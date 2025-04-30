@@ -1,0 +1,33 @@
+# .gitignore file
+#
+# Set up for Microchip/MPLAB X® development
+# 
+# Default gitignore files for code examples, only removing/ignoring usual MPLAB X® clutter
+
+# Excluding object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Excluding Netbeans specific build directories and file types
+~*.*
+.generated_files/
+nbproject/build/
+nbproject/dist/
+nbproject/private/
+nbproject/disassembly/
+nbproject/Makefile-*
+nbproject/Package-*
+build/
+dist/
+private/
+Makefile-genesis.properties
+
+# Misc
+# Use '#' to enable file tracking of certain types
+.svn
+*.lnk
+*.bak
+
+# end of file
