@@ -1,0 +1,156 @@
+{
+    "metadata": {
+        "build_time": "2025 Apr 09 16:45",
+        "commit": "128946",
+        "version": "R8/RC38"
+    },
+    "motor": [
+        {
+            "desc": "motor ID",
+            "key": "id",
+            "value": "linix-45ZWN24-40"
+        },
+        {
+            "desc": "number of poles",
+            "key": "poleCount",
+            "value": 4
+        },
+        {
+            "desc": "number of pole pairs",
+            "key": "polePairs",
+            "value": 2.0
+        },
+        {
+            "desc": "stator resistance",
+            "key": "R",
+            "units": "ohms line-neutral",
+            "value": 0.56924
+        },
+        {
+            "desc": "stator resistance",
+            "key": "Rll",
+            "units": "ohms line-line",
+            "value": 1.13848
+        },
+        {
+            "desc": "stator inductance",
+            "key": "L",
+            "units": "H line-neutral",
+            "value": 0.0003905
+        },
+        {
+            "desc": "stator inductance",
+            "key": "Lll",
+            "units": "H line-line",
+            "value": 0.000781
+        },
+        {
+            "desc": "d-axis stator inductance",
+            "key": "Ld",
+            "units": "H line-neutral",
+            "value": 0.000307
+        },
+        {
+            "desc": "d-axis stator inductance",
+            "key": "Ldll",
+            "units": "H line-line",
+            "value": 0.000614
+        },
+        {
+            "desc": "q-axis stator inductance",
+            "key": "Lq",
+            "units": "H line-neutral",
+            "value": 0.000474
+        },
+        {
+            "desc": "q-axis stator inductance",
+            "key": "Lqll",
+            "units": "H line-line",
+            "value": 0.000948
+        },
+        {
+            "desc": "back-EMF constant",
+            "key": "Ke",
+            "units": "V/(rad/s) line-neutral 0-pk",
+            "value": 0.0283624644552
+        },
+        {
+            "desc": "back-EMF constant",
+            "key": "Kell",
+            "units": "V/(rad/s) line-line 0-pk",
+            "value": 0.0491252294643
+        },
+        {
+            "desc": "back-EMF constant",
+            "key": "Ke_datasheet",
+            "units": "Vrms/KRPM line-line",
+            "value": 3.637627397
+        },
+        {
+            "desc": "viscous damping",
+            "key": "B",
+            "units": "Nm/(rad/s)",
+            "value": 1.1095029e-05
+        },
+        {
+            "desc": "Coulomb friction",
+            "key": "Tf",
+            "units": "Nm",
+            "value": 0.006072
+        },
+        {
+            "desc": "inertia",
+            "key": "J",
+            "units": "Nm/(rad/s^2)",
+            "value": 3.859584e-06
+        },
+        {
+            "desc": "maximum velocity",
+            "key": "omega_m_max",
+            "units": "rad/s",
+            "value": 837.758040957
+        },
+        {
+            "desc": "nominal (base) velocity",
+            "key": "omega_m1",
+            "units": "rad/s",
+            "value": 418.8790205
+        },
+        {
+            "desc": "nominal electrical frequency",
+            "key": "omega_e1",
+            "units": "rad/s",
+            "value": 837.758041
+        },
+        {
+            "desc": "rated current",
+            "key": "I1",
+            "units": "A",
+            "value": 2.2
+        },
+        {
+            "desc": "nominal voltage",
+            "key": "V1",
+            "units": "V line-neutral",
+            "value": 11.88044133
+        },
+        {
+            "desc": "nominal voltage",
+            "key": "V1ll",
+            "units": "V line-line",
+            "value": 20.5775279998
+        },
+        {
+            "desc": "rated torque",
+            "key": "T1",
+            "units": "Nm",
+            "value": 0.0935961327022
+        },
+        {
+            "desc": "rated power",
+            "key": "P1",
+            "units": "W",
+            "value": 39.2054563889
+        }
+    ]
+}

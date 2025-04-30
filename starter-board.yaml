@@ -1,0 +1,64 @@
+identification:
+  id: custom_board
+  displayName: "Custom Board"
+characteristics:
+  device: dsPIC33CK256MP508
+  voltage:
+    dcLink:
+      timeConstant: 0.0003147
+      fullscale: 71.3
+      minimum: 12.0
+      maximum: 48.0
+      default: 24.0
+  current:
+    phase:
+      fullscale: 21.8
+      maximum:
+        continuous: 14.1
+      timeConstant: 184.0e-9
+  pwm:
+    frequency:
+      minimum: 1000
+      maximum: 100000
+      default: 20000
+    deadTime:
+      minimum: 670.0e-9
+      maximum: 6.00e-6
+      default: 1.0e-6
+    dutyCycle:
+      minimum: 0.009
+      maximum: 0.975
+peripherals:
+  oscillator:
+    clockSource: internal FRC
+    inputClockFrequency: 8000000
+  adc:
+    current:
+      a:
+        channel: AN0
+        inverted: true
+        signed: true
+      b:
+        channel: AN1
+        inverted: true
+        signed: true
+    voltage:
+      dcLink:
+        channel: AN15
+        signed: true
+    samplingTime: 
+      default: 0.3e-6
+      minimum: 0.3e-6
+      maximum: 0.3e-6
+  pwm:
+    polarity:
+      upper: active-high
+      lower: active-high
+    generators:
+      a: 1
+      b: 2
+      c: 3
+    fault:
+      source: none
+  debugger:
+    channel: 3

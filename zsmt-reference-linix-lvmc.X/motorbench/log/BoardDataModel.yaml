@@ -1,0 +1,149 @@
+meta :
+  timeStamp : 2025-04-15T20:44:53.387Z
+boardConfig:
+  characteristics:
+    current:
+      dcLink:
+        fullscale: 21.8
+        timeConstant: 1.84E-7
+      phase:
+        fullscale: 21.8
+        maximum:
+          continuous: 14.1
+        timeConstant: 1.84E-7
+    device: "dsPIC33CK256MP508"
+    pwm:
+      deadTime:
+        default: 1.0E-6
+        maximum: 6.0E-6
+        minimum: 6.7E-7
+      dutyCycle:
+        maximum: 0.975
+        minimum: 0.009
+      frequency:
+        default: 20000
+        maximum: 100000
+        minimum: 1000
+    voltage:
+      dcLink:
+        default: 24.0
+        fullscale: 71.3
+        maximum: 26.0
+        minimum: 14.0
+        timeConstant: 3.147E-4
+      phase:
+        fullscale: 71.3
+        timeConstant: 3.147E-4
+  identification:
+    description: "dsPIC33CK Low Voltage Motor Control (LVMC) Development Board"
+    displayName: "dsPIC33CK LVMC"
+    id: "lvmc-33ck"
+  peripherals:
+    adc:
+      current:
+        a:
+          channel: "AN0"
+          inverted: true
+          signed: true
+        b:
+          channel: "AN1"
+          inverted: true
+          signed: true
+        c:
+          channel: "AN10"
+          inverted: true
+          signed: true
+        dcLink:
+          channel: "AN4"
+          inverted: false
+          signed: true
+      other:
+        bridgeTemperature:
+          channel: "AN12"
+          gain: 0.50354
+          offset: 0.5
+          signed: false
+        potentiometer:
+          channel: "AN11"
+          signed: true
+      samplingTime:
+        default: 3.0E-7
+        maximum: 3.0E-7
+        minimum: 3.0E-7
+      voltage:
+        a:
+          channel: "AN17"
+          signed: false
+        b:
+          channel: "AN23"
+          signed: false
+        c:
+          channel: "AN22"
+          signed: false
+        dcLink:
+          channel: "AN15"
+          signed: true
+    comparator:
+      inverted: false
+      source: "CMP1C"
+      threshold: 0.95
+    debugger:
+      channel: 3
+    gpio:
+      MCAF_BUTTON1:
+        direction: "input"
+        pin: "RE11"
+        polarity: "active-high"
+      MCAF_BUTTON2:
+        direction: "input"
+        pin: "RE12"
+        polarity: "active-high"
+      MCAF_LED1:
+        direction: "output"
+        pin: "RE6"
+        polarity: "active-high"
+      MCAF_LED2:
+        direction: "output"
+        pin: "RE7"
+        polarity: "active-high"
+      MCAF_TESTPOINT1:
+        direction: "output"
+        pin: "RE4"
+        polarity: "active-high"
+    opamp:
+      enabled:
+      - 1
+      - 2
+      - 3
+    oscillator:
+      clockSource: "internal FRC"
+      inputClockFrequency: 8000000
+    pwm:
+      fault:
+        polarity: "active-high"
+        source: "CMP1"
+      generators:
+        a: 1
+        b: 2
+        c: 4
+      polarity:
+        lower: "active-high"
+        upper: "active-high"
+    qei:
+      pins:
+        A: "RC12"
+        B: "RC13"
+        Z: "RC14"
+    uart:
+      pins:
+        RX: "RD14"
+        TX: "RD13"
+systemParameters:
+  samplingTimeAdc: 3.0E-7
+  pwmFrequency: 20000.0
+  samplingTimeCurrent: 1.0
+  systemClockFrequency: 1.0E7
+  samplingTimeVelocity: 20.0
+  vdcNominal: 24.0
+  setMaximumClockFrequency: true
+  pwmDeadTime: 2.0E-6

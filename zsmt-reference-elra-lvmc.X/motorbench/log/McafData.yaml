@@ -1,0 +1,267 @@
+meta :
+  timeStamp : 2025-04-15T20:56:01.045Z
+motor:
+  Tfr: 0.0281
+  B: 1.90141E-5
+  Lq: 4.853E-4
+  poleCount: 4
+  rated_current: 7.5
+  J: 5.55319E-5
+  velocity:
+    nominal: 314.1592653589793
+    maximum: 628.3185307179587
+    units: "rad/s"
+  L: 4.162E-4
+  R: 0.1859
+  current:
+    maximum:
+      continuous: 7.5
+      peak: 7.5
+    units: "A"
+  Ld: 3.471E-4
+  Ke: 0.03146130775667994
+  id: "elra-ipm80s-24v"
+controller: {}
+metadata:
+  data_model:
+    schema_version: 5
+  motorBench:
+    commit_id: "cca205f0cfd3911d9402cd4a9bb65183b7cd48b6"
+    version: "2.50.0"
+  MCC:
+    peripherals:
+      instances:
+      - name: "ADC1"
+        type: "adc"
+      - name: "PWM"
+        type: "pwm_hs"
+      - name: "QEI1"
+        type: "qei"
+      - name: "TMR1"
+        type: "timer"
+      - name: "SCCP1"
+        type: "timer"
+      - name: "UART1"
+        type: "uart"
+      - name: "OPA1"
+        type: "opa"
+      - name: "OPA2"
+        type: "opa"
+      - name: "OPA3"
+        type: "opa"
+      - name: "CMP1"
+        type: "cmp"
+    version: "5.7.1"
+    peripheral_library:
+      name: "melody"
+      version: "NA"
+    architecture: "melody"
+operating_range:
+  velocity:
+    units_qualifier: "mechanical"
+    units: "rad/s"
+    minimum: 261.7995
+scdata:
+  setup:
+    communications:
+      baudrate: 625000
+    analysis:
+      spindown_time:
+        units: "s"
+        value: 1.0
+      max_motor_speed:
+        units: "rad/s mechanical"
+        value: 2094.4
+    calibration:
+      vdc:
+        units: "V"
+        value: 24.0
+      resistor:
+        units: "ohms"
+        value: 12.0
+autotune_result:
+  current:
+    Kp: 0.21857407726943448
+    phase_margin: 80.0
+    wc: 686.8645869396512
+    Ki: 150.1307932993855
+    pi_phase_lag: 45.0
+  velocity:
+    Kp: 0.013581836939612532
+    phase_margin: 65.0
+    wc: 9.635019652424925
+    Ki: 0.02307437189535022
+    pi_phase_lag: 10.0
+drive:
+  metadata:
+    name: "dsPIC33CK LVMC"
+    id: "lvmc-33ck"
+  iout:
+    time_constant: 1.84E-7
+    fullscale: 21.8
+    maximum:
+      continuous: 14.1
+    units: "A"
+  vdc:
+    nominal: 24.0
+    time_constant: 3.147E-4
+    fullscale: 71.3
+    maximum: 26.0
+    units: "V"
+    minimum: 14.0
+  estimator:
+    omega1: 732.0
+    tau: 0.00219
+    type: "pll"
+  configuration:
+    characteristics:
+      current:
+        dcLink:
+          fullscale: 21.8
+          timeConstant: 1.84E-7
+        phase:
+          fullscale: 21.8
+          maximum:
+            continuous: 14.1
+          timeConstant: 1.84E-7
+      device: "dsPIC33CK256MP508"
+      pwm:
+        deadTime:
+          default: 1.0E-6
+          maximum: 6.0E-6
+          minimum: 6.7E-7
+        dutyCycle:
+          maximum: 0.975
+          minimum: 0.009
+        frequency:
+          default: 20000
+          maximum: 100000
+          minimum: 1000
+      voltage:
+        dcLink:
+          default: 24.0
+          fullscale: 71.3
+          maximum: 26.0
+          minimum: 14.0
+          timeConstant: 3.147E-4
+        phase:
+          fullscale: 71.3
+          timeConstant: 3.147E-4
+    identification:
+      description: "dsPIC33CK Low Voltage Motor Control (LVMC) Development Board"
+      displayName: "dsPIC33CK LVMC"
+      id: "lvmc-33ck"
+    peripherals:
+      adc:
+        current:
+          a:
+            channel: "AN0"
+            inverted: true
+            signed: true
+          b:
+            channel: "AN1"
+            inverted: true
+            signed: true
+          c:
+            channel: "AN10"
+            inverted: true
+            signed: true
+          dcLink:
+            channel: "AN4"
+            inverted: false
+            signed: true
+        other:
+          bridgeTemperature:
+            channel: "AN12"
+            gain: 0.50354
+            offset: 0.5
+            signed: false
+          potentiometer:
+            channel: "AN11"
+            signed: true
+        samplingTime:
+          default: 3.0E-7
+          maximum: 3.0E-7
+          minimum: 3.0E-7
+        voltage:
+          a:
+            channel: "AN17"
+            signed: false
+          b:
+            channel: "AN23"
+            signed: false
+          c:
+            channel: "AN22"
+            signed: false
+          dcLink:
+            channel: "AN15"
+            signed: true
+      comparator:
+        inverted: false
+        source: "CMP1C"
+        threshold: 0.95
+      debugger:
+        channel: 3
+      gpio:
+        MCAF_BUTTON1:
+          direction: "input"
+          pin: "RE11"
+          polarity: "active-high"
+        MCAF_BUTTON2:
+          direction: "input"
+          pin: "RE12"
+          polarity: "active-high"
+        MCAF_LED1:
+          direction: "output"
+          pin: "RE6"
+          polarity: "active-high"
+        MCAF_LED2:
+          direction: "output"
+          pin: "RE7"
+          polarity: "active-high"
+        MCAF_TESTPOINT1:
+          direction: "output"
+          pin: "RE4"
+          polarity: "active-high"
+      opamp:
+        enabled:
+        - 1
+        - 2
+        - 3
+      oscillator:
+        clockSource: "internal FRC"
+        inputClockFrequency: 8000000
+      pwm:
+        fault:
+          polarity: "active-high"
+          source: "CMP1"
+        generators:
+          a: 1
+          b: 2
+          c: 4
+        polarity:
+          lower: "active-high"
+          upper: "active-high"
+      qei:
+        pins:
+          A: "RC12"
+          B: "RC13"
+          Z: "RC14"
+      uart:
+        pins:
+          RX: "RD14"
+          TX: "RD13"
+  pwm:
+    period: 5.0E-5
+    duty_cycle:
+      maximum: 0.975
+      minimum: 0.009
+    deadtime: 2.0E-6
+  idc:
+    units: "A"
+  sampling_time:
+    current: 5.0E-5
+    velocity: 0.001
+  processor:
+    clock_frequency: 1.0E8
+    device: "dsPIC33CK256MP508"
