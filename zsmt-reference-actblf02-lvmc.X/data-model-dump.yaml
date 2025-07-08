@@ -1,0 +1,397 @@
+motor:
+  Tfr: 0.012851
+  B: 4.588663799999999E-5
+  Lq: 1.325E-4
+  poleCount: 8
+  rated_current: 9.01
+  J: 3.0080946E-5
+  velocity:
+    nominal: 418.87902047863906
+    maximum: 418.87902047863906
+    units: rad/s
+  L: 1.1725E-4
+  R: 0.241
+  current:
+    maximum:
+      continuous: 9.01
+      peak: 23.5
+    units: A
+  Ld: 1.02E-4
+  Ke: 0.03712916167474766
+  id: ACT57BLF02
+controller: {}
+metadata:
+  data_model:
+    schema_version: 5
+  motorBench:
+    commit_id: cca205f0cfd3911d9402cd4a9bb65183b7cd48b6
+    version: 2.50.0
+  MCC:
+    peripherals:
+      instances:
+      - name: ADC1
+        type: adc
+      - name: PWM
+        type: pwm_hs
+      - name: QEI1
+        type: qei
+      - name: TMR1
+        type: timer
+      - name: SCCP1
+        type: timer
+      - name: UART1
+        type: uart
+      - name: OPA1
+        type: opa
+      - name: OPA2
+        type: opa
+      - name: OPA3
+        type: opa
+      - name: CMP1
+        type: cmp
+    version: 5.8.2
+    peripheral_library:
+      name: melody
+      version: NA
+    architecture: melody
+operating_range:
+  velocity:
+    units_qualifier: mechanical
+    units: rad/s
+    minimum: 130.89975
+scdata:
+  setup:
+    communications:
+      baudrate: 625000
+    analysis:
+      spindown_time:
+        units: s
+        value: 1.0
+      max_motor_speed:
+        units: rad/s mechanical
+        value: 2094.4
+    calibration:
+      vdc:
+        units: V
+        value: 24.0
+      resistor:
+        units: ohms
+        value: 12.0
+autotune_result:
+  current:
+    Kp: 0.5992286556803923
+    phase_margin: 66.8
+    wc: 5522.877226390597
+    Ki: 1767.0904332405146
+    pi_phase_lag: 28.1
+  velocity:
+    Kp: 0.007558248881306976
+    phase_margin: 65.0
+    wc: 12.863007649682112
+    Ki: 0.017142828776759052
+    pi_phase_lag: 10.0
+drive:
+  metadata:
+    name: dsPIC33CK LVMC
+    id: lvmc-33ck
+  iout:
+    time_constant: 1.84E-7
+    fullscale: 21.8
+    maximum:
+      continuous: 14.1
+    units: A
+  vdc:
+    nominal: 24.0
+    time_constant: 3.147E-4
+    fullscale: 71.3
+    maximum: 26.0
+    units: V
+    minimum: 14.0
+  estimator:
+    omega1: 732.0
+    tau: 0.00219
+    type: pll
+  configuration:
+    characteristics:
+      current:
+        dcLink:
+          fullscale: 21.8
+          timeConstant: 1.84E-7
+        phase:
+          fullscale: 21.8
+          maximum:
+            continuous: 14.1
+          timeConstant: 1.84E-7
+      device: dsPIC33CK256MP508
+      pwm:
+        deadTime:
+          default: 1.0E-6
+          maximum: 6.0E-6
+          minimum: 6.7E-7
+        dutyCycle:
+          maximum: 0.975
+          minimum: 0.009
+        frequency:
+          default: 20000
+          maximum: 100000
+          minimum: 1000
+      voltage:
+        dcLink:
+          default: 24.0
+          fullscale: 71.3
+          maximum: 26.0
+          minimum: 14.0
+          timeConstant: 3.147E-4
+        phase:
+          fullscale: 71.3
+          timeConstant: 3.147E-4
+    identification:
+      description: dsPIC33CK Low Voltage Motor Control (LVMC) Development Board
+      displayName: dsPIC33CK LVMC
+      id: lvmc-33ck
+    peripherals:
+      adc:
+        current:
+          a:
+            channel: AN0
+            inverted: true
+            signed: true
+          b:
+            channel: AN1
+            inverted: true
+            signed: true
+          c:
+            channel: AN10
+            inverted: true
+            signed: true
+          dcLink:
+            channel: AN4
+            inverted: false
+            signed: true
+        other:
+          bridgeTemperature:
+            channel: AN12
+            gain: 0.50354
+            offset: 0.5
+            signed: false
+          potentiometer:
+            channel: AN11
+            signed: true
+        samplingTime:
+          default: 3.0E-7
+          maximum: 3.0E-7
+          minimum: 3.0E-7
+        voltage:
+          a:
+            channel: AN17
+            signed: false
+          b:
+            channel: AN23
+            signed: false
+          c:
+            channel: AN22
+            signed: false
+          dcLink:
+            channel: AN15
+            signed: true
+      comparator:
+        inverted: false
+        source: CMP1C
+        threshold: 0.95
+      debugger:
+        channel: 3
+      gpio:
+        MCAF_BUTTON1:
+          direction: input
+          pin: RE11
+          polarity: active-high
+        MCAF_BUTTON2:
+          direction: input
+          pin: RE12
+          polarity: active-high
+        MCAF_LED1:
+          direction: output
+          pin: RE6
+          polarity: active-high
+        MCAF_LED2:
+          direction: output
+          pin: RE7
+          polarity: active-high
+        MCAF_TESTPOINT1:
+          direction: output
+          pin: RE4
+          polarity: active-high
+      opamp:
+        enabled:
+        - 1
+        - 2
+        - 3
+      oscillator:
+        clockSource: internal FRC
+        inputClockFrequency: 8000000
+      pwm:
+        fault:
+          polarity: active-high
+          source: CMP1
+        generators:
+          a: 1
+          b: 2
+          c: 4
+        polarity:
+          lower: active-high
+          upper: active-high
+      qei:
+        pins:
+          A: RC12
+          B: RC13
+          Z: RC14
+      uart:
+        pins:
+          RX: RD14
+          TX: RD13
+  pwm:
+    period: 5.0E-5
+    duty_cycle:
+      maximum: 0.975
+      minimum: 0.009
+    deadtime: 2.0E-6
+  idc:
+    units: A
+  sampling_time:
+    current: 5.0E-5
+    velocity: 0.001
+  processor:
+    clock_frequency: 1.0E8
+    device: dsPIC33CK256MP508
+config:
+  ui:
+    content:
+      current_measure-method: triple_channel
+      current_measure-single_channel-minimumTime: 2.0
+      current_measure-single_channel-sampleDelay: 0.0
+      current_measure-opamp-full_input_range: true
+      estimator-type: zsmt
+      estimator-active-pll: true
+      estimator-active-qei: false
+      estimator-active-smo: false
+      estimator-active-atpll: false
+      estimator-active-zsmt: false
+      estimator-active-ideal: false
+      operation-min_velocity_ratio: 0.1
+      operation-startup_velocity_ratio: 0.2744
+      operation-max_velocity_ratio: 1.25
+      operation-fullscale_base_ratio: 1.5
+      operation-outer_loop_type: velocity
+      operation-saliency-threshold: 1.25
+      operation-slewrate-accel: 0.5
+      operation-slewrate-decel: 1.0
+      operation-dyn_current_type: none
+      operation-stopping-type: minimal_impact
+      operation-stopping-closed_loop_parameters-speed: 0.05
+      operation-stopping-closed_loop_parameters-time: 0.5
+      operation-stopping-coastdown-end_velocity: 0.05
+      operation-stopping-coastdown-time: 1.2
+      fault_inject-get_tf-div0: false
+      fault_inject-get_tf-missing_data: false
+      fault_inject-get_tf-raise_value_error: false
+      fault_inject-get_tf-raise_custom_error: false
+      fault_inject-tf-tf_null: false
+      fault_inject-tf-tf_jy: false
+      fault_inject-tf-tf_jyex: false
+      fault_inject-tf-div0: false
+      fault_inject-tf-tau: 0.0
+      flux_control-method: none
+      flux_control-eqn_based-ilimit-region_type: quadratic
+      flux_control-eqn_based-ilimit-id_limit: 0.7
+      flux_control-eqn_based-ilimit-iq_limit: 0.95
+      flux_control-eqn_based-fluxweak_enable: false
+      flux_control-eqn_based-fw-vdq_limit: 0.95
+      flux_control-eqn_based-mtpa_enable: false
+      deadtimecomp-method: none
+      deadtimecomp-perphase-current_sign_band: 0.02
+      deadtimecomp-perphase-forward_gain: 0.0
+      deadtimecomp-perphase-feedback_gain: 0.0
+      fault_detect-margin_uv: 2.0
+      fault_detect-margin_ov: 2.0
+      fault_detect-stall_detect_enable: false
+      startup-Istartup: 0.75
+      startup-t_rampup: 25.0
+      startup-t_align: 0.0
+      startup-min_total_accel_time: 250.0
+      startup-torque_scale_accel: 0.15
+      startup-torque_scale_slow_accel: 0.2
+      startup-t_hold: 0.0
+      startup-omega0: 0.2
+      startup-theta_converge_rate: 1.0
+      startup-method: zsmt_dsat
+      startup-damping-Imax: 0.1
+      startup-damping-gainmax: 40.0
+      startup-damping-omega_min: 0.4
+      overmodulation-vd_limit: 1.0
+      overmodulation-vq_limit: 1.15
+      overmodulation-include_duty_clipping: true
+      pll-tau: 2.19
+      pll-omega1: 116.5
+      pll-velocity_filter_threshold: 1.0
+      encoder-lines: 250.0
+      encoder-index_present: false
+      encoder-tracking_loop-tau: 1.5
+      encoder-qei_sync-method: align
+      encoder-qei_sync-align-t_align: 0.5
+      encoder-qei_sync-align-angle_shift: 30.0
+      encoder-qei_sync-align-angle_init: -30.0
+      encoder-qei_sync-align_sweep-sweep_rate_pow: 1.0
+      encoder-qei_sync-align_sweep-setup_angle: 45.0
+      encoder-qei_sync-pullout-pullout_slip: 0.117
+      zsmt-excitation-kV: 0.12
+      zsmt-excitation-kI: 0.1
+      zsmt-pll-zeta: 1.5
+      zsmt-pll-tau: 10.0
+      zsmt-pll-tau_lpf: 0.0
+      zsmt-pll-execution_divider: 2.0
+      zsmt-startup-align_delay: 1.0
+      zsmt-startup-pll_lock_time: 1.0
+      zsmt-startup-speed_limit: 0.015
+      zsmt-startup-current_limit: 0.3
+      zsmt-startup-probe_current: 0.3
+      zsmt-startup-probe_duration: 10.0
+      zsmt-startup-probe_slew_time: 1.5
+      zsmt-startup-probe_blanking_time: 4.0
+      zsmt-hybrid-type: minotaur
+      zsmt-minotaur-voltage_limit-vd: 0.45
+      zsmt-minotaur-voltage_limit-vq: 0.78
+      zsmt-minotaur-converge-angle: 10.0
+      zsmt-minotaur-converge-duration: 2.0
+      zsmt-minotaur-velocity_threshold-slow: 0.2
+      zsmt-minotaur-velocity_threshold-transition: 0.25
+      zsmt-minotaur-velocity_threshold-fast: 0.3
+      zsmt-angle_correction-current_gain: 0.0
+      dyn_current1-peak_factor: 1.0
+      dyn_current1-horizon_factor: 1.05
+      dyn_current1-tau: 5.0
+      dyn_current1-nsamples: 128.0
+      voltage_outerloop-tau_lpf: 2.0
+      voltage_outerloop-Kp: 0.1
+      voltage_outerloop-tau: 100.0
+      mcapi-isSquaredTau: 1.0
+      mcapi-iqTau: 1.0
+      mcapi-adcIsrUserFunctions_enable: false
+      board_service-uiServiceTiming: 1.0
+      board_service-uiButtonDebounceTime: 7.0
+      board_service-uiButtonLongPressTime: 2.5
+      test_harness-perturbation_asymmetric: false
+      adc-vtempbridge: false
+      adc-temp_bridge_params-threshold: 50.0
+      adc-temp_bridge_params-tau_lpf: 10.0
+      adc-temp_bridge_params-slewrate: 4.0
+      adc-vabsref: false
+      adc-vphasea: false
+      adc-vphaseb: false
+      adc-vphasec: false
+      diagnostics-method: x2cscope
+    version:
+      schema: 5.0
+      motorBench: 2.50.0
+      MCAF: R8
+    status:
+      valid: true

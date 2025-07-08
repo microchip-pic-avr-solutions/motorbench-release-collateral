@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+<report xmlns="http://www.microchip.com/motorBench/xml/report/0.1" >
+  <metadata>
+    <source>
+       <title>Motor Control Application Framework</title>
+       <version>R8/RC38</version>
+       <commit>128946</commit>
+       <build_time>2025 Apr 09 16:45</build_time>
+     </source>
+   </metadata>
+<motor>
+  <item>
+    <key>id</key>
+    <description>motor ID</description>
+    <value>ACT57BLF02</value>
+  </item>
+  <item>
+    <key>poleCount</key>
+    <description>number of poles</description>
+    <value>8</value>
+  </item>
+  <item>
+    <key>polePairs</key>
+    <description>number of pole pairs</description>
+    <value>4.0</value>
+  </item>
+  <item>
+    <key>R</key>
+    <description>stator resistance</description>
+    <value>0.241</value>
+    <units>ohms line-neutral</units>
+  </item>
+  <item>
+    <key>Rll</key>
+    <description>stator resistance</description>
+    <value>0.482</value>
+    <units>ohms line-line</units>
+  </item>
+  <item>
+    <key>L</key>
+    <description>stator inductance</description>
+    <value>0.00011725</value>
+    <units>H line-neutral</units>
+  </item>
+  <item>
+    <key>Lll</key>
+    <description>stator inductance</description>
+    <value>0.0002345</value>
+    <units>H line-line</units>
+  </item>
+  <item>
+    <key>Ld</key>
+    <description>d-axis stator inductance</description>
+    <value>0.000102</value>
+    <units>H line-neutral</units>
+  </item>
+  <item>
+    <key>Ldll</key>
+    <description>d-axis stator inductance</description>
+    <value>0.000204</value>
+    <units>H line-line</units>
+  </item>
+  <item>
+    <key>Lq</key>
+    <description>q-axis stator inductance</description>
+    <value>0.0001325</value>
+    <units>H line-neutral</units>
+  </item>
+  <item>
+    <key>Lqll</key>
+    <description>q-axis stator inductance</description>
+    <value>0.000265</value>
+    <units>H line-line</units>
+  </item>
+  <item>
+    <key>Ke</key>
+    <description>back-EMF constant</description>
+    <value>0.03712916167474766</value>
+    <units>V/(rad/s) line-neutral 0-pk</units>
+    <altunit><value>3.888156718</value><units>V/KRPM line-neutral 0-pk</units></altunit>
+  </item>
+  <item>
+    <key>Kell</key>
+    <description>back-EMF constant</description>
+    <value>0.0643095944631021</value>
+    <units>V/(rad/s) line-line 0-pk</units>
+    <altunit><value>6.734484984</value><units>V/KRPM line-line 0-pk</units></altunit>
+  </item>
+  <item>
+    <key>Ke_datasheet</key>
+    <description>back-EMF constant</description>
+    <value>4.7620000000000005</value>
+    <units>Vrms/KRPM line-line</units>
+  </item>
+  <item>
+    <key>B</key>
+    <description>viscous damping</description>
+    <value>4.588663799999999e-05</value>
+    <units>Nm/(rad/s)</units>
+  </item>
+  <item>
+    <key>Tf</key>
+    <description>Coulomb friction</description>
+    <value>0.012851</value>
+    <units>Nm</units>
+  </item>
+  <item>
+    <key>J</key>
+    <description>inertia</description>
+    <value>3.0080945999999997e-05</value>
+    <units>Nm/(rad/s^2)</units>
+  </item>
+  <item>
+    <key>omega_m_max</key>
+    <description>maximum velocity</description>
+    <value>418.87902047863906</value>
+    <units>rad/s</units>
+    <altunit><value>4000.000000114328</value><units>RPM</units></altunit>
+  </item>
+  <item>
+    <key>omega_m1</key>
+    <description>nominal (base) velocity</description>
+    <value>418.87902047863906</value>
+    <units>rad/s</units>
+    <altunit><value>4000.000000114328</value><units>RPM</units></altunit>
+  </item>
+  <item>
+    <key>omega_e1</key>
+    <description>nominal electrical frequency</description>
+    <value>1675.5160819145563</value>
+    <units>rad/s</units>
+    <altunit><value>16000.000000457312</value><units>RPM</units></altunit>
+  </item>
+  <item>
+    <key>I1</key>
+    <description>rated current</description>
+    <value>9.01</value>
+    <units>A</units>
+  </item>
+  <item>
+    <key>V1</key>
+    <description>nominal voltage</description>
+    <value>15.552626873511326</value>
+    <units>V line-neutral</units>
+  </item>
+  <item>
+    <key>V1ll</key>
+    <description>nominal voltage</description>
+    <value>26.937939936082714</value>
+    <units>V line-line</units>
+  </item>
+  <item>
+    <key>T1</key>
+    <description>rated torque</description>
+    <value>0.5018006200342146</value>
+    <units>Nm</units>
+  </item>
+  <item>
+    <key>P1</key>
+    <description>rated power</description>
+    <value>210.19375219550554</value>
+    <units>W</units>
+  </item>
+</motor>
+</report>
