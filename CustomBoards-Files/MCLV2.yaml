@@ -1,0 +1,117 @@
+characteristics:
+  current:
+    dcLink:
+      fullscale: 4.4
+      timeConstant: 1.5E-6
+    phase:
+      fullscale: 4.4
+      gainCorrectionFactors:
+        Kaa: 0.891
+        Kab: -0.03
+        Kba: -0.004
+        Kbb: 0.965
+        Kcc: 1.0
+      maximum:
+        continuous: 2.29
+      timeConstant: 1.5E-6
+  device: "dsPIC33CK64MC105"
+  pwm:
+    deadTime:
+      default: 2.0E-6
+      maximum: 6.0E-6
+      minimum: 2.0E-6
+    dutyCycle:
+      maximum: 0.977
+      minimum: 0.005
+    frequency:
+      default: 20000
+      maximum: 50000
+      minimum: 1000
+  voltage:
+    dcLink:
+      default: 24.0
+      fullscale: 52.8
+      maximum: 26.0
+      minimum: 16.0
+      timeConstant: 1.88E-4
+    phase:
+      fullscale: 52.8
+      timeConstant: 1.88E-4
+identification:
+  description: "dsPICDEM&trade; MCLV-2 Development Board"
+  displayName: "MCLV-2"
+  id: "mclv2"
+  pim_id: "33ck64mc105_extopamp_pim"
+peripherals:
+  adc:
+    current:
+      a:
+        channel: "AN0"
+        inverted: true
+        signed: true
+      b:
+        channel: "AN1"
+        inverted: true
+        signed: true
+      dcLink:
+        channel: "AN4"
+        inverted: false
+        signed: true
+    other:
+      potentiometer:
+        channel: "AN15"
+        signed: true
+    samplingTime:
+      default: 3.0E-7
+      maximum: 1.0E-6
+      minimum: 3.0E-7
+    voltage:
+      dcLink:
+        channel: "AN12"
+        signed: true
+  debugger:
+    channel: 3
+  gpio:
+    MCAF_BUTTON1:
+      direction: "input"
+      pin: "RC11"
+      polarity: "active-high"
+    MCAF_BUTTON2:
+      direction: "input"
+      pin: "RC4"
+      polarity: "active-high"
+    MCAF_LED1:
+      direction: "output"
+      pin: "RC13"
+      polarity: "active-high"
+    MCAF_LED2:
+      direction: "output"
+      pin: "RC12"
+      polarity: "active-high"
+    MCAF_TESTPOINT1:
+      direction: "output"
+      pin: "RC9"
+      polarity: "active-high"
+  oscillator:
+    clockSource: "crystal oscillator"
+    inputClockFrequency: 8000000
+  pwm:
+    fault:
+      polarity: "active-low"
+      source: "PCI19"
+    generators:
+      a: 1
+      b: 2
+      c: 3
+    polarity:
+      lower: "active-high"
+      upper: "active-high"
+  qei:
+    pins:
+      A: "RC5"
+      B: "RD13"
+      Z: "RD10"
+  uart:
+    pins:
+      RX: "RC8"
+      TX: "RD1"

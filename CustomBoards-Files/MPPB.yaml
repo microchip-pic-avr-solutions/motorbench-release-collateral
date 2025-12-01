@@ -1,0 +1,96 @@
+identification:
+  id: MPPB
+  displayName: "MultiPhase Board"
+characteristics:
+  device: dsPIC33CK64MC105
+  voltage:
+    dcLink:
+      timeConstant: 0.0003147
+      fullscale: 50 # Value for Full Scale Obtained from Atmel Schematic
+      minimum: 12.0
+      maximum: 36.0
+      default: 24.0
+  current:
+    phase:
+      fullscale: 11 # Value for Full Scale Obtained from Atmel Schematic
+      maximum:
+        continuous: 10
+      timeConstant: 184.0e-9
+  pwm:
+    frequency:
+      minimum: 1000
+      maximum: 100000
+      default: 20000
+    deadTime:
+      minimum: 670.0e-9
+      maximum: 6.00e-6
+      default: 1.0e-6
+    dutyCycle:
+      minimum: 0.009
+      maximum: 0.975
+peripherals:
+  oscillator:
+    clockSource: internal FRC
+    inputClockFrequency: 8000000
+  adc:
+    current:
+      a:
+        channel: AN3
+        inverted: true
+        signed: true
+      b:
+        channel: AN4
+        inverted: true
+        signed: true
+    other:
+      potentiometer:
+        channel: "AN6"
+        signed: true
+    voltage:
+      dcLink:
+        channel: AN9
+        signed: true
+    samplingTime: 
+      default: 0.3e-6
+      minimum: 0.3e-6
+      maximum: 0.3e-6
+  pwm:
+    polarity:
+      upper: active-high
+      lower: active-high
+    generators:
+      a: 1
+      b: 2
+      c: 3
+    fault:
+      polarity: active-high
+      source: PCI19
+  uart:
+    pins:
+      RX: RC11
+      TX: RC10
+  debugger:
+    channel: 3
+  gpio:
+    MCAF_BUTTON1:
+      direction: "input"
+      pin: "RC1"
+      polarity: "active-low"
+      weakPullUp: true
+    MCAF_BUTTON2:
+      direction: "input"
+      pin: "RD13"
+      polarity: "active-low"
+      weakPullUp: true
+    MCAF_LED1:
+      direction: "output"
+      pin: "RC2"
+      polarity: "active-high"
+    MCAF_LED2:
+      direction: "output"
+      pin: "RD10"
+      polarity: "active-high"
+    MCAF_TESTPOINT1:
+      direction: "output"
+      pin: "RA1"
+      polarity: "active-high"

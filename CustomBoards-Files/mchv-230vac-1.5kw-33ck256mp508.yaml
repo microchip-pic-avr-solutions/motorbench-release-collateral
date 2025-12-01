@@ -1,0 +1,128 @@
+identification:
+  id: mchv-230vac-1.5kw-33ck256mp508
+  displayName: " MCHV-230VAC-1.5KW + dsPIC33CK256MP508 DIM"
+  description: " MCHV-230VAC-1.5KW Inverter Board + dsPIC33CK256MP508 DIM"
+characteristics:
+  device: dsPIC33CK256MP508
+  voltage:
+    phase:
+      timeConstant: 28.7e-6
+      fullscale: 453.3
+    dcLink:
+      timeConstant: 2.87e-6
+      fullscale: 453.3
+      minimum: 110.0
+      maximum: 400.0
+      default: 311.0
+  current:
+    phase:
+      maximum:
+        continuous: 16.77
+      timeConstant: 597.1e-6
+      fullscale: 22.044
+    dcLink:
+      timeConstant: 597.1e-6
+      fullscale: 22.044
+  pwm:
+    frequency:
+      minimum: 10000
+      maximum: 20000
+      default: 20000
+    deadTime:
+      minimum: 1.0e-6
+      maximum: 6.0e-6
+      default: 2.0e-6
+    dutyCycle:
+      minimum: 0.024
+      maximum: 0.90
+peripherals:
+  debugger:
+    channel: 3
+  oscillator:
+    clockSource: external clock
+    inputClockFrequency: 8000000
+  adc:
+    samplingTime:
+      minimum: 0.3e-6
+      maximum: 1.0e-6
+      default: 0.3e-6
+    current:
+      a:
+        channel: AN1
+        inverted: true
+        signed: true
+      b:
+        channel: AN4
+        inverted: true
+        signed: true
+      c:
+        channel: AN16
+        inverted: true
+        signed: true
+      dcLink:
+        channel: AN0
+        inverted: false
+        signed: true
+    voltage:
+      dcLink:
+        channel: AN15
+        signed: true
+      a:
+        channel: AN10
+        signed: false
+      b:
+        channel: AN11
+        signed: false
+      c:
+        channel: AN12
+        signed: false
+    other:
+      potentiometer:
+        channel: AN17
+        signed: true
+  pwm:
+    polarity:
+      upper: active-high
+      lower: active-high
+    generators:
+      a: 1
+      b: 2
+      c: 3
+    fault:
+      polarity: active-low
+      source: PCI20
+  opamp:
+    enabled:
+      - 1
+      - 2
+      - 3
+  gpio:
+    MCAF_LED1:
+      pin: RE12
+      direction: output
+      polarity: active-high
+    MCAF_LED2:
+      pin: RE13
+      direction: output
+      polarity: active-high
+    MCAF_BUTTON1:
+      pin: RE10
+      direction: input
+      polarity: active-high
+    MCAF_BUTTON2:
+      pin: RE11
+      direction: input
+      polarity: active-high
+    MCAF_TESTPOINT1:
+      pin: RE8
+      direction: output
+      polarity: active-high
+  qei:
+    pins:
+      A: RC4
+      B: RC5
+      Z: RD2
+  uart:
+    pins:
+      RX: RD13
+      TX: RD14
