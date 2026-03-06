@@ -68,7 +68,7 @@ Note:
 // *****************************************************************************
 
 #include <stdint.h>
-#ifdef __XC16__  // See comments at the top of this header file
+#if defined(__XC16__) || defined(__XC_DSC__)  // See comments at the top of this header file
 #include <xc.h>
 #endif // __XC16__
 
@@ -85,8 +85,26 @@ Note:
 #include "motor_control_inline_declarations.h"
 
 
-#ifdef __XC16__   // See comments at the top of this header file
+#if defined(__XC16__) || defined(__XC_DSC__)   // See comments at the top of this header file
+
+#ifdef __dsPIC33F__
+#define __eds__ __psv__
+#endif
+
+#if defined(__dsPIC33F__) || defined(__dsPIC33E__) || defined(__dsPIC33C__)
+
+__eds__ extern uint16_t MC_SineTableInFlash[] __attribute__((space(psv)));
 #include "./motor_control_inline_dspic.h"
+
+#elif defined(__dsPIC33A__)
+
+__eds__
+__psv__
+#include "./motor_control_inline_dspic_33A.h"
+
+#else
+#error The selected device is not compatible with the Motor Control library!
+#endif
 #endif // __XC16__
 
 #ifdef __cplusplus  // Provide C++ Compatibility

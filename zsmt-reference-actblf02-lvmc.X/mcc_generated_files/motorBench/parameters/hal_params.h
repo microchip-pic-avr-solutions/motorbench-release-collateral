@@ -9,7 +9,7 @@
  */ /*
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -44,17 +44,28 @@
  *
  *
  ******************************************************************************/
-#ifndef __HAL_PARAMS_H
-#define __HAL_PARAMS_H
+#ifndef MCAF_HAL_PARAMS_H
+#define MCAF_HAL_PARAMS_H
 
 #ifdef  __cplusplus
 extern "C" {
 #endif
 
+/*
+ * Board id:   lvmc-33ck
+ * (dsPIC33CK LVMC, dsPIC33CK256MP508)
+ */
+
 /* Dead time in PWM clock cycles */
-#define HAL_PARAM_DEADTIME_COUNTS             400      // Q0(400.00000)  =   +2.00000 us          =   +2.00000 us          + 0.0000%
+#define HAL_PARAM_DEADTIME_COUNTS              200      // Q0(200.00000)  =   +1.00000 us          =   +1.00000 us          + 0.0000%
+#define HAL_PARAM_DEADTIME_COUNTS_NORM  200.0000000000  // normalized
+#define HAL_PARAM_DEADTIME_COUNTS_SCALE   5.000000e-09  // s
+#define HAL_PARAM_DEADTIME_COUNTS_ENG     1.000000e-06  // s
 /* PWM period register value in PWM clock cycles */
-#define HAL_PARAM_PWM_PERIOD_COUNTS          5000      // Q0(5000.00000) =  +25.00000 us          =  +25.00000 us          + 0.0000%
+#define HAL_PARAM_PWM_PERIOD_COUNTS             5000      // Q0(5000.00000) =  +25.00000 us          =  +25.00000 us          + 0.0000%
+#define HAL_PARAM_PWM_PERIOD_COUNTS_NORM    5.000000e+03  // normalized
+#define HAL_PARAM_PWM_PERIOD_COUNTS_SCALE   5.000000e-09  // s
+#define HAL_PARAM_PWM_PERIOD_COUNTS_ENG     2.500000e-05  // s
 /*
  * (please note: in center-aligned mode this represents
  * one half-period of the actual PWM waveforms; 
@@ -62,7 +73,10 @@ extern "C" {
  * for more information)
  */
 /* ADC sampling delay */
-#define HAL_PARAM_ADC_TRIGGER_DELAY             0      // Q0(  0.00000)  =   +0.00000 s           =   +0.00000 s           + 0.0000%
+#define HAL_PARAM_ADC_TRIGGER_DELAY                0      // Q0(  0.00000)  =   +0.00000 s           =   +0.00000 s           + 0.0000%
+#define HAL_PARAM_ADC_TRIGGER_DELAY_NORM    0.000000e+00  // normalized
+#define HAL_PARAM_ADC_TRIGGER_DELAY_SCALE   5.000000e-09  // s
+#define HAL_PARAM_ADC_TRIGGER_DELAY_ENG     0.000000e+00  // s
 
 /* ------------ other parameters ------------ */
 
@@ -71,7 +85,7 @@ extern "C" {
  * from the perspective of the PWM duty cycle registers.
  *
  * The actual minimum and maximum duty cycles created by the PWM generators
- * will have dead time (=0.04) added and subtracted.
+ * will have dead time (=0.02) added and subtracted.
  *
  * NOTE: this assumes identical dead time,
  * and no significant difference in propagation delay between gate drive channels.
@@ -79,8 +93,8 @@ extern "C" {
  * Effective limits for duty cycle as seen on the PWM outputs:
  * Minimum duty cycle on PWMxH: 0.009
  * Minimum duty cycle on PWMxL: 0.025
- * Maximum duty cycle on PWMxH: 0.895
- * Maximum duty cycle on PWMxL: 0.911
+ * Maximum duty cycle on PWMxH: 0.935
+ * Maximum duty cycle on PWMxL: 0.951
  */
 
 /* The minimum duty cycle of the half-bridge affects
@@ -88,11 +102,20 @@ extern "C" {
  * and maximum duty cycle of lower transistors.
  */
 /* Minimum duty cycle register value in counts */
-#define HAL_PARAM_MIN_DUTY_COUNTS             245      // Q0(245.00000)  =  +49.00000 m           =  +49.00000 m           + 0.0000%
+#define HAL_PARAM_MIN_DUTY_COUNTS              145      // Q0(145.00000)  =  +29.00000 m           =  +29.00000 m           + 0.0000%
+#define HAL_PARAM_MIN_DUTY_COUNTS_NORM  145.0000000000  // normalized
+#define HAL_PARAM_MIN_DUTY_COUNTS_SCALE   0.0002000000
+#define HAL_PARAM_MIN_DUTY_COUNTS_ENG     0.0290000000
 /* Minimum duty cycle register value, as ratio */
-#define HAL_PARAM_MIN_DUTY_Q15               1606      // Q15(  0.04901) =  +49.01123 m           =  +49.00000 m           + 0.0229%
+#define HAL_PARAM_MIN_DUTY_Q15                950      // Q15(  0.02899) =  +28.99170 m           =  +29.00000 m           - 0.0286%
+#define HAL_PARAM_MIN_DUTY_Q15_NORM      0.0289916992  // normalized
+#define HAL_PARAM_MIN_DUTY_Q15_SCALE     1.0000000000
+#define HAL_PARAM_MIN_DUTY_Q15_ENG       0.0289916992
 /* Maximum low-side duty cycle register value in counts */
-#define HAL_PARAM_MAX_LOWER_DUTY_COUNTS       4755      // Q0(4755.00000) = +951.00000 m           = +951.00000 m           + 0.0000%
+#define HAL_PARAM_MAX_LOWER_DUTY_COUNTS             4855      // Q0(4855.00000) = +971.00000 m           = +971.00000 m           + 0.0000%
+#define HAL_PARAM_MAX_LOWER_DUTY_COUNTS_NORM    4.855000e+03  // normalized
+#define HAL_PARAM_MAX_LOWER_DUTY_COUNTS_SCALE   0.0002000000
+#define HAL_PARAM_MAX_LOWER_DUTY_COUNTS_ENG     0.9710000000
 
 
 /* The maximum duty cycle of the half-bridge affects
@@ -100,17 +123,20 @@ extern "C" {
  * and minimum duty cycle of lower transistors.
  */
 /* Maximum duty cycle register value in counts */
-#define HAL_PARAM_MAX_DUTY_COUNTS            4675      // Q0(4675.00000) = +935.00000 m           = +935.00000 m           + 0.0000%
+#define HAL_PARAM_MAX_DUTY_COUNTS             4775      // Q0(4775.00000) = +955.00000 m           = +955.00000 m           + 0.0000%
+#define HAL_PARAM_MAX_DUTY_COUNTS_NORM    4.775000e+03  // normalized
+#define HAL_PARAM_MAX_DUTY_COUNTS_SCALE   0.0002000000
+#define HAL_PARAM_MAX_DUTY_COUNTS_ENG     0.9550000000
 /* Maximum duty cycle register value, as ratio */
-#define HAL_PARAM_MAX_DUTY_Q15              30638      // Q15(  0.93500) = +934.99756 m           = +935.00000 m           - 0.0003%
+#define HAL_PARAM_MAX_DUTY_Q15              31293      // Q15(  0.95499) = +954.98657 m           = +955.00000 m           - 0.0014%
+#define HAL_PARAM_MAX_DUTY_Q15_NORM      0.9549865723  // normalized
+#define HAL_PARAM_MAX_DUTY_Q15_SCALE     1.0000000000
+#define HAL_PARAM_MAX_DUTY_Q15_ENG       0.9549865723
 /* Minimum low-side duty cycle register value in counts */
-#define HAL_PARAM_MIN_LOWER_DUTY_COUNTS        325      // Q0(325.00000)  =  +65.00000 m           =  +65.00000 m           - 0.0000%
-
-/* DAC value for triggering an overcurrent fault
- * (for boards that utilize this feature).
- */
-/* DAC value for triggering an overcurrent fault */
-#define HAL_PARAM_DAC_OVERCURRENT_THRESHOLD       3889      // Q12(  0.94946) = +949.46289 m           = +949.50000 m           - 0.0039%
+#define HAL_PARAM_MIN_LOWER_DUTY_COUNTS              225      // Q0(225.00000)  =  +45.00000 m           =  +45.00000 m           - 0.0000%
+#define HAL_PARAM_MIN_LOWER_DUTY_COUNTS_NORM  225.0000000000  // normalized
+#define HAL_PARAM_MIN_LOWER_DUTY_COUNTS_SCALE   0.0002000000
+#define HAL_PARAM_MIN_LOWER_DUTY_COUNTS_ENG     0.0450000000
 
 /** Is double-update PWM allowed?
  *  (Some estimator algorithms are not compatible)
@@ -124,4 +150,4 @@ inline static bool MCAF_IsDoubleUpdatePwmAllowed()
 }
 #endif
 
-#endif // __HAL_PARAMS_H
+#endif /* MCAF_HAL_PARAMS_H */

@@ -9,7 +9,7 @@
 /* *********************************************************************
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -44,8 +44,8 @@
  *
  * *****************************************************************************/
 
-#ifndef __CURRENT_MEASURE_TYPES_H
-#define __CURRENT_MEASURE_TYPES_H
+#ifndef MCAF_CURRENT_MEASURE_TYPES_H 
+#define MCAF_CURRENT_MEASURE_TYPES_H 
 
 #include <stdint.h>
 #include "motor_control_types.h"
@@ -65,4 +65,4 @@ typedef struct tagMCAF_CURRENT_MEASUREMENT
 }
 #endif
 
-#endif /* __CURRENT_MEASURE_TYPES_H */
+#endif /* MCAF_CURRENT_MEASURE_TYPES_H */

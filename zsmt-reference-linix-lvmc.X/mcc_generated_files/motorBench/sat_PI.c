@@ -9,7 +9,7 @@
 /* *********************************************************************
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -106,6 +106,10 @@ inline static bool updateLatchedFlag(bool latch, uint16_t satFlag)
     else if (satFlag & MCAF_OUT_OF_SATURATION)
     {
         latch = false;
+    }
+    else
+    {
+        // For MISRA compliance
     }
     return latch;
 }
@@ -212,17 +216,25 @@ void MCAF_SatDetect(MCAF_SAT_DETECT_T *psat, const MC_DQ_T *pidq, const MC_DQ_T 
 /** * subtracts two 16-bit numbers but saturates the results * (requires saturation mode to be set) */
 inline static int16_t saturatedSubtract(int16_t x1, int16_t x2)
 {
-    a_Reg = __builtin_lac(x1, 0);
-    b_Reg = __builtin_lac(x2, 0);
-    a_Reg = __builtin_subab(a_Reg, b_Reg);
-    return __builtin_sacr(a_Reg, 0);
+    #if defined(__dsPIC33A__)
+        return __builtin_sat_sub_s16(x1, x2);
+    #else
+        a_Reg = __builtin_lac(x1, 0);
+        b_Reg = __builtin_lac(x2, 0);
+        a_Reg = __builtin_subab(a_Reg, b_Reg);
+        return __builtin_sacr(a_Reg, 0);
+    #endif
 }
 
 /** * Read accumulator A */
-inline static int32_t readAccA32()
+inline static int32_t readAccA32(void)
 {
 #if __XC16_VERSION__ >= 1026
-    const int32_t tmp = __builtin_sacd(a_Reg, 0);
+    #if defined(__dsPIC33A__)
+        const int32_t tmp = __builtin_sac_32(a_Reg, 0);
+    #else
+        const int32_t tmp = __builtin_sacd(a_Reg, 0);
+    #endif
     /* Prevent optimization from re-ordering/ignoring this sequence of operations */
     asm volatile ("");
     return tmp;
@@ -242,7 +254,11 @@ inline static void writeAccB32(int32_t input)
 #if __XC16_VERSION__ >= 1026
     const int32_t tmp = input;
     asm volatile ("" :: "r"(tmp)); 
-    b_Reg = __builtin_lacd(tmp, 0);
+    #if defined(__dsPIC33A__)
+        b_Reg = __builtin_lac_32(tmp, 0);
+    #else
+        b_Reg = __builtin_lacd(tmp, 0);
+    #endif
 #else
     uint32_t temp_dword;
     uint16_t temp_word;
@@ -267,7 +283,7 @@ void MCAF_ControllerPIUpdate(int16_t in_Ref, int16_t in_Meas,
     int16_t out_nonsat;
     /* saturated output */
     int16_t out_sat;
-    uint16_t saveCorcon = HAL_CORCON_RegisterValue_Get();
+    unsigned int saveCorcon = HAL_CORCON_RegisterValue_Get();
     
     /* Init CORCON register */
     HAL_CORCON_Initialize();
@@ -279,26 +295,44 @@ void MCAF_ControllerPIUpdate(int16_t in_Ref, int16_t in_Meas,
     writeAccB32(state->integrator);
 
     /* Calculate (Kp * error * 2^Nkp), store in A and out_Buffer */
-    a_Reg = __builtin_mpy(error, state->kp, 0, 0, 0, 0, 0, 0);
+    #if defined(__dsPIC33A__)
+        a_Reg = __builtin_mpy_16(error, state->kp);
+    #else
+        a_Reg = __builtin_mpy(error, state->kp, 0, 0, 0, 0, 0, 0);
+    #endif
     a_Reg = __builtin_sftac(a_Reg, -state->nkp);
     a_Reg = __builtin_addab(a_Reg, b_Reg);
-    out_nonsat = __builtin_sacr(a_Reg, 0);
+    #if defined(__dsPIC33A__)
+        out_nonsat = __builtin_sacr_16(a_Reg, 0);
+    #else
+        out_nonsat = __builtin_sacr(a_Reg, 0);
+    #endif
 
     /* Limit the output */
     out_sat = UTIL_LimitS16(out_nonsat, state->outMin, state->outMax);
     
     *out = out_sat;
-    /* Calculate integrator term and add it to previous value if not in saturation state */
+    /* Update integrator term to add in the latest error sample, 
+     * if it would not drive the output further into saturation.
+     */
     if ((sat_State == MCAF_SAT_NONE)
          || (UTIL_DirectedLessThanEqual(in_Ref, in_Meas, direction)))
     {    
         /* Calculate (error * Ki) and store in A */
-        a_Reg = __builtin_mpy(error, state->ki, 0, 0, 0, 0, 0, 0);
+        #if defined(__dsPIC33A__)
+            a_Reg = __builtin_mpy_16(error, state->ki);
+        #else
+            a_Reg = __builtin_mpy(error, state->ki, 0, 0, 0, 0, 0, 0);
+        #endif
         a_Reg = __builtin_sftac(a_Reg, -state->nki);
         
         /* Calculate (excess * Kc), subtract from (error * Ki) and store in A */
         error = out_nonsat - out_sat;
-        a_Reg = __builtin_msc(a_Reg, error, state->kc,0,0,0,0,0,0,0,0);
+        #if defined(__dsPIC33A__)
+            a_Reg = __builtin_msc_16(a_Reg, error, state->kc);
+        #else
+            a_Reg = __builtin_msc(a_Reg, error, state->kc,0,0,0,0,0,0,0,0);
+        #endif
         
         /* Add (error * Ki)-(excess * Kc) to the integrator value in B */
         a_Reg = __builtin_addab(a_Reg,b_Reg);

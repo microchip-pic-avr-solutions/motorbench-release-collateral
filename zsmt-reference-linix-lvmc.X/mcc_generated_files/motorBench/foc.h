@@ -9,7 +9,7 @@
 /* *********************************************************************
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -44,8 +44,8 @@
  *
  * *****************************************************************************/
 
-#ifndef __FOC_H
-#define __FOC_H
+#ifndef MCAF_FOC_H 
+#define MCAF_FOC_H 
 
 #include <stdbool.h>
 #include "system_state.h"
@@ -149,24 +149,11 @@ inline static void MCAF_FocInitializeIntegrators(MCAF_MOTOR_DATA *pmotor)
  */
 inline static void MCAF_FocRestart(MCAF_MOTOR_DATA *pmotor)
 {
-    pmotor->initialization.ready = false;
     MCAF_SetFaultLatchDelay(&pmotor->faultHandle);
 }
-
-/**
- * Returns whether the ADC initialization is ready
- *
- * @param pmotor motor data structure
- * @return true if ADC initialization is ready
- */
-inline static bool MCAF_ADCInitializationReady(const MCAF_MOTOR_DATA *pmotor)
-{
-    return pmotor->initialization.ready;
-}
-
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __FOC_H */
+#endif /* MCAF_FOC_H */

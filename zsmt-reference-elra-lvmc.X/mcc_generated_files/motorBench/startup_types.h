@@ -9,7 +9,7 @@
 /* *********************************************************************
  * 
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -44,13 +44,13 @@
  *
  * *****************************************************************************/
 
-#ifndef __STARTUP_TYPES_H
-#define __STARTUP_TYPES_H
+#ifndef MCAF_STARTUP_TYPES_H 
+#define MCAF_STARTUP_TYPES_H 
 
 #include <stdint.h>
 #include <stdbool.h>
 #include "units.h"
-#include "util.h"
+#include "util_types.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -177,8 +177,11 @@ typedef struct tagMOTOR_STARTUP_DATA
      } demodAmplitudeAccum;     
      /** Time (in # of samples) needed to accumulate demodulated amplitude */
      uint16_t              angleProbeTime;
-     /** Blanking time (in # of ISR cycles) at beginning of state to ignore samples */
-     uint16_t              blankingTime;
+     /** 
+      * Total blanking time (in # of ISR cycles) at beginning of state to ignore samples, 
+      * accounting for slew time and blanking time 
+      */
+     uint16_t              compoundBlankingTime;
      
      /** Counter for troubleshooting the number of restarts */
      uint16_t              restartCount;
@@ -289,4 +292,4 @@ inline static MCAF_U_ANGLE_ELEC MCAF_StartupGetIdqCmdAngle(const MCAF_MOTOR_STAR
 }
 #endif
 
-#endif /* __STARTUP_TYPES_H */
+#endif /* MCAF_STARTUP_TYPES_H */

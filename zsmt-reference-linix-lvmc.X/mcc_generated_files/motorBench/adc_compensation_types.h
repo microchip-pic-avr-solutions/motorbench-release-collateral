@@ -10,7 +10,7 @@
 /* *********************************************************************
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -45,13 +45,16 @@
  *
  * *****************************************************************************/
 
-#ifndef __ADC_COMPENSATION_TYPES_H
-#define __ADC_COMPENSATION_TYPES_H
+#ifndef MCAF_ADC_COMPENSATION_TYPES_H 
+#define MCAF_ADC_COMPENSATION_TYPES_H 
 
 #include <stdbool.h>
 #include <stdint.h>
 #include "units.h"
-#include "util.h"
+#include "util_types.h"
+#include "filter_types.h"
+#include "parameters/adc_params.h"
+#include "parameters/options.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -74,36 +77,73 @@ extern "C" {
  */
 typedef struct
 {
-    MCAF_U_NORMALIZED_GAIN   qKaa;        /** Q15 phase A gain */
-    MCAF_U_NORMALIZED_GAIN   qKab;        /** Q15 cross-coupling gain B->A */
+    MCAF_U_NORMALIZED_GAIN   qKaa;        /** phase A gain */
+    MCAF_U_NORMALIZED_GAIN   qKab;        /** cross-coupling gain B->A */
     int16_t                  offseta;     /** phase A offset */
 
-    MCAF_U_NORMALIZED_GAIN   qKba;        /** Q15 cross-coupling gain A->B */
-    MCAF_U_NORMALIZED_GAIN   qKbb;        /** Q15 phase B gain */
+    MCAF_U_NORMALIZED_GAIN   qKba;        /** cross-coupling gain A->B */
+    MCAF_U_NORMALIZED_GAIN   qKbb;        /** phase B gain */
     int16_t                  offsetb;     /** phase B offset */
 
-    MCAF_U_NORMALIZED_GAIN   qKcc;        /** Q15 phase C gain */
+    MCAF_U_NORMALIZED_GAIN   qKcc;        /** phase C gain */
     int16_t                  offsetc;     /** phase C offset */
     
-    MCAF_U_NORMALIZED_GAIN   qKidc;       /** Q15 DC link gain */
+    MCAF_U_NORMALIZED_GAIN   qKidc;       /** DC link gain */
     int16_t                  offsetIdc;   /** DC link offset */
 } MCAF_CURRENT_COMPENSATION_PARAMETERS;
 
-/**
- * Motor initialization state variables
- * Used to calibrate current offset for two phases.
+/** 
+ * Current offset calibration state variables
  */
-typedef struct tagMCAF_MOTOR_INITIALIZATION
+typedef struct tagMCAF_CURRENT_CALIBRATION
 {
     int16_t  kfilter;          /** filter constant */
     sx1632_t offsetLPF[3];     /** low-pass filter (one for each phase) */
     uint16_t sampleCountLimit; /** number of samples used to calibrate */
     uint16_t sampleCount;      /** counter of samples acquired for calibration */
     bool     ready;            /** whether initialization is ready */
-} MCAF_MOTOR_INITIALIZATION;
+    bool     success;          /** whether initialization succeeded */
+} MCAF_CURRENT_CALIBRATION;
+
+#if MCAF_ADC_GAIN_COMPENSATION_ENABLED
+
+/** 
+ * Compensation state for each ADC core of 33A
+ */
+typedef struct tagAdcGainCompensatorCore
+{
+    MCAF_U_NORMALIZED_Q15 upperVoltageDivider;  /** raw ADC reading */
+    MCAF_FILTER_LOW_PASS_S16_T filter;          /** filtered samples of voltage divider */
+    MCAF_U_NORMALIZED_GAIN compensationFactor;  /** computed ADC gain to be used for compensating samples taken from this ADC core */
+} MCAF_ADC_GAIN_COMPENSATOR_CORE;
+
+/** 
+ * ADC gain compensation state variables for 33A
+ */
+typedef struct tagAdcGainCompensator
+{
+    MCAF_ADC_GAIN_COMPENSATOR_CORE core[MCAF_ADC_MAX_CORE_USED]; /** State variables for each ADC core */
+    uint16_t sampleCountLimit;  /** number of samples needed for gain compensation */
+    uint16_t sampleCount;       /** counter of samples acquired for compensation */
+    bool     ready;             /** whether compensation is ready */
+    bool     success;           /** whether compensation is within limits */
+} MCAF_ADC_GAIN_COMPENSATOR;
+
+#endif
+
+/**
+ * ADC compensation state variables
+ */
+typedef struct tagMCAF_ADC_COMPENSATION
+{
+    MCAF_CURRENT_CALIBRATION currentCalibration;   /** Current calibration state */
+#if MCAF_ADC_GAIN_COMPENSATION_ENABLED
+    MCAF_ADC_GAIN_COMPENSATOR adcGainCompensator;  /** ADC gain compensation state */
+#endif
+} MCAF_ADC_COMPENSATION;
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __ADC_COMPENSATION_TYPES_H */
+#endif /* MCAF_ADC_COMPENSATION_TYPES_H */

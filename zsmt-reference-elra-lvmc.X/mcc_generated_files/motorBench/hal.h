@@ -9,7 +9,7 @@
 /* *********************************************************************
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -44,8 +44,13 @@
  *
  * *****************************************************************************/
 
+#ifndef MCAF_HAL_H
+#define MCAF_HAL_H
+
 #include <xc.h>
 #include <stdint.h>
 #include <stdbool.h>
 #include "hal/hardware_access_functions.h"
 #include "hal/mcaf_pin_manager.h"
+
+#endif /* MCAF_HAL_H */

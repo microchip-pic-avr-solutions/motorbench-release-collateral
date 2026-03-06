@@ -72,14 +72,6 @@
 #ifdef __cplusplus  // Provide C++ Compatability
     extern "C" {
 #endif
-        
-#ifdef __dsPIC33F__
-__psv__ extern uint16_t MC_SineTableInFlash[] __attribute__((space(psv)));
-#elif defined(__dsPIC33E__) || defined(__dsPIC33C__)
-__eds__ extern uint16_t MC_SineTableInFlash[] __attribute__((space(psv)));
-#else
-#error The selected device is not compatible with the Motor Control library!
-#endif
 
 extern uint16_t       MC_SineTableInRam[];
 

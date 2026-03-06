@@ -9,7 +9,7 @@
 /* *********************************************************************
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -44,8 +44,8 @@
  *
  * *****************************************************************************/
 
-#ifndef __SYSTEM_STATE_H
-#define __SYSTEM_STATE_H
+#ifndef MCAF_SYSTEM_STATE_H 
+#define MCAF_SYSTEM_STATE_H 
 
 #include <stdint.h>
 #include <stdbool.h>
@@ -63,6 +63,7 @@
 #include "recover.h"
 #include "monitor_types.h"
 #include "adc_compensation_types.h"
+#include "parameters/adc_params.h"
 #include "foc_types.h"
 #include "test_harness.h"
 #include "commutation_types.h"
@@ -180,7 +181,6 @@ typedef struct tagMOTOR
     uint16_t          controlFlags; /** MCAF_CTRL_FLAGS bitfields */
     uint16_t          stateFlags;   /** MCAF_STATE_FLAGS bitfields */    
     HAL_ADC_SELECT_T  adcSelect;    /** which channel we are scanning */
-    int16_t           potInput; /** potentiometer input */
     
     MCAF_BRIDGE_TEMPERATURE bridgeTemperature;  /** bridge temperature */
     
@@ -214,8 +214,8 @@ typedef struct tagMOTOR
     /** current calibration parameters */
     MCAF_CURRENT_COMPENSATION_PARAMETERS currentCalibration;
         
-    /** initialization */
-    MCAF_MOTOR_INITIALIZATION initialization;  
+    /** ADC compensation state */
+    MCAF_ADC_COMPENSATION adcCompensation;
 
     /** miscellaneous configurable parameters */
     struct tagConfig {
@@ -241,6 +241,7 @@ typedef struct tagMOTOR
 #if MCAF_TRIGGERED_AVERAGE_EXAMPLE == 1
     MCAF_TRIGGERED_AVERAGE_T iqAverage;  /** Triggered average example implementation */
 #endif
+
 } MCAF_MOTOR_DATA;
 
 /**
@@ -388,4 +389,4 @@ void MCAF_SystemStateInit(MCAF_MOTOR_DATA *pmotor, MCAF_SYSTEM_DATA *psys);
 }
 #endif
 
-#endif /* __SYSTEM_STATE_H */
+#endif /* MCAF_SYSTEM_STATE_H */

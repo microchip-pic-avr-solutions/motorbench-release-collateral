@@ -9,7 +9,7 @@
 /* *********************************************************************
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -44,8 +44,8 @@
  *
  * *****************************************************************************/
 
-#ifndef __FAULT_DETECT_TYPES_H
-#define __FAULT_DETECT_TYPES_H
+#ifndef MCAF_FAULT_DETECT_TYPES_H 
+#define MCAF_FAULT_DETECT_TYPES_H 
 
 #include <stdint.h>
 #include "units.h"
@@ -56,7 +56,7 @@ extern "C" {
 
 /**
  * Fault flag types 
- */  
+ */
 typedef enum
 {
     MCAF_OVERVOLTAGE_FAULT_DETECT        = 0x01,  /** Overvoltage indicator */
@@ -64,6 +64,8 @@ typedef enum
     MCAF_OVERCURRENT_HW_FAULT_DETECT     = 0x04,  /** Overcurrent fault indicator */
     MCAF_OVERTEMPERATURE_FAULT_DETECT    = 0x08,  /** Overtemperature fault indicator */
     MCAF_GATE_DRIVER_FAULT_DETECT        = 0x10,  /** Gate driver fault indicator */
+    MCAF_CURR_OFFSET_CAL_FAULT_DETECT    = 0x20,  /** Current offset calibration fault indicator */
+    MCAF_ADC_GAIN_COMP_FAULT_DETECT      = 0x40,  /** ADC gain compensation fault indicator */
 } MCAF_FAULT_DETECT_FLAG;
 
 /**
@@ -89,4 +91,4 @@ typedef struct tagMCAF_FAULT_DETECT
 }
 #endif
 
-#endif /* __FAULT_DETECT_TYPES_H */
+#endif /* MCAF_FAULT_DETECT_TYPES_H */

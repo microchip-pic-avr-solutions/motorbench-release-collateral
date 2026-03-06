@@ -8,7 +8,7 @@
 /*
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -93,9 +93,9 @@ void APP_ApplicationStep(APPLICATION_DATA *appData)
     if (appData->hardwareUiEnabled)
     {
         /* Use potentiometer to set motor velocity command */
-        int16_t potentiometerValue = MCAF_BoardServicePotentiometerValue(pboard);
+        appData->potentiometerValue = MCAF_BoardServicePotentiometerValue(pboard);
         appData->motorVelocityCommand = APP_DetermineVelocityCommand(appData, 
-                                                                     potentiometerValue);
+                                                                     appData->potentiometerValue);
         MCAPI_VelocityReferenceSet(apiData, appData->motorVelocityCommand);
         
         /* Button2 toggles motor direction */

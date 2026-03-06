@@ -9,7 +9,7 @@
  */ /*
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -44,8 +44,8 @@
  *
  *
  ******************************************************************************/
-#ifndef __ZSMT_HYBRID_PARAMS_H
-#define __ZSMT_HYBRID_PARAMS_H
+#ifndef MCAF_ZSMT_HYBRID_PARAMS_H
+#define MCAF_ZSMT_HYBRID_PARAMS_H
 
 #ifdef  __cplusplus
 extern "C" {
@@ -66,22 +66,43 @@ extern "C" {
  */
  
 /* Reduced limit during ZS/MT for output line-to-line voltage of d-axis current controller, expressed as a fraction of DC link voltage */
-#define ZSMT_CURRENT_CTRL_D_OUT_LIMIT        8513      // Q15(  0.25980) = +449.98012 mline-to-line = +450.00000 mline-to-line - 0.0044%
+#define ZSMT_CURRENT_CTRL_D_OUT_LIMIT             8513      // Q15(  0.25980) = +449.98012 mline-to-line = +450.00000 mline-to-line - 0.0044%
+#define ZSMT_CURRENT_CTRL_D_OUT_LIMIT_NORM    0.2597961426  // normalized
+#define ZSMT_CURRENT_CTRL_D_OUT_LIMIT_SCALE   1.7320508076  // line-to-line
+#define ZSMT_CURRENT_CTRL_D_OUT_LIMIT_ENG     0.4499801186  // line-to-line
 /* Reduced limit during ZS/MT for output line-to-line voltage of q-axis current controller, expressed as a fraction of DC link voltage */
-#define ZSMT_CURRENT_CTRL_Q_OUT_LIMIT       14757      // Q15(  0.45035) = +780.02544 mline-to-line = +780.00000 mline-to-line + 0.0033%
+#define ZSMT_CURRENT_CTRL_Q_OUT_LIMIT            14757      // Q15(  0.45035) = +780.02544 mline-to-line = +780.00000 mline-to-line + 0.0033%
+#define ZSMT_CURRENT_CTRL_Q_OUT_LIMIT_NORM    0.4503479004  // normalized
+#define ZSMT_CURRENT_CTRL_Q_OUT_LIMIT_SCALE   1.7320508076  // line-to-line
+#define ZSMT_CURRENT_CTRL_Q_OUT_LIMIT_ENG     0.7800254446  // line-to-line
 /* Velocity threshold slow */
-#define MCAF_ZSMT_HYBRID_VELOCITY_THRESHOLD_SLOW       3277      // Q15(  0.10001) =  +47.12677 rad/s       =  +47.12389 rad/s       + 0.0061%
+#define MCAF_ZSMT_HYBRID_VELOCITY_THRESHOLD_SLOW             3277      // Q15(  0.10001) =  +47.12677 rad/s       =  +47.12389 rad/s       + 0.0061%
+#define MCAF_ZSMT_HYBRID_VELOCITY_THRESHOLD_SLOW_NORM    0.1000061035  // normalized
+#define MCAF_ZSMT_HYBRID_VELOCITY_THRESHOLD_SLOW_SCALE 471.2388980385  // rad/s
+#define MCAF_ZSMT_HYBRID_VELOCITY_THRESHOLD_SLOW_ENG    47.1267660178  // rad/s
 /* Velocity threshold transition */
-#define MCAF_ZSMT_HYBRID_VELOCITY_THRESHOLD_TRANSITION       4369      // Q15(  0.13333) =  +62.83089 rad/s       =  +62.83185 rad/s       - 0.0015%
+#define MCAF_ZSMT_HYBRID_VELOCITY_THRESHOLD_TRANSITION             4369      // Q15(  0.13333) =  +62.83089 rad/s       =  +62.83185 rad/s       - 0.0015%
+#define MCAF_ZSMT_HYBRID_VELOCITY_THRESHOLD_TRANSITION_NORM    0.1333312988  // normalized
+#define MCAF_ZSMT_HYBRID_VELOCITY_THRESHOLD_TRANSITION_SCALE 471.2388980385  // rad/s
+#define MCAF_ZSMT_HYBRID_VELOCITY_THRESHOLD_TRANSITION_ENG    62.8308943338  // rad/s
 /* Velocity threshold fast */
-#define MCAF_ZSMT_HYBRID_VELOCITY_THRESHOLD_FAST       5461      // Q15(  0.16666) =  +78.53502 rad/s       =  +78.53982 rad/s       - 0.0061%
+#define MCAF_ZSMT_HYBRID_VELOCITY_THRESHOLD_FAST             5461      // Q15(  0.16666) =  +78.53502 rad/s       =  +78.53982 rad/s       - 0.0061%
+#define MCAF_ZSMT_HYBRID_VELOCITY_THRESHOLD_FAST_NORM    0.1666564941  // normalized
+#define MCAF_ZSMT_HYBRID_VELOCITY_THRESHOLD_FAST_SCALE 471.2388980385  // rad/s
+#define MCAF_ZSMT_HYBRID_VELOCITY_THRESHOLD_FAST_ENG    78.5350226498  // rad/s
 /* Maximum angle difference allowed for switching to back-emf based estimator */
-#define MCAF_ZSMT_HYBRID_ANGLE_CONVERGE_THRESHOLD       1820      // Q15(  0.05554) = +174.49031 mrad        = +174.53293 mrad        - 0.0244%
+#define MCAF_ZSMT_HYBRID_ANGLE_CONVERGE_THRESHOLD             1820      // Q15(  0.05554) = +174.49031 mrad        = +174.53293 mrad        - 0.0244%
+#define MCAF_ZSMT_HYBRID_ANGLE_CONVERGE_THRESHOLD_NORM    0.0555419922  // normalized
+#define MCAF_ZSMT_HYBRID_ANGLE_CONVERGE_THRESHOLD_SCALE   3.1415926536  // rad
+#define MCAF_ZSMT_HYBRID_ANGLE_CONVERGE_THRESHOLD_ENG     0.1744903146  // rad
 /* Minimum duration of angle convergence for switching to back-emf based estimator */
-#define MCAF_ZSMT_HYBRID_ANGLE_CONVERGE_DURATION         40      // Q0( 40.00000)  =   +2.00000 ms          =   +2.00000 ms          + 0.0000%
+#define MCAF_ZSMT_HYBRID_ANGLE_CONVERGE_DURATION               40      // Q0( 40.00000)  =   +2.00000 ms          =   +2.00000 ms          + 0.0000%
+#define MCAF_ZSMT_HYBRID_ANGLE_CONVERGE_DURATION_NORM   40.0000000000  // normalized
+#define MCAF_ZSMT_HYBRID_ANGLE_CONVERGE_DURATION_SCALE   5.000000e-05  // s
+#define MCAF_ZSMT_HYBRID_ANGLE_CONVERGE_DURATION_ENG     0.0020000000  // s
 
 #ifdef  __cplusplus
 }
 #endif
 
-#endif // __ZSMT_HYBRID_PARAMS_H
+#endif /* MCAF_ZSMT_HYBRID_PARAMS_H */

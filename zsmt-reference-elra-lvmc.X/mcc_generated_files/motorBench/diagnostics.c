@@ -9,7 +9,7 @@
 /* *********************************************************************
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -107,17 +107,17 @@ static void X2Cscope_sendSerial(uint8_t data)
     HAL_UART_Write(data);
 }
 
-static uint8_t X2Cscope_receiveSerial()
+static uint8_t X2Cscope_receiveSerial(void)
 {
     return HAL_UART_Read();
 }
 
-static uint8_t X2Cscope_isReceiveDataAvailable()
+static uint8_t X2Cscope_isReceiveDataAvailable(void)
 {
     return HAL_UART_IsRxReady();
 }
 
-static uint8_t X2Cscope_isSendReady()
+static uint8_t X2Cscope_isSendReady(void)
 {
     return HAL_UART_IsTxReady();
 }

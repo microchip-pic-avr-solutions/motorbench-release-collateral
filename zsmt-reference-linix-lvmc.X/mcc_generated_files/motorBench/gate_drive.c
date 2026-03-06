@@ -9,7 +9,7 @@
 /* *********************************************************************
  * 
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -55,7 +55,7 @@ void MCAF_BootstrapChargeInit(MCAF_BOOTSTRAP_STATE *pbootstrap)
     pbootstrap->dutycycle[1] = 0;
     pbootstrap->dutycycle[2] = 0;
     pbootstrap->delayCount = 0;
-    pbootstrap->state = 0;
+    pbootstrap->state = MCBS_IDLE_START;
 }
 
 static inline uint16_t minimumDutyCycleForBootstrapCharging(void)

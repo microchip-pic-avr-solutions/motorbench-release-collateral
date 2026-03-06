@@ -1,0 +1,1536 @@
+{
+    "metadata": {
+        "build_time": "2026 Feb 13 18:37",
+        "commit": "132024",
+        "version": "R9/RC31"
+    },
+    "parameters": [
+        {
+            "define_name": "MCAF_BRIDGE_TEMPERATURE_FILTER_GAIN",
+            "description": "Pole of bridge temperature low-pass filter",
+            "intended_value": 100.0,
+            "key": "adc.bridge_temperature.filterGain",
+            "q": 16,
+            "scale": 20000.0,
+            "units": "rad/s"
+        },
+        {
+            "define_name": "MCAF_BRIDGE_TEMPERATURE_GAIN",
+            "description": "temperature gain",
+            "intended_value": 0.50354,
+            "key": "adc.bridge_temperature.gain",
+            "q": 16,
+            "scale": 1.0,
+            "units": null
+        },
+        {
+            "define_name": "MCAF_BRIDGE_TEMPERATURE_OFFSET",
+            "description": "temperature offset",
+            "intended_value": 5000.0,
+            "key": "adc.bridge_temperature.offset",
+            "units": null
+        },
+        {
+            "define_name": "MCAF_BRIDGE_TEMPERATURE_SLEW_RATE",
+            "description": "Maximum temperature slew rate",
+            "intended_value": 4.0,
+            "key": "adc.bridge_temperature.slewRate",
+            "q": 15,
+            "scale": 100.0,
+            "units": "C/s"
+        },
+        {
+            "define_name": "CURRENT_KAA",
+            "description": "normalized A->A current gain",
+            "intended_value": 1,
+            "key": "adc.currentKaa",
+            "q": 14,
+            "scale": 1.0,
+            "units": null
+        },
+        {
+            "define_name": "CURRENT_KAB",
+            "description": "normalized B->A current gain",
+            "intended_value": 0,
+            "key": "adc.currentKab",
+            "q": 14,
+            "scale": 1.0,
+            "units": null
+        },
+        {
+            "define_name": "CURRENT_KBA",
+            "description": "normalized A->B current gain",
+            "intended_value": 0,
+            "key": "adc.currentKba",
+            "q": 14,
+            "scale": 1.0,
+            "units": null
+        },
+        {
+            "define_name": "CURRENT_KBB",
+            "description": "normalized B->B current gain",
+            "intended_value": 1,
+            "key": "adc.currentKbb",
+            "q": 14,
+            "scale": 1.0,
+            "units": null
+        },
+        {
+            "define_name": "CURRENT_KCC",
+            "description": "normalized C->C current gain",
+            "intended_value": 1.0,
+            "key": "adc.currentKcc",
+            "q": 14,
+            "scale": 1.0,
+            "units": null
+        },
+        {
+            "define_name": "MCAF_CURRENT_OFS_CAL_COUNT",
+            "description": "number of samples taken for current offset compensation",
+            "intended_value": 128,
+            "key": "adc.currentOffsetCal.count",
+            "units": null
+        },
+        {
+            "define_name": "MCAF_CURRENT_OFS_CAL_FILTER_GAIN",
+            "description": "low-pass filter gain for current offset compensation",
+            "intended_value": 0.25,
+            "key": "adc.currentOffsetCal.filterGain",
+            "q": 16,
+            "scale": 1.0,
+            "units": null
+        },
+        {
+            "define_name": "MCAF_CURRENT_OFS_CAL_RANGE",
+            "description": "normalized range of current offset compensation, relative to ADC fullscale",
+            "intended_value": 0.04,
+            "key": "adc.currentOffsetCal.range",
+            "q": 15,
+            "scale": 1.0,
+            "units": null
+        },
+        {
+            "define_name": "MCAF_CURRENT_OFS_CAL_SHIFT",
+            "description": "shift count used to limit offset to 0.5 * 2^(-MCAF_CAL_SHIFT) of ADC fullscale",
+            "intended_value": 3,
+            "key": "adc.currentOffsetCal.shift",
+            "units": null
+        },
+        {
+            "define_name": "MCAF_GAIN_COMP_COUNT",
+            "description": "number of samples taken for gain compensation",
+            "intended_value": 128,
+            "key": "adc.mcafGainCompCount",
+            "units": null
+        },
+        {
+            "define_name": "MCAF_IDC_SCALING_FACTOR",
+            "description": "scaling for Idc",
+            "intended_value": 1.0,
+            "key": "adc.mcafIdcScalingFactor",
+            "q": 14,
+            "scale": 1.0,
+            "units": null
+        },
+        {
+            "define_name": "MCAF_VDC_SCALING_FACTOR",
+            "description": "scaling for Vdc",
+            "intended_value": 1.0,
+            "key": "adc.mcafVdcScalingFactor",
+            "q": 10,
+            "scale": 1.0,
+            "units": null
+        },
+        {
+            "define_name": "MCAF_BUTTON_DEBOUNCE_TIME",
+            "description": "UI button debounce time in ISRs",
+            "intended_value": 0.007,
+            "key": "board_service.button.debounceTime",
+            "q": 0,
+            "scale": 0.001,
+            "units": "s"
+        },
+        {
+            "define_name": "MCAF_BUTTON_LONG_PRESS_TIME",
+            "description": "UI button long press time in ISRs",
+            "intended_value": 2.5,
+            "key": "board_service.button.longPressTime",
+            "q": 0,
+            "scale": 0.001,
+            "units": "s"
+        },
+        {
+            "define_name": "MCAF_ZSMT_HYBRID_ANGLE_CONVERGE_DURATION",
+            "description": "Minimum duration of angle convergence for switching to back-emf based estimator",
+            "intended_value": 0.002,
+            "key": "estimator_minotaur.mcafZsmtHybridAngleConvergeDuration",
+            "q": 0,
+            "scale": 5e-05,
+            "units": "s"
+        },
+        {
+            "define_name": "MCAF_ZSMT_HYBRID_ANGLE_CONVERGE_THRESHOLD",
+            "description": "Maximum angle difference allowed for switching to back-emf based estimator",
+            "intended_value": 0.174532925199,
+            "key": "estimator_minotaur.mcafZsmtHybridAngleConvergeThreshold",
+            "q": 15,
+            "scale": 3.14159265359,
+            "units": "rad"
+        },
+        {
+            "define_name": "MCAF_ZSMT_HYBRID_VELOCITY_THRESHOLD_FAST",
+            "description": "Velocity threshold fast",
+            "intended_value": 104.71975512,
+            "key": "estimator_minotaur.mcafZsmtHybridVelocityThresholdFast",
+            "q": 15,
+            "scale": 628.318530718,
+            "units": "rad/s"
+        },
+        {
+            "define_name": "MCAF_ZSMT_HYBRID_VELOCITY_THRESHOLD_SLOW",
+            "description": "Velocity threshold slow",
+            "intended_value": 62.8318530718,
+            "key": "estimator_minotaur.mcafZsmtHybridVelocityThresholdSlow",
+            "q": 15,
+            "scale": 628.318530718,
+            "units": "rad/s"
+        },
+        {
+            "define_name": "MCAF_ZSMT_HYBRID_VELOCITY_THRESHOLD_TRANSITION",
+            "description": "Velocity threshold transition",
+            "intended_value": 83.7758040957,
+            "key": "estimator_minotaur.mcafZsmtHybridVelocityThresholdTransition",
+            "q": 15,
+            "scale": 628.318530718,
+            "units": "rad/s"
+        },
+        {
+            "define_name": "ZSMT_CURRENT_CTRL_D_OUT_LIMIT",
+            "description": "Reduced limit during ZS/MT for output line-to-line voltage of d-axis current controller, expressed as a fraction of DC link voltage",
+            "intended_value": 0.45,
+            "key": "estimator_minotaur.zsmtCurrentCtrlDOutLimit",
+            "q": 15,
+            "scale": 1.73205080757,
+            "units": "line-to-line"
+        },
+        {
+            "define_name": "ZSMT_CURRENT_CTRL_Q_OUT_LIMIT",
+            "description": "Reduced limit during ZS/MT for output line-to-line voltage of q-axis current controller, expressed as a fraction of DC link voltage",
+            "intended_value": 0.78,
+            "key": "estimator_minotaur.zsmtCurrentCtrlQOutLimit",
+            "q": 15,
+            "scale": 1.73205080757,
+            "units": "line-to-line"
+        },
+        {
+            "define_name": "MCAF_OVERTEMPERATURE_THRESHOLD",
+            "description": "overtemperature fault threshold",
+            "intended_value": 50.0,
+            "key": "fault_detect.mcafOvertemperatureThreshold",
+            "q": 15,
+            "scale": 327.68,
+            "units": "C"
+        },
+        {
+            "define_name": "VDC_OVERVOLTAGE_THRESHOLD",
+            "description": "overvoltage fault threshold",
+            "intended_value": 28.0,
+            "key": "fault_detect.vdcOvervoltageThreshold",
+            "q": 15,
+            "scale": 71.3,
+            "units": "V"
+        },
+        {
+            "define_name": "VDC_UNDERVOLTAGE_THRESHOLD",
+            "description": "undervoltage fault threshold",
+            "intended_value": 12.0,
+            "key": "fault_detect.vdcUndervoltageThreshold",
+            "q": 15,
+            "scale": 71.3,
+            "units": "V"
+        },
+        {
+            "define_name": "KII",
+            "description": "Current loop integral gain",
+            "intended_value": 634.828997489,
+            "key": "foc.kii",
+            "q": 15,
+            "scale": 32706.4220183,
+            "units": "V/A/s"
+        },
+        {
+            "define_name": "KIP",
+            "description": "Current loop proportional gain",
+            "intended_value": 0.253744668077,
+            "key": "foc.kip",
+            "q": 15,
+            "scale": 1.63532110092,
+            "units": "V/A"
+        },
+        {
+            "define_name": "KWI",
+            "description": "Velocity loop integral gain",
+            "intended_value": 0.0175025014078,
+            "key": "foc.kwi",
+            "q": 15,
+            "scale": 69.3915551881,
+            "units": "A/rad"
+        },
+        {
+            "define_name": "KWP",
+            "description": "Velocity loop proportional gain",
+            "intended_value": 0.00787786395633,
+            "key": "foc.kwp",
+            "q": 15,
+            "scale": 0.0693915551881,
+            "units": "A/(rad/s)"
+        },
+        {
+            "define_name": "MCAF_DEAD_TIME_COMPENSATION_VOLTAGE_DELAY",
+            "description": null,
+            "intended_value": 0,
+            "key": "foc.mcafDeadTimeCompensationVoltageDelay",
+            "units": null
+        },
+        {
+            "define_name": "MCAF_RVDC_MIN",
+            "description": "reciprocal of minimum DC link voltage",
+            "intended_value": 0.112198539402,
+            "key": "foc.mcafRvdcMin",
+            "q": 12,
+            "scale": 0.0140252454418,
+            "units": "1/V"
+        },
+        {
+            "define_name": "MCAF_RVDC_MIN_VDC",
+            "description": "minimum DC link voltage for which we calculate reciprocals",
+            "intended_value": 8.91277199622,
+            "key": "foc.mcafRvdcMinVdc",
+            "q": 15,
+            "scale": 71.3,
+            "units": "V"
+        },
+        {
+            "define_name": "MCAF_RVDC_Q",
+            "description": "binary point for reciprocal voltages",
+            "intended_value": 12,
+            "key": "foc.mcafRvdcQ",
+            "units": null
+        },
+        {
+            "define_name": "HAL_PARAM_ADC_TRIGGER_DELAY",
+            "description": "ADC sampling delay",
+            "intended_value": 0,
+            "key": "hal.adcTriggerDelay",
+            "q": 0,
+            "scale": 5e-09,
+            "units": "s"
+        },
+        {
+            "define_name": "HAL_PARAM_DEADTIME_COUNTS",
+            "description": "Dead time in PWM clock cycles",
+            "intended_value": 1e-06,
+            "key": "hal.deadtimeCounts",
+            "q": 0,
+            "scale": 5e-09,
+            "units": "s"
+        },
+        {
+            "define_name": "HAL_PARAM_MAX_DUTY_COUNTS",
+            "description": "Maximum duty cycle register value in counts",
+            "intended_value": 0.955,
+            "key": "hal.maxDutyCounts",
+            "q": 0,
+            "scale": 0.0002,
+            "units": ""
+        },
+        {
+            "define_name": "HAL_PARAM_MAX_DUTY_Q15",
+            "description": "Maximum duty cycle register value, as ratio",
+            "intended_value": 0.955,
+            "key": "hal.maxDutyQ15",
+            "q": 15,
+            "scale": 1.0,
+            "units": null
+        },
+        {
+            "define_name": "HAL_PARAM_MAX_LOWER_DUTY_COUNTS",
+            "description": "Maximum low-side duty cycle register value in counts",
+            "intended_value": 0.971,
+            "key": "hal.maxLowerDutyCounts",
+            "q": 0,
+            "scale": 0.0002,
+            "units": ""
+        },
+        {
+            "define_name": "HAL_PARAM_MIN_DUTY_COUNTS",
+            "description": "Minimum duty cycle register value in counts",
+            "intended_value": 0.029,
+            "key": "hal.minDutyCounts",
+            "q": 0,
+            "scale": 0.0002,
+            "units": ""
+        },
+        {
+            "define_name": "HAL_PARAM_MIN_DUTY_Q15",
+            "description": "Minimum duty cycle register value, as ratio",
+            "intended_value": 0.029,
+            "key": "hal.minDutyQ15",
+            "q": 15,
+            "scale": 1.0,
+            "units": null
+        },
+        {
+            "define_name": "HAL_PARAM_MIN_LOWER_DUTY_COUNTS",
+            "description": "Minimum low-side duty cycle register value in counts",
+            "intended_value": 0.045,
+            "key": "hal.minLowerDutyCounts",
+            "q": 0,
+            "scale": 0.0002,
+            "units": ""
+        },
+        {
+            "define_name": "HAL_PARAM_PWM_PERIOD_COUNTS",
+            "description": "PWM period register value in PWM clock cycles",
+            "intended_value": 2.5e-05,
+            "key": "hal.pwmPeriodCounts",
+            "q": 0,
+            "scale": 5e-09,
+            "units": "s"
+        },
+        {
+            "define_name": "MCAPI_FULLSCALE_CURRENT",
+            "description": "A",
+            "intended_value": 43.6,
+            "key": "mcapi.fullscale.current",
+            "units": null
+        },
+        {
+            "define_name": "MCAPI_FULLSCALE_TORQUE",
+            "description": "Nm",
+            "intended_value": 1.21412358676,
+            "key": "mcapi.fullscale.torque",
+            "units": null
+        },
+        {
+            "define_name": "MCAPI_FULLSCALE_VELOCITY",
+            "description": "RPM",
+            "intended_value": 6000.0,
+            "key": "mcapi.fullscale.velocity",
+            "units": null
+        },
+        {
+            "define_name": "MCAPI_FULLSCALE_VOLTAGE",
+            "description": "V",
+            "intended_value": 71.3,
+            "key": "mcapi.fullscale.voltage",
+            "units": null
+        },
+        {
+            "define_name": "KFILTER_IQ",
+            "description": "Filter constant used for filtering the measured current in q-axis",
+            "intended_value": 1000.0,
+            "key": "mcapi.kfilterIq",
+            "q": 15,
+            "scale": 20000.0,
+            "units": "rad/s"
+        },
+        {
+            "define_name": "KFILTER_IS_SQUARED",
+            "description": "Filter constant used for filtering the squared magnitude of measured current",
+            "intended_value": 1000.0,
+            "key": "mcapi.kfilterIsSquared",
+            "q": 15,
+            "scale": 20000.0,
+            "units": "rad/s"
+        },
+        {
+            "define_name": "MCAPI_MAXIMUM_VELOCITY",
+            "description": "Maximum velocity command",
+            "intended_value": 418.879020479,
+            "key": "mcapi.mcapiMaximumVelocity",
+            "q": 15,
+            "scale": 628.318530718,
+            "units": "rad/s"
+        },
+        {
+            "define_name": "MCAPI_MINIMUM_VELOCITY",
+            "description": "Minimum velocity command",
+            "intended_value": 104.71975512,
+            "key": "mcapi.mcapiMinimumVelocity",
+            "q": 15,
+            "scale": 628.318530718,
+            "units": "rad/s"
+        },
+        {
+            "define_name": "MCAF_MOTOR_KE",
+            "description": "Back-EMF constant of the motor",
+            "intended_value": 0.0371291616747,
+            "key": "motor.ke",
+            "q": 12,
+            "scale": 0.113477474425,
+            "units": "V/(rad/s)"
+        },
+        {
+            "define_name": "MCAF_MOTOR_KE_INVERSE",
+            "description": "Inverse of BEMF constant of the motor",
+            "intended_value": 26.9330077732,
+            "key": "motor.keInverse",
+            "q": 12,
+            "scale": 8.81232160895,
+            "units": "(rad/s)/V"
+        },
+        {
+            "define_name": "MCAF_MOTOR_L0_BASE_DT",
+            "description": "Common-mode stator inductance (line-to-neutral)",
+            "intended_value": 0.00011725,
+            "key": "motor.l0BaseDt",
+            "q": 13,
+            "scale": 8.17660550459e-05,
+            "units": "H"
+        },
+        {
+            "define_name": "MCAF_MOTOR_L0_BASE_OMEGA_E",
+            "description": "Common-mode stator inductance (line-to-neutral)",
+            "intended_value": 0.00011725,
+            "key": "motor.l0BaseOmegaE",
+            "q": 15,
+            "scale": 0.000650673591884,
+            "units": "H"
+        },
+        {
+            "define_name": "MCAF_MOTOR_L1_BASE_DT",
+            "description": "Differential-mode stator inductance (line-to-neutral)",
+            "intended_value": -1.525e-05,
+            "key": "motor.l1BaseDt",
+            "q": 13,
+            "scale": 8.17660550459e-05,
+            "units": "H"
+        },
+        {
+            "define_name": "MCAF_MOTOR_L1_BASE_OMEGA_E",
+            "description": "Differential-mode stator inductance (line-to-neutral)",
+            "intended_value": -1.525e-05,
+            "key": "motor.l1BaseOmegaE",
+            "q": 15,
+            "scale": 0.000650673591884,
+            "units": "H"
+        },
+        {
+            "define_name": "MCAF_MOTOR_LD_BASE_DT",
+            "description": "Stator d-axis inductance (line-to-neutral)",
+            "intended_value": 0.000102,
+            "key": "motor.ldBaseDt",
+            "q": 13,
+            "scale": 8.17660550459e-05,
+            "units": "H"
+        },
+        {
+            "define_name": "MCAF_MOTOR_LD_BASE_OMEGA_E",
+            "description": "Stator d-axis inductance (line-to-neutral)",
+            "intended_value": 0.000102,
+            "key": "motor.ldBaseOmegaE",
+            "q": 15,
+            "scale": 0.000650673591884,
+            "units": "H"
+        },
+        {
+            "define_name": "MCAF_MOTOR_LMAX_BASE_DT",
+            "description": "Maximum of Ld, Lq",
+            "intended_value": 0.0001325,
+            "key": "motor.lmaxBaseDt",
+            "q": 13,
+            "scale": 8.17660550459e-05,
+            "units": "H"
+        },
+        {
+            "define_name": "MCAF_MOTOR_LMAX_BASE_OMEGA_E",
+            "description": "Maximum of Ld, Lq",
+            "intended_value": 0.0001325,
+            "key": "motor.lmaxBaseOmegaE",
+            "q": 15,
+            "scale": 0.000650673591884,
+            "units": "H"
+        },
+        {
+            "define_name": "MCAF_MOTOR_LQ_BASE_DT",
+            "description": "Stator q-axis inductance (line-to-neutral)",
+            "intended_value": 0.0001325,
+            "key": "motor.lqBaseDt",
+            "q": 13,
+            "scale": 8.17660550459e-05,
+            "units": "H"
+        },
+        {
+            "define_name": "MCAF_MOTOR_LQ_BASE_OMEGA_E",
+            "description": "Stator q-axis inductance (line-to-neutral)",
+            "intended_value": 0.0001325,
+            "key": "motor.lqBaseOmegaE",
+            "q": 15,
+            "scale": 0.000650673591884,
+            "units": "H"
+        },
+        {
+            "define_name": "MCAF_MOTOR_LS_BASE_DT",
+            "description": "Stator inductance (line-to-neutral)",
+            "intended_value": 0.00011725,
+            "key": "motor.lsBaseDt",
+            "q": 13,
+            "scale": 8.17660550459e-05,
+            "units": "H"
+        },
+        {
+            "define_name": "MCAF_MOTOR_LS_BASE_OMEGA_E",
+            "description": "Stator inductance (line-to-neutral)",
+            "intended_value": 0.00011725,
+            "key": "motor.lsBaseOmegaE",
+            "q": 15,
+            "scale": 0.000650673591884,
+            "units": "H"
+        },
+        {
+            "define_name": "MCAF_MOTOR_PSI_BASE_DT",
+            "description": "Magnetic Flux of the motor",
+            "intended_value": 0.00928229041869,
+            "key": "motor.psiBaseDt",
+            "q": 13,
+            "scale": 0.003565,
+            "units": "V*s"
+        },
+        {
+            "define_name": "MCAF_MOTOR_PSI_BASE_OMEGA_E",
+            "description": "Magnetic Flux of the motor",
+            "intended_value": 0.00928229041869,
+            "key": "motor.psiBaseOmegaE",
+            "q": 14,
+            "scale": 0.0283693686061,
+            "units": "V*s"
+        },
+        {
+            "define_name": "MCAF_MOTOR_RELATIVE_SALIENCY",
+            "description": "Relative saliency = (Lq-Ld)/(Lq+Ld)",
+            "intended_value": 0.130063965885,
+            "key": "motor.relativeSaliency",
+            "q": 15,
+            "scale": 1.0,
+            "units": null
+        },
+        {
+            "define_name": "MCAF_MOTOR_RS",
+            "description": "Stator resistance (line-to-neutral)",
+            "intended_value": 0.241,
+            "key": "motor.rs",
+            "q": 15,
+            "scale": 1.63532110092,
+            "units": "ohm"
+        },
+        {
+            "define_name": "MCAF_MOTOR_SALIENCY_RATIO",
+            "description": "Saliency ratio Lq/Ld",
+            "intended_value": 1.29901960784,
+            "key": "motor.saliencyRatio",
+            "q": 12,
+            "scale": 1.0,
+            "units": null
+        },
+        {
+            "define_name": "RATED_MOTOR_IPEAK",
+            "description": "rated allowable current of motor (peak amplitude)",
+            "intended_value": 9.01,
+            "key": "operation.ilimit.ratedMotorIpeak",
+            "units": "A"
+        },
+        {
+            "define_name": "MCAF_RELATIVE_SALIENCY_THRESHOLD",
+            "description": "Relative saliency threshold = (xi-1.0)/(xi+1.0)",
+            "intended_value": 0.111111111111,
+            "key": "operation.mcafRelativeSaliencyThreshold",
+            "q": 15,
+            "scale": 1.0,
+            "units": null
+        },
+        {
+            "define_name": "MCAF_VELOCITY_COMMAND_MAX",
+            "description": "Maximum velocity command",
+            "intended_value": 418.879020479,
+            "key": "operation.mcafVelocityCommandMax",
+            "q": 15,
+            "scale": 628.318530718,
+            "units": "rad/s"
+        },
+        {
+            "define_name": "MCAF_VELOCITY_COMMAND_MIN",
+            "description": "Minimum velocity command",
+            "intended_value": 104.71975512,
+            "key": "operation.mcafVelocityCommandMin",
+            "q": 15,
+            "scale": 628.318530718,
+            "units": "rad/s"
+        },
+        {
+            "define_name": "MCAF_VELOCITY_NOMINAL",
+            "description": "Nominal velocity (base speed): nominal no-load speed at nominal supply voltage with no flux weakening",
+            "intended_value": 418.879020479,
+            "key": "operation.mcafVelocityNominal",
+            "q": 15,
+            "scale": 628.318530718,
+            "units": "rad/s"
+        },
+        {
+            "define_name": "MCAF_CLOSED_LOOP_STOPPING_SPEED",
+            "description": "Speed threshold for a closed-loop stop",
+            "intended_value": 20.9439510239,
+            "key": "operation.run.closedLoopStopping.speed",
+            "q": 15,
+            "scale": 628.318530718,
+            "units": "rad/s"
+        },
+        {
+            "define_name": "MCAF_CLOSED_LOOP_STOPPING_TIME",
+            "description": "Minimum time for achieving a closed-loop stop below the speed threshold",
+            "intended_value": 0.5,
+            "key": "operation.run.closedLoopStopping.time",
+            "q": 0,
+            "scale": 5e-05,
+            "units": "s"
+        },
+        {
+            "define_name": "VELOCITY_COASTDOWN_TIME",
+            "description": "estimate of worst-case time needed to decelerate to a stop",
+            "intended_value": 0.662713449063,
+            "key": "operation.run.velocityCoastdownTime",
+            "q": 0,
+            "scale": 5e-05,
+            "units": "s"
+        },
+        {
+            "define_name": "VELOCITY_SLEWRATE_LIMIT_ACCEL",
+            "description": "slew rate limit for velocity commands during acceleration",
+            "intended_value": 8.12723143804,
+            "key": "operation.run.velocitySlewrateLimitAccel",
+            "q": 15,
+            "scale": 628.318530718,
+            "units": "rad/s"
+        },
+        {
+            "define_name": "VELOCITY_SLEWRATE_LIMIT_DECEL",
+            "description": "slew rate limit for velocity commands during deceleration",
+            "intended_value": 0.586957521038,
+            "key": "operation.run.velocitySlewrateLimitDecel",
+            "q": 15,
+            "scale": 628.318530718,
+            "units": "rad/s"
+        },
+        {
+            "define_name": "MCAF_CURRENT_CTRL_D_OUT_LIMIT",
+            "description": "Limit for output line-to-line voltage of d-axis current controller, expressed as a fraction of DC link voltage",
+            "intended_value": 1.0,
+            "key": "overmodulation.dOutLimit",
+            "q": 15,
+            "scale": 1.73205080757,
+            "units": "line-to-line"
+        },
+        {
+            "define_name": "MCAF_CURRENT_CTRL_DQ_MAGNITUDE_LIMIT",
+            "description": "Limit for output magnitude of current controllers which triggers voltage saturation, expressed as a fraction of DC link voltage",
+            "intended_value": 0.95,
+            "key": "overmodulation.dqMagnitudeLimit",
+            "q": 15,
+            "scale": 1.73205080757,
+            "units": "line-to-line"
+        },
+        {
+            "define_name": "MCAF_CURRENT_CTRL_Q_OUT_LIMIT",
+            "description": "Limit for output line-to-line voltage of q-axis current controller, expressed as a fraction of DC link voltage",
+            "intended_value": 1.15,
+            "key": "overmodulation.qOutLimit",
+            "q": 15,
+            "scale": 1.73205080757,
+            "units": "line-to-line"
+        },
+        {
+            "define_name": "D_ILIMIT_HS",
+            "description": "Maximum rate of change of current dI/dt, used as limit at high velocity operating range",
+            "intended_value": 23253.3333333,
+            "key": "pll.dIlimitHs",
+            "q": 15,
+            "scale": 872000.0,
+            "units": "A/s"
+        },
+        {
+            "define_name": "D_ILIMIT_LS",
+            "description": "Maximum rate of change of current dI/dt, used as limit at low velocity operating range\n(Note: this has a different scaling factor from D_ILIMIT_HS to account for the subsampling factor PLL_LOWSPEED_DIBYDT_PRESCALER)",
+            "intended_value": 23253.3333333,
+            "key": "pll.dIlimitLs",
+            "q": 15,
+            "scale": 109000.0,
+            "units": "A/s"
+        },
+        {
+            "define_name": "DECIMATE_BASE_SPEED",
+            "description": "Decimation speed threshold, below which velocity \n                  estimation is optimized for stability",
+            "intended_value": 41.8879020479,
+            "key": "pll.decimateBaseSpeed",
+            "q": 15,
+            "scale": 628.318530718,
+            "units": "rad/s"
+        },
+        {
+            "define_name": "KFILTER_ESDQ",
+            "description": "Filter constant that is used for filtering the estimated \n                  BEMF, at nominal velocity",
+            "intended_value": 731.991088286,
+            "key": "pll.kfilterEsdq",
+            "q": 15,
+            "scale": 20000.0,
+            "units": "rad/s"
+        },
+        {
+            "define_name": "KFILTER_ESDQ_FW",
+            "description": "Filter constant that is used for filtering the estimated \n                  BEMF, during field-weakening",
+            "intended_value": 100.0976562,
+            "key": "pll.kfilterEsdqFw",
+            "q": 15,
+            "scale": 20000.0,
+            "units": "rad/s"
+        },
+        {
+            "define_name": "KFILTER_VELESTIM",
+            "description": "Filter contant that is used for \n                  filtering the estimated velocity",
+            "intended_value": 456.621004566,
+            "key": "pll.kfilterVelestim",
+            "q": 15,
+            "scale": 20000.0,
+            "units": "rad/s"
+        },
+        {
+            "define_name": "MCAF_PLL_DELAY_MATCH",
+            "description": "Add one-cycle delay to match current and voltage sample timing",
+            "intended_value": true,
+            "key": "pll.mcafPllDelayMatch",
+            "units": null
+        },
+        {
+            "define_name": "MCAF_PLL_DT_ANGULAR",
+            "description": "Estimator sampling time used for integrating electrical frequency to obtain electrical angle",
+            "intended_value": 5e-05,
+            "key": "pll.mcafPllDtAngular",
+            "q": 15,
+            "scale": 0.00125,
+            "units": "seconds"
+        },
+        {
+            "define_name": "MCAF_PLL_KE_INVERSE_SCALING",
+            "description": "Empirical scaling factor for 1/Ke scaling",
+            "intended_value": 1.0,
+            "key": "pll.mcafPllKeInverseScaling",
+            "q": 14,
+            "scale": 1.0,
+            "units": null
+        },
+        {
+            "define_name": "MCAF_PLL_VELOCITY_FILTER_THRESHOLD",
+            "description": "Velocity filter threshold, below which a slow filter is used",
+            "intended_value": 418.879020479,
+            "key": "pll.mcafPllVelocityFilterThreshold",
+            "q": 15,
+            "scale": 628.318530718,
+            "units": "rad/s"
+        },
+        {
+            "define_name": "PLL_LOWSPEED_DIBYDT_PRESCALER",
+            "description": "Number of PLL execution steps per deltaI calculation.\nThis undersampling prescaler must be a power of two",
+            "intended_value": 8,
+            "key": "pll.pllLowspeedDibydtPrescaler",
+            "units": null
+        },
+        {
+            "define_name": "PLL_LOWSPEED_DIBYDT_PRESCALER_SHIFTCOUNT",
+            "description": "Number of shift counts required to compensate \nfor the gain in dI/dt calculation that is due to undersampling",
+            "intended_value": 3,
+            "key": "pll.pllLowspeedDibydtPrescalerShiftcount",
+            "units": null
+        },
+        {
+            "define_name": "MCAF_RECOVERY_STARTUP_ATTEMPTS",
+            "description": "Number of recovery re-trials",
+            "intended_value": 3,
+            "key": "recovery.startupAttempts",
+            "q": 0,
+            "scale": 1,
+            "units": "counts"
+        },
+        {
+            "define_name": "CURRENT_MAXIMUM_COMMAND",
+            "description": "Maximum current command to current controller",
+            "intended_value": 9.01,
+            "key": "sat_pi.currentMaximumCommand",
+            "q": 15,
+            "scale": 43.6,
+            "units": "A"
+        },
+        {
+            "define_name": "CURRENT_SATURATION_THRESHOLD_DOWN",
+            "description": "Threshold limit for current to exit saturation (velocity controller output)",
+            "intended_value": 8.74757281553,
+            "key": "sat_pi.currentSaturationThresholdDown",
+            "q": 15,
+            "scale": 43.6,
+            "units": "A"
+        },
+        {
+            "define_name": "CURRENT_SATURATION_THRESHOLD_UP",
+            "description": "Threshold limit for current to enter saturation (velocity controller output)",
+            "intended_value": 9.2942961165,
+            "key": "sat_pi.currentSaturationThresholdUp",
+            "q": 15,
+            "scale": 43.6,
+            "units": "A"
+        },
+        {
+            "define_name": "VOLTAGE_SATURATION_THRESHOLD_DOWN_CONSTANT",
+            "description": "Threshold limit for voltage to exit saturation (current controller output)",
+            "intended_value": 0.85,
+            "key": "sat_pi.voltageSaturationThresholdDownConstant",
+            "q": 15,
+            "scale": 1.73205080757,
+            "units": "line-to-line"
+        },
+        {
+            "define_name": "VOLTAGE_SATURATION_THRESHOLD_UP_CONSTANT",
+            "description": "Threshold limit for voltage to enter saturation (current controller output)",
+            "intended_value": 0.9,
+            "key": "sat_pi.voltageSaturationThresholdUpConstant",
+            "q": 15,
+            "scale": 1.73205080757,
+            "units": "line-to-line"
+        },
+        {
+            "define_name": "ACTIVE_TIMER_THRESHOLD_LOW_SPEED_DETECT",
+            "description": "Timer threshold to trigger low speed detect.\nIt is set to 3 times (1/natural frequency of velocity loop)",
+            "intended_value": 1.49598848106,
+            "key": "stall_detect.group.activeTimerThresholdLowSpeedDetect",
+            "q": 0,
+            "scale": 5e-05,
+            "units": "s"
+        },
+        {
+            "define_name": "ACTIVE_TIMER_THRESHOLD_NEGATIVE_ED_DETECT",
+            "description": "Timer threshold to trigger negative Ed stall detect.\nIt is set to 5 times (1/natural frequency of velocity loop)",
+            "intended_value": 2.49331413511,
+            "key": "stall_detect.group.activeTimerThresholdNegativeEdDetect",
+            "q": 0,
+            "scale": 5e-05,
+            "units": "s"
+        },
+        {
+            "define_name": "ACTIVE_TIMER_THRESHOLD_TORQUE_ANGLE_DETECT",
+            "description": "Timer threshold to trigger stall detect based on torque angle.\nIt is set to 3 times (1/natural frequency of velocity loop)",
+            "intended_value": 1.49598848106,
+            "key": "stall_detect.group.activeTimerThresholdTorqueAngleDetect",
+            "q": 0,
+            "scale": 5e-05,
+            "units": "s"
+        },
+        {
+            "define_name": "DECIMATION_FACTOR",
+            "description": "decimation factor for 2 stage filter LPF",
+            "intended_value": 100,
+            "key": "stall_detect.group.decimationFactor",
+            "q": 0,
+            "scale": 1.0,
+            "units": null
+        },
+        {
+            "define_name": "DECIMATION_FILTER_LPF1_VARIANCE_DETECT_COEFFA1",
+            "description": "Coefficient a1 for 2 stage implementation of LPF. Equation used for calculation:\nf3db*Ts*2*pi. f3db for 1st stage is 10hz",
+            "intended_value": 10.0,
+            "key": "stall_detect.group.decimationFilterLpf1VarianceDetectCoeffa1",
+            "q": 15,
+            "scale": 3183.09886184,
+            "units": "Hz"
+        },
+        {
+            "define_name": "DECIMATION_FILTER_LPF2_VARIANCE_DETECT_COEFFA1",
+            "description": "Coefficient a1 for 2 stage implementation of LPF. Equation used for calculation:\nf3db*Ts*2*pi. f3db for second stage is 1/10th of the natural frequency, Ts is 1/200hz",
+            "intended_value": 0.200536303452,
+            "key": "stall_detect.group.decimationFilterLpf2VarianceDetectCoeffa1",
+            "q": 15,
+            "scale": 31.8309886184,
+            "units": "Hz"
+        },
+        {
+            "define_name": "FILTER_HPF_VARIANCE_DETECT",
+            "description": "HPF filter coefficient for 16bit implementation of HPF.\nf3db is 2x natural frequency.",
+            "intended_value": 4.01072606905,
+            "key": "stall_detect.group.filterHpfVarianceDetect",
+            "q": 16,
+            "scale": 3183.09886184,
+            "units": "Hz"
+        },
+        {
+            "define_name": "FILTER_LPF_NEGATIVE_ED_DETECT",
+            "description": "LPF filter coefficient for negative Ed detect. Equation used for calculation:\nf3db*Ts*2*pi f3d is equal to natural frequency",
+            "intended_value": 2.00536303452,
+            "key": "stall_detect.group.filterLpfNegativeEdDetect",
+            "q": 15,
+            "scale": 3183.09886184,
+            "units": "Hz"
+        },
+        {
+            "define_name": "FILTER_LPF_OVERCURRENT_DETECT",
+            "description": "LPF filter coefficient for over current detect. Equation used for calculation:\nf3db*Ts*2*pi f3d is equal to natural frequency",
+            "intended_value": 2.00536303452,
+            "key": "stall_detect.group.filterLpfOvercurrentDetect",
+            "q": 15,
+            "scale": 3183.09886184,
+            "units": "Hz"
+        },
+        {
+            "define_name": "INACTIVE_TIMER_THRESHOLD_LOW_SPEED_DETECT",
+            "description": "Inactive timer threshold for low speed detect.\nIt is set to (2.0/natural frequency of velocity loop),\nin units of the ADC ISR period.",
+            "intended_value": 1.49598848106,
+            "key": "stall_detect.group.inactiveTimerThresholdLowSpeedDetect",
+            "q": 0,
+            "scale": 5e-05,
+            "units": "s"
+        },
+        {
+            "define_name": "INACTIVE_TIMER_THRESHOLD_NEGATIVE_ED_DETECT",
+            "description": "Timer threshold to trigger negative Ed stall detect.\nIt is set to 5 times (1/natural frequency of velocity loop)",
+            "intended_value": 2.49331413511,
+            "key": "stall_detect.group.inactiveTimerThresholdNegativeEdDetect",
+            "q": 0,
+            "scale": 5e-05,
+            "units": "s"
+        },
+        {
+            "define_name": "INACTIVE_TIMER_THRESHOLD_TORQUE_ANGLE_DETECT",
+            "description": "Inactive Timer threshold for stall detect based on torque angle.\nIt is set to 3 times (1/natural frequency of velocity loop)",
+            "intended_value": 1.49598848106,
+            "key": "stall_detect.group.inactiveTimerThresholdTorqueAngleDetect",
+            "q": 0,
+            "scale": 5e-05,
+            "units": "s"
+        },
+        {
+            "define_name": "TIMER_COUNTS_OVERCURRENT_DETECT",
+            "description": "Overcurrent detector. Normally if the saturation limit was exceeded,\nthen we have a fault in the controllers.\nthen the error should immediately trigger\nTimer threshold to trigger over currents detect.\nIt is set to 2 times (1/natural frequency of current loop)",
+            "intended_value": 0.00502284796865,
+            "key": "stall_detect.group.timerCountsOvercurrentDetect",
+            "q": 0,
+            "scale": 5e-05,
+            "units": "s"
+        },
+        {
+            "define_name": "TIMER_COUNTS_VARIANCE_DETECT",
+            "description": "Timer threshold to trigger stall detect based on variance in Ed and Eq.\nIt is set to (1/natural frequency of velocity loop)",
+            "intended_value": 0.498662827022,
+            "key": "stall_detect.group.timerCountsVarianceDetect",
+            "q": 0,
+            "scale": 0.005,
+            "units": "s"
+        },
+        {
+            "define_name": "THRESHOLD_ED_STALL_DETECT",
+            "description": "Ed detect threshold",
+            "intended_value": 0.01,
+            "key": "stall_detect.thresholdEdStallDetect",
+            "q": 15,
+            "scale": 71.3,
+            "units": "V"
+        },
+        {
+            "define_name": "THRESHOLD_OVERCURRENT_STALL_DETECT",
+            "description": "overcurrent threshold (109.2% of rated allowable current)",
+            "intended_value": 9.84101941748,
+            "key": "stall_detect.thresholdOvercurrentStallDetect",
+            "q": 15,
+            "scale": 43.6,
+            "units": "A"
+        },
+        {
+            "define_name": "STALL_DETECT_TORQUE_ANGLE_COEFF0",
+            "description": "torque angle threshold polynomial, constant term",
+            "intended_value": 0.189086250387,
+            "key": "stall_detect.torque_angle.coeff0",
+            "q": 15,
+            "scale": 1.0,
+            "units": null
+        },
+        {
+            "define_name": "STALL_DETECT_TORQUE_ANGLE_COEFF1",
+            "description": "torque angle threshold polynomial, linear term",
+            "intended_value": 0.733049551087,
+            "key": "stall_detect.torque_angle.coeff1",
+            "q": 15,
+            "scale": 1.0,
+            "units": null
+        },
+        {
+            "define_name": "STALL_DETECT_TORQUE_ANGLE_COEFF2",
+            "description": "torque angle threshold polynomial, quadratic term",
+            "intended_value": 0.0678641985262,
+            "key": "stall_detect.torque_angle.coeff2",
+            "q": 15,
+            "scale": 1.0,
+            "units": null
+        },
+        {
+            "define_name": "STALL_DETECT_TORQUE_ANGLE_K",
+            "description": null,
+            "intended_value": 0.364355142873,
+            "key": "stall_detect.torque_angle.k",
+            "q": 15,
+            "scale": 1.0,
+            "units": null
+        },
+        {
+            "define_name": "STALL_DETECT_TORQUE_ANGLE_VELOCITY_THRESHOLD",
+            "description": "Maximum velocity for torque angle stall detection (we inhibit at faster speeds)",
+            "intended_value": 167.551608191,
+            "key": "stall_detect.torque_angle.velocityThreshold",
+            "q": 15,
+            "scale": 628.318530718,
+            "units": "rad/s"
+        },
+        {
+            "define_name": "MCAF_RAMPDOWN_DECAY_RATE",
+            "description": "current rampdown decay rate (=1/time constant)",
+            "intended_value": 11.1853733177,
+            "key": "startup.mcafRampdownDecayRate",
+            "q": 24,
+            "scale": 20000.0,
+            "units": "1/s"
+        },
+        {
+            "define_name": "MCAF_RAMPDOWN_END_CURRENT",
+            "description": "current rampdown end threshold",
+            "intended_value": 0.337875,
+            "key": "startup.mcafRampdownEndCurrent",
+            "q": 15,
+            "scale": 43.6,
+            "units": "A"
+        },
+        {
+            "define_name": "MCAF_STARTUP_CURRENT",
+            "description": "motor current from end of current rampup phase to end of startup",
+            "intended_value": 6.7575,
+            "key": "startup.mcafStartupCurrent",
+            "q": 15,
+            "scale": 43.6,
+            "units": "A"
+        },
+        {
+            "define_name": "MCAF_STARTUP_CURRENT_INITIAL",
+            "description": "motor current at beginning of startup",
+            "intended_value": 0,
+            "key": "startup.mcafStartupCurrentInitial",
+            "q": 15,
+            "scale": 43.6,
+            "units": "A"
+        },
+        {
+            "define_name": "MINSPEEDINRPM",
+            "description": "minimum operating speed in RPM",
+            "intended_value": 1000,
+            "key": "startup.minspeedinrpm",
+            "units": null
+        },
+        {
+            "define_name": "STARTUP_ACCEL0_VELOCITY_THRESHOLD",
+            "description": "first startup threshold velocity",
+            "intended_value": 89.4829865412,
+            "key": "startup.startupAccel0VelocityThreshold",
+            "q": 15,
+            "scale": 628.318530718,
+            "units": "rad/s"
+        },
+        {
+            "define_name": "STARTUP_ACCEL1_VELOCITY_THRESHOLD",
+            "description": "second startup threshold velocity",
+            "intended_value": 114.940403219,
+            "key": "startup.startupAccel1VelocityThreshold",
+            "q": 15,
+            "scale": 628.318530718,
+            "units": "rad/s"
+        },
+        {
+            "define_name": "STARTUP_ACCELERATION0",
+            "description": "first startup acceleration rate",
+            "intended_value": 359.317205342,
+            "key": "startup.startupAcceleration0",
+            "q": 15,
+            "scale": 958.737992429,
+            "units": "rad/s^2"
+        },
+        {
+            "define_name": "STARTUP_ACCELERATION1",
+            "description": "second startup acceleration rate",
+            "intended_value": 945.011076362,
+            "key": "startup.startupAcceleration1",
+            "q": 15,
+            "scale": 958.737992429,
+            "units": "rad/s^2"
+        },
+        {
+            "define_name": "STARTUP_ALIGN_ANGLE_DELTA",
+            "description": "align angle shift after current rampup",
+            "intended_value": 0.523598775598,
+            "key": "startup.startupAlignAngleDelta",
+            "q": 15,
+            "scale": 3.14159265359,
+            "units": "rad"
+        },
+        {
+            "define_name": "STARTUP_ALIGN_TIME",
+            "description": "hold time between current rampup and acceleration",
+            "intended_value": 0.0,
+            "key": "startup.startupAlignTime",
+            "q": 0,
+            "scale": 5e-05,
+            "units": "s"
+        },
+        {
+            "define_name": "STARTUP_DAMPING_GAIN",
+            "description": "active damping gain",
+            "intended_value": 0.120003527788,
+            "key": "startup.startupDampingGain",
+            "q": 8,
+            "scale": 0.0693915551881,
+            "units": "A/(rad/s)"
+        },
+        {
+            "define_name": "STARTUP_DAMPING_IQMAX",
+            "description": "maximum current amplitude used for active damping",
+            "intended_value": 0.8987475,
+            "key": "startup.startupDampingIqmax",
+            "q": 15,
+            "scale": 43.6,
+            "units": "A"
+        },
+        {
+            "define_name": "STARTUP_DAMPING_SHIFT",
+            "description": "binary point for active damping gain",
+            "intended_value": 8,
+            "key": "startup.startupDampingShift",
+            "units": null
+        },
+        {
+            "define_name": "STARTUP_DAMPING_THRESHOLD",
+            "description": "threshold velocity for damping",
+            "intended_value": 45.9761612877,
+            "key": "startup.startupDampingThreshold",
+            "q": 15,
+            "scale": 628.318530718,
+            "units": "rad/s"
+        },
+        {
+            "define_name": "STARTUP_DELTA_T_FACTOR",
+            "description": null,
+            "intended_value": 2621,
+            "key": "startup.startupDeltaTFactor",
+            "units": null
+        },
+        {
+            "define_name": "STARTUP_DELTA_T_FACTOR_ACCELERATION",
+            "description": null,
+            "intended_value": 5,
+            "key": "startup.startupDeltaTFactorAcceleration",
+            "units": null
+        },
+        {
+            "define_name": "STARTUP_HOLD_TIME",
+            "description": "hold time between velocity rampup and current rampdown",
+            "intended_value": 0.0,
+            "key": "startup.startupHoldTime",
+            "q": 0,
+            "scale": 5e-05,
+            "units": "s"
+        },
+        {
+            "define_name": "STARTUP_RAMPUP_ANGLE",
+            "description": "align angle shift after current rampup",
+            "intended_value": -0.523598775598,
+            "key": "startup.startupRampupAngle",
+            "q": 15,
+            "scale": 3.14159265359,
+            "units": "rad"
+        },
+        {
+            "define_name": "STARTUP_THETA_ERROR",
+            "description": "value of theta_error at transition",
+            "intended_value": 10.0,
+            "key": "startup.startupThetaError",
+            "q": 15,
+            "scale": 180,
+            "units": "deg"
+        },
+        {
+            "define_name": "STARTUP_THETA_ERROR_CONVERGE_RATE",
+            "description": "convergence rate (electrical frequency) for forcing angle error towards zero, during transition to closed-loop",
+            "intended_value": 17.4532925199,
+            "key": "startup.startupThetaErrorConvergeRate",
+            "q": 24,
+            "scale": 125663.706144,
+            "units": "rad/s"
+        },
+        {
+            "define_name": "STARTUP_TORQUE_RAMPUP_RATE",
+            "description": "increase in current per control cycle, during current rampup",
+            "intended_value": 0.0277792324094,
+            "key": "startup.startupTorqueRampupRate",
+            "q": 15,
+            "scale": 43.6,
+            "units": "A"
+        },
+        {
+            "define_name": "DTCY",
+            "description": "instruction cycle period",
+            "intended_value": 1e-08,
+            "key": "timing.dtcy",
+            "units": "s"
+        },
+        {
+            "define_name": "LOOPTIMEINSEC",
+            "description": "sampling period",
+            "intended_value": 5e-05,
+            "key": "timing.looptimeinsec",
+            "units": "s"
+        },
+        {
+            "define_name": "MCAF_CYCLES_PER_NANOSECOND_Q16",
+            "description": "Instruction clock frequency (converted to cycles per nanosecond Q16 for use in time delays)",
+            "intended_value": 100000000.0,
+            "key": "timing.mcafCyclesPerNanosecondQ16",
+            "q": 16,
+            "scale": 1000000000,
+            "units": "Hz"
+        },
+        {
+            "define_name": "MCAF_ISR_SUBSAMPLE_DIVIDER",
+            "description": "Timestep for velocity loop timing, converted to a divider (one velocity control cycle executes every N ISRs)",
+            "intended_value": 0.001,
+            "key": "timing.mcafIsrSubsampleDivider",
+            "q": 0,
+            "scale": 5e-05,
+            "units": "s"
+        },
+        {
+            "define_name": "MCAF_POWER_ON_DELAY",
+            "description": "power-on delay",
+            "intended_value": 0,
+            "key": "timing.mcafPowerOnDelay",
+            "q": 0,
+            "scale": 0.001,
+            "units": "s"
+        },
+        {
+            "define_name": "MCAF_UI_LOOP_TIME_IN_ISRS",
+            "description": "UI update period",
+            "intended_value": 0.1,
+            "key": "timing.mcafUiLoopTimeInIsrs",
+            "q": 0,
+            "scale": 5e-05,
+            "units": "s"
+        },
+        {
+            "define_name": "VELOCITY_LOOP_FREQ",
+            "description": "velocity loop frequency",
+            "intended_value": 1000.0,
+            "key": "timing.velocityLoopFreq",
+            "units": "Hz"
+        },
+        {
+            "define_name": "VELOCITY_LOOP_FREQ_INTEGER",
+            "description": "integer version of velocityLoopFreq",
+            "intended_value": 1000,
+            "key": "timing.velocityLoopFreqInteger",
+            "units": null
+        },
+        {
+            "define_name": "VELOCITY_LOOP_TIME",
+            "description": "velocity loop period",
+            "intended_value": 0.001,
+            "key": "timing.velocityLoopTime",
+            "units": "s"
+        },
+        {
+            "define_name": "ZSMT_ALIGN_TIME",
+            "description": "Align delay",
+            "intended_value": 0.001,
+            "key": "zsmt.alignTime",
+            "q": 0,
+            "scale": 5e-05,
+            "units": "s"
+        },
+        {
+            "define_name": "ZSMT_ANGLE_LOCK_DELAY",
+            "description": "Angle lock delay",
+            "intended_value": 0.05,
+            "key": "zsmt.angleLockDelay",
+            "q": 0,
+            "scale": 5e-05,
+            "units": "s"
+        },
+        {
+            "define_name": "ZSMT_ANGLE_PROBE_ACCUM_GAIN",
+            "description": "Angle probe accumulator gain",
+            "intended_value": 1.0,
+            "key": "zsmt.angleProbeAccumGain",
+            "q": 16,
+            "scale": 200.0,
+            "units": ""
+        },
+        {
+            "define_name": "ZSMT_ANGLE_PROBE_BLANKING_TIME",
+            "description": "Angle probe blanking time",
+            "intended_value": 0.00159882216522,
+            "key": "zsmt.angleProbeBlankingTime",
+            "q": 0,
+            "scale": 5e-05,
+            "units": "s"
+        },
+        {
+            "define_name": "ZSMT_ANGLE_PROBE_CURRENT",
+            "description": "Angle probe current",
+            "intended_value": 2.703,
+            "key": "zsmt.angleProbeCurrent",
+            "q": 15,
+            "scale": 43.6,
+            "units": "A"
+        },
+        {
+            "define_name": "ZSMT_ANGLE_PROBE_SLEW_RATE",
+            "description": "Angle probe slew rate",
+            "intended_value": 4508.31878417,
+            "key": "zsmt.angleProbeSlewRate",
+            "q": 15,
+            "scale": 872000.0,
+            "units": "A/s"
+        },
+        {
+            "define_name": "ZSMT_ANGLE_PROBE_SLEW_TIME",
+            "description": "Angle probe slew time",
+            "intended_value": 0.000599558311957,
+            "key": "zsmt.angleProbeSlewTime",
+            "q": 0,
+            "scale": 5e-05,
+            "units": "s"
+        },
+        {
+            "define_name": "ZSMT_ANGLE_PROBE_TIME",
+            "description": "Angle probe duration",
+            "intended_value": 0.01,
+            "key": "zsmt.angleProbeTime",
+            "q": 0,
+            "scale": 5e-05,
+            "units": "s"
+        },
+        {
+            "define_name": "ZSMT_CORRECTION_GAIN_DC",
+            "description": "DC correction gain",
+            "intended_value": 0.0,
+            "key": "zsmt.correctionGainDc",
+            "q": 14,
+            "scale": 0.0344040137649,
+            "units": "rad/A"
+        },
+        {
+            "define_name": "ZSMT_ERROR_GAIN",
+            "description": "Scaling gain for HFI error",
+            "intended_value": 243.83691286,
+            "key": "zsmt.errorGain",
+            "q": 6,
+            "scale": 1.0,
+            "units": null
+        },
+        {
+            "define_name": "ZSMT_ERROR_LIMIT",
+            "description": "Error limit for PLL",
+            "intended_value": 0.99997,
+            "key": "zsmt.errorLimit",
+            "q": 15,
+            "scale": 1.0,
+            "units": null
+        },
+        {
+            "define_name": "ZSMT_EXCITATION_VOLTAGE_AMPLITUDE",
+            "description": "Excitation voltage amplitude",
+            "intended_value": 2.112845,
+            "key": "zsmt.excitationVoltageAmplitude",
+            "q": 15,
+            "scale": 71.3,
+            "units": "V"
+        },
+        {
+            "define_name": "ZSMT_FILTER_GAIN",
+            "description": "Pole of input low-pass filter",
+            "intended_value": 20000.0,
+            "key": "zsmt.filterGain",
+            "q": 16,
+            "scale": 10000.0,
+            "units": "rad/s"
+        },
+        {
+            "define_name": "ZSMT_PLL_DT",
+            "description": "PLL integrator time scaling factor",
+            "intended_value": 5e-05,
+            "key": "zsmt.pllDt",
+            "q": 16,
+            "scale": 0.00125,
+            "units": "s"
+        },
+        {
+            "define_name": "ZSMT_PLL_EXECUTION_DIVIDER",
+            "description": "defines PLL execution rate based on main control update rate",
+            "intended_value": 2.0,
+            "key": "zsmt.pllExecutionDivider",
+            "units": ""
+        },
+        {
+            "define_name": "ZSMT_PLL_KI",
+            "description": "Integral gain of PLL = 1/B/tau^2",
+            "intended_value": 30000.300003,
+            "key": "zsmt.pllKi",
+            "q": 16,
+            "scale": 8000000.0,
+            "units": "rad/s^2"
+        },
+        {
+            "define_name": "ZSMT_PLL_KP",
+            "description": "Proportional gain of PLL = 2*zeta/B/tau",
+            "intended_value": 900.00900009,
+            "key": "zsmt.pllKp",
+            "q": 14,
+            "scale": 800.0,
+            "units": "rad/s"
+        },
+        {
+            "define_name": "ZSMT_PLL_LOCK_CURRENT_SQUARED_LIMIT",
+            "description": "Maximum allowed squared current for ZSMT startup",
+            "intended_value": 7.306209,
+            "key": "zsmt.pllLockCurrentSquaredLimit",
+            "q": 15,
+            "scale": 1900.96,
+            "units": "A^2"
+        },
+        {
+            "define_name": "ZSMT_PLL_LOCK_SPEED_LIMIT",
+            "description": "Maximum allowed speed for ZSMT startup",
+            "intended_value": 6.28318530718,
+            "key": "zsmt.pllLockSpeedLimit",
+            "q": 15,
+            "scale": 628.318530718,
+            "units": "rad/s"
+        },
+        {
+            "define_name": "ZSMT_PLL_LOCK_TIME",
+            "description": "Required PLL lock time",
+            "intended_value": 0.01,
+            "key": "zsmt.pllLockTime",
+            "q": 0,
+            "scale": 5e-05,
+            "units": "s"
+        }
+    ]
+}

@@ -9,7 +9,7 @@
 /* *********************************************************************
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -44,11 +44,11 @@
  *
  * *****************************************************************************/
 
-#ifndef __FILTER_TYPES_H
-#define __FILTER_TYPES_H
+#ifndef MCAF_FILTER_TYPES_H 
+#define MCAF_FILTER_TYPES_H 
 
 #include <stdint.h>
-#include "util.h"
+#include "util_types.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -96,4 +96,4 @@ typedef struct tagHpfFilterx16
 }
 #endif
 
-#endif /* __FILTER_TYPES_H */
+#endif /* MCAF_FILTER_TYPES_H */

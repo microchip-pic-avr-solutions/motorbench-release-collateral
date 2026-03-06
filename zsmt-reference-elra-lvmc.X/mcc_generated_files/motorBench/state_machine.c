@@ -9,7 +9,7 @@
 /* *********************************************************************
  * 
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -50,6 +50,7 @@
 #include "foc.h"
 #include "adc_compensation.h"
 #include "commutation.h"
+#include "parameters/init_params.h"
 #include "parameters/hal_params.h"
 #include "parameters/operating_params.h"
 #include "parameters/timing_params.h"
@@ -326,6 +327,9 @@ inline static void MCAF_MotorControllerOnFaultInit(MCAF_MOTOR_DATA *pmotor)
     pmotor->ui.run = false;
     MCAF_SetPwmMinimalImpact();
     MCAF_ClearClosedLoopFlags(pmotor);
+#if MCAF_ADC_GAIN_COMPENSATION_ENABLED
+    MCAF_ADCGainCompRestart(&pmotor->adcCompensation.adcGainCompensator);
+#endif
 }
 
 /**
@@ -346,6 +350,10 @@ inline static void MCAF_MotorControllerOnFault(MCAF_MOTOR_DATA *pmotor)
     else if (MCAF_OvercurrentFaultClearContinue(&pmotor->faultHandle))
     {   
         MCAF_OvercurrentHWFlagAttemptClear(pmotor);
+    }
+    else
+    {
+        // For MISRA compliance
     }
 }
 
@@ -368,6 +376,13 @@ inline static void MCAF_MotorControllerOnTestDisable(MCAF_MOTOR_DATA *pmotor)
 {
     MCAF_SetPwmMinimalImpact();
 }
+
+#if MCAF_ADC_GAIN_COMPENSATION_ENABLED
+inline static bool gainCompensationComplete(const MCAF_ADC_GAIN_COMPENSATOR *pgaincomp)
+{
+    return pgaincomp->ready;
+}
+#endif
 
 /**
  * Executes actions in the TEST_RESTART state.
@@ -394,13 +409,21 @@ inline static void MCAF_MotorControllerOnTestRestart(MCAF_MOTOR_DATA *pmotor, bo
          * Clear latching PWM fault and delay for at least one ISR cycle.
          */
         MCAF_BootstrapChargeInit(&pmotor->bootstrap);
-        MCAF_ADCCompensationInit(&pmotor->initialization, &pmotor->currentCalibration);
+        MCAF_ADCCompensationInit(&pmotor->adcCompensation, &pmotor->currentCalibration);
         HAL_PWM_FaultClearBegin();
         MCAF_UiRestart(&pmotor->ui);
         MCAF_FocRestart(pmotor);
         
         MCAF_FocInitializeIntegrators(pmotor);
     }
+#if MCAF_ADC_GAIN_COMPENSATION_ENABLED
+    /* Calculate gain compensation parameters when PWM signals are off
+     */
+    else if (!gainCompensationComplete(&pmotor->adcCompensation.adcGainCompensator))
+    {
+        MCAF_ADCGainCompensationStep(pmotor);
+    }
+#endif
     /* Otherwise, delay some number of samples for fault-latch circuitry 
      * to stabilize, then re-enable PWM fault latching.
      * (PWM peripheral requires the interval between disable
@@ -425,10 +448,10 @@ inline static void MCAF_MotorControllerOnTestRestart(MCAF_MOTOR_DATA *pmotor, bo
             {
                 /* Tasks requiring PWM to be ready. */
                 MCAF_TestHarness_ClearRestartRequired(&pmotor->testing);
-                MCAF_ADCCalibrateCurrentOffsets(&pmotor->initialization,
-                                            &pmotor->currentCalibration,
-                                            &pmotor->iabc,
-                                            pmotor->iDC);
+                MCAF_ADCCalibrateCurrentOffsets(&pmotor->adcCompensation.currentCalibration,
+                                                &pmotor->currentCalibration,
+                                                &pmotor->iabc,
+                                                pmotor->iDC);
             }
         }
     }
@@ -481,12 +504,22 @@ inline static void MCAF_MotorControllerOnRestartInit(MCAF_MOTOR_DATA *pmotor)
      * Put PWMs in a safe state to keep gate drive going.
      * Clear latching PWM fault and delay for at least one ISR cycle.
      */
+#if MCAF_ADC_GAIN_COMPENSATION_ENABLED
+    /*
+     * Turn off PWM signals using PWM overrides during the ADC gain compensation
+     * routine. The call to HAL_PWM_DutyCycle_SetIdentical writes values to the PWM
+     * duty cycle registers in order to trigger a PWM override update at the next 
+     * PWM start-of-cycle (SOC) while in PWM data register update mode 
+     * (UPMOD == 0b000).
+     * The PWM signals are turned back on during the bootstrap charging routine.
+     */
+    HAL_PWM_Outputs_Disable();
+    HAL_PWM_DutyCycle_SetIdentical(HAL_PARAM_MIN_DUTY_COUNTS);
+#endif
     MCAF_BootstrapChargeInit(&pmotor->bootstrap);
-    MCAF_ADCCompensationInit(&pmotor->initialization, &pmotor->currentCalibration);
+    MCAF_ADCCompensationInit(&pmotor->adcCompensation, &pmotor->currentCalibration);
     HAL_PWM_FaultClearBegin();
-    
     MCAF_FocRestart(pmotor);
-    
     MCAF_UiRestart(&pmotor->ui);
     MCAF_TestHarness_Restart(&pmotor->testing);
     MCAF_CommutationRestart(pmotor);
@@ -530,6 +563,14 @@ inline static void MCAF_MotorControllerOnRestart(MCAF_MOTOR_DATA *pmotor, bool i
     {
         /* do nothing */
     }
+#if MCAF_ADC_GAIN_COMPENSATION_ENABLED
+    /* Calculate gain compensation parameters when PWM signals are off
+     */
+    else if (!gainCompensationComplete(&pmotor->adcCompensation.adcGainCompensator))
+    {
+        MCAF_ADCGainCompensationStep(pmotor);
+    }
+#endif
     /* Otherwise, delay some number of samples for fault-latch circuitry 
      * to stabilize, then re-enable PWM fault latching.
      * (PWM peripheral requires the interval between disable
@@ -556,10 +597,10 @@ inline static void MCAF_MotorControllerOnRestart(MCAF_MOTOR_DATA *pmotor, bool i
             if (bootstrapComplete)
             {
                 /* Tasks requiring PWM to be ready. */
-                MCAF_ADCCalibrateCurrentOffsets(&pmotor->initialization,
-                                            &pmotor->currentCalibration,
-                                            &pmotor->iabc,
-                                            pmotor->iDC); 
+                MCAF_ADCCalibrateCurrentOffsets(&pmotor->adcCompensation.currentCalibration,
+                                                &pmotor->currentCalibration,
+                                                &pmotor->iabc,
+                                                pmotor->iDC); 
             }
         }
     }
@@ -680,6 +721,10 @@ inline static MCAF_FSM_STATE MCAF_FSM_DetermineNextState(MCAF_MOTOR_DATA *pmotor
                 {
                     next_state = MCSM_RUNNING;
                 }
+                else
+                {
+                    // For MISRA compliance
+                }
                 break;
             case MCSM_RUNNING:
                 if (!run)
@@ -697,6 +742,10 @@ inline static MCAF_FSM_STATE MCAF_FSM_DetermineNextState(MCAF_MOTOR_DATA *pmotor
                 else if (stopping_complete(pmotor))
                 {
                     next_state = MCSM_STOPPED;
+                }
+                else
+                {
+                    // For MISRA compliance
                 }
                 break;
             case MCSM_FAULT:

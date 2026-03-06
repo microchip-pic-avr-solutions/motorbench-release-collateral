@@ -9,7 +9,7 @@
 /* *********************************************************************
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -87,10 +87,24 @@ void MCAF_FaultDetect(MCAF_FAULT_DETECT_T *pfaultDetect, const MCAF_MOTOR_DATA *
             flags = UTIL_SetBits(flags, MCAF_OVERTEMPERATURE_FAULT_DETECT);
         }
     }
+    else  // ADC calibration not completed
+    {
+        if (MCAF_CurrCalOffsetFaultDetect(pmotor))
+        {
+            flags = UTIL_SetBits(flags, MCAF_CURR_OFFSET_CAL_FAULT_DETECT);
+        }
+    }
+
     if (MCAF_OvercurrentHWFlagPending(&pmotor->faultHandle) && MCAF_OvercurrentHWDetect())
     {
         flags = UTIL_SetBits(flags, MCAF_OVERCURRENT_HW_FAULT_DETECT);
     }
+#if MCAF_ADC_GAIN_COMPENSATION_ENABLED
+    if (MCAF_ADCGainCompFaultDetect(pmotor))
+    {
+        flags = UTIL_SetBits(flags, MCAF_ADC_GAIN_COMP_FAULT_DETECT);
+    }
+#endif
 #if MCAF_GATE_DRIVER_ENABLED    
     if (MCAF_GateDriverFaultDetect())
     {

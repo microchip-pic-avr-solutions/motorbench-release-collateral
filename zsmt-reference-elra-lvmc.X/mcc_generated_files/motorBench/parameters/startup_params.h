@@ -9,7 +9,7 @@
  */ /*
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -44,8 +44,8 @@
  *
  *
  ******************************************************************************/
-#ifndef __STARTUP_PARAMS_H
-#define __STARTUP_PARAMS_H
+#ifndef MCAF_STARTUP_PARAMS_H
+#define MCAF_STARTUP_PARAMS_H
 
 #ifdef  __cplusplus
 extern "C" {
@@ -83,7 +83,7 @@ extern "C" {
  * damping_gain:                 114.654 mA/(rad/s)
  * damping_threshold:             34.482  rad/s
  *                               329.280  RPM
- * damping_Imax:                 750.000 mA
+ * damping_Imax:                 748.125 mA
  * t_rampup:                      55.971 ms
  * dIdt_rampup:                  100.499  A/s
  * t_align:                        0.000  s
@@ -92,71 +92,124 @@ extern "C" {
  * Irampdown_end:                281.250 mA
  * rampup_angle:                 -523.599 mrad
  * align_angle_delta:            523.599 mrad
+ * thetadelta:                    10.000  deg
  * theta_error_converge_rate:     17.453  rad/s
  *                               166.667  RPM
  */
 
 /* first startup threshold velocity */
-#define STARTUP_ACCEL0_VELOCITY_THRESHOLD       2720      // Q15(  0.08301) = +373.53516 RPM         = +373.48261 RPM         + 0.0141%
+#define STARTUP_ACCEL0_VELOCITY_THRESHOLD             2720      // Q15(  0.08301) = +373.53516 RPM         = +373.48261 RPM         + 0.0141%
+#define STARTUP_ACCEL0_VELOCITY_THRESHOLD_NORM    0.0830078125  // normalized
+#define STARTUP_ACCEL0_VELOCITY_THRESHOLD_SCALE   4.500000e+03  // RPM
+#define STARTUP_ACCEL0_VELOCITY_THRESHOLD_ENG    39.1165100911  // RPM
 /* second startup threshold velocity */
-#define STARTUP_ACCEL1_VELOCITY_THRESHOLD       5994      // Q15(  0.18292) = +823.15063 RPM         = +823.20000 RPM         - 0.0060%
+#define STARTUP_ACCEL1_VELOCITY_THRESHOLD             5994      // Q15(  0.18292) = +823.15063 RPM         = +823.20000 RPM         - 0.0060%
+#define STARTUP_ACCEL1_VELOCITY_THRESHOLD_NORM    0.1829223633  // normalized
+#define STARTUP_ACCEL1_VELOCITY_THRESHOLD_SCALE   4.500000e+03  // RPM
+#define STARTUP_ACCEL1_VELOCITY_THRESHOLD_ENG    86.2001328992  // RPM
 /* threshold velocity for damping */
-#define STARTUP_DAMPING_THRESHOLD            2398      // Q15(  0.07318) = +329.31519 RPM         = +329.28000 RPM         + 0.0107%
-#define Q15_THETADELTA (Q15(THETADELTA/180.0))
+#define STARTUP_DAMPING_THRESHOLD             2398      // Q15(  0.07318) = +329.31519 RPM         = +329.28000 RPM         + 0.0107%
+#define STARTUP_DAMPING_THRESHOLD_NORM    0.0731811523  // normalized
+#define STARTUP_DAMPING_THRESHOLD_SCALE   4.500000e+03  // RPM
+#define STARTUP_DAMPING_THRESHOLD_ENG    34.4858055877  // RPM
 
 /* open loop startup current ramp from initial startup current to startup current */
 /* motor current from end of current rampup phase to end of startup */
 #define MCAF_STARTUP_CURRENT                 4228      // Q15(  0.12903) =   +5.62563 A           =   +5.62500 A           + 0.0113%
+#define MCAF_STARTUP_CURRENT_NORM        0.1290283203  // normalized
+#define MCAF_STARTUP_CURRENT_SCALE      43.6000000000  // A
+#define MCAF_STARTUP_CURRENT_ENG         5.6256347656  // A
 /* motor current at beginning of startup */
-#define MCAF_STARTUP_CURRENT_INITIAL            0      // Q15(  0.00000) =   +0.00000 A           =   +0.00000 A           + 0.0000%
+#define MCAF_STARTUP_CURRENT_INITIAL                0      // Q15(  0.00000) =   +0.00000 A           =   +0.00000 A           + 0.0000%
+#define MCAF_STARTUP_CURRENT_INITIAL_NORM    0.000000e+00  // normalized
+#define MCAF_STARTUP_CURRENT_INITIAL_SCALE  43.6000000000  // A
+#define MCAF_STARTUP_CURRENT_INITIAL_ENG     0.000000e+00  // A
 /* maximum current amplitude used for active damping */
-#define STARTUP_DAMPING_IQMAX                 564      // Q15(  0.01721) = +750.43945 mA          = +750.00000 mA          + 0.0586%
+#define STARTUP_DAMPING_IQMAX                 562      // Q15(  0.01715) = +747.77832 mA          = +748.12500 mA          - 0.0463%
+#define STARTUP_DAMPING_IQMAX_NORM       0.0171508789  // normalized
+#define STARTUP_DAMPING_IQMAX_SCALE     43.6000000000  // A
+#define STARTUP_DAMPING_IQMAX_ENG        0.7477783203  // A
 /* binary point for active damping gain */
 #define STARTUP_DAMPING_SHIFT                   8
 /* active damping gain */
 #define STARTUP_DAMPING_GAIN                  317      // Q8(  1.23828)  = +114.56835 mA/(rad/s)  = +114.65421 mA/(rad/s)  - 0.0749%
-
-//value of theta_error at transition
-#define THETADELTA 10           
+#define STARTUP_DAMPING_GAIN_NORM        1.2382812500  // normalized
+#define STARTUP_DAMPING_GAIN_SCALE       0.0925220736  // A/(rad/s)
+#define STARTUP_DAMPING_GAIN_ENG         0.1145683489  // A/(rad/s)
 
 
 #define STARTUP_DELTA_T_FACTOR                983
 #define STARTUP_DELTA_T_FACTOR_ACCELERATION          2
 /* first startup acceleration rate */
 #define STARTUP_ACCELERATION0               14704      // Q15(  0.44873) = +129.06448 rad/s^2     = +129.06598 rad/s^2     - 0.0012%
+#define STARTUP_ACCELERATION0_NORM       0.4487304688  // normalized
+#define STARTUP_ACCELERATION0_SCALE    287.6213977286  // rad/s^2
+#define STARTUP_ACCELERATION0_ENG      129.0644846253  // rad/s^2
 /* second startup acceleration rate */
 #define STARTUP_ACCELERATION1               17547      // Q15(  0.53549) = +154.01894 rad/s^2     = +154.01793 rad/s^2     + 0.0007%
+#define STARTUP_ACCELERATION1_NORM       0.5354919434  // normalized
+#define STARTUP_ACCELERATION1_SCALE    287.6213977286  // rad/s^2
+#define STARTUP_ACCELERATION1_ENG      154.0189412214  // rad/s^2
 
 /* increase in current per control cycle, during current rampup */
-#define STARTUP_TORQUE_RAMPUP_RATE              4      // Q15(  0.00012) =   +5.32227 mA          =   +5.02493 mA          + 5.9173%
+#define STARTUP_TORQUE_RAMPUP_RATE                4      // Q15(  0.00012) =   +5.32227 mA          =   +5.02493 mA          + 5.9173%
+#define STARTUP_TORQUE_RAMPUP_RATE_NORM    0.0001220703  // normalized
+#define STARTUP_TORQUE_RAMPUP_RATE_SCALE  43.6000000000  // A
+#define STARTUP_TORQUE_RAMPUP_RATE_ENG     0.0053222656  // A
 
 /* Current rampdown time constant = 0.204546 s */
 /* current rampdown decay rate (=1/time constant) */
 #define MCAF_RAMPDOWN_DECAY_RATE             4101      // Q24(  0.00024) =   +4.88877 1/s         =   +4.88888 1/s         - 0.0021%
 #define MCAF_RAMPDOWN_DECAY_RATE_Q             24
+#define MCAF_RAMPDOWN_DECAY_RATE_NORM    0.0002444386  // normalized
+#define MCAF_RAMPDOWN_DECAY_RATE_SCALE   2.000000e+04  // 1/s
+#define MCAF_RAMPDOWN_DECAY_RATE_ENG     4.8887729645  // 1/s
 #define MCAF_RAMPDOWN_DECAY_SHIFT (MCAF_RAMPDOWN_DECAY_RATE_Q - 16)
 
 /* current rampdown end threshold */
-#define MCAF_RAMPDOWN_END_CURRENT             211      // Q15(  0.00644) = +280.74951 mA          = +281.25000 mA          - 0.1780%
+#define MCAF_RAMPDOWN_END_CURRENT              211      // Q15(  0.00644) = +280.74951 mA          = +281.25000 mA          - 0.1780%
+#define MCAF_RAMPDOWN_END_CURRENT_NORM    0.0064392090  // normalized
+#define MCAF_RAMPDOWN_END_CURRENT_SCALE  43.6000000000  // A
+#define MCAF_RAMPDOWN_END_CURRENT_ENG     0.2807495117  // A
 
 /* align angle shift after current rampup */
 #define STARTUP_RAMPUP_ANGLE                -5461      // Q15( -0.16666) = -523.56682 mrad        = -523.59878 mrad        - 0.0061%
+#define STARTUP_RAMPUP_ANGLE_NORM       -0.1666564941  // normalized
+#define STARTUP_RAMPUP_ANGLE_SCALE       3.1415926536  // rad
+#define STARTUP_RAMPUP_ANGLE_ENG        -0.5235668177  // rad
 /* align angle shift after current rampup */
-#define STARTUP_ALIGN_ANGLE_DELTA            5461      // Q15(  0.16666) = +523.56682 mrad        = +523.59878 mrad        - 0.0061%
+#define STARTUP_ALIGN_ANGLE_DELTA             5461      // Q15(  0.16666) = +523.56682 mrad        = +523.59878 mrad        - 0.0061%
+#define STARTUP_ALIGN_ANGLE_DELTA_NORM    0.1666564941  // normalized
+#define STARTUP_ALIGN_ANGLE_DELTA_SCALE   3.1415926536  // rad
+#define STARTUP_ALIGN_ANGLE_DELTA_ENG     0.5235668177  // rad
 /* hold time between current rampup and acceleration */
 #define STARTUP_ALIGN_TIME                      0      // Q0(  0.00000)  =   +0.00000 s           =   +0.00000 s           + 0.0000%
+#define STARTUP_ALIGN_TIME_NORM          0.000000e+00  // normalized
+#define STARTUP_ALIGN_TIME_SCALE         5.000000e-05  // s
+#define STARTUP_ALIGN_TIME_ENG           0.000000e+00  // s
 /* hold time between velocity rampup and current rampdown */
 #define STARTUP_HOLD_TIME                       0      // Q0(  0.00000)  =   +0.00000 s           =   +0.00000 s           + 0.0000%
+#define STARTUP_HOLD_TIME_NORM           0.000000e+00  // normalized
+#define STARTUP_HOLD_TIME_SCALE          5.000000e-05  // s
+#define STARTUP_HOLD_TIME_ENG            0.000000e+00  // s
 // PWM loops necessary for transitioning from open loop to closed loop
 #define TRANSITION_STEPS   IRP_PERCALC/4
 
+/* value of theta_error at transition */
+#define STARTUP_THETA_ERROR                  1820      // Q15(  0.05554) =   +9.99756 deg         =  +10.00000 deg         - 0.0244%
+#define STARTUP_THETA_ERROR_NORM         0.0555419922  // normalized
+#define STARTUP_THETA_ERROR_SCALE             180      // deg
+#define STARTUP_THETA_ERROR_ENG          9.9975585938  // deg
 /* convergence rate (electrical frequency) for forcing angle error towards zero, during transition to closed-loop */
-#define STARTUP_THETA_ERROR_CONVERGE_RATE       2330      // Q24(  0.00014) =  +17.45203 rad/s       =  +17.45329 rad/s       - 0.0072%
-#define STARTUP_THETA_ERROR_CONVERGE_RATE_Q         24
+#define STARTUP_THETA_ERROR_CONVERGE_RATE             2330      // Q24(  0.00014) =  +17.45203 rad/s       =  +17.45329 rad/s       - 0.0072%
+#define STARTUP_THETA_ERROR_CONVERGE_RATE_Q             24
+#define STARTUP_THETA_ERROR_CONVERGE_RATE_NORM    0.0001388788  // normalized
+#define STARTUP_THETA_ERROR_CONVERGE_RATE_SCALE   1.256637e+05  // rad/s
+#define STARTUP_THETA_ERROR_CONVERGE_RATE_ENG    17.4520275184  // rad/s
 
 
 #ifdef  __cplusplus
 }
 #endif
 
-#endif // __STARTUP_PARAMS_H
+#endif /* MCAF_STARTUP_PARAMS_H */

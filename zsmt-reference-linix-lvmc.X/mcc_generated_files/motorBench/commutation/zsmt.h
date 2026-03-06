@@ -9,7 +9,7 @@
 /* *********************************************************************
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -44,8 +44,8 @@
  *
  * *****************************************************************************/
 
-#ifndef __ZSMT_H
-#define __ZSMT_H
+#ifndef MCAF_ZSMT_H 
+#define MCAF_ZSMT_H 
 
 #include <stdint.h>
 #include "motor_control_types.h"
@@ -192,4 +192,4 @@ inline static void MCAF_EstimatorZsmtStartupInit(MCAF_ESTIMATOR_ZSMT_T *pzsmt) {
 }
 #endif
 
-#endif /* __ZSMT_H */
+#endif /* MCAF_ZSMT_H */

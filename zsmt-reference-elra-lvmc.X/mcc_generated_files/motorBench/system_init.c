@@ -9,7 +9,7 @@
 /* *********************************************************************
  * 
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -81,7 +81,6 @@ void MCAF_SystemInit(MCAF_SYSTEM_DATA *psys)
         HAL_OpAmpsInputVoltageRangeSelect();
     }
     HAL_InterruptPrioritySet();
-    HAL_CMP_SetComparatorOvercurrentThreshold(HAL_PARAM_DAC_OVERCURRENT_THRESHOLD);
     HAL_ADC_SignalsInit();
     HAL_ADC_ResolutionInit();
     HAL_ADC_Enable();

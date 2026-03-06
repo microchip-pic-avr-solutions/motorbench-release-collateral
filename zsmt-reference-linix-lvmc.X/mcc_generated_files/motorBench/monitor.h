@@ -9,7 +9,7 @@
 /* *********************************************************************
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -44,8 +44,8 @@
  *
  * *****************************************************************************/
 
-#ifndef __MONITOR_H
-#define __MONITOR_H
+#ifndef MCAF_MONITOR_H 
+#define MCAF_MONITOR_H 
 
 #include <stdint.h>
 #include <stdbool.h>
@@ -196,6 +196,20 @@ inline static MCAF_ERROR_CODE MCAF_MonitorTranslateFaultFlags(
    {
        result = ERR_OVERTEMPERATURE;
    }
+   else if (MCAF_IsCurrCalOffsetFaultFlagSet(pfaultinfo))
+   {
+       result = ERR_CURR_OFFSET_CAL_FAIL;
+   }
+#if MCAF_ADC_GAIN_COMPENSATION_ENABLED
+   else if (MCAF_IsADCGainCompFaultFlagSet(pfaultinfo))
+   {
+       result = ERR_ADC_GAIN_COMP_FAIL;
+   }
+#endif
+   else
+   {
+       // For MISRA compliance
+   }
    return result;
 }
 
@@ -227,6 +241,14 @@ inline static bool MCAF_DetectFault(MCAF_MOTOR_DATA *pmotor,
         {
             result = true;
         }
+        else
+        {
+            // For MISRA compliance
+        }
+    }
+    else
+    {
+        // For MISRA compliance
     }
     return result;
 }
@@ -258,4 +280,4 @@ inline static MCAF_ERROR_CODE MCAF_GetFaultCode(MCAF_MOTOR_DATA *pmotor)
 }
 #endif
 
-#endif /* __MONITOR_H */
+#endif /* MCAF_MONITOR_H */

@@ -8,7 +8,7 @@
 /*
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -45,8 +45,8 @@
  ******************************************************************************/
 
 
-#ifndef __APP_SAMPLE_H
-#define __APP_SAMPLE_H
+#ifndef MCAF_APP_SAMPLE_H
+#define MCAF_APP_SAMPLE_H
 
 #include <stdint.h>
 #include "mcapi.h"
@@ -62,6 +62,7 @@ typedef struct tagAPPLICATION_DATA
     int16_t motorVelocityCommand;
     int16_t motorVelocityCommandMinimum;
     int16_t motorVelocityCommandMaximum;
+    int16_t potentiometerValue;
     bool hardwareUiEnabled;
     volatile MCAPI_MOTOR_DATA *apiData;
     MCAF_BOARD_DATA *pboard;
@@ -84,4 +85,4 @@ void APP_ApplicationStep(APPLICATION_DATA *appData);
 }
 #endif
 
-#endif /* __APP_SAMPLE_H */
+#endif /* MCAF_APP_SAMPLE_H */

@@ -9,7 +9,7 @@
  */ /*
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -44,8 +44,8 @@
  *
  *
  ******************************************************************************/
-#ifndef __TIMING_PARAMS_H
-#define __TIMING_PARAMS_H
+#ifndef MCAF_TIMING_PARAMS_H
+#define MCAF_TIMING_PARAMS_H
 
 #ifdef  __cplusplus
 extern "C" {
@@ -62,9 +62,10 @@ extern "C" {
  * f_velloop:            1.000 kHz          velocity loop frequency
  * t_UI:               100.000 ms           UI update period
  * f_UI:                10.000  Hz          UI update frequency
- * t_deadtime:           2.000 us           PWM deadtime
+ * t_deadtime:           1.000 us           PWM deadtime
  * t_cy:                10.000 ns           instruction cycle period
  * f_cy:               100.000 MHz          instruction cycle frequency
+ * t_poweron_delay:      0.000  s           power-on delay
  *
  */
 
@@ -76,22 +77,37 @@ extern "C" {
 #define VELOCITY_LOOP_FREQ_INTEGER           1000
 
 /* Timestep for velocity loop timing, converted to a divider (one velocity control cycle executes every N ISRs) */
-#define MCAF_ISR_SUBSAMPLE_DIVIDER             20      // Q0( 20.00000)  =   +1.00000 ms          =   +1.00000 ms          + 0.0000%
+#define MCAF_ISR_SUBSAMPLE_DIVIDER               20      // Q0( 20.00000)  =   +1.00000 ms          =   +1.00000 ms          + 0.0000%
+#define MCAF_ISR_SUBSAMPLE_DIVIDER_NORM   20.0000000000  // normalized
+#define MCAF_ISR_SUBSAMPLE_DIVIDER_SCALE   5.000000e-05  // s
+#define MCAF_ISR_SUBSAMPLE_DIVIDER_ENG     0.0010000000  // s
 #define IRP_PERCALC MCAF_ISR_SUBSAMPLE_DIVIDER 
 /* UI update time in ISRs: */
 /* UI update period */
-#define MCAF_UI_LOOP_TIME_IN_ISRS            2000      // Q0(2000.00000) = +100.00000 ms          = +100.00000 ms          + 0.0000%
+#define MCAF_UI_LOOP_TIME_IN_ISRS             2000      // Q0(2000.00000) = +100.00000 ms          = +100.00000 ms          + 0.0000%
+#define MCAF_UI_LOOP_TIME_IN_ISRS_NORM    2.000000e+03  // normalized
+#define MCAF_UI_LOOP_TIME_IN_ISRS_SCALE   5.000000e-05  // s
+#define MCAF_UI_LOOP_TIME_IN_ISRS_ENG     0.1000000000  // s
 
 // PWM loops necessary for transitioning from open loop to closed loop
 #define TRANSITION_STEPS   IRP_PERCALC/4
 
 /* Instruction clock frequency (converted to cycles per nanosecond Q16 for use in time delays) */
-#define MCAF_CYCLES_PER_NANOSECOND_Q16       6554      // Q16(  0.10001) = +100.00610 MHz         = +100.00000 MHz         + 0.0061%
+#define MCAF_CYCLES_PER_NANOSECOND_Q16             6554      // Q16(  0.10001) = +100.00610 MHz         = +100.00000 MHz         + 0.0061%
+#define MCAF_CYCLES_PER_NANOSECOND_Q16_NORM    0.1000061035  // normalized
+#define MCAF_CYCLES_PER_NANOSECOND_Q16_SCALE 1000000000      // Hz
+#define MCAF_CYCLES_PER_NANOSECOND_Q16_ENG     1.000061e+08  // Hz
 
 /* UI button debounce time in ISRs */
-#define MCAF_BUTTON_DEBOUNCE_TIME               7      // Q0(  7.00000)  =   +7.00000 ms          =   +7.00000 ms          + 0.0000%
+#define MCAF_BUTTON_DEBOUNCE_TIME                7      // Q0(  7.00000)  =   +7.00000 ms          =   +7.00000 ms          + 0.0000%
+#define MCAF_BUTTON_DEBOUNCE_TIME_NORM    7.0000000000  // normalized
+#define MCAF_BUTTON_DEBOUNCE_TIME_SCALE   0.0010000000  // s
+#define MCAF_BUTTON_DEBOUNCE_TIME_ENG     0.0070000000  // s
 /* UI button long press time in ISRs */
-#define MCAF_BUTTON_LONG_PRESS_TIME          2500      // Q0(2500.00000) =   +2.50000 s           =   +2.50000 s           + 0.0000%
+#define MCAF_BUTTON_LONG_PRESS_TIME             2500      // Q0(2500.00000) =   +2.50000 s           =   +2.50000 s           + 0.0000%
+#define MCAF_BUTTON_LONG_PRESS_TIME_NORM    2.500000e+03  // normalized
+#define MCAF_BUTTON_LONG_PRESS_TIME_SCALE   0.0010000000  // s
+#define MCAF_BUTTON_LONG_PRESS_TIME_ENG     2.5000000000  // s
 
 /* ---- system initialization parameters ---- */
 #define MCAF_POWERUP_FAULT_LATCH_DELAY 20
@@ -99,9 +115,15 @@ extern "C" {
  * before we enable the fault-latch circuitry to automatically disable PWM circuits.
  * This is only applied on first power-up.
  */
+
+/* power-on delay */
+#define MCAF_POWER_ON_DELAY                     0      // Q0(  0.00000)  =   +0.00000 s           =   +0.00000 s           + 0.0000%
+#define MCAF_POWER_ON_DELAY_NORM         0.000000e+00  // normalized
+#define MCAF_POWER_ON_DELAY_SCALE        0.0010000000  // s
+#define MCAF_POWER_ON_DELAY_ENG          0.000000e+00  // s
                             
 #ifdef  __cplusplus
 }
 #endif
 
-#endif // __TIMING_PARAMS_H
+#endif /* MCAF_TIMING_PARAMS_H */

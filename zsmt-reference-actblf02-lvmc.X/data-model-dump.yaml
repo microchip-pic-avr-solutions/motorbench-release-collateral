@@ -24,8 +24,8 @@ metadata:
   data_model:
     schema_version: 5
   motorBench:
-    commit_id: cca205f0cfd3911d9402cd4a9bb65183b7cd48b6
-    version: 2.50.0
+    commit_id: e295e8191836011540cb544beb5347d8147868da
+    version: 2.55.0
   MCC:
     peripherals:
       instances:
@@ -35,9 +35,9 @@ metadata:
         type: pwm_hs
       - name: QEI1
         type: qei
-      - name: TMR1
-        type: timer
       - name: SCCP1
+        type: timer
+      - name: TMR1
         type: timer
       - name: UART1
         type: uart
@@ -49,7 +49,7 @@ metadata:
         type: opa
       - name: CMP1
         type: cmp
-    version: 5.8.2
+    version: 5.8.4
     peripheral_library:
       name: melody
       version: NA
@@ -79,16 +79,16 @@ scdata:
         value: 12.0
 autotune_result:
   current:
-    Kp: 0.5992286556803923
-    phase_margin: 66.8
-    wc: 5522.877226390597
-    Ki: 1767.0904332405146
-    pi_phase_lag: 28.1
+    Kp: 0.25374466807730733
+    phase_margin: 80.0
+    wc: 2501.841722622772
+    Ki: 634.8289974888739
+    pi_phase_lag: 45.0
   velocity:
-    Kp: 0.007558248881306976
+    Kp: 0.007877863956330897
     phase_margin: 65.0
-    wc: 12.863007649682112
-    Ki: 0.017142828776759052
+    wc: 12.600067554078278
+    Ki: 0.017502501407750306
     pi_phase_lag: 10.0
 drive:
   metadata:
@@ -99,10 +99,11 @@ drive:
     fullscale: 21.8
     maximum:
       continuous: 14.1
+      peak: 14.1
     units: A
   vdc:
-    nominal: 24.0
     time_constant: 3.147E-4
+    nominal: 24.0
     fullscale: 71.3
     maximum: 26.0
     units: V
@@ -254,7 +255,7 @@ drive:
     duty_cycle:
       maximum: 0.975
       minimum: 0.009
-    deadtime: 2.0E-6
+    deadtime: 1.0E-6
   idc:
     units: A
   sampling_time:
@@ -270,14 +271,15 @@ config:
       current_measure-single_channel-minimumTime: 2.0
       current_measure-single_channel-sampleDelay: 0.0
       current_measure-opamp-full_input_range: true
+      current_measure-offset_cal-range: 0.04
       estimator-type: zsmt
       estimator-active-pll: true
-      estimator-active-qei: false
       estimator-active-smo: false
+      estimator-active-qei: false
       estimator-active-atpll: false
       estimator-active-zsmt: false
       estimator-active-ideal: false
-      operation-min_velocity_ratio: 0.1
+      operation-min_velocity_ratio: 0.25
       operation-startup_velocity_ratio: 0.2744
       operation-max_velocity_ratio: 1.25
       operation-fullscale_base_ratio: 1.5
@@ -324,15 +326,20 @@ config:
       startup-omega0: 0.2
       startup-theta_converge_rate: 1.0
       startup-method: zsmt_dsat
-      startup-damping-Imax: 0.1
+      startup-damping-Imax: 0.133
       startup-damping-gainmax: 40.0
       startup-damping-omega_min: 0.4
       overmodulation-vd_limit: 1.0
       overmodulation-vq_limit: 1.15
       overmodulation-include_duty_clipping: true
+      atpll-tau1: 0.1
+      atpll-tau2: 2.19
+      atpll-kp: 1.9
+      atpll-ki: 30.0
       pll-tau: 2.19
       pll-omega1: 116.5
       pll-velocity_filter_threshold: 1.0
+      smo-velocity_loop_cutoff: 0.3
       encoder-lines: 250.0
       encoder-index_present: false
       encoder-tracking_loop-tau: 1.5
@@ -362,9 +369,9 @@ config:
       zsmt-minotaur-voltage_limit-vq: 0.78
       zsmt-minotaur-converge-angle: 10.0
       zsmt-minotaur-converge-duration: 2.0
-      zsmt-minotaur-velocity_threshold-slow: 0.2
-      zsmt-minotaur-velocity_threshold-transition: 0.25
-      zsmt-minotaur-velocity_threshold-fast: 0.3
+      zsmt-minotaur-velocity_threshold-slow: 0.15
+      zsmt-minotaur-velocity_threshold-transition: 0.2
+      zsmt-minotaur-velocity_threshold-fast: 0.25
       zsmt-angle_correction-current_gain: 0.0
       dyn_current1-peak_factor: 1.0
       dyn_current1-horizon_factor: 1.05
@@ -380,6 +387,8 @@ config:
       board_service-uiButtonDebounceTime: 7.0
       board_service-uiButtonLongPressTime: 2.5
       test_harness-perturbation_asymmetric: false
+      test_harness-codegen-test_harness: false
+      test_harness-codegen-test_profiling: false
       adc-vtempbridge: false
       adc-temp_bridge_params-threshold: 50.0
       adc-temp_bridge_params-tau_lpf: 10.0
@@ -390,8 +399,8 @@ config:
       adc-vphasec: false
       diagnostics-method: x2cscope
     version:
-      schema: 5.0
-      motorBench: 2.50.0
-      MCAF: R8
+      schema: 6.0
+      motorBench: 2.55.0
+      MCAF: R9
     status:
       valid: true

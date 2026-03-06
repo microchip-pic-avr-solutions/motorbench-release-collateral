@@ -9,7 +9,7 @@
  */ /*
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -45,8 +45,8 @@
  *
  ******************************************************************************/
 
-#ifndef __SAT_PI_PARAMS_H
-#define __SAT_PI_PARAMS_H
+#ifndef MCAF_SAT_PI_PARAMS_H
+#define MCAF_SAT_PI_PARAMS_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -55,9 +55,15 @@ extern "C" {
 /* Current limit is 9.01A, we set the following thresholds as a percentage of this */
 
 /* Threshold limit for current to exit saturation (velocity controller output) */
-#define CURRENT_SATURATION_THRESHOLD_DOWN       6574      // Q15(  0.20062) =   +8.74714 A           =   +8.74757 A           - 0.0049%
+#define CURRENT_SATURATION_THRESHOLD_DOWN             6574      // Q15(  0.20062) =   +8.74714 A           =   +8.74757 A           - 0.0049%
+#define CURRENT_SATURATION_THRESHOLD_DOWN_NORM    0.2006225586  // normalized
+#define CURRENT_SATURATION_THRESHOLD_DOWN_SCALE  43.6000000000  // A
+#define CURRENT_SATURATION_THRESHOLD_DOWN_ENG     8.7471435547  // A
 /* Threshold limit for current to enter saturation (velocity controller output) */
-#define CURRENT_SATURATION_THRESHOLD_UP       6985      // Q15(  0.21317) =   +9.29401 A           =   +9.29430 A           - 0.0031%
+#define CURRENT_SATURATION_THRESHOLD_UP             6985      // Q15(  0.21317) =   +9.29401 A           =   +9.29430 A           - 0.0031%
+#define CURRENT_SATURATION_THRESHOLD_UP_NORM    0.2131652832  // normalized
+#define CURRENT_SATURATION_THRESHOLD_UP_SCALE  43.6000000000  // A
+#define CURRENT_SATURATION_THRESHOLD_UP_ENG     9.2940063477  // A
 
 /* Threshold limits for voltage to enter and exit saturation,
  * normalized to fullscale voltage.
@@ -65,16 +71,25 @@ extern "C" {
  * constants need to be squared, at the point of use.
  */
 /* Threshold limit for voltage to exit saturation (current controller output) */
-#define VOLTAGE_SATURATION_THRESHOLD_DOWN_CONSTANT      16081      // Q15(  0.49075) = +850.00943 mline-to-line = +850.00000 mline-to-line + 0.0011%
+#define VOLTAGE_SATURATION_THRESHOLD_DOWN_CONSTANT            16081      // Q15(  0.49075) = +850.00943 mline-to-line = +850.00000 mline-to-line + 0.0011%
+#define VOLTAGE_SATURATION_THRESHOLD_DOWN_CONSTANT_NORM    0.4907531738  // normalized
+#define VOLTAGE_SATURATION_THRESHOLD_DOWN_CONSTANT_SCALE   1.7320508076  // line-to-line
+#define VOLTAGE_SATURATION_THRESHOLD_DOWN_CONSTANT_ENG     0.8500094310  // line-to-line
 /* Threshold limit for voltage to enter saturation (current controller output) */
-#define VOLTAGE_SATURATION_THRESHOLD_UP_CONSTANT      17027      // Q15(  0.51962) = +900.01310 mline-to-line = +900.00000 mline-to-line + 0.0015%
+#define VOLTAGE_SATURATION_THRESHOLD_UP_CONSTANT            17027      // Q15(  0.51962) = +900.01310 mline-to-line = +900.00000 mline-to-line + 0.0015%
+#define VOLTAGE_SATURATION_THRESHOLD_UP_CONSTANT_NORM    0.5196228027  // normalized
+#define VOLTAGE_SATURATION_THRESHOLD_UP_CONSTANT_SCALE   1.7320508076  // line-to-line
+#define VOLTAGE_SATURATION_THRESHOLD_UP_CONSTANT_ENG     0.9000130951  // line-to-line
 
 /* Maximum current command to current controller */
 #define CURRENT_MAXIMUM_COMMAND              6772      // Q15(  0.20667) =   +9.01060 A           =   +9.01000 A           + 0.0066%
+#define CURRENT_MAXIMUM_COMMAND_NORM     0.2066650391  // normalized
+#define CURRENT_MAXIMUM_COMMAND_SCALE   43.6000000000  // A
+#define CURRENT_MAXIMUM_COMMAND_ENG      9.0105957031  // A
 
     
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __SAT_PI_PARAMS_H */
+#endif /* MCAF_SAT_PI_PARAMS_H */

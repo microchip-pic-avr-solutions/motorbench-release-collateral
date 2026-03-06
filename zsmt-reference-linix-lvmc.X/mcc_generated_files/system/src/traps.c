@@ -9,13 +9,13 @@
  *
  * @skipline @version   Firmware Driver Version 1.0.3
  *
- * @skipline @version   PLIB Version 1.4.0
+ * @skipline @version   PLIB Version 1.4.3
  *
  * @skipline  Device : dsPIC33CK256MP508
 */
 
 /*
-© [2025] Microchip Technology Inc. and its subsidiaries.
+© [2026] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -39,13 +39,13 @@
 #include <xc.h>
 #include "../traps.h"
 
-/* To identify the source of the trap, or the address of the source code causing the trap, please uncomment the
-  following line. When the code is executed by uncommenting the below line, the trapSrcAddr variable will contain
-  the address of the source code that, in the event that a trap occurs, is causing.*/
+/*  To identify the source of the trap, or the exact address in the source code that caused the trap, enable the trap source macro to true.
+ When enabled, the variable `trapSrcAddr` holds the program address of the instruction that triggered the trap. This value can be examined using a debugger or printed via UART for diagnostic purposes.  */
 
-/* #define FIND_TRAP_SOURCE */
+#define FIND_TRAP_SOURCE 0
 
-#ifdef FIND_TRAP_SOURCE
+#if FIND_TRAP_SOURCE
+
 void __attribute__((interrupt(preprologue( "rcall _where_was_i ")), no_auto_psv)) _DefaultInterrupt(void);
 extern unsigned long trapSrcAddr;
 
@@ -103,6 +103,14 @@ inline static void use_failsafe_stack(void)
     SPLIM = (uint16_t)(((uint8_t *)failsafe_stack) + sizeof(failsafe_stack) - (uint16_t) FAILSAFE_STACK_GUARDSIZE);
 }
 
+/* cppcheck-suppress misra-c2012-8.4
+*
+* (Rule 8.4) REQUIRED: A compatible declaration shall be visible when an object or 
+* function with external linkage is defined
+*
+* Reasoning: Interrupt declaration are provided by compiler and are available
+* outside the driver folder
+*/
 /** Address error Trap vector**/
 void ERROR_HANDLER _AddressError(void)
 {
@@ -110,6 +118,14 @@ void ERROR_HANDLER _AddressError(void)
     TRAPS_halt_on_error(TRAPS_ADDRESS_ERR);
 }
 
+/* cppcheck-suppress misra-c2012-8.4
+*
+* (Rule 8.4) REQUIRED: A compatible declaration shall be visible when an object or 
+* function with external linkage is defined
+*
+* Reasoning: Interrupt declaration are provided by compiler and are available
+* outside the driver folder
+*/
 /** Generic Hard Trap vector**/
 void ERROR_HANDLER _HardTrapError(void)
 {
@@ -117,6 +133,14 @@ void ERROR_HANDLER _HardTrapError(void)
     TRAPS_halt_on_error(TRAPS_HARD_ERR);
 }
 
+/* cppcheck-suppress misra-c2012-8.4
+*
+* (Rule 8.4) REQUIRED: A compatible declaration shall be visible when an object or 
+* function with external linkage is defined
+*
+* Reasoning: Interrupt declaration are provided by compiler and are available
+* outside the driver folder
+*/
 /** Generic Soft Trap vector**/
 void ERROR_HANDLER _SoftTrapError(void)
 {
@@ -159,6 +183,14 @@ void ERROR_HANDLER _SoftTrapError(void)
     }
 }
 
+/* cppcheck-suppress misra-c2012-8.4
+*
+* (Rule 8.4) REQUIRED: A compatible declaration shall be visible when an object or 
+* function with external linkage is defined
+*
+* Reasoning: Interrupt declaration are provided by compiler and are available
+* outside the driver folder
+*/
 /** Oscillator Fail Trap vector**/
 void ERROR_HANDLER _OscillatorFail(void)
 {
@@ -166,6 +198,14 @@ void ERROR_HANDLER _OscillatorFail(void)
     TRAPS_halt_on_error(TRAPS_OSC_FAIL);
 }
 
+/* cppcheck-suppress misra-c2012-8.4
+*
+* (Rule 8.4) REQUIRED: A compatible declaration shall be visible when an object or 
+* function with external linkage is defined
+*
+* Reasoning: Interrupt declaration are provided by compiler and are available
+* outside the driver folder
+*/
 /** Math Error Trap vector**/
 void ERROR_HANDLER _MathError(void)
 {
@@ -173,6 +213,14 @@ void ERROR_HANDLER _MathError(void)
     TRAPS_halt_on_error(TRAPS_MATH_ERR);
 }
 
+/* cppcheck-suppress misra-c2012-8.4
+*
+* (Rule 8.4) REQUIRED: A compatible declaration shall be visible when an object or 
+* function with external linkage is defined
+*
+* Reasoning: Interrupt declaration are provided by compiler and are available
+* outside the driver folder
+*/
 /** Stack Error Trap Vector**/
 void ERROR_HANDLER _StackError(void)
 {

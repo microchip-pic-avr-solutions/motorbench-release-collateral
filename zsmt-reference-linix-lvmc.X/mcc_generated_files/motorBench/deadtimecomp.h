@@ -9,7 +9,7 @@
 /* *********************************************************************
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -44,8 +44,8 @@
  *
  * *****************************************************************************/
 
-#ifndef __DEADTIMECOMP_H
-#define __DEADTIMECOMP_H
+#ifndef MCAF_DEADTIMECOMP_H 
+#define MCAF_DEADTIMECOMP_H 
 
 #include <stddef.h>
 #include "deadtimecomp_types.h"
@@ -96,4 +96,4 @@ inline static const MCAF_U_DUTYCYCLE_ALPHABETA *MCAF_DeadTimeCompensationFeedbac
 }
 #endif
 
-#endif /* __DEADTIMECOMP_H */
+#endif /* MCAF_DEADTIMECOMP_H */

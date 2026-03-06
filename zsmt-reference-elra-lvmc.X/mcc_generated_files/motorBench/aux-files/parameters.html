@@ -68,7 +68,7 @@ This list is still under construction.
 	<th>Key</th><th class="col_macro">#define macro</th><th>Symbol</th><th>Intended Value</th><th>Units</th><th>Description</th>
 	</tr>
 <tr class="param-group">
-<th class="group-name"><code>adc</code> (15 items)</th><th>ADC parameters</th>
+<th class="group-name"><code>adc</code> (16 items)</th><th>ADC parameters</th>
 </tr>
 <tr class="param-group">
 <th class="group-name"><code>adc.bridge_temperature</code> (4 items)</th><th>Three-phase bridge temperature</th>
@@ -145,37 +145,48 @@ This list is still under construction.
 <td></td>
 <td>normalized C->C current gain</td>
 </tr>
+<tr class="param-group">
+<th class="group-name"><code>adc.currentOffsetCal</code> (4 items)</th><th>Current offset calibration</th>
+</tr>
 <tr>
-<td><code>adc.mcafCalCount</code></td>
-<td class="col_macro"><code>MCAF_CAL_COUNT</code></td>
+<td><code>adc.currentOffsetCal.count</code></td>
+<td class="col_macro"><code>MCAF_CURRENT_OFS_CAL_COUNT</code></td>
 <td></td>
 <td>128 </td>
 <td></td>
 <td>number of samples taken for current offset compensation</td>
 </tr>
 <tr>
-<td><code>adc.mcafCalFilterGain</code></td>
-<td class="col_macro"><code>MCAF_CAL_FILTER_GAIN</code></td>
+<td><code>adc.currentOffsetCal.filterGain</code></td>
+<td class="col_macro"><code>MCAF_CURRENT_OFS_CAL_FILTER_GAIN</code></td>
 <td></td>
 <td>0.2500000 </td>
 <td></td>
 <td>low-pass filter gain for current offset compensation</td>
 </tr>
 <tr>
-<td><code>adc.mcafCalRange</code></td>
-<td class="col_macro"><code>MCAF_CAL_RANGE</code></td>
+<td><code>adc.currentOffsetCal.range</code></td>
+<td class="col_macro"><code>MCAF_CURRENT_OFS_CAL_RANGE</code></td>
 <td></td>
-<td>0.0312500 </td>
+<td>0.0400000 </td>
 <td></td>
 <td>normalized range of current offset compensation, relative to ADC fullscale</td>
 </tr>
 <tr>
-<td><code>adc.mcafCalShift</code></td>
-<td class="col_macro"><code>MCAF_CAL_SHIFT</code></td>
+<td><code>adc.currentOffsetCal.shift</code></td>
+<td class="col_macro"><code>MCAF_CURRENT_OFS_CAL_SHIFT</code></td>
 <td></td>
-<td>5 </td>
+<td>3 </td>
 <td></td>
-<td>shift count used to limit offset to 2^(-MCAF_CAL_SHIFT) of ADC fullscale</td>
+<td>shift count used to limit offset to 0.5 * 2^(-MCAF_CAL_SHIFT) of ADC fullscale</td>
+</tr>
+<tr>
+<td><code>adc.mcafGainCompCount</code></td>
+<td class="col_macro"><code>MCAF_GAIN_COMP_COUNT</code></td>
+<td></td>
+<td>128 </td>
+<td></td>
+<td>number of samples taken for gain compensation</td>
 </tr>
 <tr>
 <td><code>adc.mcafIdcScalingFactor</code></td>
@@ -369,7 +380,7 @@ This list is still under construction.
 <td>binary point for reciprocal voltages</td>
 </tr>
 <tr class="param-group">
-<th class="group-name"><code>hal</code> (10 items)</th><th>Hardware Abstraction Layer (HAL) parameters</th>
+<th class="group-name"><code>hal</code> (9 items)</th><th>Hardware Abstraction Layer (HAL) parameters</th>
 </tr>
 <tr>
 <td><code>hal.adcTriggerDelay</code></td>
@@ -380,18 +391,10 @@ This list is still under construction.
 <td>ADC sampling delay</td>
 </tr>
 <tr>
-<td><code>hal.dacOvercurrentThreshold</code></td>
-<td class="col_macro"><code>HAL_PARAM_DAC_OVERCURRENT_THRESHOLD</code></td>
-<td></td>
-<td>0.9495000 </td>
-<td></td>
-<td>DAC value for triggering an overcurrent fault</td>
-</tr>
-<tr>
 <td><code>hal.deadtimeCounts</code></td>
 <td class="col_macro"><code>HAL_PARAM_DEADTIME_COUNTS</code></td>
 <td></td>
-<td>2.000e-06 </td>
+<td>1.000e-06 </td>
 <td>s</td>
 <td>Dead time in PWM clock cycles</td>
 </tr>
@@ -399,7 +402,7 @@ This list is still under construction.
 <td><code>hal.maxDutyCounts</code></td>
 <td class="col_macro"><code>HAL_PARAM_MAX_DUTY_COUNTS</code></td>
 <td></td>
-<td>0.9350000 </td>
+<td>0.9550000 </td>
 <td></td>
 <td>Maximum duty cycle register value in counts</td>
 </tr>
@@ -407,7 +410,7 @@ This list is still under construction.
 <td><code>hal.maxDutyQ15</code></td>
 <td class="col_macro"><code>HAL_PARAM_MAX_DUTY_Q15</code></td>
 <td></td>
-<td>0.9350000 </td>
+<td>0.9550000 </td>
 <td></td>
 <td>Maximum duty cycle register value, as ratio</td>
 </tr>
@@ -415,7 +418,7 @@ This list is still under construction.
 <td><code>hal.maxLowerDutyCounts</code></td>
 <td class="col_macro"><code>HAL_PARAM_MAX_LOWER_DUTY_COUNTS</code></td>
 <td></td>
-<td>0.9510000 </td>
+<td>0.9710000 </td>
 <td></td>
 <td>Maximum low-side duty cycle register value in counts</td>
 </tr>
@@ -423,7 +426,7 @@ This list is still under construction.
 <td><code>hal.minDutyCounts</code></td>
 <td class="col_macro"><code>HAL_PARAM_MIN_DUTY_COUNTS</code></td>
 <td></td>
-<td>0.0490000 </td>
+<td>0.0290000 </td>
 <td></td>
 <td>Minimum duty cycle register value in counts</td>
 </tr>
@@ -431,7 +434,7 @@ This list is still under construction.
 <td><code>hal.minDutyQ15</code></td>
 <td class="col_macro"><code>HAL_PARAM_MIN_DUTY_Q15</code></td>
 <td></td>
-<td>0.0490000 </td>
+<td>0.0290000 </td>
 <td></td>
 <td>Minimum duty cycle register value, as ratio</td>
 </tr>
@@ -439,7 +442,7 @@ This list is still under construction.
 <td><code>hal.minLowerDutyCounts</code></td>
 <td class="col_macro"><code>HAL_PARAM_MIN_LOWER_DUTY_COUNTS</code></td>
 <td></td>
-<td>0.0650000 </td>
+<td>0.0450000 </td>
 <td></td>
 <td>Minimum low-side duty cycle register value in counts</td>
 </tr>
@@ -1181,7 +1184,7 @@ Torque angle method of stall detection
 <td>Maximum velocity for torque angle stall detection (we inhibit at faster speeds)</td>
 </tr>
 <tr class="param-group">
-<th class="group-name"><code>startup</code> (21 items)</th><th>Motor startup parameters controlling open-loop commutation and transition to sensorless closed-loop operation</th>
+<th class="group-name"><code>startup</code> (22 items)</th><th>Motor startup parameters controlling open-loop commutation and transition to sensorless closed-loop operation</th>
 </tr>
 <tr>
 <td><code>startup.mcafRampdownDecayRate</code></td>
@@ -1283,7 +1286,7 @@ Torque angle method of stall detection
 <td><code>startup.startupDampingIqmax</code></td>
 <td class="col_macro"><code>STARTUP_DAMPING_IQMAX</code></td>
 <td></td>
-<td>0.7500000 </td>
+<td>0.7481250 </td>
 <td>A</td>
 <td>maximum current amplitude used for active damping</td>
 </tr>
@@ -1336,6 +1339,14 @@ Torque angle method of stall detection
 <td>align angle shift after current rampup</td>
 </tr>
 <tr>
+<td><code>startup.startupThetaError</code></td>
+<td class="col_macro"><code>STARTUP_THETA_ERROR</code></td>
+<td></td>
+<td>1.000e+01 </td>
+<td>deg</td>
+<td>value of theta_error at transition</td>
+</tr>
+<tr>
 <td><code>startup.startupThetaErrorConvergeRate</code></td>
 <td class="col_macro"><code>STARTUP_THETA_ERROR_CONVERGE_RATE</code></td>
 <td></td>
@@ -1352,7 +1363,7 @@ Torque angle method of stall detection
 <td>increase in current per control cycle, during current rampup</td>
 </tr>
 <tr class="param-group">
-<th class="group-name"><code>timing</code> (8 items)</th><th>Timing parameters</th>
+<th class="group-name"><code>timing</code> (9 items)</th><th>Timing parameters</th>
 </tr>
 <tr>
 <td><code>timing.dtcy</code></td>
@@ -1387,6 +1398,14 @@ Torque angle method of stall detection
 <td>Timestep for velocity loop timing, converted to a divider (one velocity control cycle executes every N ISRs)</td>
 </tr>
 <tr>
+<td><code>timing.mcafPowerOnDelay</code></td>
+<td class="col_macro"><code>MCAF_POWER_ON_DELAY</code></td>
+<td></td>
+<td>0.000e+00 </td>
+<td>s</td>
+<td>power-on delay</td>
+</tr>
+<tr>
 <td><code>timing.mcafUiLoopTimeInIsrs</code></td>
 <td class="col_macro"><code>MCAF_UI_LOOP_TIME_IN_ISRS</code></td>
 <td></td>
@@ -1419,7 +1438,7 @@ Torque angle method of stall detection
 <td>velocity loop period</td>
 </tr>
 <tr class="param-group">
-<th class="group-name"><code>zsmt</code> (19 items)</th><th>ZS/MT estimator parameters</th>
+<th class="group-name"><code>zsmt</code> (20 items)</th><th>ZS/MT estimator parameters</th>
 </tr>
 <tr>
 <td><code>zsmt.alignTime</code></td>
@@ -1468,6 +1487,14 @@ Torque angle method of stall detection
 <td>1.030e+03 </td>
 <td>A/s</td>
 <td>Angle probe slew rate</td>
+</tr>
+<tr>
+<td><code>zsmt.angleProbeSlewTime</code></td>
+<td class="col_macro"><code>ZSMT_ANGLE_PROBE_SLEW_TIME</code></td>
+<td></td>
+<td>0.0021838 </td>
+<td>s</td>
+<td>Angle probe slew time</td>
 </tr>
 <tr>
 <td><code>zsmt.angleProbeTime</code></td>
@@ -1610,7 +1637,7 @@ Torque angle method of stall detection
 </script>
 <p>
  Motor Control Application Framework <br>
- R8/RC38 (commit 128946, build on 2025 Apr 09 16:45)
+ R9/RC31 (commit 132024, build on 2026 Feb 13 18:37)
 </p>
 </body>
 </html>

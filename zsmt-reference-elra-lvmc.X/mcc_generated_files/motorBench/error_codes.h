@@ -9,7 +9,7 @@
 /* *********************************************************************
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -44,8 +44,8 @@
  *
  * *****************************************************************************/
 
-#ifndef __ERROR_CODES_H
-#define __ERROR_CODES_H
+#ifndef MCAF_ERROR_CODES_H 
+#define MCAF_ERROR_CODES_H 
 
 #ifdef __cplusplus
 extern "C" {
@@ -57,19 +57,19 @@ extern "C" {
 typedef enum tagMCAF_ERROR_CODE
 {
     ERR_NO_ERROR                  =  0,  /** absence of error */
-            
+
     /* ----- Traps ----- */
     ERR_OSC_FAIL                  =  1,  /** oscillator failure */
     ERR_ADDRESS_ERROR             =  2,  /** address error (e.g. alignment) */
     ERR_HARD_TRAP                 =  3,  /** hard trap */
     ERR_STACK_ERROR               =  4,  /** stack pointer error */
     ERR_MATH                      =  5,  /** arithmetic error */
-    ERR_RESERVED_TRAP5            =  6,  /** code for trap 5 unused */
-    ERR_SOFT_TRAP                 =  7,  /** hard trap */
-    ERR_RESERVED_TRAP7            =  8,  /** reserved trap #7 */
+    ERR_DMA_BUS_ERROR             =  6,  /** DMA bus error for 33A; reserved trap 5 for 33CK */
+    ERR_SOFT_TRAP                 =  7,  /** soft trap */
+    ERR_ILLEGALINSTRUCTION        =  8,  /** illegal opcode error for 33A; reserved trap 7 for 33CK and 33EP */
 
     ERR_UNEXPECTED_TRAP           = 255, /** unexpected trap from MCC trap handler */
-    
+
     /* ----- Application errors ----- */
     ERR_STALL_RETRY_EXCEEDED      = 16,  /** number of stall retries exceeded */
     ERR_INVALID_STARTUP_FSM_STATE = 17,  /** invalid startup FSM state */
@@ -79,7 +79,9 @@ typedef enum tagMCAF_ERROR_CODE
     ERR_OVERTEMPERATURE           = 21,  /** Overtemperature */
     ERR_COMMUTATION_FAIL          = 22,  /** Commutation failure, detected within estimator */
     ERR_APP_COMMUTATION_FAIL      = 23,  /** Commutation failure, detected within application */
-            
+    ERR_CURR_OFFSET_CAL_FAIL      = 24,  /** Current offset calibration out of range */
+    ERR_ADC_GAIN_COMP_FAIL        = 25,  /** ADC gain compensation out of range */
+
     MCAF_ERR_RCON_TRAPR                = 32,  /** trap conflict */
     MCAF_ERR_RCON_IOPUWR               = 33,  /** IOPUWR illegal opcode / uninitialized W */
     MCAF_ERR_RCON_CM                   = 34,  /** configuration mismatch */
@@ -89,7 +91,7 @@ typedef enum tagMCAF_ERROR_CODE
     ERR_BOARD_FAULT               = 38,  /** board fault detected */
 
     // Note: 240-255 are reserved for other MCAF errors
-    
+
     /* ----- Unexpected interrupt errors ----- */
     ERR_UNEXPECTED_INTERRUPT_BASE = 256,
 } MCAF_ERROR_CODE;
@@ -98,4 +100,4 @@ typedef enum tagMCAF_ERROR_CODE
 }
 #endif
 
-#endif /* __ERROR_CODES_H */
+#endif /* MCAF_ERROR_CODES_H */

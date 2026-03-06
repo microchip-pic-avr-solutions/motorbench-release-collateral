@@ -9,7 +9,7 @@
 /* *********************************************************************
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -44,8 +44,8 @@
  *
  * *****************************************************************************/
 
-#ifndef __UI_H
-#define __UI_H
+#ifndef MCAF_UI_H 
+#define MCAF_UI_H 
 
 #include <stdbool.h>
 #include <stdint.h>
@@ -187,4 +187,4 @@ inline static bool MCAF_TestAndClearDirectionChangeFlag(volatile MCAF_UI_DATA *p
 }
 #endif
 
-#endif /* __UI_H */
+#endif /* MCAF_UI_H */

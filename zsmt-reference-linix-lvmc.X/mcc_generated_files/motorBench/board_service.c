@@ -10,7 +10,7 @@
 /* *********************************************************************
  * 
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -108,6 +108,10 @@ static void MCAF_ButtonService(volatile BOARD_BUTTON_DATA_T *pButtonData, bool r
             pButtonData->shortButtonPress = true;
             pButtonData->counterC1 = 0;
             pButtonData->buttonState = BOARD_BUTTON_UNPRESSED;
+        }
+        else
+        {
+            // For MISRA compliance
         }
         break;
         
