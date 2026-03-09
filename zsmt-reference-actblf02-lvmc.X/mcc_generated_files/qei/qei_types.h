@@ -9,13 +9,13 @@
  *            
  * @skipline @version   Firmware Driver Version 1.2.3
  *
- * @skipline @version   PLIB Version 1.4.2
+ * @skipline @version   PLIB Version 1.4.6
  *            
  * @skipline  Device : PIC24/dspIC/PIC32MM
 */
 
 /*
-© [2025] Microchip Technology Inc. and its subsidiaries.
+© [2026] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -51,13 +51,13 @@
 
 enum QEI_MODE
 { 
-    QEI_MODE_FREE_RUNNING = 0,   /**< Index input event does not affect position counter */
-    QEI_MODE_RESET_ON_INDEX = 1, /**< Every index input event resets the position counter */
-    QEI_MODE_2 = 2,              /**< Next index input event initializes the position counter with contents of QEI1IC register */
-    QEI_MODE_3 = 3,              /**< First index event after home event initializes position counter with contents of QEI1IC register */
-    QEI_MODE_4 = 4,              /**< Second index event after home event initializes position counter with contents of QEI1IC register */
-    QEI_MODE_5 = 5,              /**< Resets the position counter when the position counter equals QEI1GEC register */
-    QEI_MODE_MODULO_COUNT = 6    /**< Modulo Count mode for position counter */
+    QEI_MODE_FREE_RUNNING = 0U,   /**< Index input event does not affect position counter */
+    QEI_MODE_RESET_ON_INDEX = 1U, /**< Every index input event resets the position counter */
+    QEI_MODE_2 = 2U,              /**< Next index input event initializes the position counter with contents of QEI1IC register */
+    QEI_MODE_3 = 3U,              /**< First index event after home event initializes position counter with contents of QEI1IC register */
+    QEI_MODE_4 = 4U,              /**< Second index event after home event initializes position counter with contents of QEI1IC register */
+    QEI_MODE_5 = 5U,              /**< Resets the position counter when the position counter equals QEI1GEC register */
+    QEI_MODE_MODULO_COUNT = 6U   /**< Modulo Count mode for position counter */
 };
 
 /**

@@ -9,7 +9,7 @@
 /* *********************************************************************
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -44,8 +44,8 @@
  *
  * *****************************************************************************/
 
-#ifndef __DYN_CURRENT_H
-#define __DYN_CURRENT_H
+#ifndef MCAF_DYN_CURRENT_H 
+#define MCAF_DYN_CURRENT_H 
 
 #include <stddef.h>
 #include "dyn_current_types.h"
@@ -91,4 +91,4 @@ inline static void MCAF_DynamicCurrentLimitUpdate(MCAF_DYNAMIC_CURRENT_LIMIT *pd
 }
 #endif
 
-#endif /* __DYN_CURRENT_H */
+#endif /* MCAF_DYN_CURRENT_H */

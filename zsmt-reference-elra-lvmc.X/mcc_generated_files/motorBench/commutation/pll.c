@@ -9,7 +9,7 @@
 /* *********************************************************************
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -54,7 +54,6 @@
 #include "motor_control_function_mapping.h"
 #include "pll.h"
 #include "system_state.h"
-#include "math_asm.h"
 #include "commutation/common.h"
 
 inline static bool useNegatedEsd(const MCAF_ESTIMATOR_PLL_T *pll)
@@ -204,9 +203,9 @@ void MCAF_EstimatorPllStep(MCAF_ESTIMATOR_PLL_T *pll,
         /* 
          * vInductance = Ls * (dI/dt) with implicit dt=1 (per-unit)
          */
-        pll->vInductance.alpha = UTIL_SatShrS16(__builtin_mulss(pmotor->l0BaseDt, deltaI.alpha),
+        pll->vInductance.alpha = UTIL_SatShrS16(UTIL_mulss(pmotor->l0BaseDt, deltaI.alpha),
                                     MCAF_MOTOR_L0_BASE_DT_Q+PLL_LOWSPEED_DIBYDT_PRESCALER_SHIFTCOUNT);
-        pll->vInductance.beta = UTIL_SatShrS16(__builtin_mulss(pmotor->l0BaseDt, deltaI.beta),
+        pll->vInductance.beta = UTIL_SatShrS16(UTIL_mulss(pmotor->l0BaseDt, deltaI.beta),
                                     MCAF_MOTOR_L0_BASE_DT_Q+PLL_LOWSPEED_DIBYDT_PRESCALER_SHIFTCOUNT);
     }
     else
@@ -226,9 +225,9 @@ void MCAF_EstimatorPllStep(MCAF_ESTIMATOR_PLL_T *pll,
         /* 
          * vInductance = Ls * (dI/dt) with implicit dt=1 (per-unit)
          */
-        pll->vInductance.alpha = UTIL_SatShrS16(__builtin_mulss(pmotor->l0BaseDt, deltaI.alpha),
+        pll->vInductance.alpha = UTIL_SatShrS16(UTIL_mulss(pmotor->l0BaseDt, deltaI.alpha),
                                             MCAF_MOTOR_L0_BASE_DT_Q);
-        pll->vInductance.beta = UTIL_SatShrS16(__builtin_mulss(pmotor->l0BaseDt, deltaI.beta),
+        pll->vInductance.beta = UTIL_SatShrS16(UTIL_mulss(pmotor->l0BaseDt, deltaI.beta),
                                             MCAF_MOTOR_L0_BASE_DT_Q);
     }
 
@@ -252,11 +251,11 @@ void MCAF_EstimatorPllStep(MCAF_ESTIMATOR_PLL_T *pll,
      * and scale it down by a factor of two. This scaling is required 
      * to prevent overflow/saturation of BEMF calculation in a few corner cases.
      */
-    pll->irDropAlpha = UTIL_SatShrS16(__builtin_mulss(pmotor->rs, ialphabeta->alpha),
+    pll->irDropAlpha = UTIL_SatShrS16(UTIL_mulss(pmotor->rs, ialphabeta->alpha),
                                       MCAF_MOTOR_RS_Q);
     pll->esalphabeta.alpha = (((int32_t)valphabetaCompensated->alpha) - pll->irDropAlpha
                                                  - pll->vInductance.alpha) >> 1;
-    pll->irDropBeta = UTIL_SatShrS16(__builtin_mulss(pmotor->rs, ialphabeta->beta ),
+    pll->irDropBeta = UTIL_SatShrS16(UTIL_mulss(pmotor->rs, ialphabeta->beta ),
                                      MCAF_MOTOR_RS_Q);
     pll->esalphabeta.beta = (((int32_t)valphabetaCompensated->beta) - pll->irDropBeta
                                                   - pll->vInductance.beta) >> 1;
@@ -276,31 +275,31 @@ void MCAF_EstimatorPllStep(MCAF_ESTIMATOR_PLL_T *pll,
      *  Esq = -Ealpha*sin(Angle) + Ebeta*cos(Angle)
      * i.e. equivalent to Park transform
      */
-    pll->esdq.d = UTIL_Shr15(__builtin_mulss(pll->esalphabeta.alpha, pll->sincos.cos) + 
-                        __builtin_mulss(pll->esalphabeta.beta, pll->sincos.sin));
-    pll->esdq.q = UTIL_Shr15(__builtin_mulss(pll->esalphabeta.beta, pll->sincos.cos) - 
-                        __builtin_mulss(pll->esalphabeta.alpha, pll->sincos.sin));    
+    pll->esdq.d = UTIL_Shr15(UTIL_mulss(pll->esalphabeta.alpha, pll->sincos.cos) + 
+                        UTIL_mulss(pll->esalphabeta.beta, pll->sincos.sin));
+    pll->esdq.q = UTIL_Shr15(UTIL_mulss(pll->esalphabeta.beta, pll->sincos.cos) - 
+                        UTIL_mulss(pll->esalphabeta.alpha, pll->sincos.sin));    
     
     /* Filter the BEMF voltage using a first order low pass filter:
      *  Edqfiltered = 1/TFilterd * Integral{ (Esd-EsdFilter).dt }
      */
     const int16_t ddiff = pll->esdq.d - pll->esdqFiltered.d;
-    pll->esdqStateVar.d += __builtin_mulss(ddiff, pll->kEsdqFilter);
+    pll->esdqStateVar.d += UTIL_mulss(ddiff, pll->kEsdqFilter);
     pll->esdqFiltered.d = UTIL_Shr15(pll->esdqStateVar.d);
     const int16_t qdiff = pll->esdq.q - pll->esdqFiltered.q;
-    pll->esdqStateVar.q += __builtin_mulss(qdiff, pll->kEsdqFilter);
+    pll->esdqStateVar.q += UTIL_mulss(qdiff, pll->kEsdqFilter);
     pll->esdqFiltered.q = UTIL_Shr15(pll->esdqStateVar.q);
 
     pll->omegaMr = computeOmegaMr(pll, pmotor);
     
     /* Integrate the estimated velocity to get estimated rotor angle */
-    pll->rhoStateVar += __builtin_mulss(pll->omegaMr, pll->dtAngular);
+    pll->rhoStateVar += UTIL_mulss(pll->omegaMr, pll->dtAngular);
     pll->rho = UTIL_Shr15(pll->rhoStateVar);
     /* Compensate the estimated rotor angle with predetermined offset value */
     pll->output.thetaElectrical = pll->rho + pll->rhoOffset;
     /* Filter the estimated velocity using a first order low-pass filter */
     const int16_t omegadiff = pll->omegaMr - pll->output.omegaElectrical;
-    pll->velEstimStateVar += __builtin_mulss(omegadiff, pll->kVelEstimFilter);
+    pll->velEstimStateVar += UTIL_mulss(omegadiff, pll->kVelEstimFilter);
     pll->output.omegaElectrical = UTIL_Shr15(pll->velEstimStateVar);
 
 }

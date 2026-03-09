@@ -7,7 +7,7 @@
  */ /*
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -43,8 +43,8 @@
  *
  ******************************************************************************/
 
-#ifndef __OPTIONS_H
-#define __OPTIONS_H
+#ifndef MCAF_OPTIONS_H
+#define MCAF_OPTIONS_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -52,7 +52,7 @@ extern "C" {
 
 #define MCAF_INCLUDE_STALL_DETECT 0
 
-inline static bool MCAF_OvercurrentDetectEnabled(void) { return true; }
+inline static bool MCAF_OvercurrentDetectEnabled(void) { return false; }
 inline static bool MCAF_NegativeEdDetectEnabled(void)  { return true; }
 inline static bool MCAF_LowSpeedDetectEnabled(void)    { return true; }
 inline static bool MCAF_TorqueAngleDetectEnabled(void) { return true; }
@@ -70,6 +70,8 @@ inline static bool MCAF_FluxWeakEnabled(void)    { return false; }
 #define MCAF_GATE_DRIVER_ENABLED 0
 
 #define MCAF_SINGLE_CHANNEL_SUPPORT 0
+
+#define MCAF_ADC_GAIN_COMPENSATION_ENABLED 0
 
 inline static bool MCAF_SingleChannelEnabled(void)    { return false; }
 inline static bool MCAF_TripleChannelEnabled(void)    { return true; }
@@ -93,11 +95,16 @@ inline static bool MCAF_DutyCycleFeedbackIncludesClipping(void) { return true; }
 
 /** Enables the test harness.
  */
-//#define MCAF_TEST_HARNESS
+// #define MCAF_TEST_HARNESS 
 
 /** Enables cpu profiling.
  */
-//#define MCAF_TEST_PROFILING
+// #define MCAF_TEST_PROFILING
+
+/** Enables additive current offset for testing ADC offset compensation
+ */
+//#define MCAF_TEST_ADC_OFFSET_COMPENSATION
+
 
 /** Does the test harness use symmetric (square wave) or asymmetric perturbation? 
  *  0 = asymmetric, 1 = symmetric
@@ -138,4 +145,4 @@ inline static bool MCAF_StoppingClosedLoopVelocity(void) { return false; }
 }
 #endif
 
-#endif /* __OPTIONS_H */
+#endif /* MCAF_OPTIONS_H */

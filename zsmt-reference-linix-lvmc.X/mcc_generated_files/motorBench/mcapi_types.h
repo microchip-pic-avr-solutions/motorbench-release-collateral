@@ -9,7 +9,7 @@
 /* *********************************************************************
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -44,8 +44,8 @@
  *
  * *****************************************************************************/
 
-#ifndef __MCAPI_TYPES_H
-#define __MCAPI_TYPES_H
+#ifndef MCAF_MCAPI_TYPES_H 
+#define MCAF_MCAPI_TYPES_H 
 
 #include <stdint.h>
 #include <stdbool.h>
@@ -77,6 +77,8 @@ typedef enum tagMCAPI_FAULT_FLAGS
     MCAPI_FAULT_FLAG_OVERVOLTAGE     = 0x04,   /** over-voltage fault has occurred */
     MCAPI_FAULT_FLAG_OVERTEMPERATURE = 0x08,   /** over-temperature fault has occurred */
     MCAPI_FAULT_FLAG_GATE_DRIVER     = 0x10,   /** gate driver fault has occurred */
+    MCAPI_FAULT_FLAG_CURR_OFFSET_CAL = 0x20,   /** Current offset calibration failure has occurred */
+    MCAPI_FAULT_FLAG_ADC_GAIN_COMP   = 0x40,   /** ADC gain compensation failure has occurred */
     MCAPI_FAULT_FLAG_MOTOR_DRIVE     = 0x8000,   /** higher level fault that encapsulates 
                                                 * all other unspecified faults */
 } MCAPI_FAULT_FLAGS;
@@ -144,4 +146,4 @@ typedef struct tagMCAPI_FEEDBACK_SIGNALS
 }
 #endif
 
-#endif /* __MCAPI_TYPES_H */
+#endif /* MCAF_MCAPI_TYPES_H */

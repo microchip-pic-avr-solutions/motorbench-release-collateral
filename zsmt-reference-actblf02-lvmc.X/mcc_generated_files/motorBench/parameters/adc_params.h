@@ -9,7 +9,7 @@
  */ /*
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -44,8 +44,8 @@
  *
  *
  ******************************************************************************/
-#ifndef __ADC_PARAMS_H
-#define __ADC_PARAMS_H
+#ifndef MCAF_ADC_PARAMS_H
+#define MCAF_ADC_PARAMS_H
 
 #ifdef  __cplusplus
 extern "C" {
@@ -74,20 +74,28 @@ extern "C" {
  * an ideal settling time of 99.99% towards the equilibrium value, plenty
  * of margin to allow for quantization errors.
  */
-    
+
+//************** ADC Current Offset Calibration **************
 /* normalized range of current offset compensation, relative to ADC fullscale */
-#define MCAF_CAL_RANGE                       1024      // Q15(  0.03125) =  +31.25000 m           =  +31.25000 m           + 0.0000%
-/* shift count used to limit offset to 2^(-MCAF_CAL_SHIFT) of ADC fullscale */
-#define MCAF_CAL_SHIFT                          5
+#define MCAF_CURRENT_OFS_CAL_RANGE             1311      // Q15(  0.04001) =  +40.00854 m           =  +40.00000 m           + 0.0214%
+#define MCAF_CURRENT_OFS_CAL_RANGE_NORM    0.0400085449  // normalized
+#define MCAF_CURRENT_OFS_CAL_RANGE_SCALE   1.0000000000
+#define MCAF_CURRENT_OFS_CAL_RANGE_ENG     0.0400085449
+/* shift count used to limit offset to 0.5 * 2^(-MCAF_CAL_SHIFT) of ADC fullscale */
+#define MCAF_CURRENT_OFS_CAL_SHIFT              3
 /* number of samples taken for current offset compensation */
-#define MCAF_CAL_COUNT                        128
+#define MCAF_CURRENT_OFS_CAL_COUNT            128
 /* low-pass filter gain for current offset compensation */
-#define MCAF_CAL_FILTER_GAIN                16384      // Q16(  0.25000) = +250.00000 m           = +250.00000 m           + 0.0000%
+#define MCAF_CURRENT_OFS_CAL_FILTER_GAIN            16384      // Q16(  0.25000) = +250.00000 m           = +250.00000 m           + 0.0000%
+#define MCAF_CURRENT_OFS_CAL_FILTER_GAIN_NORM    0.2500000000  // normalized
+#define MCAF_CURRENT_OFS_CAL_FILTER_GAIN_SCALE   1.0000000000
+#define MCAF_CURRENT_OFS_CAL_FILTER_GAIN_ENG     0.2500000000
 
 
 //************** ADC Scaling **************
 // Scaling constants: Determined by calibration or hardware design. 
-#define     DQKA_NOMINAL (1<<14)
+#define DQKA_NOMINAL (1<<14)
+
 
 /*
  * Current compensation gains
@@ -99,21 +107,42 @@ extern "C" {
  *
  */
 /* normalized A->A current gain */
-#define CURRENT_KAA                         16384      // Q14(  1.00000) =   +1.00000             =   +1.00000             + 0.0000%   
+#define CURRENT_KAA                         16384      // Q14(  1.00000) =   +1.00000             =   +1.00000             + 0.0000%
+#define CURRENT_KAA_NORM                 1.0000000000  // normalized
+#define CURRENT_KAA_SCALE                1.0000000000
+#define CURRENT_KAA_ENG                  1.0000000000   
 /* normalized B->A current gain */
-#define CURRENT_KAB                             0      // Q14(  0.00000) =   +0.00000             =   +0.00000             + 0.0000%   
+#define CURRENT_KAB                             0      // Q14(  0.00000) =   +0.00000             =   +0.00000             + 0.0000%
+#define CURRENT_KAB_NORM                 0.000000e+00  // normalized
+#define CURRENT_KAB_SCALE                1.0000000000
+#define CURRENT_KAB_ENG                  0.000000e+00   
 /* normalized A->B current gain */
-#define CURRENT_KBA                             0      // Q14(  0.00000) =   +0.00000             =   +0.00000             + 0.0000%   
+#define CURRENT_KBA                             0      // Q14(  0.00000) =   +0.00000             =   +0.00000             + 0.0000%
+#define CURRENT_KBA_NORM                 0.000000e+00  // normalized
+#define CURRENT_KBA_SCALE                1.0000000000
+#define CURRENT_KBA_ENG                  0.000000e+00   
 /* normalized B->B current gain */
 #define CURRENT_KBB                         16384      // Q14(  1.00000) =   +1.00000             =   +1.00000             + 0.0000%
+#define CURRENT_KBB_NORM                 1.0000000000  // normalized
+#define CURRENT_KBB_SCALE                1.0000000000
+#define CURRENT_KBB_ENG                  1.0000000000
 /* normalized C->C current gain */
 #define CURRENT_KCC                         16384      // Q14(  1.00000) =   +1.00000             =   +1.00000             + 0.0000%
+#define CURRENT_KCC_NORM                 1.0000000000  // normalized
+#define CURRENT_KCC_SCALE                1.0000000000
+#define CURRENT_KCC_ENG                  1.0000000000
 /* scaling for Idc */
 #define MCAF_IDC_SCALING_FACTOR             16384      // Q14(  1.00000) =   +1.00000             =   +1.00000             + 0.0000%
+#define MCAF_IDC_SCALING_FACTOR_NORM     1.0000000000  // normalized
+#define MCAF_IDC_SCALING_FACTOR_SCALE    1.0000000000
+#define MCAF_IDC_SCALING_FACTOR_ENG      1.0000000000
 
 /* scaling for Vdc */
 #define MCAF_VDC_SCALING_FACTOR              1024      // Q10(  1.00000) =   +1.00000             =   +1.00000             + 0.0000%
 #define MCAF_VDC_SCALING_FACTOR_Q              10
+#define MCAF_VDC_SCALING_FACTOR_NORM     1.0000000000  // normalized
+#define MCAF_VDC_SCALING_FACTOR_SCALE    1.0000000000
+#define MCAF_VDC_SCALING_FACTOR_ENG      1.0000000000
 
 /** Is the DC link voltage reading scaled? 
  * @return true if DC link voltage reading has a scaling factor applied
@@ -156,15 +185,24 @@ inline static bool MCAF_ADCIsDCLinkCurrentInverted(void)
 }
 
 /* temperature gain */
-#define MCAF_BRIDGE_TEMPERATURE_GAIN        33000      // Q16(  0.50354) = +503.54004 m           = +503.54000 m           + 0.0000%
+#define MCAF_BRIDGE_TEMPERATURE_GAIN            33000      // Q16(  0.50354) = +503.54004 m           = +503.54000 m           + 0.0000%
+#define MCAF_BRIDGE_TEMPERATURE_GAIN_NORM    0.5035400391  // normalized
+#define MCAF_BRIDGE_TEMPERATURE_GAIN_SCALE   1.0000000000
+#define MCAF_BRIDGE_TEMPERATURE_GAIN_ENG     0.5035400391
 #define MCAF_BRIDGE_TEMPERATURE_OFFSET            5000 //            temperature offset
 /* Pole of bridge temperature low-pass filter */
-#define MCAF_BRIDGE_TEMPERATURE_FILTER_GAIN        328      // Q16(  0.00500) = +100.09766 rad/s       = +100.00000 rad/s       + 0.0977%
+#define MCAF_BRIDGE_TEMPERATURE_FILTER_GAIN              328      // Q16(  0.00500) = +100.09766 rad/s       = +100.00000 rad/s       + 0.0977%
+#define MCAF_BRIDGE_TEMPERATURE_FILTER_GAIN_NORM    0.0050048828  // normalized
+#define MCAF_BRIDGE_TEMPERATURE_FILTER_GAIN_SCALE   2.000000e+04  // rad/s
+#define MCAF_BRIDGE_TEMPERATURE_FILTER_GAIN_ENG   100.0976562500  // rad/s
 /* Maximum temperature slew rate */
-#define MCAF_BRIDGE_TEMPERATURE_SLEW_RATE       1311      // Q15(  0.04001) =   +4.00085 C/s         =   +4.00000 C/s         + 0.0214%
+#define MCAF_BRIDGE_TEMPERATURE_SLEW_RATE             1311      // Q15(  0.04001) =   +4.00085 C/s         =   +4.00000 C/s         + 0.0214%
+#define MCAF_BRIDGE_TEMPERATURE_SLEW_RATE_NORM    0.0400085449  // normalized
+#define MCAF_BRIDGE_TEMPERATURE_SLEW_RATE_SCALE 100.0000000000  // C/s
+#define MCAF_BRIDGE_TEMPERATURE_SLEW_RATE_ENG     4.0008544922  // C/s
 
 #ifdef  __cplusplus
 }
 #endif
 
-#endif // __ADC_PARAMS_H
+#endif /* MCAF_ADC_PARAMS_H */

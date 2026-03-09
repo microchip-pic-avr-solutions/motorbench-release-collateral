@@ -7,7 +7,7 @@
  */ /* 
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -44,8 +44,8 @@
  * *****************************************************************************/
 
 
-#ifndef __RECOVER_PARAMS_H
-#define __RECOVER_PARAMS_H
+#ifndef MCAF_RECOVER_PARAMS_H
+#define MCAF_RECOVER_PARAMS_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -55,10 +55,13 @@ extern "C" {
 #define MCAF_RECOVERY_COASTDOWN_TIME 50000 
 
 /* Number of recovery re-trials */
-#define MCAF_RECOVERY_STARTUP_ATTEMPTS          3      // Q0(  3.00000)  =   +3.00000 counts      =   +3.00000 counts      + 0.0000%
+#define MCAF_RECOVERY_STARTUP_ATTEMPTS                3      // Q0(  3.00000)  =   +3.00000 counts      =   +3.00000 counts      + 0.0000%
+#define MCAF_RECOVERY_STARTUP_ATTEMPTS_NORM    3.0000000000  // normalized
+#define MCAF_RECOVERY_STARTUP_ATTEMPTS_SCALE          1      // counts
+#define MCAF_RECOVERY_STARTUP_ATTEMPTS_ENG     3.0000000000  // counts
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __RECOVER_PARAMS_H */
+#endif /* MCAF_RECOVER_PARAMS_H */

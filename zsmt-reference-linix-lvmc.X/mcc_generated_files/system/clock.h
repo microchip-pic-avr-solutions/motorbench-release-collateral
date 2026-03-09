@@ -7,15 +7,13 @@
  *            
  * @brief     Clock configurator driver for System and Peripheral Clock using dsPIC MCUs.
  *
- * @version   Firmware Driver Version 1.0.2
- *
- * @version   PLIB Version 1.4.1
+ * @skipline @version   PLIB Version 1.4.6
  *
  * @skipline  Device : dsPIC33CK256MP508
 */
 
 /*
-© [2025] Microchip Technology Inc. and its subsidiaries.
+© [2026] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -68,6 +66,7 @@
 /**
  * @ingroup  clockdriver
  * @brief    Initializes all the INTERNAL OSCILLATOR sources and clock switch configurations. 
+ * @param    none
  * @return   none  
  */
 void CLOCK_Initialize(void);
@@ -77,6 +76,7 @@ void CLOCK_Initialize(void);
  * @brief    Returns Auxiliary PLL status
  * @pre      \ref CLOCK_Initialize() should be called for the associated
  *           function to work.
+ * @param    none
  * @return   true   - Auxiliary PLL locked
  * @return   false  - Auxiliary PLL not locked
  */

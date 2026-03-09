@@ -9,7 +9,7 @@
 /*
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -45,8 +45,8 @@
  *
  ******************************************************************************/
  
-#ifndef __HAF_H
-#define __HAF_H
+#ifndef MCAF_HAF_H
+#define MCAF_HAF_H
 
 #define MCC_MELODY
 
@@ -72,8 +72,8 @@
 #include "adc/adc1.h"
 #include "pwm_hs/pwm.h"
 #include "qei/qei1.h"
-#include "timer/tmr1.h"
 #include "timer/sccp1.h"
+#include "timer/tmr1.h"
 #include "uart/uart1.h"
 #include "opa/opa1.h"
 #include "opa/opa2.h"
@@ -125,6 +125,7 @@ extern "C" {
  */
 #define HAL_ADC_ISR                     _ADCAN15Interrupt
 #define MCAF_ADC_CHANNEL_USED_FOR_ISR   MCAF_ADC_DCLINK_VOLTAGE
+#define APP_TimerCallback TMR1_CallBack
 
 /** Interrupt priorities used in MCAF */
 enum {
@@ -132,6 +133,50 @@ enum {
     MCAF_PRIORITY_ADC_SINGLECHANNEL = 5,  /** ISR priority for DC link current measurement(single-channel) */
     MCAF_PRIORITY_TMR = 4                 /** Periodic timer tick ISR priority */
 };
+
+/* Where APIs are identical except naming, support backwards-compatibility */
+#ifndef MCC_MELODY
+#define MCC_PWM_Enable                                     PWM_Enable
+#define MCC_PWM_MasterPeriodSet                            PWM_MasterPeriodSet
+#define MCC_PWM_DeadTimeSet                                PWM_DeadTimeSet
+#define MCC_PWM_GeneratorEventStatusClear                  PWM_GeneratorEventStatusClear
+#define MCC_PWM_GeneratorEventStatusGet                    PWM_GeneratorEventStatusGet
+#define MCC_PWM_TriggerACompareValueSet                    PWM_TriggerACompareValueSet
+#define MCC_PWM_TriggerBCompareValueSet                    PWM_TriggerBCompareValueSet
+#define MCC_PWM_TriggerCCompareValueSet                    PWM_TriggerCCompareValueSet
+#define MCC_PWM_OverrideDataSet                            PWM_OverrideDataSet
+#define MCC_PWM_OverrideLowDisable                         PWM_OverrideLowDisable
+#define MCC_PWM_OverrideLowEnable                          PWM_OverrideLowEnable
+#define MCC_PWM_OverrideHighDisable                        PWM_OverrideHighDisable
+#define MCC_PWM_OverrideHighEnable                         PWM_OverrideHighEnable
+#define MCC_PWM_PhaseSet                                   PWM_PhaseSet
+#define MCC_PWM_DutyCycleSet                               PWM_DutyCycleSet
+#define MCC_PWM_FaultModeLatchClear                        PWM_FaultModeLatchClear
+#define MCC_PWM_FaultModeLatchDisable                      PWM_FaultModeLatchDisable
+#define MCC_PWM_ModeSet                                    HAL_PWM_ModeSetGenerator
+#define MCC_PWM_PhaseSelect                                HAL_PWM_MasterPhaseSelectGenerator
+#define MCC_ADC_ConversionResultGet                        ADC1_ConversionResultGet
+#define MCC_ADC_Enable                                     ADC1_Enable
+#define MCC_ADC_IndividualChannelInterruptFlagClear        ADC1_IndividualChannelInterruptFlagClear
+#define MCC_ADC_IndividualChannelInterruptEnable           ADC1_IndividualChannelInterruptEnable
+#define MCC_ADC_IndividualChannelInterruptPrioritySet(x,y) // already configured in SYSTEM_Initialize()
+#define MCC_ADC_InterruptFlagClear                         ADC1_InterruptFlagClear
+#define MCC_UART_Initialize                                UART1_Initialize
+#define MCC_UART_Write                                     UART1_Write
+#define MCC_UART_Read                                      UART1_Read
+#define MCC_UART_IsRxReady                                 UART1_IsRxReady
+#define MCC_UART_IsTxReady                                 UART1_IsTxReady
+#define MCC_TMR_PROFILE_Start                              SCCP1_TMR_Start
+#define MCC_TMR_PROFILE_Counter16BitGet                    SCCP1_TMR_Counter16BitPrimaryGet
+#define MCC_TMR_TICK_InterruptPrioritySet(x)               // already configured in SYSTEM_Initialize()
+#define MCC_TMR_TICK_TimeoutCallbackRegister(x)            // no action required
+#define MCC_TMR_TICK_Start                                 TMR1_Start
+#define MCC_QEI_ModuloRangeSet                             QEI1_ModuloMode16bitSet
+#define MCC_QEI_Enable                                     QEI1_ModuleEnable
+#define MCC_QEI_PositionCount16bitRead                     QEI1_PositionCount16bitRead
+#define MCC_QEI_PositionCapture16bitGet                    QEI_PositionCaptureGet
+                                                           // covered in qei_temp_hal.h
+#endif
 
 /**
   Section: Hardware Access Functions
@@ -150,11 +195,7 @@ enum {
  * </code>
  */
 inline static void HAL_PWM_ModuleEnable(void) { 
-#ifdef MCC_MELODY
     MCC_PWM_Enable();
-#else
-    PWM_Enable();
-#endif
 }
 
 /**
@@ -169,11 +210,7 @@ inline static void HAL_PWM_ModuleEnable(void) {
  */
 inline static void HAL_PWM_SetPeriodIdentical(uint16_t period)
 {
-#ifdef MCC_MELODY
     MCC_PWM_MasterPeriodSet(period-1);
-#else
-    PWM_MasterPeriodSet(period-1);
-#endif    
 }
 
 /**
@@ -186,15 +223,9 @@ inline static void HAL_PWM_SetPeriodIdentical(uint16_t period)
  */
 inline static void HAL_PWM_SetDeadtimeIdentical_Motor1(uint16_t dt)
 {
-#ifdef MCC_MELODY
     MCC_PWM_DeadTimeSet(MOTOR1_PHASE_A, dt);
     MCC_PWM_DeadTimeSet(MOTOR1_PHASE_B, dt);
     MCC_PWM_DeadTimeSet(MOTOR1_PHASE_C, dt);    
-#else
-    PWM_DeadTimeSet(MOTOR1_PHASE_A,dt);
-    PWM_DeadTimeSet(MOTOR1_PHASE_B,dt);
-    PWM_DeadTimeSet(MOTOR1_PHASE_C,dt);
-#endif    
 }
 
 /**
@@ -206,15 +237,9 @@ inline static void HAL_PWM_SetDeadtimeIdentical_Motor1(uint16_t dt)
  */
 inline static void HAL_PWM_FaultStatus_Clear(void)
 {
-#ifdef MCC_MELODY
     MCC_PWM_GeneratorEventStatusClear(MOTOR1_PHASE_A, PWM_GENERATOR_INTERRUPT_FAULT);
     MCC_PWM_GeneratorEventStatusClear(MOTOR1_PHASE_B, PWM_GENERATOR_INTERRUPT_FAULT);
     MCC_PWM_GeneratorEventStatusClear(MOTOR1_PHASE_C, PWM_GENERATOR_INTERRUPT_FAULT);
-#else
-    PWM_GeneratorEventStatusClear(MOTOR1_PHASE_A,PWM_GENERATOR_INTERRUPT_FAULT);
-    PWM_GeneratorEventStatusClear(MOTOR1_PHASE_B,PWM_GENERATOR_INTERRUPT_FAULT);
-    PWM_GeneratorEventStatusClear(MOTOR1_PHASE_C,PWM_GENERATOR_INTERRUPT_FAULT);
-#endif    
 }
 
 /**
@@ -226,11 +251,7 @@ inline static void HAL_PWM_FaultStatus_Clear(void)
  */
 inline static bool HAL_PWM_FaultStatus_Get(void)
 {
-#ifdef MCC_MELODY
     return MCC_PWM_GeneratorEventStatusGet(MOTOR1_PHASE_A,PWM_GENERATOR_INTERRUPT_FAULT);
-#else
-    return PWM_GeneratorEventStatusGet(MOTOR1_PHASE_A,PWM_GENERATOR_INTERRUPT_FAULT);
-#endif    
 }
 
 /**
@@ -243,13 +264,8 @@ inline static bool HAL_PWM_FaultStatus_Get(void)
  */
 inline static void HAL_PWM_SetADCTrigger()
 {
-#ifdef MCC_MELODY
     MCC_PWM_TriggerACompareValueSet(MOTOR1_PHASE_A,
                                 (HAL_PARAM_DEADTIME_COUNTS >> 1) + HAL_PARAM_ADC_TRIGGER_DELAY);
-#else
-    PWM_TriggerACompareValueSet(MOTOR1_PHASE_A,
-                                (HAL_PARAM_DEADTIME_COUNTS >> 1) + HAL_PARAM_ADC_TRIGGER_DELAY);
-#endif
 }
 
 /**
@@ -262,15 +278,9 @@ inline static void HAL_PWM_SetADCTrigger()
  */
 inline static void HAL_PWM_LowerTransistorsOverride_Disable(void)
 {
-#ifdef MCC_MELODY
     MCC_PWM_OverrideLowDisable(MOTOR1_PHASE_A);
     MCC_PWM_OverrideLowDisable(MOTOR1_PHASE_B);
     MCC_PWM_OverrideLowDisable(MOTOR1_PHASE_C);
-#else
-    PWM_OverrideLowDisable(MOTOR1_PHASE_A);
-    PWM_OverrideLowDisable(MOTOR1_PHASE_B);
-    PWM_OverrideLowDisable(MOTOR1_PHASE_C);
-#endif
 }
 
 /**
@@ -283,7 +293,6 @@ inline static void HAL_PWM_LowerTransistorsOverride_Disable(void)
  */
 inline static void HAL_PWM_LowerTransistorsOverride_Low(void)
 {
-#ifdef MCC_MELODY
     /* Set PWM override data to 0b00 */
     MCC_PWM_OverrideDataSet(MOTOR1_PHASE_A,0);
     MCC_PWM_OverrideDataSet(MOTOR1_PHASE_B,0);
@@ -293,17 +302,6 @@ inline static void HAL_PWM_LowerTransistorsOverride_Low(void)
     MCC_PWM_OverrideLowEnable(MOTOR1_PHASE_A);
     MCC_PWM_OverrideLowEnable(MOTOR1_PHASE_B);
     MCC_PWM_OverrideLowEnable(MOTOR1_PHASE_C);
-#else
-    /* Set PWM override data to 0b00 */
-    PWM_OverrideDataSet(MOTOR1_PHASE_A,0);
-    PWM_OverrideDataSet(MOTOR1_PHASE_B,0);
-    PWM_OverrideDataSet(MOTOR1_PHASE_C,0);
-    
-    /* Enable PWM override */    
-    PWM_OverrideLowEnable(MOTOR1_PHASE_A);
-    PWM_OverrideLowEnable(MOTOR1_PHASE_B);
-    PWM_OverrideLowEnable(MOTOR1_PHASE_C);
-#endif    
 }
 
     
@@ -317,15 +315,9 @@ inline static void HAL_PWM_LowerTransistorsOverride_Low(void)
  */
 inline static void HAL_PWM_UpperTransistorsOverride_Disable(void)
 {
-#ifdef MCC_MELODY
     MCC_PWM_OverrideHighDisable(MOTOR1_PHASE_A);
     MCC_PWM_OverrideHighDisable(MOTOR1_PHASE_B);
     MCC_PWM_OverrideHighDisable(MOTOR1_PHASE_C);
-#else
-    PWM_OverrideHighDisable(MOTOR1_PHASE_A);
-    PWM_OverrideHighDisable(MOTOR1_PHASE_B);
-    PWM_OverrideHighDisable(MOTOR1_PHASE_C);
-#endif
 }
 
 /**
@@ -338,7 +330,6 @@ inline static void HAL_PWM_UpperTransistorsOverride_Disable(void)
  */
 inline static void HAL_PWM_UpperTransistorsOverride_Low(void)
 {
-#ifdef MCC_MELODY
     /* Set PWM override data to 0b00 */
     MCC_PWM_OverrideDataSet(MOTOR1_PHASE_A,0);
     MCC_PWM_OverrideDataSet(MOTOR1_PHASE_B,0);
@@ -348,17 +339,6 @@ inline static void HAL_PWM_UpperTransistorsOverride_Low(void)
     MCC_PWM_OverrideHighEnable(MOTOR1_PHASE_A);
     MCC_PWM_OverrideHighEnable(MOTOR1_PHASE_B);
     MCC_PWM_OverrideHighEnable(MOTOR1_PHASE_C);
-#else
-    /* Set PWM override data to 0b00 */
-    PWM_OverrideDataSet(MOTOR1_PHASE_A,0);
-    PWM_OverrideDataSet(MOTOR1_PHASE_B,0);
-    PWM_OverrideDataSet(MOTOR1_PHASE_C,0);
-
-    /* Enable PWM override */
-    PWM_OverrideHighEnable(MOTOR1_PHASE_A);
-    PWM_OverrideHighEnable(MOTOR1_PHASE_B);
-    PWM_OverrideHighEnable(MOTOR1_PHASE_C);
-#endif
 }
 
 /**
@@ -372,7 +352,6 @@ inline static void HAL_PWM_UpperTransistorsOverride_Low(void)
  */
 inline static void HAL_PWM_DutyCycle_SetIdentical(uint16_t dc)
 {
-#ifdef MCC_MELODY
     #if MCAF_SINGLE_CHANNEL_SUPPORT 
     MCC_PWM_PhaseSet(MOTOR1_PHASE_A,dc);
     MCC_PWM_PhaseSet(MOTOR1_PHASE_B,dc);
@@ -381,16 +360,6 @@ inline static void HAL_PWM_DutyCycle_SetIdentical(uint16_t dc)
     MCC_PWM_DutyCycleSet(MOTOR1_PHASE_A,dc);
     MCC_PWM_DutyCycleSet(MOTOR1_PHASE_B,dc);
     MCC_PWM_DutyCycleSet(MOTOR1_PHASE_C,dc);
-#else
-    #if MCAF_SINGLE_CHANNEL_SUPPORT 
-    PWM_PhaseSet(MOTOR1_PHASE_A,dc);
-    PWM_PhaseSet(MOTOR1_PHASE_B,dc);
-    PWM_PhaseSet(MOTOR1_PHASE_C,dc);
-    #endif
-    PWM_DutyCycleSet(MOTOR1_PHASE_A,dc);
-    PWM_DutyCycleSet(MOTOR1_PHASE_B,dc);
-    PWM_DutyCycleSet(MOTOR1_PHASE_C,dc);
-#endif
 }
 
 /**
@@ -405,15 +374,9 @@ inline static void HAL_PWM_DutyCycle_SetIdentical(uint16_t dc)
  */
 inline static void HAL_PWM_DutyCycleRegister_Set(const uint16_t *pdc)
 {
-#ifdef MCC_MELODY
     MCC_PWM_DutyCycleSet(MOTOR1_PHASE_A,pdc[0]);
     MCC_PWM_DutyCycleSet(MOTOR1_PHASE_B,pdc[1]);
     MCC_PWM_DutyCycleSet(MOTOR1_PHASE_C,pdc[2]);
-#else
-    PWM_DutyCycleSet(MOTOR1_PHASE_A,pdc[0]);
-    PWM_DutyCycleSet(MOTOR1_PHASE_B,pdc[1]);
-    PWM_DutyCycleSet(MOTOR1_PHASE_C,pdc[2]);
-#endif
 }
 
 /**
@@ -428,15 +391,9 @@ inline static void HAL_PWM_DutyCycleRegister_Set(const uint16_t *pdc)
  */
 inline static void HAL_PWM_PhaseRegister_Set(const uint16_t *phase)
 {
-#ifdef MCC_MELODY
     MCC_PWM_PhaseSet(MOTOR1_PHASE_A,phase[0]);
     MCC_PWM_PhaseSet(MOTOR1_PHASE_B,phase[1]);
     MCC_PWM_PhaseSet(MOTOR1_PHASE_C,phase[2]);
-#else
-    PWM_PhaseSet(MOTOR1_PHASE_A,phase[0]);
-    PWM_PhaseSet(MOTOR1_PHASE_B,phase[1]);
-    PWM_PhaseSet(MOTOR1_PHASE_C,phase[2]);
-#endif
 }
 
 /**
@@ -482,7 +439,6 @@ inline static void HAL_PWM_DutyCycleDualEdge_Set(const uint16_t *firstHalf, cons
 */
 inline static void HAL_PWM_FaultClearBegin(void)
 {
-#ifdef MCC_MELODY
     #if (PWM_FAULT_LATCH_SOFTWARE_CLEAR_FEATURE_AVAILABLE)
     {
         MCC_PWM_FaultModeLatchClear(MOTOR1_PHASE_A);
@@ -496,21 +452,6 @@ inline static void HAL_PWM_FaultClearBegin(void)
         MCC_PWM_FaultModeLatchDisable(MOTOR1_PHASE_C);
     }
     #endif
-#else
-    #if (PWM_FAULT_LATCH_SOFTWARE_CLEAR_FEATURE_AVAILABLE)
-    {
-        PWM_FaultModeLatchClear(MOTOR1_PHASE_A);
-        PWM_FaultModeLatchClear(MOTOR1_PHASE_B);
-        PWM_FaultModeLatchClear(MOTOR1_PHASE_C);
-    }
-    #else
-    {
-        PWM_FaultModeLatchDisable(MOTOR1_PHASE_A);
-        PWM_FaultModeLatchDisable(MOTOR1_PHASE_B);
-        PWM_FaultModeLatchDisable(MOTOR1_PHASE_C);
-    }
-    #endif
-#endif
 }
 
 /**
@@ -522,7 +463,6 @@ inline static void HAL_PWM_FaultClearBegin(void)
 */
 inline static void HAL_PWM_FaultClearEnd(void)
 {
-#ifdef MCC_MELODY
     #if (PWM_FAULT_LATCH_SOFTWARE_CLEAR_FEATURE_AVAILABLE)
     {
         // no action required
@@ -534,19 +474,6 @@ inline static void HAL_PWM_FaultClearEnd(void)
         MCC_PWM_FaultModeLatchEnable(MOTOR1_PHASE_C);
     }
     #endif
-#else
-    #if (PWM_FAULT_LATCH_SOFTWARE_CLEAR_FEATURE_AVAILABLE)
-    {
-        // no action required
-    }
-    #else
-    {
-        PWM_FaultModeLatchEnable(MOTOR1_PHASE_A);
-        PWM_FaultModeLatchEnable(MOTOR1_PHASE_B);
-        PWM_FaultModeLatchEnable(MOTOR1_PHASE_C);
-    }
-    #endif
-#endif
 }
 
 
@@ -581,7 +508,6 @@ inline static void HAL_PWM_LowerTransistorsDutyCycle_Set(uint16_t pwmPeriodCount
  */
 inline static void HAL_PWM_Outputs_Disable(void)
 {
-#ifdef MCC_MELODY
     MCC_PWM_OverrideDataSet(MOTOR1_PHASE_A,0);
     MCC_PWM_OverrideDataSet(MOTOR1_PHASE_B,0);
     MCC_PWM_OverrideDataSet(MOTOR1_PHASE_C,0);   
@@ -592,18 +518,6 @@ inline static void HAL_PWM_Outputs_Disable(void)
     MCC_PWM_OverrideLowEnable(MOTOR1_PHASE_B);    
     MCC_PWM_OverrideHighEnable(MOTOR1_PHASE_C);
     MCC_PWM_OverrideLowEnable(MOTOR1_PHASE_C);    
-#else
-    PWM_OverrideDataSet(MOTOR1_PHASE_A,0);
-    PWM_OverrideDataSet(MOTOR1_PHASE_B,0);
-    PWM_OverrideDataSet(MOTOR1_PHASE_C,0);   
-    
-    PWM_OverrideHighEnable(MOTOR1_PHASE_A);
-    PWM_OverrideLowEnable(MOTOR1_PHASE_A);    
-    PWM_OverrideHighEnable(MOTOR1_PHASE_B);
-    PWM_OverrideLowEnable(MOTOR1_PHASE_B);    
-    PWM_OverrideHighEnable(MOTOR1_PHASE_C);
-    PWM_OverrideLowEnable(MOTOR1_PHASE_C);    
-#endif
 }
 
 /**
@@ -616,17 +530,10 @@ inline static void HAL_PWM_Outputs_Disable(void)
  */
 inline static void HAL_PWM_PhaseAOutput_Disable(void)
 {
-#ifdef MCC_MELODY
     MCC_PWM_OverrideDataSet(MOTOR1_PHASE_A,0);  
     
     MCC_PWM_OverrideHighEnable(MOTOR1_PHASE_A);
     MCC_PWM_OverrideLowEnable(MOTOR1_PHASE_A);
-#else
-    PWM_OverrideDataSet(MOTOR1_PHASE_A,0);  
-    
-    PWM_OverrideHighEnable(MOTOR1_PHASE_A);
-    PWM_OverrideLowEnable(MOTOR1_PHASE_A);
-#endif    
 }
 
 /**
@@ -639,13 +546,8 @@ inline static void HAL_PWM_PhaseAOutput_Disable(void)
  */
 inline static void HAL_PWM_PhaseAOutput_Enable(void)
 {
-#ifdef MCC_MELODY
     MCC_PWM_OverrideHighDisable(MOTOR1_PHASE_A);
     MCC_PWM_OverrideLowDisable(MOTOR1_PHASE_A);
-#else
-    PWM_OverrideHighDisable(MOTOR1_PHASE_A);
-    PWM_OverrideLowDisable(MOTOR1_PHASE_A);
-#endif
 }
 
 /**
@@ -658,17 +560,10 @@ inline static void HAL_PWM_PhaseAOutput_Enable(void)
  */
 inline static void HAL_PWM_PhaseBOutput_Disable(void)
 {
-#ifdef MCC_MELODY
     MCC_PWM_OverrideDataSet(MOTOR1_PHASE_B,0);
     
     MCC_PWM_OverrideHighEnable(MOTOR1_PHASE_B);
     MCC_PWM_OverrideLowEnable(MOTOR1_PHASE_B);
-#else
-    PWM_OverrideDataSet(MOTOR1_PHASE_B,0);
-    
-    PWM_OverrideHighEnable(MOTOR1_PHASE_B);
-    PWM_OverrideLowEnable(MOTOR1_PHASE_B);
-#endif
 }
 
 /**
@@ -681,13 +576,8 @@ inline static void HAL_PWM_PhaseBOutput_Disable(void)
  */
 inline static void HAL_PWM_PhaseBOutput_Enable(void)
 {
-#ifdef MCC_MELODY
     MCC_PWM_OverrideHighDisable(MOTOR1_PHASE_B);
-    MCC_PWM_OverrideHighDisable(MOTOR1_PHASE_B);
-#else
-    PWM_OverrideHighDisable(MOTOR1_PHASE_B);
-    PWM_OverrideLowDisable(MOTOR1_PHASE_B);
-#endif
+    MCC_PWM_OverrideLowDisable(MOTOR1_PHASE_B);
 }
 
 /**
@@ -700,17 +590,10 @@ inline static void HAL_PWM_PhaseBOutput_Enable(void)
  */
 inline static void HAL_PWM_PhaseCOutput_Disable(void)
 {
-#ifdef MCC_MELODY
     MCC_PWM_OverrideDataSet(MOTOR1_PHASE_C,0);
     
     MCC_PWM_OverrideHighEnable(MOTOR1_PHASE_C);
     MCC_PWM_OverrideLowEnable(MOTOR1_PHASE_C);
-#else
-    PWM_OverrideDataSet(MOTOR1_PHASE_C,0);
-    
-    PWM_OverrideHighEnable(MOTOR1_PHASE_C);
-    PWM_OverrideLowEnable(MOTOR1_PHASE_C);
-#endif
 }
 
 /**
@@ -723,13 +606,8 @@ inline static void HAL_PWM_PhaseCOutput_Disable(void)
  */
 inline static void HAL_PWM_PhaseCOutput_Enable(void)
 {
-#ifdef MCC_MELODY
     MCC_PWM_OverrideHighDisable(MOTOR1_PHASE_C);
     MCC_PWM_OverrideLowDisable(MOTOR1_PHASE_C);
-#else
-    PWM_OverrideHighDisable(MOTOR1_PHASE_C);
-    PWM_OverrideLowDisable(MOTOR1_PHASE_C);
-#endif
 }
 
 /**
@@ -742,7 +620,6 @@ inline static void HAL_PWM_PhaseCOutput_Enable(void)
  */
 inline static void HAL_PWM_Outputs_Enable(void)
 {
-#ifdef MCC_MELODY
     MCC_PWM_OverrideHighDisable(MOTOR1_PHASE_A);
     MCC_PWM_OverrideLowDisable(MOTOR1_PHASE_A);
 
@@ -751,16 +628,6 @@ inline static void HAL_PWM_Outputs_Enable(void)
     
     MCC_PWM_OverrideHighDisable(MOTOR1_PHASE_C);
     MCC_PWM_OverrideLowDisable(MOTOR1_PHASE_C);
-#else
-    PWM_OverrideHighDisable(MOTOR1_PHASE_A);
-    PWM_OverrideLowDisable(MOTOR1_PHASE_A);
-
-    PWM_OverrideHighDisable(MOTOR1_PHASE_B);
-    PWM_OverrideLowDisable(MOTOR1_PHASE_B);
-    
-    PWM_OverrideHighDisable(MOTOR1_PHASE_C);
-    PWM_OverrideLowDisable(MOTOR1_PHASE_C);
-#endif
 }
 
 /**
@@ -788,11 +655,7 @@ inline static bool HAL_hasTwoButtons(void)
  */
 inline static void HAL_LedGp1_Activate(void)
 {
-#ifdef MCC_MELODY
     MCAF_LED1_SetHigh();
-#else
-    MCAF_LED1_On();
-#endif    
 }
 
 /**
@@ -805,11 +668,7 @@ inline static void HAL_LedGp1_Activate(void)
  */
 inline static void HAL_LedGp1_Deactivate(void)
 {
-#ifdef MCC_MELODY
     MCAF_LED1_SetLow();
-#else
-    MCAF_LED1_Off();
-#endif    
 }
 
 /**
@@ -822,11 +681,7 @@ inline static void HAL_LedGp1_Deactivate(void)
  */
 inline static void HAL_LedGp2_Activate(void)
 {
-#ifdef MCC_MELODY
     MCAF_LED2_SetHigh();
-#else
-    MCAF_LED2_On();
-#endif  
 }
 
 /**
@@ -839,11 +694,7 @@ inline static void HAL_LedGp2_Activate(void)
  */
 inline static void HAL_LedGp2_Deactivate(void)
 {
-#ifdef MCC_MELODY
     MCAF_LED2_SetLow();
-#else
-    MCAF_LED2_Off();
-#endif    
 }
 
 /**
@@ -878,11 +729,7 @@ inline static void HAL_TestpointGp1_Deactivate(void)
  */
 inline static bool HAL_ButtonGp1RawInput(void)
 {
-#ifdef MCC_MELODY
     return !MCAF_BUTTON1_GetValue();
-#else
-    return MCAF_BUTTON1_IsPressed(); 
-#endif
 }
 
 /**
@@ -891,11 +738,7 @@ inline static bool HAL_ButtonGp1RawInput(void)
  */
 inline static bool HAL_ButtonGp2RawInput(void)
 {
-#ifdef MCC_MELODY
     return !MCAF_BUTTON2_GetValue();
-#else
-    return MCAF_BUTTON2_IsPressed();
-#endif
 }
 
 /**
@@ -924,11 +767,7 @@ inline static bool HAL_ADC_IsPhaseACurrentAvailable(void)
  */
 inline static uint16_t HAL_ADC_ValuePhaseACurrent(void)
 { 
-#ifdef MCC_MELODY
     return MCC_ADC_ConversionResultGet(MCAF_ADC_PHASEA_CURRENT);
-#else
-    return ADC1_ConversionResultGet(MCAF_ADC_PHASEA_CURRENT);
-#endif
 }
 /**
  * Is the phase B current analog input available?
@@ -945,11 +784,7 @@ inline static bool HAL_ADC_IsPhaseBCurrentAvailable(void)
  */
 inline static uint16_t HAL_ADC_ValuePhaseBCurrent(void)
 { 
-#ifdef MCC_MELODY
     return MCC_ADC_ConversionResultGet(MCAF_ADC_PHASEB_CURRENT);
-#else
-    return ADC1_ConversionResultGet(MCAF_ADC_PHASEB_CURRENT);
-#endif
 }
 /**
  * Is the phase C current analog input available?
@@ -966,11 +801,7 @@ inline static bool HAL_ADC_IsPhaseCCurrentAvailable(void)
  */
 inline static uint16_t HAL_ADC_ValuePhaseCCurrent(void)
 { 
-#ifdef MCC_MELODY
     return MCC_ADC_ConversionResultGet(MCAF_ADC_PHASEC_CURRENT);
-#else
-    return ADC1_ConversionResultGet(MCAF_ADC_PHASEC_CURRENT);
-#endif
 }
 /**
  * Is the phase A voltage analog input available?
@@ -1055,11 +886,7 @@ inline static bool HAL_ADC_IsDCLinkVoltageAvailable(void)
  */
 inline static uint16_t HAL_ADC_ValueDCLinkVoltage(void)
 { 
-#ifdef MCC_MELODY
     return MCC_ADC_ConversionResultGet(MCAF_ADC_DCLINK_VOLTAGE);
-#else
-    return ADC1_ConversionResultGet(MCAF_ADC_DCLINK_VOLTAGE);
-#endif
 }
 /**
  * Is the potentiometer voltage analog input available?
@@ -1076,11 +903,7 @@ inline static bool HAL_ADC_IsPotentiometerAvailable(void)
  */
 inline static uint16_t HAL_ADC_ValuePotentiometer(void)
 { 
-#ifdef MCC_MELODY
     return MCC_ADC_ConversionResultGet(MCAF_ADC_POTENTIOMETER);
-#else
-    return ADC1_ConversionResultGet(MCAF_ADC_POTENTIOMETER);
-#endif
 }
 /**
  * Is the bridge temperature voltage analog input available?
@@ -1127,11 +950,7 @@ inline static uint16_t HAL_ADC_ValueAbsoluteReferenceVoltage(void)
 */
 inline static void HAL_ADC_Enable(void)
 {
-#ifdef MCC_MELODY
     MCC_ADC_Enable();
-#else
-    ADC1_Enable();
-#endif
 }
 
 /**
@@ -1143,7 +962,6 @@ inline static void HAL_ADC_Enable(void)
 */
 inline static void HAL_ADC_InterruptFlag_Clear(void)
 {
-#ifdef MCC_MELODY
     #if (ADC_INDIVIDUAL_CHANNEL_INTERRUPT_FEATURE_AVAILABLE)
         // In order to clear the ADC ISR flag one must read the associated
         // ADC buffer. This dummy read is to ensure the ISR flag will be cleared.
@@ -1152,16 +970,6 @@ inline static void HAL_ADC_InterruptFlag_Clear(void)
     #else
         MCC_ADC_InterruptFlagClear();
     #endif
-#else
-    #if (ADC_INDIVIDUAL_CHANNEL_INTERRUPT_FEATURE_AVAILABLE)
-        // In order to clear the ADC ISR flag one must read the associated
-        // ADC buffer. This dummy read is to ensure the ISR flag will be cleared.
-        ADC1_ConversionResultGet(MCAF_ADC_CHANNEL_USED_FOR_ISR);
-        ADC1_IndividualChannelInterruptFlagClear(MCAF_ADC_CHANNEL_USED_FOR_ISR);
-    #else
-        ADC1_InterruptFlagClear();   
-    #endif
-#endif
 }
 
 /**
@@ -1173,19 +981,11 @@ inline static void HAL_ADC_InterruptFlag_Clear(void)
 */
 inline static void HAL_ADC_Interrupt_Enable(void)
 {
-#ifdef MCC_MELODY
     #if (ADC_INDIVIDUAL_CHANNEL_INTERRUPT_FEATURE_AVAILABLE)
         MCC_ADC_IndividualChannelInterruptEnable(MCAF_ADC_CHANNEL_USED_FOR_ISR);
     #else
         MCC_ADC_InterruptEnable(); 
     #endif
-#else
-    #if (ADC_INDIVIDUAL_CHANNEL_INTERRUPT_FEATURE_AVAILABLE)
-        ADC1_IndividualChannelInterruptEnable(MCAF_ADC_CHANNEL_USED_FOR_ISR);
-    #else
-        ADC1_InterruptEnable(); 
-    #endif
-#endif
 }
 
 /**
@@ -1193,11 +993,7 @@ inline static void HAL_ADC_Interrupt_Enable(void)
  */
 inline static void HAL_ADC_IndividualChannelInterruptPrioritySet(void)
 {
-#ifdef MCC_MELODY
     MCC_ADC_IndividualChannelInterruptPrioritySet(MCAF_ADC_CHANNEL_USED_FOR_ISR, MCAF_PRIORITY_ADC);
-#else
-    // already configured in SYSTEM_Initialize()
-#endif
 }
 
 /**
@@ -1240,11 +1036,7 @@ bool HAL_DMA_ErrorHandler(void);
 */
 inline static void HAL_UART_Initialize(void) 
 {
-#ifdef MCC_MELODY
     MCC_UART_Initialize();
-#else
-    UART1_Initialize();
-#endif
 }
 
 /**
@@ -1253,11 +1045,26 @@ inline static void HAL_UART_Initialize(void)
  */
 inline static void HAL_UART_Write(uint8_t data)
 {
-#ifdef MCC_MELODY
     MCC_UART_Write(data);
-#else
-    UART1_Write(data);
-#endif
+}
+
+/**
+ * Get the availability for all upper voltage divider ADC channels.
+ * @return whether any upper voltage divider analog inputs are available
+ */
+inline static bool HAL_ADC_IsUpperVoltageDividerAvailable(void)
+{
+    return false;
+}
+
+/**
+ * Get the results for the upper voltage divider ADC channels.
+ * @param adc_core core number
+ * @return ADC result value
+ */
+inline static uint16_t HAL_ADC_ValueUpperVoltageDivider(unsigned int adc_core)
+{
+    return 0;
 }
 
 /**
@@ -1266,11 +1073,7 @@ inline static void HAL_UART_Write(uint8_t data)
  */
 inline static uint8_t HAL_UART_Read(void)
 {
-#ifdef MCC_MELODY
     return MCC_UART_Read();
-#else
-    return UART1_Read();
-#endif
 }
 
 /**
@@ -1279,11 +1082,7 @@ inline static uint8_t HAL_UART_Read(void)
  */
 inline static bool HAL_UART_IsRxReady(void)
 {
-#ifdef MCC_MELODY
     return MCC_UART_IsRxReady();
-#else
-    return UART1_IsRxReady();
-#endif
 }
 
 /**
@@ -1292,11 +1091,7 @@ inline static bool HAL_UART_IsRxReady(void)
  */
 inline static bool HAL_UART_IsTxReady(void)
 {
-#ifdef MCC_MELODY
     return MCC_UART_IsTxReady();
-#else
-    return UART1_IsTxReady();
-#endif
 }
 
 
@@ -1343,11 +1138,7 @@ inline static void HAL_CORCON_Initialize(void) { SYSTEM_CORCONModeOperatingSet(C
 * Starts the profiling timer used to time the various operations
 */
 inline static void HAL_ProfilingCounter_Start(void) {
-#ifdef MCC_MELODY
     MCC_TMR_PROFILE_Start();
-#else
-    SCCP1_TMR_Start(); 
-#endif    
 }
 
 /**
@@ -1356,11 +1147,7 @@ inline static void HAL_ProfilingCounter_Start(void) {
  */
 inline static uint16_t HAL_ProfilingCounter_Get(void)
 {
-#ifdef MCC_MELODY
     return MCC_TMR_PROFILE_Counter16BitGet();
-#else
-    return SCCP1_TMR_Counter16BitPrimaryGet();
-#endif    
 }
 
 /**
@@ -1368,11 +1155,7 @@ inline static uint16_t HAL_ProfilingCounter_Get(void)
  */
 inline static void HAL_TMR_TICK_InterruptPrioritySet(void)
 {
-#ifdef MCC_MELODY
     MCC_TMR_TICK_InterruptPrioritySet(MCAF_PRIORITY_TMR);
-#else
-    // already configured in SYSTEM_Initialize()
-#endif
 }
 
 /**
@@ -1382,11 +1165,7 @@ inline static void HAL_TMR_TICK_InterruptPrioritySet(void)
  */
 inline static void HAL_TMR_TICK_SetCallbackFunction(void (*handler)(void))
 {
-#ifdef MCC_MELODY
     MCC_TMR_TICK_TimeoutCallbackRegister(handler);
-#else
-    // no action required
-#endif
 }
 
 /**
@@ -1394,11 +1173,7 @@ inline static void HAL_TMR_TICK_SetCallbackFunction(void (*handler)(void))
  */
 inline static void HAL_TMR_TICK_Start(void)
 {
-#ifdef MCC_MELODY
     MCC_TMR_TICK_Start();
-#else
-    TMR1_Start();
-#endif
 }
 
 /**
@@ -1440,11 +1215,7 @@ inline static void HAL_QEI_PositionCaptureInit(void)
  */
 inline static void HAL_QEI_CountsPerRevolutionSet(uint16_t counts_per_rev)
 {
-#ifdef MCC_MELODY            
     MCC_QEI_ModuloRangeSet(counts_per_rev);
-#else    
-    QEI1_ModuloMode16bitSet(counts_per_rev);
-#endif
 }
 
 /**
@@ -1452,12 +1223,7 @@ inline static void HAL_QEI_CountsPerRevolutionSet(uint16_t counts_per_rev)
  */
 inline static void HAL_QEI_Enable(void)
 {
-#ifdef MCC_MELODY
-    MCC_QEI_Enable();
-#else
-    QEI1_ModuleEnable();
-#endif
-    
+    MCC_QEI_Enable();    
 }
 
 /**
@@ -1466,11 +1232,7 @@ inline static void HAL_QEI_Enable(void)
  */
 inline static uint16_t HAL_QEI_PositionCountGet(void)
 {
-#ifdef MCC_MELODY
     return MCC_QEI_PositionCount16bitRead();
-#else
-    return QEI1_PositionCount16bitRead();
-#endif    
 }
 
 /**
@@ -1483,11 +1245,7 @@ inline static uint16_t HAL_QEI_PositionCountGet(void)
  */
 inline static uint16_t HAL_QEI_PositionCaptureGet(void)
 {
-#ifdef MCC_MELODY
     return MCC_QEI_PositionCapture16bitGet();
-#else
-    return QEI_PositionCaptureGet();
-#endif    
 }
  
 
@@ -1516,21 +1274,37 @@ inline static void HAL_OpAmpsEnable(void) {
 }
 
 /**
-  Sub-section: CMP/DAC Module Access Functions
-*/
-
-/**
- * Sets the DAC data value.
- */
-inline static void HAL_CMP_SetComparatorOvercurrentThreshold(const uint16_t dacValue)
-{
-}
-
-/**
  * Initializes ADC signals
  */
 inline static void HAL_ADC_SignalsInit(void)
 {
+#ifdef MCC_MELODY
+    MCC_ADC_PWMTriggerSourceSet(
+        MCAF_ADC_PHASEC_CURRENT, 
+        ADC_PWM_GENERATOR_1, 
+        ADC_PWM_TRIGGER_1
+    );
+    MCC_ADC_PWMTriggerSourceSet(
+        MCAF_ADC_PHASEA_CURRENT, 
+        ADC_PWM_GENERATOR_1, 
+        ADC_PWM_TRIGGER_1
+    );
+    MCC_ADC_PWMTriggerSourceSet(
+        MCAF_ADC_DCLINK_VOLTAGE, 
+        ADC_PWM_GENERATOR_1, 
+        ADC_PWM_TRIGGER_1
+    );
+    MCC_ADC_PWMTriggerSourceSet(
+        MCAF_ADC_PHASEB_CURRENT, 
+        ADC_PWM_GENERATOR_1, 
+        ADC_PWM_TRIGGER_1
+    );
+    MCC_ADC_PWMTriggerSourceSet(
+        MCAF_ADC_POTENTIOMETER, 
+        ADC_PWM_GENERATOR_1, 
+        ADC_PWM_TRIGGER_1
+    );
+#else
     volatile uint8_t * const trig_sources = (volatile uint8_t *)&ADTRIG0L;
     
     enum {
@@ -1549,6 +1323,7 @@ inline static void HAL_ADC_SignalsInit(void)
     trig_sources[15] = PWM1_TRIGGER1;  // MCAF_ADC_DCLINK_VOLTAGE
     trig_sources[ 1] = PWM1_TRIGGER1;  // MCAF_ADC_PHASEB_CURRENT
     trig_sources[11] = PWM1_TRIGGER1;  // MCAF_ADC_POTENTIOMETER
+#endif
 }
 
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
@@ -1599,15 +1374,9 @@ inline static void HAL_PWM_ModeSetGenerator(uint16_t generator, uint16_t mode)
  */
 inline static void HAL_PWM_ModeSet(uint16_t mode)
 {
-#ifdef MCC_MELODY
     MCC_PWM_ModeSet(MOTOR1_PHASE_A, mode);
     MCC_PWM_ModeSet(MOTOR1_PHASE_B, mode);
     MCC_PWM_ModeSet(MOTOR1_PHASE_C, mode);
-#else
-    HAL_PWM_ModeSetGenerator(MOTOR1_PHASE_A, mode);
-    HAL_PWM_ModeSetGenerator(MOTOR1_PHASE_B, mode);
-    HAL_PWM_ModeSetGenerator(MOTOR1_PHASE_C, mode);
-#endif    
 }
 
 /** Set PWM mode to center-aligned single update */
@@ -1657,15 +1426,9 @@ inline static void HAL_PWM_MasterPhaseSelectGenerator(uint16_t generator, uint16
  */
 inline static void HAL_PWM_MasterPhaseSelect(uint16_t select)
 {
-#ifdef MCC_MELODY
     MCC_PWM_PhaseSelect(MOTOR1_PHASE_A, select);
     MCC_PWM_PhaseSelect(MOTOR1_PHASE_B, select);
     MCC_PWM_PhaseSelect(MOTOR1_PHASE_C, select);
-#else
-    HAL_PWM_MasterPhaseSelectGenerator(MOTOR1_PHASE_A, select);
-    HAL_PWM_MasterPhaseSelectGenerator(MOTOR1_PHASE_B, select);
-    HAL_PWM_MasterPhaseSelectGenerator(MOTOR1_PHASE_C, select);
-#endif
 }
 
 /** Enable PWM phase control from master (common) register*/
@@ -1730,21 +1493,22 @@ inline static void HAL_PWM_ADCTrigger2CDisable(void)
 #endif
 }
 
-/** Set Priority for Bus Current AN Interrupt */
-inline static void HAL_ADC_BusCurrentInterruptPrioritySet(void)
+/** Set priority for DC link current interrupt */
+inline static void HAL_ADC_DCLinkCurrentInterruptPrioritySet(void)
+{
+    // no action required
+}
+
+/** Clears the DC link current ADC interrupt flag */
+inline static void HAL_ADC_DCLinkCurrentInterruptFlag_Clear(void)
 {
     // no action required
 }
 
 inline static void HAL_PWM_SetADCDualTrigger(int16_t a, int16_t b)
 {
-#ifdef MCC_MELODY
     MCC_PWM_TriggerBCompareValueSet(MOTOR1_PHASE_A, a);
     MCC_PWM_TriggerCCompareValueSet(MOTOR1_PHASE_A, b);
-#else
-    PWM_TriggerBCompareValueSet(MOTOR1_PHASE_A, a);
-    PWM_TriggerCCompareValueSet(MOTOR1_PHASE_A, b);
-#endif
 }
 
 /**
@@ -1767,7 +1531,7 @@ inline static void HAL_InterruptPrioritySet(void)
     HAL_ADC_IndividualChannelInterruptPrioritySet();
     if (MCAF_SingleChannelEnabled())
     {
-        HAL_ADC_BusCurrentInterruptPrioritySet();
+        HAL_ADC_DCLinkCurrentInterruptPrioritySet();
     }
 }
 
@@ -1775,4 +1539,4 @@ inline static void HAL_InterruptPrioritySet(void)
 }
 #endif
 
-#endif /* __HAF_H */
+#endif /* MCAF_HAF_H */

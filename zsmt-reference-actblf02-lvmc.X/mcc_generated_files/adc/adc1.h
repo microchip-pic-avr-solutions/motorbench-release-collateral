@@ -9,13 +9,13 @@
  *            
  * @skipline @version   Firmware Driver Version 1.4.4
  *
- * @skipline @version   PLIB Version 2.4.3
+ * @skipline @version   PLIB Version 2.4.6
  *            
  * @skipline  Device : dsPIC33CK256MP508
 */
 
 /*
-© [2025] Microchip Technology Inc. and its subsidiaries.
+© [2026] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 

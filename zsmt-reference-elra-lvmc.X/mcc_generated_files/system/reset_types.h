@@ -9,13 +9,13 @@
  *
  * @skipline @version   Firmware Driver Version 1.0.3
  *
- * @skipline @version   PLIB Version 1.1.0
+ * @skipline @version   PLIB Version 1.1.3
  *
  * @skipline  Device : dsPIC33CK256MP508
 */
 
 /*
-© [2025] Microchip Technology Inc. and its subsidiaries.
+© [2026] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -45,10 +45,10 @@
 */
 enum RESET_TYPES
 {
-    RESET_ERROR_RCON_TRAPR      = 1, /**< A Trap Conflict Reset has occurred */
-    RESET_ERROR_RCON_IOPUWR     = 2, /**< An illegal opcode detection, an illegal address mode or Uninitialized W register used as an Address Pointer caused a Reset */
-    RESET_ERROR_RCON_CM         = 3, /**< A Configuration Mismatch Reset has occurred */
-    RESET_ERROR_RCON_WDTO_ISR   = 4  /**< WDT time-out has occurred */
+    RESET_ERROR_RCON_TRAPR      = 1U, /**< A Trap Conflict Reset has occurred */
+    RESET_ERROR_RCON_IOPUWR     = 2U, /**< An illegal opcode detection, an illegal address mode or Uninitialized W register used as an Address Pointer caused a Reset */
+    RESET_ERROR_RCON_CM         = 3U, /**< A Configuration Mismatch Reset has occurred */
+    RESET_ERROR_RCON_WDTO_ISR   = 4U  /**< WDT time-out has occurred */
 };
 
 /**
@@ -58,13 +58,12 @@ enum RESET_TYPES
 */
 enum RESET_MASKS
 { 
-  RESET_MASK_POR       = 0x0001,   /**< Defines the power ON Reset flag mask location */
-  RESET_MASK_WDTO      = 0x0010,   /**< Defines the watchdog timeout reset flag mask location */
-  RESET_MASK_SWR       = 0x0040,   /**< Defines the software reset mask location */
-  RESET_MASK_EXTR      = 0x0080,   /**< Defines the external reset mask location */
-  RESET_MASK_CM        = 0x0200,   /**< Defines the configuration mismatch reset mask location */
-  RESET_MASK_IOPUWR    = 0x4000,   /**< Defines the illegal opcode or uninitialized W access reset mask location */
-  RESET_MASK_TRAPR     = 0x8000,   /**< Defines the trap reset mask location */
+  RESET_MASK_WDTO      = 0x0010U,   /**< Defines the watchdog timeout reset flag mask location */
+  RESET_MASK_SWR       = 0x0040U,   /**< Defines the software reset mask location */
+  RESET_MASK_EXTR      = 0x0080U,   /**< Defines the external reset mask location */
+  RESET_MASK_CM        = 0x0200U,   /**< Defines the configuration mismatch reset mask location */
+  RESET_MASK_IOPUWR    = 0x4000U,   /**< Defines the illegal opcode or uninitialized W access reset mask location */
+  RESET_MASK_TRAPR     = 0x8000U,   /**< Defines the trap reset mask location */
 };
 
 #endif    /* RESET_TYPES_H */

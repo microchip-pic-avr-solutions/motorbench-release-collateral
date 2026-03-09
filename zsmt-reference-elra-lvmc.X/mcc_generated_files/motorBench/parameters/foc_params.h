@@ -9,7 +9,7 @@
  */ /*
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -44,8 +44,8 @@
  *
  *
  ******************************************************************************/
-#ifndef __FOC_PARAMS_H
-#define __FOC_PARAMS_H
+#ifndef MCAF_FOC_PARAMS_H
+#define MCAF_FOC_PARAMS_H
 
 #include "sat_PI_params.h"
 /* needed for speed controller output current */
@@ -62,9 +62,15 @@ extern "C" {
 /* Current loop proportional gain */
 #define KIP                                  4380      // Q15(  0.13367) = +218.58845 mV/A        = +218.57408 mV/A        + 0.0066%
 #define KIP_Q                                  15
+#define KIP_NORM                         0.1336669922  // normalized
+#define KIP_SCALE                        1.6353211009  // V/A
+#define KIP_ENG                          0.2185884528  // V/A
 /* Current loop integral gain */
 #define KII                                   150      // Q15(  0.00458) = +149.71812 V/A/s       = +150.13079 V/A/s       - 0.2749%
 #define KII_Q                                  15
+#define KII_NORM                         0.0045776367  // normalized
+#define KII_SCALE                        3.270642e+04  // V/A/s
+#define KII_ENG                        149.7181183701  // V/A/s
 //// Velocity loop
 // phase margin = 65 deg
 // PI phase at crossover = 10.000 deg
@@ -72,9 +78,15 @@ extern "C" {
 /* Velocity loop proportional gain */
 #define KWP                                  4810      // Q15(  0.14679) =  +13.58127 mA/(rad/s)  =  +13.58184 mA/(rad/s)  - 0.0041%
 #define KWP_Q                                  15
+#define KWP_NORM                         0.1467895508  // normalized
+#define KWP_SCALE                        0.0925220736  // A/(rad/s)
+#define KWP_ENG                          0.0135812736  // A/(rad/s)
 /* Velocity loop integral gain */
 #define KWI                                     8      // Q15(  0.00024) =  +22.58840 mA/rad      =  +23.07437 mA/rad      - 2.1061%
 #define KWI_Q                                  15
+#define KWI_NORM                         0.0002441406  // normalized
+#define KWI_SCALE                       92.5220735841  // A/rad
+#define KWI_ENG                          0.0225883969  // A/rad
 
 
 /*
@@ -94,25 +106,31 @@ extern "C" {
 // D-axis current control loop coefficients
 #define     DKP        KIP
 #define     DKI        KII
-#define     DKC        Q15(0.99999)
+#define     DKC        32767 // Q15(0.99999)
 /* Limit for output line-to-line voltage of d-axis current controller, expressed as a fraction of DC link voltage */
-#define MCAF_CURRENT_CTRL_D_OUT_LIMIT       18919      // Q15(  0.57736) =   +1.00002 line-to-line =   +1.00000 line-to-line + 0.0020%
+#define MCAF_CURRENT_CTRL_D_OUT_LIMIT            18919      // Q15(  0.57736) =   +1.00002 line-to-line =   +1.00000 line-to-line + 0.0020%
+#define MCAF_CURRENT_CTRL_D_OUT_LIMIT_NORM    0.5773620605  // normalized
+#define MCAF_CURRENT_CTRL_D_OUT_LIMIT_SCALE   1.7320508076  // line-to-line
+#define MCAF_CURRENT_CTRL_D_OUT_LIMIT_ENG     1.0000204232  // line-to-line
 #define     DKNP       (15-KIP_Q)
 #define     DKNI       (15-KII_Q)
 
 // Q-axis current control loop coefficients
 #define     QKP        KIP
 #define     QKI        KII
-#define     QKC        Q15(0.99999)
+#define     QKC        32767 // Q15(0.99999)
 /* Limit for output line-to-line voltage of q-axis current controller, expressed as a fraction of DC link voltage */
-#define MCAF_CURRENT_CTRL_Q_OUT_LIMIT       21756      // Q15(  0.66394) =   +1.14998 line-to-line =   +1.15000 line-to-line - 0.0019%
+#define MCAF_CURRENT_CTRL_Q_OUT_LIMIT            21756      // Q15(  0.66394) =   +1.14998 line-to-line =   +1.15000 line-to-line - 0.0019%
+#define MCAF_CURRENT_CTRL_Q_OUT_LIMIT_NORM    0.6639404297  // normalized
+#define MCAF_CURRENT_CTRL_Q_OUT_LIMIT_SCALE   1.7320508076  // line-to-line
+#define MCAF_CURRENT_CTRL_Q_OUT_LIMIT_ENG     1.1499785574  // line-to-line
 #define     QKNP       (15-KIP_Q)
 #define     QKNI       (15-KII_Q)
 
 // Velocity control loop coefficients
 #define     WKP        KWP
 #define     WKI        KWI
-#define     WKC        Q15(0.0)
+#define     WKC        0 // Q15(0.0)
 #define     MCAF_VELOCITY_CTRL_IQ_OUT_LIMIT  CURRENT_MAXIMUM_COMMAND   // see sat_PI_params.h for definition
 #define     WKNP       (15-KWP_Q)
 #define     WKNI       (15-KWI_Q)
@@ -120,7 +138,10 @@ extern "C" {
 /* Limits for magnitude and magnitude squared (Vd^2 + Vq^2) 
  * as output of PI current controllers, in terms of line-neutral voltage */
 /* Limit for output magnitude of current controllers which triggers voltage saturation, expressed as a fraction of DC link voltage */
-#define MCAF_CURRENT_CTRL_DQ_MAGNITUDE_LIMIT      17973      // Q15(  0.54849) = +950.01676 mline-to-line = +950.00000 mline-to-line + 0.0018%
+#define MCAF_CURRENT_CTRL_DQ_MAGNITUDE_LIMIT            17973      // Q15(  0.54849) = +950.01676 mline-to-line = +950.00000 mline-to-line + 0.0018%
+#define MCAF_CURRENT_CTRL_DQ_MAGNITUDE_LIMIT_NORM    0.5484924316  // normalized
+#define MCAF_CURRENT_CTRL_DQ_MAGNITUDE_LIMIT_SCALE   1.7320508076  // line-to-line
+#define MCAF_CURRENT_CTRL_DQ_MAGNITUDE_LIMIT_ENG     0.9500167592  // line-to-line
 
 /* ------ DC link voltage compensation ------ */
 /*
@@ -168,8 +189,14 @@ extern "C" {
 #define MCAF_RVDC_Q                            12
 /* minimum DC link voltage for which we calculate reciprocals */
 #define MCAF_RVDC_MIN_VDC                    4096      // Q15(  0.12500) =   +8.91250 V           =   +8.91277 V           - 0.0031%
+#define MCAF_RVDC_MIN_VDC_NORM           0.1250000000  // normalized
+#define MCAF_RVDC_MIN_VDC_SCALE         71.3000000000  // V
+#define MCAF_RVDC_MIN_VDC_ENG            8.9125000000  // V
 /* reciprocal of minimum DC link voltage */
 #define MCAF_RVDC_MIN                       32767      // Q12(  7.99976) = +112.19854 m1/V        = +112.19854 m1/V        + 0.0000%
+#define MCAF_RVDC_MIN_NORM               7.9997558594  // normalized
+#define MCAF_RVDC_MIN_SCALE              0.0140252454  // 1/V
+#define MCAF_RVDC_MIN_ENG                0.1121985394  // 1/V
 
 #define MCAF_DEAD_TIME_COMPENSATION_VOLTAGE_DELAY          0
 
@@ -179,4 +206,4 @@ extern "C" {
 }
 #endif
 
-#endif // __FOC_PARAMS_H
+#endif /* MCAF_FOC_PARAMS_H */

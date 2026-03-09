@@ -9,7 +9,7 @@
 /* *********************************************************************
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -44,8 +44,8 @@
  *
  * *****************************************************************************/
 
-#ifndef __UNITS_H
-#define __UNITS_H
+#ifndef MCAF_UNITS_H 
+#define MCAF_UNITS_H 
 
 #include <stdbool.h>
 #include <stdint.h>
@@ -71,8 +71,11 @@ typedef MC_ABC_T MCAF_U_DIMENSIONLESS_ABC_Q14;
 /** Dimensionless two-phase quantity, Q14 */
 typedef MC_ALPHABETA_T MCAF_U_DIMENSIONLESS_ALPHABETA_Q14;
 
-/** Normalized gain (example: current gain compensation) */    
+/** Normalized gain, Q14 (example: current gain compensation) */    
 typedef int16_t MCAF_U_NORMALIZED_GAIN;
+
+/** Normalized Q15 value (example: adc raw value) */   
+typedef int16_t MCAF_U_NORMALIZED_Q15;
 
 /** Electrical frequency */
 typedef int16_t MCAF_U_VELOCITY_ELEC;
@@ -180,4 +183,4 @@ typedef int16_t MCAF_U_TEMPERATURE;
 }
 #endif
 
-#endif /* __UNITS_H */
+#endif /* MCAF_UNITS_H */

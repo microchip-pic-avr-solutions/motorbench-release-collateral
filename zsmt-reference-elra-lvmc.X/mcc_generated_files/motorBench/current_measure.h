@@ -9,7 +9,7 @@
 /* *********************************************************************
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -44,13 +44,15 @@
  *
  * *****************************************************************************/
 
-#ifndef __CURRENT_MEASURE_H
-#define __CURRENT_MEASURE_H
+#ifndef MCAF_CURRENT_MEASURE_H 
+#define MCAF_CURRENT_MEASURE_H 
 
 #include <stdint.h>
+#include "util.h"
 #include "units.h"
 #include "current_measure_types.h"
 #include "system_state.h"
+#include "adc_compensation.h"
 #include "parameters/adc_params.h"
 
 #ifdef __cplusplus
@@ -101,6 +103,38 @@ inline static void MCAF_ADCApplyCurrentCompensation(const MCAF_CURRENT_COMPENSAT
     }
 }
 
+#if MCAF_ADC_GAIN_COMPENSATION_ENABLED
+/**
+ * Update gain measured current based on adcGainCompensator.
+ * 
+ * @param pcal current compensation parameters
+ * @param padcgaincompcores adc gain compensator core array
+ */
+inline static void MCAF_ADCUpdateCurrentCompensation(MCAF_CURRENT_COMPENSATION_PARAMETERS *pcal, MCAF_ADC_GAIN_COMPENSATOR *padcgaincomp)
+{
+    if (HAL_ADC_IsPhaseACurrentAvailable())
+    {
+        pcal->qKaa = UTIL_MulQ14(padcgaincomp->core[MCAF_ADC_CORE_PHASEA_CURRENT].compensationFactor, CURRENT_KAA);
+    }
+    if (HAL_ADC_IsPhaseBCurrentAvailable())
+    {
+        pcal->qKbb = UTIL_MulQ14(padcgaincomp->core[MCAF_ADC_CORE_PHASEB_CURRENT].compensationFactor, CURRENT_KBB);
+    }
+#ifdef MCAF_ADC_CORE_PHASEC_CURRENT
+    if (HAL_ADC_IsPhaseCCurrentAvailable())
+    {
+        pcal->qKcc = UTIL_MulQ14(padcgaincomp->core[MCAF_ADC_CORE_PHASEC_CURRENT].compensationFactor, CURRENT_KCC);
+    }
+#endif
+#ifdef MCAF_ADC_CORE_DCLINK_CURRENT
+    if (HAL_ADC_IsDCLinkCurrentAvailable())
+    {
+        pcal->qKidc = UTIL_MulQ14(padcgaincomp->core[MCAF_ADC_CORE_DCLINK_CURRENT].compensationFactor, MCAF_IDC_SCALING_FACTOR);
+    }
+#endif
+}
+#endif
+
 /**
  * Obtains motor phase current information from appropriate sources.
  * @param currentMeasure MCAF current measurement
@@ -108,12 +142,20 @@ inline static void MCAF_ADCApplyCurrentCompensation(const MCAF_CURRENT_COMPENSAT
  */
 inline static void MCAF_ADCCurrentRead(const MCAF_CURRENT_MEASUREMENT *currentMeasure, MCAF_U_CURRENT_ABC *iabc)
 {
-    iabc->a = HAL_ADC_ValuePhaseACurrent();
-    iabc->b = HAL_ADC_ValuePhaseBCurrent(); 
+    // dsPIC33A gives unsigned ADC results.
+    // XOR with 0x8000 converts to signed format like dsPIC33C/E.
+    #ifdef __dsPIC33A__
+    const int16_t invert_msb_mask = 0x8000;
+    #else
+    const int16_t invert_msb_mask = 0x0;
+    #endif
+
+    iabc->a = HAL_ADC_ValuePhaseACurrent() ^ invert_msb_mask;
+    iabc->b = HAL_ADC_ValuePhaseBCurrent() ^ invert_msb_mask; 
     
     if (HAL_ADC_IsPhaseCCurrentAvailable())
     {
-        iabc->c = HAL_ADC_ValuePhaseCCurrent();
+        iabc->c = HAL_ADC_ValuePhaseCCurrent() ^ invert_msb_mask;
     }
 }
 
@@ -129,20 +171,36 @@ inline static void MCAF_ADCCurrentRead(const MCAF_CURRENT_MEASUREMENT *currentMe
  */
 inline static void MCAF_ADCCalibrateCurrentOffset(sx1632_t *pLPF, int16_t measurement, int16_t k, bool invert)
 {
-    if ((measurement > -MCAF_CAL_RANGE) && (measurement < MCAF_CAL_RANGE))
+    const int16_t cal_limit = 2*MCAF_CURRENT_OFS_CAL_RANGE - 1;
+
+    asm volatile ("; BEGIN MCAF_ADCCalibrateCurrentOffset" ::);
+    const int16_t adjustment = UTIL_LimitS16(measurement, -cal_limit, cal_limit);
+    const int32_t delta = UTIL_mulss(adjustment << MCAF_CURRENT_OFS_CAL_SHIFT, k);
+    if (invert)
     {
-        asm volatile ("; BEGIN MCAF_ADCCalibrateCurrentOffset" ::);
-        const int32_t delta = UTIL_mulss(measurement << MCAF_CAL_SHIFT, k);
-        if (invert)
-        {
-            pLPF->x32 -= delta;
-        }
-        else
-        {
-            pLPF->x32 += delta;
-        }
-        asm volatile ("; END MCAF_ADCCalibrateCurrentOffset" ::);
+        pLPF->x32 -= delta;
     }
+    else
+    {
+        pLPF->x32 += delta;
+    }
+    asm volatile ("; END MCAF_ADCCalibrateCurrentOffset" ::);
+}
+
+/**
+ * Applies offset
+ *
+ * @param pLPF low-pass filter state
+ * @param poffset offset
+ * @return whether it succeeded
+ */
+inline static bool MCAF_ADCComputeCurrentOffsetCompensation(const sx1632_t* pLPF, int16_t *poffset) {
+    const int16_t offset = pLPF->x16.hi >> MCAF_CURRENT_OFS_CAL_SHIFT;
+    const bool success = (offset > -MCAF_CURRENT_OFS_CAL_RANGE) && (offset < MCAF_CURRENT_OFS_CAL_RANGE);
+    if (success) {
+        *poffset = offset;
+    }
+    return success;
 }
 
 /**
@@ -152,10 +210,10 @@ inline static void MCAF_ADCCalibrateCurrentOffset(sx1632_t *pLPF, int16_t measur
  * @param pcal current compensation gains
  * @param piabc measured currents
  */
-inline static void MCAF_ADCCalibrateCurrentOffsets(MCAF_MOTOR_INITIALIZATION *pinit, 
-                                     MCAF_CURRENT_COMPENSATION_PARAMETERS *pcal,
-                                     const MCAF_U_CURRENT_ABC *piabc,
-                                     const MCAF_U_CURRENT pidc)
+inline static void MCAF_ADCCalibrateCurrentOffsets(MCAF_CURRENT_CALIBRATION *pinit, 
+                                                   MCAF_CURRENT_COMPENSATION_PARAMETERS *pcal,
+                                                   const MCAF_U_CURRENT_ABC *piabc,
+                                                   const MCAF_U_CURRENT pidc)
 {
     if (pinit->sampleCount < pinit->sampleCountLimit)
     {
@@ -175,11 +233,17 @@ inline static void MCAF_ADCCalibrateCurrentOffsets(MCAF_MOTOR_INITIALIZATION *pi
                                             MCAF_ADCIsPhaseCCurrentInverted());
         }
     
-        pcal->offseta = pinit->offsetLPF[0].x16.hi >> MCAF_CAL_SHIFT;
-        pcal->offsetb = pinit->offsetLPF[1].x16.hi >> MCAF_CAL_SHIFT;
+        if (!MCAF_ADCComputeCurrentOffsetCompensation(&pinit->offsetLPF[0], &pcal->offseta)) {
+            pinit->success = false;
+        }
+        if (!MCAF_ADCComputeCurrentOffsetCompensation(&pinit->offsetLPF[1], &pcal->offsetb)) {
+            pinit->success = false;
+        }
         if (HAL_ADC_IsPhaseCCurrentAvailable())
         {
-            pcal->offsetc = pinit->offsetLPF[2].x16.hi >> MCAF_CAL_SHIFT;
+            if (!MCAF_ADCComputeCurrentOffsetCompensation(&pinit->offsetLPF[2], &pcal->offsetc)) {
+                pinit->success = false;
+            }
         }
         ++pinit->sampleCount;
     }
@@ -194,7 +258,7 @@ inline static void MCAF_ADCCalibrateCurrentOffsets(MCAF_MOTOR_INITIALIZATION *pi
  * @param pinit motor initialization state data
  * @param pcal current compensation gains
  */
-void MCAF_ADCCompensationInit(MCAF_MOTOR_INITIALIZATION *pinit, 
+void MCAF_ADCCompensationInit(MCAF_ADC_COMPENSATION *padccomp, 
                               MCAF_CURRENT_COMPENSATION_PARAMETERS *pcal);
 
 /**
@@ -219,4 +283,4 @@ void MCAF_ComputeDutyCycleOutputs(MCAF_MOTOR_DATA *pmotor);
 }
 #endif
 
-#endif /* __CURRENT_MEASURE_H */
+#endif /* MCAF_CURRENT_MEASURE_H */

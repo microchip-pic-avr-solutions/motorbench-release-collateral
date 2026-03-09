@@ -9,7 +9,7 @@
 /* *********************************************************************
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -44,8 +44,8 @@
  *
  * *****************************************************************************/
 
-#ifndef __TEST_HARNESS_H
-#define __TEST_HARNESS_H
+#ifndef MCAF_TEST_HARNESS_H 
+#define MCAF_TEST_HARNESS_H 
 
 #include <stdint.h>
 #include <stdbool.h>
@@ -54,6 +54,7 @@
 #include "units.h"
 #include "util.h"
 #include "parameters/options.h"
+#include "parameters/adc_params.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -181,7 +182,15 @@ typedef struct tagMCAF_MOTOR_TEST_MANAGER
         MCAF_TEST_PERTURB_STEP step;          /** automatic stepping for some number of steps */
     } perturb;
 #endif // MCAF_TEST_HARNESS_PERTURBATION_SYMMETRIC
-    
+
+#ifdef MCAF_TEST_ADC_OFFSET_COMPENSATION
+    uint16_t currentOffset[3];  /** offset applied to raw phase currents */
+#endif
+
+#ifdef MCAF_TEST_ADC_GAIN_COMPENSATION
+    uint16_t adcGainOffset[MCAF_ADC_MAX_CORE_USED];  /** offset for each adc core's gain compensation */
+#endif
+
     uint16_t                overrides;       /** override bits */
     
     /** commutation frequency to use in case TEST_OVERRIDE_VELOCITY_COMMAND is set */
@@ -194,7 +203,7 @@ typedef struct tagMCAF_MOTOR_TEST_MANAGER
     bool        stopNow;
     bool        testRestartRequired;
 #endif
-   
+
 #ifdef MCAF_TEST_PROFILING
 #define MCAF_PROFILING_TIMESTAMP_CAPACITY 8
     uint16_t    timestampReference; /** reference for timestamps */
@@ -582,6 +591,19 @@ inline static void MCAF_TestHarness_Init(volatile MCAF_MOTOR_TEST_MANAGER *ptest
     ptest->forceStateChange = TEST_FORCE_STATE_INACTIVE;
     ptest->stopNow = false;
 #endif
+
+#ifdef MCAF_TEST_ADC_OFFSET_COMPENSATION
+    ptest->currentOffset[0] = 0;
+    ptest->currentOffset[1] = 0;
+    ptest->currentOffset[2] = 0;
+#endif
+
+#ifdef MCAF_TEST_ADC_GAIN_COMPENSATION
+    for (uint16_t i = 0; i < MCAF_ADC_MAX_CORE_USED; ++i)
+    {
+        ptest->adcGainOffset[i] = 0;
+    }
+#endif
 }
 
 inline static MCAF_OPERATING_MODE MCAF_GetOperatingMode (const volatile MCAF_MOTOR_TEST_MANAGER *ptest)
@@ -722,11 +744,11 @@ inline static bool MCAF_TestHarness_CheckFlags(
          && (psystest->flags & mask));
 }
 
-inline static void MCAF_TestHarness_TriggerSeizure()
+inline static void MCAF_TestHarness_TriggerSeizure(void)
 {
     while (true)
     {
-        __builtin_nop(); /* prevent the compiler from optimizing this loop out */
+        UTIL_Nop(); /* prevent the compiler from optimizing this loop out */
     }
 }
 #endif
@@ -869,4 +891,4 @@ inline static void MCAF_TriggeredAverage_Step(MCAF_TRIGGERED_AVERAGE_T *ptrigavg
 }
 #endif
 
-#endif /* __TEST_HARNESS_H */
+#endif /* MCAF_TEST_HARNESS_H */

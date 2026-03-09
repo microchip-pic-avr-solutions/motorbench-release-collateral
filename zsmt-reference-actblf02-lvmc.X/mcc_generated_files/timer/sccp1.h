@@ -9,13 +9,13 @@
  *
  * @skipline @version   Firmware Driver Version 1.6.1
  *
- * @skipline @version   PLIB Version 1.6.5
+ * @skipline @version   PLIB Version 1.6.6
  *
  * @skipline  Device : dsPIC33CK256MP508
 */
 
 /*
-© [2025] Microchip Technology Inc. and its subsidiaries.
+© [2026] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -56,73 +56,73 @@
  *           This allows defining a structure with application specific name using 
  *           the 'Custom Name' field. Application specific name allows the API Portability.
 */
-extern const struct TIMER_INTERFACE MCC_TMR_TICK;
+extern const struct TIMER_INTERFACE MCC_TMR_PROFILE;
 
 /**
  * @ingroup  timerdriver
  * @brief    This macro defines the Custom Name for \ref SCCP1_Timer_Initialize API
  */
-#define MCC_TMR_TICK_Initialize SCCP1_Timer_Initialize
+#define MCC_TMR_PROFILE_Initialize SCCP1_Timer_Initialize
 /**
  * @ingroup  timerdriver
  * @brief    This macro defines the Custom Name for \ref SCCP1_Timer_Deinitialize API
  */
-#define MCC_TMR_TICK_Deinitialize SCCP1_Timer_Deinitialize
+#define MCC_TMR_PROFILE_Deinitialize SCCP1_Timer_Deinitialize
 /**
  * @ingroup  timerdriver
  * @brief    This macro defines the Custom Name for \ref SCCP1_Timer_Tasks API
  */
-#define MCC_TMR_TICK_Tasks SCCP1_Timer_Tasks
+#define MCC_TMR_PROFILE_Tasks SCCP1_Timer_Tasks
 /**
  * @ingroup  timerdriver
  * @brief    This macro defines the Custom Name for \ref SCCP1_Timer_Start API
  */
-#define MCC_TMR_TICK_Start SCCP1_Timer_Start
+#define MCC_TMR_PROFILE_Start SCCP1_Timer_Start
 /**
  * @ingroup  timerdriver
  * @brief    This macro defines the Custom Name for \ref SCCP1_Timer_Stop API
  */
-#define MCC_TMR_TICK_Stop SCCP1_Timer_Stop
+#define MCC_TMR_PROFILE_Stop SCCP1_Timer_Stop
 
 #if TIMER_PERIODCOUNTSET_API_SUPPORT
 /**
  * @ingroup  timerdriver
  * @brief    This macro defines the Custom Name for \ref SCCP1_Timer_PeriodCountSet API
  */
-#define MCC_TMR_TICK_PeriodCountSet SCCP1_Timer_PeriodCountSet
+#define MCC_TMR_PROFILE_PeriodCountSet SCCP1_Timer_PeriodCountSet
 #endif
 
 /**
  * @ingroup  timerdriver
  * @brief    This macro defines the Custom Name for \ref SCCP1_Timer_PeriodSet API
  */
-#define MCC_TMR_TICK_PeriodSet SCCP1_Timer_PeriodSet
+#define MCC_TMR_PROFILE_PeriodSet SCCP1_Timer_PeriodSet
 /**
  * @ingroup  timerdriver
  * @brief    This macro defines the Custom Name for \ref SCCP1_Timer_PeriodGet API
  */
-#define MCC_TMR_TICK_PeriodGet SCCP1_Timer_PeriodGet
+#define MCC_TMR_PROFILE_PeriodGet SCCP1_Timer_PeriodGet
 /**
  * @ingroup  timerdriver
  * @brief    This macro defines the Custom Name for \ref SCCP1_Timer_CounterGet API
  */
-#define MCC_TMR_TICK_CounterGet SCCP1_Timer_CounterGet
+#define MCC_TMR_PROFILE_CounterGet SCCP1_Timer_CounterGet
 /**
  * @ingroup  timerdriver
  * @brief    This macro defines the Custom Name for \ref SCCP1_Timer_Counter16BitGet API
  */
-#define MCC_TMR_TICK_Counter16BitGet SCCP1_Timer_Counter16BitGet
+#define MCC_TMR_PROFILE_Counter16BitGet SCCP1_Timer_Counter16BitGet
 /**
  * @ingroup  timerdriver
  * @brief    This macro defines the Custom Name for \ref SCCP1_Timer_InterruptPrioritySet API
  */
-#define MCC_TMR_TICK_InterruptPrioritySet SCCP1_Timer_InterruptPrioritySet
+#define MCC_TMR_PROFILE_InterruptPrioritySet SCCP1_Timer_InterruptPrioritySet
 
 /**
  * @ingroup  timerdriver
  * @brief    This macro defines the Custom Name for \ref SCCP1_Timer_TimeoutCallbackRegister API
  */
-#define MCC_TMR_TICK_TimeoutCallbackRegister SCCP1_Timer_TimeoutCallbackRegister
+#define MCC_TMR_PROFILE_TimeoutCallbackRegister SCCP1_Timer_TimeoutCallbackRegister
 
 // Section: Driver Interface Functions
 
@@ -214,6 +214,14 @@ inline static uint16_t SCCP1_Timer_Counter16BitGet(void)
  * @return   none  
  */
 void SCCP1_Timer_InterruptPrioritySet(enum INTERRUPT_PRIORITY priority);
+/**
+ * @ingroup  timerdriver
+ * @brief    Used in polling method of timeout event 
+ * @pre      \ref SCCP1_Timer_Initialize must be called 
+ * @param    none
+ * @return   none  
+ */
+void SCCP1_Timer_Tasks(void);
 
 
 /**

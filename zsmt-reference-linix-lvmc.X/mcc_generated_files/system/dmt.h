@@ -11,13 +11,13 @@
  *
  * @skipline @version   Firmware Driver Version 1.2.1
  *
- * @skipline @version   PLIB Version 1.1.1
+ * @skipline @version   PLIB Version 1.1.4
  *
  * @skipline  Device : dsPIC33CK256MP508
 */
 
 /*
-© [2025] Microchip Technology Inc. and its subsidiaries.
+© [2026] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -43,6 +43,8 @@
 // Section: Included Files
 #include <stdbool.h>
 #include <stdint.h>
+
+extern uint32_t calibOffset;
 
 // Section: DMT APIs
 

@@ -10,7 +10,7 @@
 /* *********************************************************************
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -45,8 +45,8 @@
  *
  * *****************************************************************************/
 
-#ifndef __MCAF_BOARD_SERVICE_H
-#define __MCAF_BOARD_SERVICE_H
+#ifndef MCAF_BOARD_SERVICE_H 
+#define MCAF_BOARD_SERVICE_H 
 
 #include <stdbool.h>
 #include "hal.h"
@@ -89,7 +89,11 @@ void MCAF_BoardServiceTasks(MCAF_BOARD_DATA *pboard);
  */
 inline static int16_t MCAF_BoardServicePotentiometerValue(const MCAF_BOARD_DATA *pboard) 
 { 
+    #ifdef __dsPIC33A__
+    return HAL_ADC_ValuePotentiometer();
+    #else
     return HAL_ADC_UnsignedFromSignedInput(HAL_ADC_ValuePotentiometer());
+    #endif
 }
 
 /**
@@ -154,4 +158,4 @@ inline static void MCAF_GateDriverService(volatile MCAF_GATE_DRIVER_T *pGateDriv
 }
 #endif
 
-#endif /* __MCAF_BOARD_SERVICE_H */
+#endif /* MCAF_BOARD_SERVICE_H */

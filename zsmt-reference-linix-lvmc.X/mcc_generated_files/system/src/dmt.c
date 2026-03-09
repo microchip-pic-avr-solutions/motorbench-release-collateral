@@ -9,13 +9,13 @@
  *
  * @skipline @version   Firmware Driver Version 1.2.1
  *
- * @skipline @version   PLIB Version 1.1.1
+ * @skipline @version   PLIB Version 1.1.4
  *
  * @skipline  Device : dsPIC33CK256MP508
 */
 
 /*
-© [2025] Microchip Technology Inc. and its subsidiaries.
+© [2026] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -65,12 +65,12 @@ void DMT_Initialize(void)
 void DMT_Enable(void)
 {   
     // Set the Bit ON = 1
-    DMTCON = 0x8000;
+    DMTCON = 0x8000U;
 }
 
 void DMT_PreClear(void)
 {
-    DMTPRECLR =  0x4000;  
+    DMTPRECLR =  0x4000U;  
   
     // To keep track of Preclear operation is performed
     bPreCleared = true;
@@ -83,7 +83,7 @@ void DMT_Clear(void)
     {
     }
     
-    DMTCLR = 0x0008;
+    DMTCLR = 0x0008U;
 }
 
 bool DMT_IsWindowOpen(void)
@@ -106,14 +106,14 @@ bool DMT_IsPreCleared(void)
 uint32_t DMT_TimeoutCounterGet(void)
 {
     uint32_t counter = 0;    
-    counter = (uint32_t)(DMTPSCNTH & 0x0000FFFF) << 16;    
+    counter = ((uint32_t)DMTPSCNTH & 0x0000FFFFU) << 16U;    
     return (counter | DMTPSCNTL);
 }
 
 uint32_t DMT_WindowTimeoutCounterGet(void) 
 {    
     uint32_t winTimeoutCounter = 0;    
-    winTimeoutCounter = (uint32_t)(DMTPSINTVH & 0x0000FFFF) << 16;    
+    winTimeoutCounter = ((uint32_t)DMTPSINTVH & 0x0000FFFFU) << 16U;    
     return (winTimeoutCounter | DMTPSINTVL);
 }
 
@@ -125,9 +125,9 @@ uint16_t DMT_StatusGet(void)
 }
 
 uint32_t DMT_CounterGet(void)
-{   
-    uint32_t counter = 0;    
-    counter = (uint32_t)(DMTCNTH & 0x0000FFFF) << 16;
+{
+    uint32_t counter = 0;
+    counter = ((uint32_t)DMTCNTH & 0x0000FFFFU) << 16U;
     return (counter | DMTCNTL);
 }
 
@@ -145,6 +145,14 @@ void __attribute__ ((weak)) DMT_EventCallback( void )
 } 
 
 
+/* cppcheck-suppress misra-c2012-8.4
+*
+* (Rule 8.4) REQUIRED: A compatible declaration shall be visible when an object or 
+* function with external linkage is defined
+*
+* Reasoning: Interrupt declaration are provided by compiler and are available
+* outside the driver folder
+*/
 void __attribute__ ((interrupt, no_auto_psv)) _DMTInterrupt(void)
 {
     if(NULL != DMT_EventHandler)

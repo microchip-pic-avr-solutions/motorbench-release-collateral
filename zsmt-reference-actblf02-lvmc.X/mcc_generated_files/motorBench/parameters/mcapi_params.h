@@ -9,7 +9,7 @@
  */ /*
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -44,8 +44,8 @@
  *
  *
  ******************************************************************************/
-#ifndef __MCAPI_PARAMS_H
-#define __MCAPI_PARAMS_H
+#ifndef MCAF_MCAPI_PARAMS_H
+#define MCAF_MCAPI_PARAMS_H
 
 #ifdef  __cplusplus
 extern "C" {
@@ -54,12 +54,24 @@ extern "C" {
 /* ------ MC API related parameters ------*/
 /* Filter constant used for filtering the squared magnitude of measured current */
 #define KFILTER_IS_SQUARED                   1638      // Q15(  0.04999) = +999.75586 rad/s       =   +1.00000 krad/s      - 0.0244%
+#define KFILTER_IS_SQUARED_NORM          0.0499877930  // normalized
+#define KFILTER_IS_SQUARED_SCALE         2.000000e+04  // rad/s
+#define KFILTER_IS_SQUARED_ENG         999.7558593750  // rad/s
 /* Filter constant used for filtering the measured current in q-axis */
 #define KFILTER_IQ                           1638      // Q15(  0.04999) = +999.75586 rad/s       =   +1.00000 krad/s      - 0.0244%
+#define KFILTER_IQ_NORM                  0.0499877930  // normalized
+#define KFILTER_IQ_SCALE                 2.000000e+04  // rad/s
+#define KFILTER_IQ_ENG                 999.7558593750  // rad/s
 /* Minimum velocity command */
-#define MCAPI_MINIMUM_VELOCITY               2185      // Q15(  0.06668) =  +41.89685 rad/s       =  +41.88790 rad/s       + 0.0214%
+#define MCAPI_MINIMUM_VELOCITY               5461      // Q15(  0.16666) = +104.71336 rad/s       = +104.71976 rad/s       - 0.0061%
+#define MCAPI_MINIMUM_VELOCITY_NORM      0.1666564941  // normalized
+#define MCAPI_MINIMUM_VELOCITY_SCALE   628.3185307180  // rad/s
+#define MCAPI_MINIMUM_VELOCITY_ENG     104.7133635330  // rad/s
 /* Maximum velocity command */
 #define MCAPI_MAXIMUM_VELOCITY              21845      // Q15(  0.66666) = +418.87263 rad/s       = +418.87902 rad/s       - 0.0015%
+#define MCAPI_MAXIMUM_VELOCITY_NORM      0.6666564941  // normalized
+#define MCAPI_MAXIMUM_VELOCITY_SCALE   628.3185307180  // rad/s
+#define MCAPI_MAXIMUM_VELOCITY_ENG     418.8726288920  // rad/s
 
 #define MCAPI_FULLSCALE_CURRENT                   43.6 //            A
 #define MCAPI_FULLSCALE_VOLTAGE                   71.3 //            V
@@ -70,4 +82,4 @@ extern "C" {
 }
 #endif
 
-#endif // __MCAPI_PARAMS_H
+#endif /* MCAF_MCAPI_PARAMS_H */

@@ -9,7 +9,7 @@
 /* *********************************************************************
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -44,8 +44,8 @@
  *
  * *****************************************************************************/
 
-#ifndef __MATH_ASM_H
-#define __MATH_ASM_H
+#ifndef MCAF_MATH_ASM_H 
+#define MCAF_MATH_ASM_H 
 
 #include <stdint.h>
 
@@ -53,7 +53,12 @@
 extern "C" {
 #endif
 
+
+#ifdef __dsPIC33A__
+#warning Q15SQRT not implemented for dsPIC33A devices
+#else
 int16_t Q15SQRT(int16_t x);
+#endif
 
 /**
  * CORDIC implementation of atan2:
@@ -73,4 +78,4 @@ int16_t atan2CORDIC(int16_t y, int16_t x);
 }
 #endif
 
-#endif /* __MATH_ASM_H */
+#endif /* MCAF_MATH_ASM_H */

@@ -9,7 +9,7 @@
 /* *********************************************************************
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -44,8 +44,8 @@
  *
  * *****************************************************************************/
 
-#ifndef __TEST_HARNESS_TIMESTAMPS_H
-#define __TEST_HARNESS_TIMESTAMPS_H
+#ifndef MCAF_TEST_HARNESS_TIMESTAMPS_H 
+#define MCAF_TEST_HARNESS_TIMESTAMPS_H 
 
 /* 
  * Note: this is not a normal #include file; it is context-sensitive and
@@ -73,4 +73,4 @@ MCTH_TIMESTAMP(END_OF_ISR,                 7)
 MCTH_TIMESTAMP(FLUX_CONTROL_START,        -1)
 MCTH_TIMESTAMP(FLUX_CONTROL_END,          -1)
 
-#endif /* __TEST_HARNESS_TIMESTAMPS_H */
+#endif /* MCAF_TEST_HARNESS_TIMESTAMPS_H */

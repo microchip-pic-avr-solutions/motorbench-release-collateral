@@ -9,7 +9,7 @@
 /* *********************************************************************
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -44,8 +44,8 @@
  *
  * *****************************************************************************/
 
-#ifndef __MCAPI_INTERNAL_H
-#define __MCAPI_INTERNAL_H
+#ifndef MCAF_MCAPI_INTERNAL_H 
+#define MCAF_MCAPI_INTERNAL_H 
 
 #include <stdint.h>
 #include <stdbool.h>
@@ -104,6 +104,10 @@ inline static void handleFaultFlags(MCAF_MOTOR_DATA *pMotor)
         pApiData->faultFlags = UTIL_ClearBits(pApiData->faultFlags, MCAPI_FAULT_FLAG_OVERCURRENT);
         MCAF_ClearOvercurrentFaultHandleFlag(&pMotor->faultHandle); 
     }
+    else
+    {
+        // For MISRA compliance
+    }
 
     pApiData->faultFlags = UTIL_ClearBits(pApiData->faultFlags, faultsToClear);
     pApiData->faultClearFlags = 0;
@@ -142,6 +146,18 @@ inline static void handleFaults(MCAF_MOTOR_DATA *pMotor)
         pApiData->faultFlags = UTIL_SetBits(pApiData->faultFlags,
                                             MCAPI_FAULT_FLAG_OVERTEMPERATURE);
     }
+    if (MCAF_IsCurrCalOffsetFaultFlagSet(&pMotor->faultDetect))
+    {
+        pApiData->faultFlags = UTIL_SetBits(pApiData->faultFlags,
+                                            MCAPI_FAULT_FLAG_CURR_OFFSET_CAL);
+    }
+#if MCAF_ADC_GAIN_COMPENSATION_ENABLED
+    if (MCAF_IsADCGainCompFaultFlagSet(&pMotor->faultDetect))
+    {
+        pApiData->faultFlags = UTIL_SetBits(pApiData->faultFlags,
+                                            MCAPI_FAULT_FLAG_ADC_GAIN_COMP);
+    }
+#endif
 #if MCAF_GATE_DRIVER_ENABLED
     if (MCAF_IsGateDriverFaultFlagSet(&pMotor->faultDetect))
     {
@@ -158,6 +174,8 @@ inline static void handleFaults(MCAF_MOTOR_DATA *pMotor)
             (errorCode != ERR_DCLINK_OVERVOLTAGE)&&
             (errorCode != ERR_DCLINK_UNDERVOLTAGE)&&
             (errorCode != ERR_OVERTEMPERATURE)&& 
+            (errorCode != ERR_CURR_OFFSET_CAL_FAIL) &&
+            (errorCode != ERR_ADC_GAIN_COMP_FAIL) &&
             !MCAF_MotorDriveFaultHandleFlagPending(&pMotor->faultHandle))
         {
             pApiData->faultFlags = UTIL_SetBits(pApiData->faultFlags,
@@ -349,4 +367,4 @@ inline static void MCAF_CalculateFilteredCurrent(MCAF_MOTOR_DATA *pmotor)
 }
 #endif
 
-#endif /* __MCAPI_INTERNAL_H */
+#endif /* MCAF_MCAPI_INTERNAL_H */

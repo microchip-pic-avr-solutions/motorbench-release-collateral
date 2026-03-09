@@ -8,7 +8,7 @@
 /*
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -63,6 +63,8 @@
 #include "test_harness.h"
 #include "fault_detect.h"
 #include "mcapi.h"
+#include "timing.h"
+#include "parameters/timing_params.h"
 #include "mcaf_sample_application.h"
 #if MCAF_GATE_DRIVER_ENABLED
 #include "hal/gate_driver_interface.h"
@@ -76,6 +78,7 @@ extern volatile MCAF_WATCHDOG_T watchdog;
 
 bool MCAF_MainInit(void)
 {
+    MCAF_DelayMilliseconds(MCAF_POWER_ON_DELAY);
     MCAF_SystemStateInit(&motor, &systemData);
     MCAF_SystemInit(&systemData);
     MCAF_BoardServiceInit(&systemData.board);

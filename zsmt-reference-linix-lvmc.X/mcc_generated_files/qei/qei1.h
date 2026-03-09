@@ -9,13 +9,13 @@
  *            
  * @skipline @version   Firmware Driver Version 1.2.3
  *
- * @skipline @version   PLIB Version 1.4.1
+ * @skipline @version   PLIB Version 1.4.6
  *            
  * @skipline  Device : PIC24/dspIC/PIC32MM
 */
 
 /*
-© [2025] Microchip Technology Inc. and its subsidiaries.
+© [2026] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 

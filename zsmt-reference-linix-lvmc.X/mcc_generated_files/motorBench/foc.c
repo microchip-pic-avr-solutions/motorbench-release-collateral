@@ -12,7 +12,7 @@
 /* *********************************************************************
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -64,7 +64,7 @@
 #include "foc.h"
 #include "commutation.h"
 #include "startup.h"
-#include "math_asm.h"
+#include "math/sqrt.h"
 #include "sat_PI.h"
 #include "hal.h"
 #include "deadtimecomp.h"
@@ -90,7 +90,7 @@ inline static void initStateParameters(MCAF_MOTOR_DATA *pmotor)
     /* ============= Open Loop Startup ====================== */
     MCAF_StartupTransitioningInit(&pmotor->startup);
 
-    MCAF_ADCCompensationInit(&pmotor->initialization,
+    MCAF_ADCCompensationInit(&pmotor->adcCompensation,
                              &pmotor->currentCalibration); 
     MCAF_FluxControlInit(&pmotor->fluxControl);        
 
@@ -242,19 +242,19 @@ inline static void estimateBackEMF(MCAF_MOTOR_DATA *pmotor)
      */
     if (MCAF_IsMotorSaliencySignificant())
     {
-        fluxAlphaBeta.alpha = UTIL_SatShrS16((__builtin_mulss(pemf->laa, ialphabeta->alpha) +
-                        __builtin_mulss(pemf->lab, ialphabeta->beta)), (MCAF_MOTOR_LMAX_BASE_DT_Q + 1));
+        fluxAlphaBeta.alpha = UTIL_SatShrS16((UTIL_mulss(pemf->laa, ialphabeta->alpha) +
+                        UTIL_mulss(pemf->lab, ialphabeta->beta)), (MCAF_MOTOR_LMAX_BASE_DT_Q + 1));
 
-        fluxAlphaBeta.beta = UTIL_SatShrS16((__builtin_mulss(pemf->lba, ialphabeta->alpha) +
-                        __builtin_mulss(pemf->lbb, ialphabeta->beta)), (MCAF_MOTOR_LMAX_BASE_DT_Q + 1));
+        fluxAlphaBeta.beta = UTIL_SatShrS16((UTIL_mulss(pemf->lba, ialphabeta->alpha) +
+                        UTIL_mulss(pemf->lbb, ialphabeta->beta)), (MCAF_MOTOR_LMAX_BASE_DT_Q + 1));
     }
     else
     {
         fluxAlphaBeta.alpha =
-        UTIL_SatShrS16(__builtin_mulss(l0, ialphabeta->alpha), (MCAF_MOTOR_LMAX_BASE_DT_Q + 1));
+        UTIL_SatShrS16(UTIL_mulss(l0, ialphabeta->alpha), (MCAF_MOTOR_LMAX_BASE_DT_Q + 1));
 
         fluxAlphaBeta.beta =
-        UTIL_SatShrS16(__builtin_mulss(l0, ialphabeta->beta), (MCAF_MOTOR_LMAX_BASE_DT_Q + 1));
+        UTIL_SatShrS16(UTIL_mulss(l0, ialphabeta->beta), (MCAF_MOTOR_LMAX_BASE_DT_Q + 1));
     }
     
     /* 
@@ -322,10 +322,10 @@ inline static void estimateBackEMF(MCAF_MOTOR_DATA *pmotor)
     pemf->vInductance.beta = fluxAlphaBeta.beta - 
                                         pemf->lastFluxalphabeta.beta;
 
-    pemf->irDrop.alpha = UTIL_SatShrS16(__builtin_mulss(rs, ialphabeta->alpha),
+    pemf->irDrop.alpha = UTIL_SatShrS16(UTIL_mulss(rs, ialphabeta->alpha),
                                                                        (MCAF_MOTOR_RS_Q + 1));
 
-    pemf->irDrop.beta = UTIL_SatShrS16(__builtin_mulss(rs, ialphabeta->beta),
+    pemf->irDrop.beta = UTIL_SatShrS16(UTIL_mulss(rs, ialphabeta->beta),
                                                                        (MCAF_MOTOR_RS_Q + 1));
 
     pinput->ealphabeta.alpha = pemf->lastValphabeta.alpha -
@@ -687,7 +687,7 @@ void MCAF_VelocityAndCurrentControllerStep(MCAF_MOTOR_DATA *pmotor)
              */
             const int16_t vdSquared = UTIL_SignedSqr(pmotor->vdq.d);
             const int16_t vdqSquaredLimit = UTIL_SignedSqr(UTIL_MulQ15(pmotor->psys->vDC, MCAF_CURRENT_CTRL_DQ_MAGNITUDE_LIMIT));
-            pmotor->iqCtrl.outMax = Q15SQRT(vdqSquaredLimit - vdSquared);
+            pmotor->iqCtrl.outMax = MCAF_SqrtQ15(vdqSquaredLimit - vdSquared);
             pmotor->iqCtrl.outMin = -pmotor->iqCtrl.outMax;
         }
         else
@@ -741,7 +741,7 @@ inline int16_t MCAF_ComputeReciprocalDCLinkVoltage(int16_t vdc)
     }
     else
     {
-        return __builtin_divf(MCAF_RVDC_MIN_VDC, vdc);
+        return UTIL_DivQ15(MCAF_RVDC_MIN_VDC, vdc);
     }
 }
 

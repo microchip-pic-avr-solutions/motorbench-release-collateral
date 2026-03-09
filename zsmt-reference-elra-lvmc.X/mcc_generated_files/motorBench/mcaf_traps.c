@@ -11,7 +11,7 @@
 /* *********************************************************************
  * 
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -86,25 +86,42 @@ inline static uint16_t translate_error_code(uint16_t mcc_code)
 {
     switch (mcc_code)
     {
-        case TRAPS_OSC_FAIL:
-            return ERR_OSC_FAIL;
         case TRAPS_STACK_ERR:
             return ERR_STACK_ERROR;
         case TRAPS_ADDRESS_ERR:
             return ERR_ADDRESS_ERROR;
-        case TRAPS_MATH_ERR:
-            return ERR_MATH;
+#if defined(__dsPIC33E__) || defined(__dsPIC33C__)
+        case TRAPS_OSC_FAIL:
+            return ERR_OSC_FAIL;
         case TRAPS_HARD_ERR:
             return ERR_HARD_TRAP;
         case TRAPS_DOOVR_ERR:
             return ERR_SOFT_TRAP;
+        case TRAPS_MATH_ERR:
+            return ERR_MATH;
+#elif defined(__dsPIC33A__)
+        case TRAPS_DMA_BUS_ERR:
+            return ERR_DMA_BUS_ERROR;
+        case TRAPS_ILLEGALINSTRUCTION:
+            return ERR_ILLEGALINSTRUCTION;
+        case TRAPS_DMT_ERR:
+        case TRAPS_GEN_ERR:
+            return ERR_SOFT_TRAP;
+        case TRAPS_DIV0_ERR:
+        case TRAPS_SFTAC_ERR:
+        case TRAPS_COVT_ERR:
+        case TRAPS_COVA_ERR:
+        case TRAPS_OVA_ERR:
+        case TRAPS_OVAT_ERR:
+        case TRAPS_COVB_ERR:
+        case TRAPS_OVB_ERR:
+        case TRAPS_OVBT_ERR:
+            return ERR_MATH;
+#endif
         default:
             return ERR_UNEXPECTED_TRAP;
     }
 }
-
-/** Reserved trap error */
-void ERROR_HANDLER_NORETURN _ReservedTrap7(void) { halt_on_error(ERR_RESERVED_TRAP7); }
 
 /** 
  * Reports unexpected interrupt, by displaying error vector number.
@@ -117,6 +134,7 @@ void MCAF_CheckResetCause(void)
 {
     const uint16_t rconcopy = RCON;
     uint16_t errorCode = 0;
+#if defined(__dsPIC33E__) || defined(__dsPIC33C__)
     if (rconcopy & 0x8000) /* TRAPR */
     {
         errorCode = MCAF_ERR_RCON_TRAPR;
@@ -129,6 +147,12 @@ void MCAF_CheckResetCause(void)
     {
         errorCode = MCAF_ERR_RCON_CM;    
     }
+#elif defined(__dsPIC33A__)
+    if (rconcopy & 0x0200) /* CM */
+    {
+        errorCode = MCAF_ERR_RCON_CM;    
+    }
+#endif
     else if (rconcopy & 0x0010) /* WDTO */
     {
         if (watchdog.isrCount < MCAF_WATCHDOG_MAINLOOP_TIMEOUT)
@@ -139,6 +163,10 @@ void MCAF_CheckResetCause(void)
         {
             errorCode = ERR_RCON_WDTO_MAINLOOP;
         }
+    }
+    else
+    {
+        // For MISRA compliance
     }
     RCON = 0;    // clear RCON bits so that at next reset they will be accurate
     

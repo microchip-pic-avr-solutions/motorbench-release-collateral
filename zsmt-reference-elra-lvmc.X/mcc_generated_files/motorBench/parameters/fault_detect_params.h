@@ -9,7 +9,7 @@
  */ /*
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -44,15 +44,18 @@
  *
  *
  ******************************************************************************/
-#ifndef __FAULT_DETECT_PARAMS_H
-#define __FAULT_DETECT_PARAMS_H
+#ifndef MCAF_FAULT_DETECT_PARAMS_H
+#define MCAF_FAULT_DETECT_PARAMS_H
 
 #ifdef  __cplusplus
 extern "C" {
 #endif
 
 /* overcurrent threshold (109.2% of rated allowable current) */
-#define THRESHOLD_OVERCURRENT_STALL_DETECT       6157      // Q15(  0.18790) =   +8.19230 A           =   +8.19175 A           + 0.0067%
+#define THRESHOLD_OVERCURRENT_STALL_DETECT             6157      // Q15(  0.18790) =   +8.19230 A           =   +8.19175 A           + 0.0067%
+#define THRESHOLD_OVERCURRENT_STALL_DETECT_NORM    0.1878967285  // normalized
+#define THRESHOLD_OVERCURRENT_STALL_DETECT_SCALE  43.6000000000  // A
+#define THRESHOLD_OVERCURRENT_STALL_DETECT_ENG     8.1922973633  // A
 
 /*
  * natural_freq_current:         109.318  Hz
@@ -64,42 +67,66 @@ extern "C" {
 
 /* decimation factor for 2 stage filter LPF */
 #define DECIMATION_FACTOR                     100      // Q0(100.00000)  = +100.00000             = +100.00000             + 0.0000%
+#define DECIMATION_FACTOR_NORM         100.0000000000  // normalized
+#define DECIMATION_FACTOR_SCALE          1.0000000000
+#define DECIMATION_FACTOR_ENG          100.0000000000
 /* 
  * Coefficient a1 for 2 stage implementation of LPF. Equation used for calculation:
  * f3db*Ts*2*pi. f3db for 1st stage is 10hz
  */
-#define DECIMATION_FILTER_LPF1_VARIANCE_DETECT_COEFFA1        103      // Q15(  0.00314) =  +10.00547 Hz          =  +10.00000 Hz          + 0.0547%
+#define DECIMATION_FILTER_LPF1_VARIANCE_DETECT_COEFFA1              103      // Q15(  0.00314) =  +10.00547 Hz          =  +10.00000 Hz          + 0.0547%
+#define DECIMATION_FILTER_LPF1_VARIANCE_DETECT_COEFFA1_NORM    0.0031433105  // normalized
+#define DECIMATION_FILTER_LPF1_VARIANCE_DETECT_COEFFA1_SCALE   3.183099e+03  // Hz
+#define DECIMATION_FILTER_LPF1_VARIANCE_DETECT_COEFFA1_ENG    10.0054682242  // Hz
 /* 
  * Coefficient a1 for 2 stage implementation of LPF. Equation used for calculation:
  * f3db*Ts*2*pi. f3db for second stage is 1/10th of the natural frequency, Ts is 1/200hz
  */
-#define DECIMATION_FILTER_LPF2_VARIANCE_DETECT_COEFFA1        158      // Q15(  0.00482) = +153.48194 mHz         = +153.34610 mHz         + 0.0886%
+#define DECIMATION_FILTER_LPF2_VARIANCE_DETECT_COEFFA1              158      // Q15(  0.00482) = +153.48194 mHz         = +153.34610 mHz         + 0.0886%
+#define DECIMATION_FILTER_LPF2_VARIANCE_DETECT_COEFFA1_NORM    0.0048217773  // normalized
+#define DECIMATION_FILTER_LPF2_VARIANCE_DETECT_COEFFA1_SCALE  31.8309886184  // Hz
+#define DECIMATION_FILTER_LPF2_VARIANCE_DETECT_COEFFA1_ENG     0.1534819397  // Hz
 /* 
  * LPF filter coefficient for over current detect. Equation used for calculation:
  * f3db*Ts*2*pi f3d is equal to natural frequency
  */
-#define FILTER_LPF_OVERCURRENT_DETECT          16      // Q15(  0.00049) =   +1.55425 Hz          =   +1.53346 Hz          + 1.3555%
+#define FILTER_LPF_OVERCURRENT_DETECT               16      // Q15(  0.00049) =   +1.55425 Hz          =   +1.53346 Hz          + 1.3555%
+#define FILTER_LPF_OVERCURRENT_DETECT_NORM    0.0004882812  // normalized
+#define FILTER_LPF_OVERCURRENT_DETECT_SCALE   3.183099e+03  // Hz
+#define FILTER_LPF_OVERCURRENT_DETECT_ENG     1.5542474911  // Hz
 /* 
  * LPF filter coefficient for negative Ed detect. Equation used for calculation:
  * f3db*Ts*2*pi f3d is equal to natural frequency
  */
-#define FILTER_LPF_NEGATIVE_ED_DETECT          16      // Q15(  0.00049) =   +1.55425 Hz          =   +1.53346 Hz          + 1.3555%
+#define FILTER_LPF_NEGATIVE_ED_DETECT               16      // Q15(  0.00049) =   +1.55425 Hz          =   +1.53346 Hz          + 1.3555%
+#define FILTER_LPF_NEGATIVE_ED_DETECT_NORM    0.0004882812  // normalized
+#define FILTER_LPF_NEGATIVE_ED_DETECT_SCALE   3.183099e+03  // Hz
+#define FILTER_LPF_NEGATIVE_ED_DETECT_ENG     1.5542474911  // Hz
 /* 
  * HPF filter coefficient for 16bit implementation of HPF.
  * f3db is 2x natural frequency.
  */
-#define FILTER_HPF_VARIANCE_DETECT             63      // Q16(  0.00096) =   +3.05992 Hz          =   +3.06692 Hz          - 0.2282%
+#define FILTER_HPF_VARIANCE_DETECT               63      // Q16(  0.00096) =   +3.05992 Hz          =   +3.06692 Hz          - 0.2282%
+#define FILTER_HPF_VARIANCE_DETECT_NORM    0.0009613037  // normalized
+#define FILTER_HPF_VARIANCE_DETECT_SCALE   3.183099e+03  // Hz
+#define FILTER_HPF_VARIANCE_DETECT_ENG     3.0599247482  // Hz
 /* 
  * Timer threshold to trigger low speed detect.
  * It is set to 3 times (1/natural frequency of velocity loop)
  */
-#define ACTIVE_TIMER_THRESHOLD_LOW_SPEED_DETECT      39127      // Q0(39127.00000) =   +1.95635 s           =   +1.95636 s           - 0.0005%
+#define ACTIVE_TIMER_THRESHOLD_LOW_SPEED_DETECT            39127      // Q0(39127.00000) =   +1.95635 s           =   +1.95636 s           - 0.0005%
+#define ACTIVE_TIMER_THRESHOLD_LOW_SPEED_DETECT_NORM    3.912700e+04  // normalized
+#define ACTIVE_TIMER_THRESHOLD_LOW_SPEED_DETECT_SCALE   5.000000e-05  // s
+#define ACTIVE_TIMER_THRESHOLD_LOW_SPEED_DETECT_ENG     1.9563500000  // s
 /* 
  * Inactive timer threshold for low speed detect.
  * It is set to (2.0/natural frequency of velocity loop),
  * in units of the ADC ISR period.
  */
-#define INACTIVE_TIMER_THRESHOLD_LOW_SPEED_DETECT      39127      // Q0(39127.00000) =   +1.95635 s           =   +1.95636 s           - 0.0005%
+#define INACTIVE_TIMER_THRESHOLD_LOW_SPEED_DETECT            39127      // Q0(39127.00000) =   +1.95635 s           =   +1.95636 s           - 0.0005%
+#define INACTIVE_TIMER_THRESHOLD_LOW_SPEED_DETECT_NORM    3.912700e+04  // normalized
+#define INACTIVE_TIMER_THRESHOLD_LOW_SPEED_DETECT_SCALE   5.000000e-05  // s
+#define INACTIVE_TIMER_THRESHOLD_LOW_SPEED_DETECT_ENG     1.9563500000  // s
 /* 
  * Overcurrent detector. Normally if the saturation limit was exceeded,
  * then we have a fault in the controllers.
@@ -107,37 +134,58 @@ extern "C" {
  * Timer threshold to trigger over currents detect.
  * It is set to 2 times (1/natural frequency of current loop)
  */
-#define TIMER_COUNTS_OVERCURRENT_DETECT        366      // Q0(366.00000)  =  +18.30000 ms          =  +18.29527 ms          + 0.0259%
+#define TIMER_COUNTS_OVERCURRENT_DETECT              366      // Q0(366.00000)  =  +18.30000 ms          =  +18.29527 ms          + 0.0259%
+#define TIMER_COUNTS_OVERCURRENT_DETECT_NORM  366.0000000000  // normalized
+#define TIMER_COUNTS_OVERCURRENT_DETECT_SCALE   5.000000e-05  // s
+#define TIMER_COUNTS_OVERCURRENT_DETECT_ENG     0.0183000000  // s
 /* 
  * Timer threshold to trigger negative Ed stall detect.
  * It is set to 5 times (1/natural frequency of velocity loop)
  */
-#define ACTIVE_TIMER_THRESHOLD_NEGATIVE_ED_DETECT      65212      // Q0(65212.00000) =   +3.26060 s           =   +3.26060 s           + 0.0001%
+#define ACTIVE_TIMER_THRESHOLD_NEGATIVE_ED_DETECT            65212      // Q0(65212.00000) =   +3.26060 s           =   +3.26060 s           + 0.0001%
+#define ACTIVE_TIMER_THRESHOLD_NEGATIVE_ED_DETECT_NORM    6.521200e+04  // normalized
+#define ACTIVE_TIMER_THRESHOLD_NEGATIVE_ED_DETECT_SCALE   5.000000e-05  // s
+#define ACTIVE_TIMER_THRESHOLD_NEGATIVE_ED_DETECT_ENG     3.2606000000  // s
 /* 
  * Timer threshold to trigger negative Ed stall detect.
  * It is set to 5 times (1/natural frequency of velocity loop)
  */
-#define INACTIVE_TIMER_THRESHOLD_NEGATIVE_ED_DETECT      65212      // Q0(65212.00000) =   +3.26060 s           =   +3.26060 s           + 0.0001%
+#define INACTIVE_TIMER_THRESHOLD_NEGATIVE_ED_DETECT            65212      // Q0(65212.00000) =   +3.26060 s           =   +3.26060 s           + 0.0001%
+#define INACTIVE_TIMER_THRESHOLD_NEGATIVE_ED_DETECT_NORM    6.521200e+04  // normalized
+#define INACTIVE_TIMER_THRESHOLD_NEGATIVE_ED_DETECT_SCALE   5.000000e-05  // s
+#define INACTIVE_TIMER_THRESHOLD_NEGATIVE_ED_DETECT_ENG     3.2606000000  // s
 /* 
  * Timer threshold to trigger stall detect based on torque angle.
  * It is set to 3 times (1/natural frequency of velocity loop)
  */
-#define ACTIVE_TIMER_THRESHOLD_TORQUE_ANGLE_DETECT      39127      // Q0(39127.00000) =   +1.95635 s           =   +1.95636 s           - 0.0005%
+#define ACTIVE_TIMER_THRESHOLD_TORQUE_ANGLE_DETECT            39127      // Q0(39127.00000) =   +1.95635 s           =   +1.95636 s           - 0.0005%
+#define ACTIVE_TIMER_THRESHOLD_TORQUE_ANGLE_DETECT_NORM    3.912700e+04  // normalized
+#define ACTIVE_TIMER_THRESHOLD_TORQUE_ANGLE_DETECT_SCALE   5.000000e-05  // s
+#define ACTIVE_TIMER_THRESHOLD_TORQUE_ANGLE_DETECT_ENG     1.9563500000  // s
 /* 
  * Inactive Timer threshold for stall detect based on torque angle.
  * It is set to 3 times (1/natural frequency of velocity loop)
  */
-#define INACTIVE_TIMER_THRESHOLD_TORQUE_ANGLE_DETECT      39127      // Q0(39127.00000) =   +1.95635 s           =   +1.95636 s           - 0.0005%
+#define INACTIVE_TIMER_THRESHOLD_TORQUE_ANGLE_DETECT            39127      // Q0(39127.00000) =   +1.95635 s           =   +1.95636 s           - 0.0005%
+#define INACTIVE_TIMER_THRESHOLD_TORQUE_ANGLE_DETECT_NORM    3.912700e+04  // normalized
+#define INACTIVE_TIMER_THRESHOLD_TORQUE_ANGLE_DETECT_SCALE   5.000000e-05  // s
+#define INACTIVE_TIMER_THRESHOLD_TORQUE_ANGLE_DETECT_ENG     1.9563500000  // s
 /* 
  * Timer threshold to trigger stall detect based on variance in Ed and Eq.
  * It is set to (1/natural frequency of velocity loop)
  */
-#define TIMER_COUNTS_VARIANCE_DETECT          130      // Q0(130.00000)  = +650.00000 ms          = +652.11962 ms          - 0.3250%
+#define TIMER_COUNTS_VARIANCE_DETECT              130      // Q0(130.00000)  = +650.00000 ms          = +652.11962 ms          - 0.3250%
+#define TIMER_COUNTS_VARIANCE_DETECT_NORM  130.0000000000  // normalized
+#define TIMER_COUNTS_VARIANCE_DETECT_SCALE   0.0050000000  // s
+#define TIMER_COUNTS_VARIANCE_DETECT_ENG     0.6500000000  // s
 
 /* Threshold for under speed detect as a fixed fraction of minimum velocity */
 #define THRESHOLD_UNDERSPEED_STALL_DETECT  ((int16_t)(0.333*MCAF_VELOCITY_COMMAND_MIN))
 /* Ed detect threshold */
-#define THRESHOLD_ED_STALL_DETECT               5      // Q15(  0.00015) =  +10.87952 mV          =  +10.00000 mV          + 8.7952%
+#define THRESHOLD_ED_STALL_DETECT                5      // Q15(  0.00015) =  +10.87952 mV          =  +10.00000 mV          + 8.7952%
+#define THRESHOLD_ED_STALL_DETECT_NORM    0.0001525879  // normalized
+#define THRESHOLD_ED_STALL_DETECT_SCALE  71.3000000000  // V
+#define THRESHOLD_ED_STALL_DETECT_ENG     0.0108795166  // V
 
 /*
  * max error from modified polynomial approximation 0.048158
@@ -145,24 +193,48 @@ extern "C" {
  * max error above omega_c1 = 0.018113
  */
 /* torque angle threshold polynomial, constant term */
-#define STALL_DETECT_TORQUE_ANGLE_COEFF0       6257      // Q15(  0.19095) = +190.94849 m           = +190.93777 m           + 0.0056%
+#define STALL_DETECT_TORQUE_ANGLE_COEFF0             6257      // Q15(  0.19095) = +190.94849 m           = +190.93777 m           + 0.0056%
+#define STALL_DETECT_TORQUE_ANGLE_COEFF0_NORM    0.1909484863  // normalized
+#define STALL_DETECT_TORQUE_ANGLE_COEFF0_SCALE   1.0000000000
+#define STALL_DETECT_TORQUE_ANGLE_COEFF0_ENG     0.1909484863
 /* torque angle threshold polynomial, linear term */
-#define STALL_DETECT_TORQUE_ANGLE_COEFF1      23921      // Q15(  0.73001) = +730.01099 m           = +730.01391 m           - 0.0004%
+#define STALL_DETECT_TORQUE_ANGLE_COEFF1            23921      // Q15(  0.73001) = +730.01099 m           = +730.01391 m           - 0.0004%
+#define STALL_DETECT_TORQUE_ANGLE_COEFF1_NORM    0.7300109863  // normalized
+#define STALL_DETECT_TORQUE_ANGLE_COEFF1_SCALE   1.0000000000
+#define STALL_DETECT_TORQUE_ANGLE_COEFF1_ENG     0.7300109863
 /* torque angle threshold polynomial, quadratic term */
-#define STALL_DETECT_TORQUE_ANGLE_COEFF2       2263      // Q15(  0.06906) =  +69.06128 m           =  +69.04832 m           + 0.0188%
-#define STALL_DETECT_TORQUE_ANGLE_K         11899      // Q15(  0.36313) = +363.12866 m           = +363.13034 m           - 0.0005%
+#define STALL_DETECT_TORQUE_ANGLE_COEFF2             2263      // Q15(  0.06906) =  +69.06128 m           =  +69.04832 m           + 0.0188%
+#define STALL_DETECT_TORQUE_ANGLE_COEFF2_NORM    0.0690612793  // normalized
+#define STALL_DETECT_TORQUE_ANGLE_COEFF2_SCALE   1.0000000000
+#define STALL_DETECT_TORQUE_ANGLE_COEFF2_ENG     0.0690612793
+#define STALL_DETECT_TORQUE_ANGLE_K            11899      // Q15(  0.36313) = +363.12866 m           = +363.13034 m           - 0.0005%
+#define STALL_DETECT_TORQUE_ANGLE_K_NORM    0.3631286621  // normalized
+#define STALL_DETECT_TORQUE_ANGLE_K_SCALE   1.0000000000
+#define STALL_DETECT_TORQUE_ANGLE_K_ENG     0.3631286621
 /* Maximum velocity for torque angle stall detection (we inhibit at faster speeds) */
-#define STALL_DETECT_TORQUE_ANGLE_VELOCITY_THRESHOLD       8738      // Q15(  0.26666) = +125.66179 rad/s       = +125.66371 rad/s       - 0.0015%
+#define STALL_DETECT_TORQUE_ANGLE_VELOCITY_THRESHOLD             8738      // Q15(  0.26666) = +125.66179 rad/s       = +125.66371 rad/s       - 0.0015%
+#define STALL_DETECT_TORQUE_ANGLE_VELOCITY_THRESHOLD_NORM    0.2666625977  // normalized
+#define STALL_DETECT_TORQUE_ANGLE_VELOCITY_THRESHOLD_SCALE 471.2388980385  // rad/s
+#define STALL_DETECT_TORQUE_ANGLE_VELOCITY_THRESHOLD_ENG   125.6617886676  // rad/s
 
 /* overvoltage fault threshold */
-#define VDC_OVERVOLTAGE_THRESHOLD           12868      // Q15(  0.39270) =  +27.99952 V           =  +28.00000 V           - 0.0017%
+#define VDC_OVERVOLTAGE_THRESHOLD            12868      // Q15(  0.39270) =  +27.99952 V           =  +28.00000 V           - 0.0017%
+#define VDC_OVERVOLTAGE_THRESHOLD_NORM    0.3927001953  // normalized
+#define VDC_OVERVOLTAGE_THRESHOLD_SCALE  71.3000000000  // V
+#define VDC_OVERVOLTAGE_THRESHOLD_ENG    27.9995239258  // V
 /* undervoltage fault threshold */
-#define VDC_UNDERVOLTAGE_THRESHOLD           5515      // Q15(  0.16830) =  +12.00011 V           =  +12.00000 V           + 0.0009%
+#define VDC_UNDERVOLTAGE_THRESHOLD             5515      // Q15(  0.16830) =  +12.00011 V           =  +12.00000 V           + 0.0009%
+#define VDC_UNDERVOLTAGE_THRESHOLD_NORM    0.1683044434  // normalized
+#define VDC_UNDERVOLTAGE_THRESHOLD_SCALE  71.3000000000  // V
+#define VDC_UNDERVOLTAGE_THRESHOLD_ENG    12.0001068115  // V
 /* overtemperature fault threshold */
-#define MCAF_OVERTEMPERATURE_THRESHOLD       5000      // Q15(  0.15259) =  +50.00000 C           =  +50.00000 C           + 0.0000%
+#define MCAF_OVERTEMPERATURE_THRESHOLD             5000      // Q15(  0.15259) =  +50.00000 C           =  +50.00000 C           + 0.0000%
+#define MCAF_OVERTEMPERATURE_THRESHOLD_NORM    0.1525878906  // normalized
+#define MCAF_OVERTEMPERATURE_THRESHOLD_SCALE 327.6800000000  // C
+#define MCAF_OVERTEMPERATURE_THRESHOLD_ENG    50.0000000000  // C
 
 #ifdef  __cplusplus
 }
 #endif
 
-#endif // __FAULT_DETECT_PARAMS_H
+#endif /* MCAF_FAULT_DETECT_PARAMS_H */

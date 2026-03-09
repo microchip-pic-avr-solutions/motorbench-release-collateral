@@ -9,7 +9,7 @@
  */ /*
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -44,8 +44,8 @@
  *
  *
  ******************************************************************************/
-#ifndef __OPERATING_PARAMS_H
-#define __OPERATING_PARAMS_H
+#ifndef MCAF_OPERATING_PARAMS_H
+#define MCAF_OPERATING_PARAMS_H
 
 #include "motor_params.h"
 /* needed for motor's relative saliency */
@@ -57,11 +57,20 @@ extern "C" {
 /**** parameters for speed reference ***/
 
 /* Maximum velocity command */
-#define MCAF_VELOCITY_COMMAND_MAX           27307      // Q15(  0.83334) =   +3.75005 kRPM        =   +3.75000 kRPM        + 0.0012%
+#define MCAF_VELOCITY_COMMAND_MAX            27307      // Q15(  0.83334) =   +3.75005 kRPM        =   +3.75000 kRPM        + 0.0012%
+#define MCAF_VELOCITY_COMMAND_MAX_NORM    0.8333435059  // normalized
+#define MCAF_VELOCITY_COMMAND_MAX_SCALE   4.500000e+03  // RPM
+#define MCAF_VELOCITY_COMMAND_MAX_ENG   392.7038753887  // RPM
 /* Minimum velocity command */
-#define MCAF_VELOCITY_COMMAND_MIN            5461      // Q15(  0.16666) = +749.95422 RPM         = +750.00000 RPM         - 0.0061%
+#define MCAF_VELOCITY_COMMAND_MIN             5461      // Q15(  0.16666) = +749.95422 RPM         = +750.00000 RPM         - 0.0061%
+#define MCAF_VELOCITY_COMMAND_MIN_NORM    0.1666564941  // normalized
+#define MCAF_VELOCITY_COMMAND_MIN_SCALE   4.500000e+03  // RPM
+#define MCAF_VELOCITY_COMMAND_MIN_ENG    78.5350226498  // RPM
 /* Nominal velocity (base speed): nominal no-load speed at nominal supply voltage with no flux weakening */
 #define MCAF_VELOCITY_NOMINAL               21845      // Q15(  0.66666) =   +2.99995 kRPM        =   +3.00000 kRPM        - 0.0015%
+#define MCAF_VELOCITY_NOMINAL_NORM       0.6666564941  // normalized
+#define MCAF_VELOCITY_NOMINAL_SCALE      4.500000e+03  // RPM
+#define MCAF_VELOCITY_NOMINAL_ENG      314.1544716690  // RPM
 
 /* --- Miscellaneous operating velocity parameters --- */
 
@@ -90,24 +99,42 @@ extern "C" {
  */
 
 /* Minimum time for achieving a closed-loop stop below the speed threshold */
-#define MCAF_CLOSED_LOOP_STOPPING_TIME      10000      // Q0(10000.00000) = +500.00000 ms          = +500.00000 ms          + 0.0000%
+#define MCAF_CLOSED_LOOP_STOPPING_TIME            10000      // Q0(10000.00000) = +500.00000 ms          = +500.00000 ms          + 0.0000%
+#define MCAF_CLOSED_LOOP_STOPPING_TIME_NORM    1.000000e+04  // normalized
+#define MCAF_CLOSED_LOOP_STOPPING_TIME_SCALE   5.000000e-05  // s
+#define MCAF_CLOSED_LOOP_STOPPING_TIME_ENG     0.5000000000  // s
 /* Speed threshold for a closed-loop stop */
-#define MCAF_CLOSED_LOOP_STOPPING_SPEED       1092      // Q15(  0.03333) =  +15.70413 rad/s       =  +15.70796 rad/s       - 0.0244%
+#define MCAF_CLOSED_LOOP_STOPPING_SPEED             1092      // Q15(  0.03333) =  +15.70413 rad/s       =  +15.70796 rad/s       - 0.0244%
+#define MCAF_CLOSED_LOOP_STOPPING_SPEED_NORM    0.0333251953  // normalized
+#define MCAF_CLOSED_LOOP_STOPPING_SPEED_SCALE 471.2388980385  // rad/s
+#define MCAF_CLOSED_LOOP_STOPPING_SPEED_ENG    15.7041283160  // rad/s
 
 #define VELOCITY_SLEWRATE_LIMIT1 32000
 /* slew rate limit for velocity commands during acceleration */
-#define VELOCITY_SLEWRATE_LIMIT_ACCEL         204      // Q15(  0.00623) =   +2.93374 rad/s       =   +2.93381 rad/s       - 0.0023%
+#define VELOCITY_SLEWRATE_LIMIT_ACCEL              204      // Q15(  0.00623) =   +2.93374 rad/s       =   +2.93381 rad/s       - 0.0023%
+#define VELOCITY_SLEWRATE_LIMIT_ACCEL_NORM    0.0062255859  // normalized
+#define VELOCITY_SLEWRATE_LIMIT_ACCEL_SCALE 471.2388980385  // rad/s
+#define VELOCITY_SLEWRATE_LIMIT_ACCEL_ENG     2.9337382568  // rad/s
 /* slew rate limit for velocity commands during deceleration */
-#define VELOCITY_SLEWRATE_LIMIT_DECEL          37      // Q15(  0.00113) = +532.09959 mrad/s      = +532.90746 mrad/s      - 0.1516%
+#define VELOCITY_SLEWRATE_LIMIT_DECEL               37      // Q15(  0.00113) = +532.09959 mrad/s      = +532.90746 mrad/s      - 0.1516%
+#define VELOCITY_SLEWRATE_LIMIT_DECEL_NORM    0.0011291504  // normalized
+#define VELOCITY_SLEWRATE_LIMIT_DECEL_SCALE 471.2388980385  // rad/s
+#define VELOCITY_SLEWRATE_LIMIT_DECEL_ENG     0.5320995858  // rad/s
 /* estimate of worst-case time needed to decelerate to a stop */
 #define VELOCITY_COASTDOWN_TIME             23358      // Q0(23358.00000) =   +1.16790 s           =   +1.16792 s           - 0.0020%
+#define VELOCITY_COASTDOWN_TIME_NORM     2.335800e+04  // normalized
+#define VELOCITY_COASTDOWN_TIME_SCALE    5.000000e-05  // s
+#define VELOCITY_COASTDOWN_TIME_ENG      1.1679000000  // s
 
 #define RATED_MOTOR_IPEAK                          7.5 // (A)        rated allowable current of motor (peak amplitude)
 
 /**** Motor saliency ****/
 
 /*  Relative saliency threshold = (xi-1.0)/(xi+1.0)  */
-#define MCAF_RELATIVE_SALIENCY_THRESHOLD       3641      // Q15(  0.11111) = +111.11450 m           = +111.11111 m           + 0.0031%
+#define MCAF_RELATIVE_SALIENCY_THRESHOLD             3641      // Q15(  0.11111) = +111.11450 m           = +111.11111 m           + 0.0031%
+#define MCAF_RELATIVE_SALIENCY_THRESHOLD_NORM    0.1111145020  // normalized
+#define MCAF_RELATIVE_SALIENCY_THRESHOLD_SCALE   1.0000000000
+#define MCAF_RELATIVE_SALIENCY_THRESHOLD_ENG     0.1111145020
 
 /**
  * This function returns whether the motor's saliency is significant
@@ -124,4 +151,4 @@ inline static bool MCAF_IsMotorSaliencySignificant(void)
 }
 #endif
 
-#endif // __OPERATING_PARAMS_H
+#endif /* MCAF_OPERATING_PARAMS_H */

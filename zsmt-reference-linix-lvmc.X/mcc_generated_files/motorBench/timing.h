@@ -9,7 +9,7 @@
 /* *********************************************************************
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -44,8 +44,8 @@
  *
  * *****************************************************************************/
 
-#ifndef __TIMING_H
-#define __TIMING_H
+#ifndef MCAF_TIMING_H 
+#define MCAF_TIMING_H 
 
 #include <stdint.h>
 #include <stdbool.h>
@@ -70,8 +70,26 @@ inline static void MCAF_DelayNanoseconds(uint16_t ns)
     UTIL_RepeatNop(nop_count - 1);
 }
 
+/**
+* Blocking delay for ms milliseconds.
+* Uses MCAF_DelayNanoseconds to achieve the delay.
+* Ensures that the argument to MCAF_DelayNanoseconds does not exceed 65535.
+* 
+* @param ms milliseconds to delay
+*/
+inline static void MCAF_DelayMilliseconds(uint16_t ms)
+{
+    for (uint16_t i = 0; i < ms; i++)
+    {
+        for (uint16_t j = 0; j < 16; j++)
+        {
+            MCAF_DelayNanoseconds(62500); // 62500 ns * 16 = 1 ms
+        }
+    }
+}
+
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __TIMING_H */
+#endif /* MCAF_TIMING_H */

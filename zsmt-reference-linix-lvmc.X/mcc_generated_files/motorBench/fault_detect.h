@@ -9,7 +9,7 @@
 /* *********************************************************************
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -44,11 +44,12 @@
  *
  * *****************************************************************************/
 
-#ifndef __FAULT_DETECT_H
-#define __FAULT_DETECT_H
+#ifndef MCAF_FAULT_DETECT_H 
+#define MCAF_FAULT_DETECT_H 
 
 #include "fault_detect_types.h"
 #include "system_state.h"
+#include "adc_compensation.h"
 #include "hal.h"
 
 #if MCAF_GATE_DRIVER_ENABLED
@@ -87,7 +88,6 @@ void MCAF_FaultDetectReset(MCAF_FAULT_DETECT_T *pFaultDetect);
  * @param pfaultDetect This parameter is pointer to MCAF_FAULT_DETECT_T structure
  * @return whether a fault has been detected
  */
-
 static inline bool MCAF_Fault_IsFaultDetected(MCAF_FAULT_DETECT_T *pfaultDetect)
 {
     return pfaultDetect->faultDetectFlag != 0;
@@ -128,7 +128,6 @@ inline static bool MCAF_UndervoltageDetect(const MCAF_DCLINKVOLTAGE_DETECT_T *pV
  *
  * @return whether a hardware overcurrent fault has been detected
  */
-
 inline static bool MCAF_OvercurrentHWDetect(void)
 {
     return HAL_PWM_FaultStatus_Get();
@@ -137,7 +136,7 @@ inline static bool MCAF_OvercurrentHWDetect(void)
 /**
  * Returns whether an overtemperature fault occurred
  *
- * @param pfaultDetect pointer to fault detect state
+ * @param threshold temperature threshold
  * @param pmotor motor state 
  * @return true if an overtemperature fault has been detected 
  */
@@ -148,6 +147,31 @@ inline static bool MCAF_OvertemperatureDetect(MCAF_U_TEMPERATURE threshold,
                         pmotor->bridgeTemperature.filter.output > threshold;
     return faultActive;
 }
+
+/**
+ * Returns whether a current offset calibration fault occurred
+ *
+ * @param pmotor motor state 
+ * @return true if a current offset calibration fault has been detected 
+ */
+inline static bool MCAF_CurrCalOffsetFaultDetect(const MCAF_MOTOR_DATA *pmotor)
+{
+    return !MCAF_ADCCurrentOffsetCalibrationSuccessful(&pmotor->adcCompensation.currentCalibration);
+}
+
+#if MCAF_ADC_GAIN_COMPENSATION_ENABLED
+/**
+ * Returns whether an ADC gain compensation fault occurred
+ *
+ * @param pmotor motor state 
+ * @return true if an ADC gain compensation fault has been detected 
+ */
+inline static bool MCAF_ADCGainCompFaultDetect(const MCAF_MOTOR_DATA *pmotor)
+{
+    const MCAF_ADC_GAIN_COMPENSATOR *pcompensator = &pmotor->adcCompensation.adcGainCompensator;
+    return MCAF_ADCGainCompReady(pcompensator) && !MCAF_ADCGainCompSuccessful(pcompensator);
+}
+#endif
 
 /**
  * This function updates the fault status in special designated status registers
@@ -222,11 +246,32 @@ inline static bool MCAF_IsOvertemperatureFlagSet(const MCAF_FAULT_DETECT_T *pfau
 }
 
 /**
+ * Returns whether the current offset calibration fault flag is set
+ * @param pfaultinfo fault info 
+ * @return true if current offset calibration fault flag is set
+ */
+inline static bool MCAF_IsCurrCalOffsetFaultFlagSet(const MCAF_FAULT_DETECT_T *pfaultinfo)
+{
+    return pfaultinfo->faultDetectFlag & MCAF_CURR_OFFSET_CAL_FAULT_DETECT;
+}
+
+#if MCAF_ADC_GAIN_COMPENSATION_ENABLED
+/**
+ * Returns whether the ADC gain compensation fault flag is set
+ * @param pfaultinfo fault info 
+ * @return true if ADC gain compensation fault flag is set
+ */
+inline static bool MCAF_IsADCGainCompFaultFlagSet(const MCAF_FAULT_DETECT_T *pfaultinfo)
+{
+    return pfaultinfo->faultDetectFlag & MCAF_ADC_GAIN_COMP_FAULT_DETECT;
+}
+#endif
+
+/**
  * Returns whether any fault flag is set
  * @param pfaultinfo fault info 
  * @return true if any fault flag is set
  */
- 
 inline static bool MCAF_IsAnyFaultFlagSet(const MCAF_FAULT_DETECT_T *pfaultinfo)
 {
     return pfaultinfo->faultDetectFlag != 0;
@@ -236,4 +281,4 @@ inline static bool MCAF_IsAnyFaultFlagSet(const MCAF_FAULT_DETECT_T *pfaultinfo)
 }
 #endif
 
-#endif /* __FAULT_DETECT_H */
+#endif /* MCAF_FAULT_DETECT_H */

@@ -9,7 +9,7 @@
 /* *********************************************************************
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -99,6 +99,10 @@ void MCAF_EstimatorZsmtHybridStep(MCAF_ESTIMATOR_ZSMT_HYBRID_T *pstate,
                 pstate->flags |= MCAF_ZSMT_HYBRID_DISENGAGE_ZSMT;
                 pstate->pout = pstate->pbemf_out;
             }
+            else
+            {
+                // For MISRA compliance
+            }
             
             if (speed < pstate->speedThreshold.slow)
             {
@@ -116,14 +120,28 @@ void MCAF_EstimatorZsmtHybridStep(MCAF_ESTIMATOR_ZSMT_HYBRID_T *pstate,
                 next_state = MCAF_ZSMT_HYBRID_FAST;
                 pstate->flags |= MCAF_ZSMT_HYBRID_DISENGAGE_ZSMT;
             }
+            /* 
+             * Check angle convergence every time the transition to MCAF_ZSMT_HYBRID_FAST does not occur.
+             *
+             * In the case of the previous state being MCAF_ZSMT_HYBRID_FAST, which is currently the only 
+             * entry point into this state, the delay counter is reset as a part of that state transition, 
+             * so an instant transition to MCAF_ZSMT_HYBRID_SLOW will not happen until the angle is 
+             * convergent for an entire delay period.
+             */ 
+            else if (thetaDifferenceAbs > pstate->angleConvergence.threshold)
+            {
+                // Angle difference too high! Restart counter.
+                pstate->delayCounter = pstate->angleConvergence.duration;
+            }
             else if (delayComplete && (speed < pstate->speedThreshold.slow))
             {
-                if (thetaDifferenceAbs <= pstate->angleConvergence.threshold)
-                {
-                    // Ready to switch back to ZS/MT!
-                    next_state = MCAF_ZSMT_HYBRID_SLOW;
-                    pstate->pout = pstate->pzsmt_out;
-                }
+                // Ready to switch back to ZS/MT!
+                next_state = MCAF_ZSMT_HYBRID_SLOW;
+                pstate->pout = pstate->pzsmt_out;
+            }
+            else
+            {
+                // For MISRA compliance
             }
             break;
         }
@@ -151,6 +169,7 @@ inline void MCAF_EstimatorZsmtHybridStartupInit(MCAF_ESTIMATOR_ZSMT_HYBRID_T *ps
     pstate->flags |= MCAF_ZSMT_HYBRID_ENGAGE_ZSMT;
 
     pstate->state = MCAF_ZSMT_HYBRID_SLOW;
+    pstate->pout = pstate->pzsmt_out; //Use ZS/MT output whenever hybrid state is set to MCAF_ZSMT_HYBRID_SLOW
     pstate->delayCounter = pstate->angleConvergence.duration;
 }
 

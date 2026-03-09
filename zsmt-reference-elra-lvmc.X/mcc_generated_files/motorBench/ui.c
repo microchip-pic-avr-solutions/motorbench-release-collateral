@@ -9,7 +9,7 @@
 /* *********************************************************************
  * 
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -245,7 +245,7 @@ inline void MCAF_UiSetupFlashErrorCode(volatile MCAF_UI_INDICATOR_STATE *pindsta
 static MCAF_UI_INDICATOR_STATE errorIndicatorState;
 void __attribute__((naked, noreturn)) MCAF_UiFlashErrorCodeForever(uint16_t code)
 {    
-    __builtin_disable_interrupts();
+    UTIL_DisableGlobalInterrupts();
     MCAF_UiSetupFlashErrorCode(&errorIndicatorState, code);
     HAL_PWM_Outputs_Disable();
     

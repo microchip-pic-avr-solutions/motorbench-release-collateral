@@ -7,7 +7,7 @@
  */ /*
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -87,5 +87,6 @@ void MCAF_InitControlParameters_Motor1(MCAF_MOTOR_DATA *pmotor)
     pmotor->bridgeTemperature.filter.state.x32 = 0;
     pmotor->bridgeTemperature.filter.output = 0;
     pmotor->bridgeTemperature.filter.slewRate = MCAF_BRIDGE_TEMPERATURE_SLEW_RATE;
+
 }
 

@@ -7,7 +7,7 @@
  */ /*
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -42,8 +42,8 @@
  *
  *
  ******************************************************************************/
-#ifndef __PLL_PARAMS_H
-#define __PLL_PARAMS_H
+#ifndef MCAF_PLL_PARAMS_H
+#define MCAF_PLL_PARAMS_H
 
 #ifdef  __cplusplus
 extern "C" {
@@ -51,30 +51,54 @@ extern "C" {
 
 /* Estimator sampling time used for integrating electrical frequency to obtain electrical angle */
 #define MCAF_PLL_DT_ANGULAR                   655      // Q15(  0.01999) =  +49.97253 useconds    =  +50.00000 useconds    - 0.0549%
+#define MCAF_PLL_DT_ANGULAR_NORM         0.0199890137  // normalized
+#define MCAF_PLL_DT_ANGULAR_SCALE        0.0025000000  // seconds
+#define MCAF_PLL_DT_ANGULAR_ENG          4.997253e-05  // seconds
 /* Maximum rate of change of current dI/dt, used as limit at high velocity operating range */
 #define D_ILIMIT_HS                           874      // Q15(  0.02667) =  +23.25830 kA/s        =  +23.25333 kA/s        + 0.0214%
+#define D_ILIMIT_HS_NORM                 0.0266723633  // normalized
+#define D_ILIMIT_HS_SCALE                8.720000e+05  // A/s
+#define D_ILIMIT_HS_ENG                  2.325830e+04  // A/s
 /* Maximum rate of change of current dI/dt, used as limit at low velocity operating range
  * (Note: this has a different scaling factor from D_ILIMIT_HS to account for the subsampling factor PLL_LOWSPEED_DIBYDT_PRESCALER)
  */
 #define D_ILIMIT_LS                          3495      // Q15(  0.10666) =  +11.62582 kA/s        =  +11.62667 kA/s        - 0.0072%
+#define D_ILIMIT_LS_NORM                 0.1066589355  // normalized
+#define D_ILIMIT_LS_SCALE                1.090000e+05  // A/s
+#define D_ILIMIT_LS_ENG                  1.162582e+04  // A/s
 /* Filter constant that is used for filtering the estimated 
  *                   BEMF, at nominal velocity
  */
 #define KFILTER_ESDQ                         1199      // Q15(  0.03659) = +731.81152 rad/s       = +731.99109 rad/s       - 0.0245%
+#define KFILTER_ESDQ_NORM                0.0365905762  // normalized
+#define KFILTER_ESDQ_SCALE               2.000000e+04  // rad/s
+#define KFILTER_ESDQ_ENG               731.8115234375  // rad/s
 /* Filter constant that is used for filtering the estimated 
  *                   BEMF, during field-weakening
  */
 #define KFILTER_ESDQ_FW                       164      // Q15(  0.00500) = +100.09766 rad/s       = +100.09766 rad/s       + 0.0000%
+#define KFILTER_ESDQ_FW_NORM             0.0050048828  // normalized
+#define KFILTER_ESDQ_FW_SCALE            2.000000e+04  // rad/s
+#define KFILTER_ESDQ_FW_ENG            100.0976562500  // rad/s
 /* Filter contant that is used for 
  *                   filtering the estimated velocity
  */
 #define KFILTER_VELESTIM                      748      // Q15(  0.02283) = +456.54297 rad/s       = +456.62100 rad/s       - 0.0171%
+#define KFILTER_VELESTIM_NORM            0.0228271484  // normalized
+#define KFILTER_VELESTIM_SCALE           2.000000e+04  // rad/s
+#define KFILTER_VELESTIM_ENG           456.5429687500  // rad/s
 /* Decimation speed threshold, below which velocity 
  *                   estimation is optimized for stability
  */
 #define DECIMATE_BASE_SPEED                  2185      // Q15(  0.06668) = +400.08545 RPM         = +400.00000 RPM         + 0.0214%
+#define DECIMATE_BASE_SPEED_NORM         0.0666809082  // normalized
+#define DECIMATE_BASE_SPEED_SCALE        6.000000e+03  // RPM
+#define DECIMATE_BASE_SPEED_ENG         41.8968502713  // RPM
 /* Velocity filter threshold, below which a slow filter is used */
-#define MCAF_PLL_VELOCITY_FILTER_THRESHOLD      21845      // Q15(  0.66666) =   +3.99994 kRPM        =   +4.00000 kRPM        - 0.0015%
+#define MCAF_PLL_VELOCITY_FILTER_THRESHOLD            21845      // Q15(  0.66666) =   +3.99994 kRPM        =   +4.00000 kRPM        - 0.0015%
+#define MCAF_PLL_VELOCITY_FILTER_THRESHOLD_NORM    0.6666564941  // normalized
+#define MCAF_PLL_VELOCITY_FILTER_THRESHOLD_SCALE   6.000000e+03  // RPM
+#define MCAF_PLL_VELOCITY_FILTER_THRESHOLD_ENG   418.8726289134  // RPM
 /* Number of PLL execution steps per deltaI calculation.
  * This undersampling prescaler must be a power of two
  */
@@ -86,7 +110,10 @@ extern "C" {
 /* Add one-cycle delay to match current and voltage sample timing */
 #define MCAF_PLL_DELAY_MATCH                    1
 /* Empirical scaling factor for 1/Ke scaling */
-#define MCAF_PLL_KE_INVERSE_SCALING         16384      // Q14(  1.00000) =   +1.00000             =   +1.00000             + 0.0000%
+#define MCAF_PLL_KE_INVERSE_SCALING            16384      // Q14(  1.00000) =   +1.00000             =   +1.00000             + 0.0000%
+#define MCAF_PLL_KE_INVERSE_SCALING_NORM    1.0000000000  // normalized
+#define MCAF_PLL_KE_INVERSE_SCALING_SCALE   1.0000000000
+#define MCAF_PLL_KE_INVERSE_SCALING_ENG     1.0000000000
 
 #define INITOFFSET_TRANS_OPEN_CLSD  0x0000       // initial offset added to estimated angle value
 
@@ -94,4 +121,4 @@ extern "C" {
 }
 #endif
 
-#endif // __PLL_PARAMS_H
+#endif /* MCAF_PLL_PARAMS_H */

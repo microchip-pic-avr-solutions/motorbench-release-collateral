@@ -64,6 +64,9 @@
 */
 #include <stdint.h>
 
+#ifdef __cplusplus  // Provide C++ Compatability
+    extern "C" {
+#endif
 
 /**
  * Compute limit(x + ofs_out, min, max)
@@ -87,10 +90,7 @@ static inline int16_t MC_adjust_zero_sequence(int16_t x, int16_t ofs_out, int16_
     );
     return w;
 }
-
-#ifdef __cplusplus  // Provide C++ Compatability
-    extern "C" {
+#ifdef __cplusplus  // Provide C++ Compatibility
+    }
 #endif
-
 #endif // _MOTOR_CONTROL_INLINE_INTERNAL_H_
-

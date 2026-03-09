@@ -7,7 +7,7 @@
  */ /*
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -42,8 +42,8 @@
  *
  *
  ******************************************************************************/
-#ifndef __ZSMT_PARAMS_H
-#define __ZSMT_PARAMS_H
+#ifndef MCAF_ZSMT_PARAMS_H
+#define MCAF_ZSMT_PARAMS_H
 
 #ifdef  __cplusplus
 extern "C" {
@@ -73,9 +73,9 @@ extern "C" {
  * angleProbeCurrent:              2.703  A
  * angleProbeTime:                10.000 ms
  * angleProbeAccumGain:                1  
- * angleProbeSlewTime:           271.598 us
- * angleProbeSlewRate:             9.952 kA/s
- * angleProbeBlankingTime:       724.260 us
+ * angleProbeSlewTime:           599.558 us
+ * angleProbeSlewRate:             4.508 kA/s
+ * angleProbeBlankingTime:         1.599 ms
  * correctionGainDc:               0.000  rad/A
  * pllLockTime:                   10.000 ms
  * pllLockSpeedLimit:              6.283  rad/s
@@ -85,43 +85,102 @@ extern "C" {
  */
 
 /* Excitation voltage amplitude */
-#define ZSMT_EXCITATION_VOLTAGE_AMPLITUDE        971      // Q15(  0.02963) =   +2.11280 V           =   +2.11285 V           - 0.0020%
+#define ZSMT_EXCITATION_VOLTAGE_AMPLITUDE              971      // Q15(  0.02963) =   +2.11280 V           =   +2.11285 V           - 0.0020%
+#define ZSMT_EXCITATION_VOLTAGE_AMPLITUDE_NORM    0.0296325684  // normalized
+#define ZSMT_EXCITATION_VOLTAGE_AMPLITUDE_SCALE  71.3000000000  // V
+#define ZSMT_EXCITATION_VOLTAGE_AMPLITUDE_ENG     2.1128021240  // V
 /* Proportional gain of PLL = 2*zeta/B/tau */
 #define ZSMT_PLL_KP                         18432      // Q14(  1.12500) = +900.00000 rad/s       = +900.00900 rad/s       - 0.0010%
 #define ZSMT_PLL_KP_Q                          14
+#define ZSMT_PLL_KP_NORM                 1.1250000000  // normalized
+#define ZSMT_PLL_KP_SCALE              800.0000000000  // rad/s
+#define ZSMT_PLL_KP_ENG                900.0000000000  // rad/s
 /* Integral gain of PLL = 1/B/tau^2 */
 #define ZSMT_PLL_KI                           246      // Q16(  0.00375) =  +30.02930 krad/s^2    =  +30.00030 krad/s^2    + 0.0967%
+#define ZSMT_PLL_KI_NORM                 0.0037536621  // normalized
+#define ZSMT_PLL_KI_SCALE                8.000000e+06  // rad/s^2
+#define ZSMT_PLL_KI_ENG                  3.002930e+04  // rad/s^2
 /* PLL integrator time scaling factor */
 #define ZSMT_PLL_DT                          2621      // Q16(  0.03999) =  +49.99161 us          =  +50.00000 us          - 0.0168%
+#define ZSMT_PLL_DT_NORM                 0.0399932861  // normalized
+#define ZSMT_PLL_DT_SCALE                0.0012500000  // s
+#define ZSMT_PLL_DT_ENG                  4.999161e-05  // s
 /* Scaling gain for HFI error */
 #define ZSMT_ERROR_GAIN                     15606      // Q6(243.84375)  = +243.84375             = +243.83691             + 0.0028%
+#define ZSMT_ERROR_GAIN_NORM           243.8437500000  // normalized
+#define ZSMT_ERROR_GAIN_SCALE            1.0000000000
+#define ZSMT_ERROR_GAIN_ENG            243.8437500000
 /* Error limit for PLL */
 #define ZSMT_ERROR_LIMIT                    32767      // Q15(  0.99997) = +999.96948 m           = +999.97000 m           - 0.0001%
+#define ZSMT_ERROR_LIMIT_NORM            0.9999694824  // normalized
+#define ZSMT_ERROR_LIMIT_SCALE           1.0000000000
+#define ZSMT_ERROR_LIMIT_ENG             0.9999694824
 #define ZSMT_PLL_EXECUTION_DIVIDER                   2 // ()         defines PLL execution rate based on main control update rate
 /* Pole of input low-pass filter */
 #define ZSMT_FILTER_GAIN                    65535      // Q16(  0.99998) =   +9.99985 krad/s      =  +20.00000 krad/s      -50.0008%
+#define ZSMT_FILTER_GAIN_NORM            0.9999847412  // normalized
+#define ZSMT_FILTER_GAIN_SCALE           1.000000e+04  // rad/s
+#define ZSMT_FILTER_GAIN_ENG             9.999847e+03  // rad/s
 /* Align delay */
 #define ZSMT_ALIGN_TIME                        20      // Q0( 20.00000)  =   +1.00000 ms          =   +1.00000 ms          + 0.0000%
+#define ZSMT_ALIGN_TIME_NORM            20.0000000000  // normalized
+#define ZSMT_ALIGN_TIME_SCALE            5.000000e-05  // s
+#define ZSMT_ALIGN_TIME_ENG              0.0010000000  // s
 /* Angle lock delay */
 #define ZSMT_ANGLE_LOCK_DELAY                1000      // Q0(1000.00000) =  +50.00000 ms          =  +50.00000 ms          + 0.0000%
+#define ZSMT_ANGLE_LOCK_DELAY_NORM       1.000000e+03  // normalized
+#define ZSMT_ANGLE_LOCK_DELAY_SCALE      5.000000e-05  // s
+#define ZSMT_ANGLE_LOCK_DELAY_ENG        0.0500000000  // s
 /* Angle probe current */
 #define ZSMT_ANGLE_PROBE_CURRENT             2031      // Q15(  0.06198) =   +2.70238 A           =   +2.70300 A           - 0.0229%
+#define ZSMT_ANGLE_PROBE_CURRENT_NORM    0.0619812012  // normalized
+#define ZSMT_ANGLE_PROBE_CURRENT_SCALE  43.6000000000  // A
+#define ZSMT_ANGLE_PROBE_CURRENT_ENG     2.7023803711  // A
 /* Angle probe duration */
 #define ZSMT_ANGLE_PROBE_TIME                 200      // Q0(200.00000)  =  +10.00000 ms          =  +10.00000 ms          + 0.0000%
+#define ZSMT_ANGLE_PROBE_TIME_NORM     200.0000000000  // normalized
+#define ZSMT_ANGLE_PROBE_TIME_SCALE      5.000000e-05  // s
+#define ZSMT_ANGLE_PROBE_TIME_ENG        0.0100000000  // s
 /* Angle probe accumulator gain */
-#define ZSMT_ANGLE_PROBE_ACCUM_GAIN           328      // Q16(  0.00500) =   +1.00098             =   +1.00000             + 0.0977%
+#define ZSMT_ANGLE_PROBE_ACCUM_GAIN              328      // Q16(  0.00500) =   +1.00098             =   +1.00000             + 0.0977%
+#define ZSMT_ANGLE_PROBE_ACCUM_GAIN_NORM    0.0050048828  // normalized
+#define ZSMT_ANGLE_PROBE_ACCUM_GAIN_SCALE 200.0000000000
+#define ZSMT_ANGLE_PROBE_ACCUM_GAIN_ENG     1.0009765625
 /* Angle probe blanking time */
-#define ZSMT_ANGLE_PROBE_BLANKING_TIME         14      // Q0( 14.00000)  = +700.00000 us          = +724.26017 us          - 3.3496%
+#define ZSMT_ANGLE_PROBE_BLANKING_TIME               32      // Q0( 32.00000)  =   +1.60000 ms          =   +1.59882 ms          + 0.0737%
+#define ZSMT_ANGLE_PROBE_BLANKING_TIME_NORM   32.0000000000  // normalized
+#define ZSMT_ANGLE_PROBE_BLANKING_TIME_SCALE   5.000000e-05  // s
+#define ZSMT_ANGLE_PROBE_BLANKING_TIME_ENG     0.0016000000  // s
+/* Angle probe slew time */
+#define ZSMT_ANGLE_PROBE_SLEW_TIME               12      // Q0( 12.00000)  = +600.00000 us          = +599.55831 us          + 0.0737%
+#define ZSMT_ANGLE_PROBE_SLEW_TIME_NORM   12.0000000000  // normalized
+#define ZSMT_ANGLE_PROBE_SLEW_TIME_SCALE   5.000000e-05  // s
+#define ZSMT_ANGLE_PROBE_SLEW_TIME_ENG     0.0006000000  // s
 /* Angle probe slew rate */
-#define ZSMT_ANGLE_PROBE_SLEW_RATE            374      // Q15(  0.01141) =   +9.95264 kA/s        =   +9.95222 kA/s        + 0.0041%
+#define ZSMT_ANGLE_PROBE_SLEW_RATE              169      // Q15(  0.00516) =   +4.49731 kA/s        =   +4.50832 kA/s        - 0.2441%
+#define ZSMT_ANGLE_PROBE_SLEW_RATE_NORM    0.0051574707  // normalized
+#define ZSMT_ANGLE_PROBE_SLEW_RATE_SCALE   8.720000e+05  // A/s
+#define ZSMT_ANGLE_PROBE_SLEW_RATE_ENG     4.497314e+03  // A/s
 /* DC correction gain */
 #define ZSMT_CORRECTION_GAIN_DC                 0      // Q14(  0.00000) =   +0.00000 rad/A       =   +0.00000 rad/A       + 0.0000%
+#define ZSMT_CORRECTION_GAIN_DC_NORM     0.000000e+00  // normalized
+#define ZSMT_CORRECTION_GAIN_DC_SCALE    0.0344040138  // rad/A
+#define ZSMT_CORRECTION_GAIN_DC_ENG      0.000000e+00  // rad/A
 /* Required PLL lock time */
 #define ZSMT_PLL_LOCK_TIME                    200      // Q0(200.00000)  =  +10.00000 ms          =  +10.00000 ms          + 0.0000%
+#define ZSMT_PLL_LOCK_TIME_NORM        200.0000000000  // normalized
+#define ZSMT_PLL_LOCK_TIME_SCALE         5.000000e-05  // s
+#define ZSMT_PLL_LOCK_TIME_ENG           0.0100000000  // s
 /* Maximum allowed speed for ZSMT startup */
-#define ZSMT_PLL_LOCK_SPEED_LIMIT             328      // Q15(  0.01001) =   +6.28932 rad/s       =   +6.28319 rad/s       + 0.0977%
+#define ZSMT_PLL_LOCK_SPEED_LIMIT              328      // Q15(  0.01001) =   +6.28932 rad/s       =   +6.28319 rad/s       + 0.0977%
+#define ZSMT_PLL_LOCK_SPEED_LIMIT_NORM    0.0100097656  // normalized
+#define ZSMT_PLL_LOCK_SPEED_LIMIT_SCALE 628.3185307180  // rad/s
+#define ZSMT_PLL_LOCK_SPEED_LIMIT_ENG     6.2893212303  // rad/s
 /* Maximum allowed squared current for ZSMT startup */
-#define ZSMT_PLL_LOCK_CURRENT_SQUARED_LIMIT        126      // Q15(  0.00385) =   +7.30960 A^2         =   +7.30621 A^2         + 0.0464%
+#define ZSMT_PLL_LOCK_CURRENT_SQUARED_LIMIT              126      // Q15(  0.00385) =   +7.30960 A^2         =   +7.30621 A^2         + 0.0464%
+#define ZSMT_PLL_LOCK_CURRENT_SQUARED_LIMIT_NORM    0.0038452148  // normalized
+#define ZSMT_PLL_LOCK_CURRENT_SQUARED_LIMIT_SCALE   1.900960e+03  // A^2
+#define ZSMT_PLL_LOCK_CURRENT_SQUARED_LIMIT_ENG     7.3095996094  // A^2
 
 /**
  * Returns whether ZS/MT estimator operates in a standalone manner.
@@ -138,4 +197,4 @@ inline static bool ZSMT_IsStandaloneEstimator(void)
 }
 #endif
 
-#endif // __ZSMT_PARAMS_H
+#endif /* MCAF_ZSMT_PARAMS_H */

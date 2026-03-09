@@ -14,7 +14,7 @@
 */
 
 /*
-© [2025] Microchip Technology Inc. and its subsidiaries.
+© [2026] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -50,7 +50,7 @@
  * @brief    Defines the deprecated SCCPx_Timer_PeriodCountSet or TMRx_PeriodCountSet API. 
  *           Set it to true for backward compatibility. 
 */
-#define TIMER_PERIODCOUNTSET_API_SUPPORT false
+#define  TIMER_PERIODCOUNTSET_API_SUPPORT 0
 
 /**
  @ingroup  timerdriver

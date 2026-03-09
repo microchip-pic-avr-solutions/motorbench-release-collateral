@@ -9,7 +9,7 @@
  */ /*
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -44,8 +44,8 @@
  *
  *
  ******************************************************************************/
-#ifndef __MOTOR_PARAMS_H
-#define __MOTOR_PARAMS_H
+#ifndef MCAF_MOTOR_PARAMS_H
+#define MCAF_MOTOR_PARAMS_H
 
 #ifdef  __cplusplus
 extern "C" {
@@ -54,76 +54,133 @@ extern "C" {
 /* Stator resistance (line-to-neutral) */
 #define MCAF_MOTOR_RS                        4829      // Q15(  0.14737) = +240.99626 mohm        = +241.00000 mohm        - 0.0015%
 #define MCAF_MOTOR_RS_Q                        15
+#define MCAF_MOTOR_RS_NORM               0.1473693848  // normalized
+#define MCAF_MOTOR_RS_SCALE              1.6353211009  // ohm
+#define MCAF_MOTOR_RS_ENG                0.2409962645  // ohm
 
 /* Maximum of Ld, Lq */
 #define MCAF_MOTOR_LMAX_BASE_DT             13275      // Q13(  1.62048) = +132.50053 uH          = +132.50000 uH          + 0.0004%
 #define MCAF_MOTOR_LMAX_BASE_DT_Q              13
+#define MCAF_MOTOR_LMAX_BASE_DT_NORM     1.6204833984  // normalized
+#define MCAF_MOTOR_LMAX_BASE_DT_SCALE    8.176606e-05  // H
+#define MCAF_MOTOR_LMAX_BASE_DT_ENG      0.0001325005  // H
 
 /* Stator inductance (line-to-neutral) */
 #define MCAF_MOTOR_LS_BASE_DT               11747      // Q13(  1.43396) = +117.24925 uH          = +117.25000 uH          - 0.0006%
 #define MCAF_MOTOR_LS_BASE_DT_Q                13
+#define MCAF_MOTOR_LS_BASE_DT_NORM       1.4339599609  // normalized
+#define MCAF_MOTOR_LS_BASE_DT_SCALE      8.176606e-05  // H
+#define MCAF_MOTOR_LS_BASE_DT_ENG        0.0001172492  // H
 
 /* Stator d-axis inductance (line-to-neutral) */
 #define MCAF_MOTOR_LD_BASE_DT               10219      // Q13(  1.24744) = +101.99796 uH          = +102.00000 uH          - 0.0020%
 #define MCAF_MOTOR_LD_BASE_DT_Q                13
+#define MCAF_MOTOR_LD_BASE_DT_NORM       1.2474365234  // normalized
+#define MCAF_MOTOR_LD_BASE_DT_SCALE      8.176606e-05  // H
+#define MCAF_MOTOR_LD_BASE_DT_ENG        0.0001019980  // H
 
 /* Stator q-axis inductance (line-to-neutral) */
 #define MCAF_MOTOR_LQ_BASE_DT               13275      // Q13(  1.62048) = +132.50053 uH          = +132.50000 uH          + 0.0004%
 #define MCAF_MOTOR_LQ_BASE_DT_Q                13
+#define MCAF_MOTOR_LQ_BASE_DT_NORM       1.6204833984  // normalized
+#define MCAF_MOTOR_LQ_BASE_DT_SCALE      8.176606e-05  // H
+#define MCAF_MOTOR_LQ_BASE_DT_ENG        0.0001325005  // H
 
 /* Common-mode stator inductance (line-to-neutral) */
 #define MCAF_MOTOR_L0_BASE_DT               11747      // Q13(  1.43396) = +117.24925 uH          = +117.25000 uH          - 0.0006%
 #define MCAF_MOTOR_L0_BASE_DT_Q                13
+#define MCAF_MOTOR_L0_BASE_DT_NORM       1.4339599609  // normalized
+#define MCAF_MOTOR_L0_BASE_DT_SCALE      8.176606e-05  // H
+#define MCAF_MOTOR_L0_BASE_DT_ENG        0.0001172492  // H
 
 /* Differential-mode stator inductance (line-to-neutral) */
 #define MCAF_MOTOR_L1_BASE_DT               -1528      // Q13( -0.18652) =  -15.25129 uH          =  -15.25000 uH          + 0.0084%
 #define MCAF_MOTOR_L1_BASE_DT_Q                13
+#define MCAF_MOTOR_L1_BASE_DT_NORM      -0.1865234375  // normalized
+#define MCAF_MOTOR_L1_BASE_DT_SCALE      8.176606e-05  // H
+#define MCAF_MOTOR_L1_BASE_DT_ENG       -1.525129e-05  // H
 
 /* Saliency ratio Lq/Ld */
-#define MCAF_MOTOR_SALIENCY_RATIO            5321      // Q12(  1.29907) =   +1.29907             =   +1.29902             + 0.0041%
+#define MCAF_MOTOR_SALIENCY_RATIO             5321      // Q12(  1.29907) =   +1.29907             =   +1.29902             + 0.0041%
+#define MCAF_MOTOR_SALIENCY_RATIO_NORM    1.2990722656  // normalized
+#define MCAF_MOTOR_SALIENCY_RATIO_SCALE   1.0000000000
+#define MCAF_MOTOR_SALIENCY_RATIO_ENG     1.2990722656
 
 /* Relative saliency = (Lq-Ld)/(Lq+Ld) */
-#define MCAF_MOTOR_RELATIVE_SALIENCY         4262      // Q15(  0.13007) = +130.06592 m           = +130.06397 m           + 0.0015%
+#define MCAF_MOTOR_RELATIVE_SALIENCY             4262      // Q15(  0.13007) = +130.06592 m           = +130.06397 m           + 0.0015%
+#define MCAF_MOTOR_RELATIVE_SALIENCY_NORM    0.1300659180  // normalized
+#define MCAF_MOTOR_RELATIVE_SALIENCY_SCALE   1.0000000000
+#define MCAF_MOTOR_RELATIVE_SALIENCY_ENG     0.1300659180
 
 /* Back-EMF constant of the motor */
 #define MCAF_MOTOR_KE                        1340      // Q12(  0.32715) =  +37.12398 mV/(rad/s)  =  +37.12916 mV/(rad/s)  - 0.0140%
 #define MCAF_MOTOR_KE_Q                        12
+#define MCAF_MOTOR_KE_NORM               0.3271484375  // normalized
+#define MCAF_MOTOR_KE_SCALE              0.1134774744  // V/(rad/s)
+#define MCAF_MOTOR_KE_ENG                0.0371239784  // V/(rad/s)
 
 /* Inverse of BEMF constant of the motor */
 #define MCAF_MOTOR_KE_INVERSE               12519      // Q12(  3.05640) =  +26.93395 (rad/s)/V   =  +26.93301 (rad/s)/V   + 0.0035%
 #define MCAF_MOTOR_KE_INVERSE_Q                12
+#define MCAF_MOTOR_KE_INVERSE_NORM       3.0563964844  // normalized
+#define MCAF_MOTOR_KE_INVERSE_SCALE      8.8123216089  // (rad/s)/V
+#define MCAF_MOTOR_KE_INVERSE_ENG       26.9339487848  // (rad/s)/V
 
 /* Magnetic Flux of the motor */
-#define MCAF_MOTOR_PSI_BASE_OMEGA_E          5361      // Q14(  0.32721) =   +9.28273 mV*s        =   +9.28229 mV*s        + 0.0047%
-#define MCAF_MOTOR_PSI_BASE_OMEGA_E_Q          14
+#define MCAF_MOTOR_PSI_BASE_OMEGA_E             5361      // Q14(  0.32721) =   +9.28273 mV*s        =   +9.28229 mV*s        + 0.0047%
+#define MCAF_MOTOR_PSI_BASE_OMEGA_E_Q             14
+#define MCAF_MOTOR_PSI_BASE_OMEGA_E_NORM    0.3272094727  // normalized
+#define MCAF_MOTOR_PSI_BASE_OMEGA_E_SCALE   0.0283693686  // V*s
+#define MCAF_MOTOR_PSI_BASE_OMEGA_E_ENG     0.0092827261  // V*s
 
 /* Magnetic Flux of the motor */
 #define MCAF_MOTOR_PSI_BASE_DT              21330      // Q13(  2.60376) =   +9.28240 mV*s        =   +9.28229 mV*s        + 0.0012%
 #define MCAF_MOTOR_PSI_BASE_DT_Q               13
+#define MCAF_MOTOR_PSI_BASE_DT_NORM      2.6037597656  // normalized
+#define MCAF_MOTOR_PSI_BASE_DT_SCALE     0.0035650000  // V*s
+#define MCAF_MOTOR_PSI_BASE_DT_ENG       0.0092824036  // V*s
 
 /* Maximum of Ld, Lq */
-#define MCAF_MOTOR_LMAX_BASE_OMEGA_E         6673      // Q15(  0.20364) = +132.50564 uH          = +132.50000 uH          + 0.0043%
-#define MCAF_MOTOR_LMAX_BASE_OMEGA_E_Q         15
+#define MCAF_MOTOR_LMAX_BASE_OMEGA_E             6673      // Q15(  0.20364) = +132.50564 uH          = +132.50000 uH          + 0.0043%
+#define MCAF_MOTOR_LMAX_BASE_OMEGA_E_Q             15
+#define MCAF_MOTOR_LMAX_BASE_OMEGA_E_NORM    0.2036437988  // normalized
+#define MCAF_MOTOR_LMAX_BASE_OMEGA_E_SCALE   0.0006506736  // H
+#define MCAF_MOTOR_LMAX_BASE_OMEGA_E_ENG     0.0001325056  // H
 
 /* Stator inductance (line-to-neutral) */
-#define MCAF_MOTOR_LS_BASE_OMEGA_E           5905      // Q15(  0.18021) = +117.25548 uH          = +117.25000 uH          + 0.0047%
-#define MCAF_MOTOR_LS_BASE_OMEGA_E_Q           15
+#define MCAF_MOTOR_LS_BASE_OMEGA_E             5905      // Q15(  0.18021) = +117.25548 uH          = +117.25000 uH          + 0.0047%
+#define MCAF_MOTOR_LS_BASE_OMEGA_E_Q             15
+#define MCAF_MOTOR_LS_BASE_OMEGA_E_NORM    0.1802062988  // normalized
+#define MCAF_MOTOR_LS_BASE_OMEGA_E_SCALE   0.0006506736  // H
+#define MCAF_MOTOR_LS_BASE_OMEGA_E_ENG     0.0001172555  // H
 
 /* Stator d-axis inductance (line-to-neutral) */
-#define MCAF_MOTOR_LD_BASE_OMEGA_E           5137      // Q15(  0.15677) = +102.00532 uH          = +102.00000 uH          + 0.0052%
-#define MCAF_MOTOR_LD_BASE_OMEGA_E_Q           15
+#define MCAF_MOTOR_LD_BASE_OMEGA_E             5137      // Q15(  0.15677) = +102.00532 uH          = +102.00000 uH          + 0.0052%
+#define MCAF_MOTOR_LD_BASE_OMEGA_E_Q             15
+#define MCAF_MOTOR_LD_BASE_OMEGA_E_NORM    0.1567687988  // normalized
+#define MCAF_MOTOR_LD_BASE_OMEGA_E_SCALE   0.0006506736  // H
+#define MCAF_MOTOR_LD_BASE_OMEGA_E_ENG     0.0001020053  // H
 
 /* Stator q-axis inductance (line-to-neutral) */
-#define MCAF_MOTOR_LQ_BASE_OMEGA_E           6673      // Q15(  0.20364) = +132.50564 uH          = +132.50000 uH          + 0.0043%
-#define MCAF_MOTOR_LQ_BASE_OMEGA_E_Q           15
+#define MCAF_MOTOR_LQ_BASE_OMEGA_E             6673      // Q15(  0.20364) = +132.50564 uH          = +132.50000 uH          + 0.0043%
+#define MCAF_MOTOR_LQ_BASE_OMEGA_E_Q             15
+#define MCAF_MOTOR_LQ_BASE_OMEGA_E_NORM    0.2036437988  // normalized
+#define MCAF_MOTOR_LQ_BASE_OMEGA_E_SCALE   0.0006506736  // H
+#define MCAF_MOTOR_LQ_BASE_OMEGA_E_ENG     0.0001325056  // H
 
 /* Common-mode stator inductance (line-to-neutral) */
-#define MCAF_MOTOR_L0_BASE_OMEGA_E           5905      // Q15(  0.18021) = +117.25548 uH          = +117.25000 uH          + 0.0047%
-#define MCAF_MOTOR_L0_BASE_OMEGA_E_Q           15
+#define MCAF_MOTOR_L0_BASE_OMEGA_E             5905      // Q15(  0.18021) = +117.25548 uH          = +117.25000 uH          + 0.0047%
+#define MCAF_MOTOR_L0_BASE_OMEGA_E_Q             15
+#define MCAF_MOTOR_L0_BASE_OMEGA_E_NORM    0.1802062988  // normalized
+#define MCAF_MOTOR_L0_BASE_OMEGA_E_SCALE   0.0006506736  // H
+#define MCAF_MOTOR_L0_BASE_OMEGA_E_ENG     0.0001172555  // H
 
 /* Differential-mode stator inductance (line-to-neutral) */
-#define MCAF_MOTOR_L1_BASE_OMEGA_E           -768      // Q15( -0.02344) =  -15.25016 uH          =  -15.25000 uH          + 0.0011%
-#define MCAF_MOTOR_L1_BASE_OMEGA_E_Q           15
+#define MCAF_MOTOR_L1_BASE_OMEGA_E             -768      // Q15( -0.02344) =  -15.25016 uH          =  -15.25000 uH          + 0.0011%
+#define MCAF_MOTOR_L1_BASE_OMEGA_E_Q             15
+#define MCAF_MOTOR_L1_BASE_OMEGA_E_NORM   -0.0234375000  // normalized
+#define MCAF_MOTOR_L1_BASE_OMEGA_E_SCALE   0.0006506736  // H
+#define MCAF_MOTOR_L1_BASE_OMEGA_E_ENG    -1.525016e-05  // H
 
 
 /* 
@@ -186,4 +243,4 @@ extern "C" {
 }
 #endif
 
-#endif // __MOTOR_PARAMS_H
+#endif /* MCAF_MOTOR_PARAMS_H */

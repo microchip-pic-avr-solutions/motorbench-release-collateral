@@ -9,13 +9,13 @@
  *
  * @skipline @version   Firmware Driver Version 1.6.1
  *
- * @skipline @version   PLIB Version 1.6.5
+ * @skipline @version   PLIB Version 1.6.6
  *
  * @skipline  Device : dsPIC33CK256MP508
 */
 
 /*
-© [2025] Microchip Technology Inc. and its subsidiaries.
+© [2026] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -54,7 +54,7 @@ static void (*SCCP1_TimeoutHandler)(void) = NULL;
 
 // Defines an object for TIMER_INTERFACE
 
-const struct TIMER_INTERFACE MCC_TMR_TICK = {
+const struct TIMER_INTERFACE MCC_TMR_PROFILE = {
     .Initialize     = &SCCP1_Timer_Initialize,
     .Deinitialize   = &SCCP1_Timer_Deinitialize,
     .Start          = &SCCP1_Timer_Start,
@@ -67,47 +67,44 @@ const struct TIMER_INTERFACE MCC_TMR_TICK = {
     .PeriodGet	    = &SCCP1_Timer_PeriodGet,
     .InterruptPrioritySet = &SCCP1_Timer_InterruptPrioritySet,
     .TimeoutCallbackRegister = &SCCP1_Timer_TimeoutCallbackRegister,
-    .Tasks          = NULL,
+    .Tasks          = &SCCP1_Timer_Tasks,
 };
 
 // Section: Driver Interface Function Definitions
 
 void SCCP1_Timer_Initialize(void)
 {
-    // MOD 16-Bit/32-Bit Timer; CCSEL disabled; TMR32 16 Bit; TMRPS 1:4; CLKSEL FOSC/2; TMRSYNC disabled; CCPSLP disabled; CCPSIDL disabled; CCPON disabled; 
-    CCP1CON1L = 0x40; //The module is disabled, till other settings are configured
+    // MOD 16-Bit/32-Bit Timer; CCSEL disabled; TMR32 16 Bit; TMRPS 1:1; CLKSEL FOSC/2; TMRSYNC disabled; CCPSLP disabled; CCPSIDL disabled; CCPON disabled; 
+    CCP1CON1L = 0x0U; //The module is disabled, till other settings are configured
     //SYNC None; ALTSYNC disabled; ONESHOT disabled; TRIGEN disabled; IOPS Each Time Base Period Match; RTRGEN disabled; OPSRC Timer Interrupt Event; 
-    CCP1CON1H = 0x0;
+    CCP1CON1H = 0x0U;
     //ASDG 0x0; SSDG disabled; ASDGM disabled; PWMRSEN disabled; 
-    CCP1CON2L = 0x0;
+    CCP1CON2L = 0x0U;
     //ICSEL ; AUXOUT Disabled; ICGSM Level-Sensitive mode; OCAEN disabled; OENSYNC disabled; 
-    CCP1CON2H = 0x0;
+    CCP1CON2H = 0x0U;
     //PSSACE Tri-state; POLACE disabled; OSCNT None; OETRIG disabled; 
-    CCP1CON3H = 0x0;
+    CCP1CON3H = 0x0U;
     //ICOV disabled; ICDIS disabled; SCEVT disabled; ASEVT disabled; TRCLR disabled; TRSET disabled; ICGARM disabled; 
-    CCP1STATL = 0x0;
+    CCP1STATL = 0x0U;
     //TMRL 0x0000; 
-    CCP1TMRL = 0x0;
+    CCP1TMRL = 0x0U;
     //TMRH 0x0000; 
-    CCP1TMRH = 0x0;
-    //PRL 24999; 
-    CCP1PRL = 0x61A7;
+    CCP1TMRH = 0x0U;
+    //PRL 65535; 
+    CCP1PRL = 0xFFFFU;
     //PRH 0; 
-    CCP1PRH = 0x0;
+    CCP1PRH = 0x0U;
     //CMPA 0; 
-    CCP1RA = 0x0;
+    CCP1RA = 0x0U;
     //CMPB 0; 
-    CCP1RB = 0x0;
+    CCP1RB = 0x0U;
     //BUFL 0x0000; 
-    CCP1BUFL = 0x0;
+    CCP1BUFL = 0x0U;
     //BUFH 0x0000; 
-    CCP1BUFH = 0x0;
+    CCP1BUFH = 0x0U;
     
     SCCP1_Timer_TimeoutCallbackRegister(&SCCP1_TimeoutCallback);
 
-    IFS0bits.CCT1IF = 0;
-    // Enabling SCCP1 interrupt
-    IEC0bits.CCT1IE = 1;
 
     CCP1CON1Lbits.CCPON = 1; //Enable Module
 }
@@ -116,41 +113,30 @@ void SCCP1_Timer_Deinitialize(void)
 {
     CCP1CON1Lbits.CCPON = 0;
     
-    IFS0bits.CCT1IF = 0;
-    IEC0bits.CCT1IE = 0;
-    
-    CCP1CON1L = 0x0; 
-    CCP1CON1H = 0x0; 
-    CCP1CON2L = 0x0; 
-    CCP1CON2H = 0x100; 
-    CCP1CON3H = 0x0; 
-    CCP1STATL = 0x0; 
-    CCP1TMRL = 0x0; 
-    CCP1TMRH = 0x0; 
-    CCP1PRL = 0xFFFF; 
-    CCP1PRH = 0xFFFF; 
-    CCP1RA = 0x0; 
-    CCP1RB = 0x0; 
-    CCP1BUFL = 0x0; 
-    CCP1BUFH = 0x0; 
+    CCP1CON1L = 0x0U; 
+    CCP1CON1H = 0x0U; 
+    CCP1CON2L = 0x0U; 
+    CCP1CON2H = 0x100U; 
+    CCP1CON3H = 0x0U; 
+    CCP1STATL = 0x0U; 
+    CCP1TMRL = 0x0U; 
+    CCP1TMRH = 0x0U; 
+    CCP1PRL = 0xFFFFU; 
+    CCP1PRH = 0xFFFFU; 
+    CCP1RA = 0x0U; 
+    CCP1RB = 0x0U; 
+    CCP1BUFL = 0x0U; 
+    CCP1BUFH = 0x0U; 
 }
 
 void SCCP1_Timer_Start(void)
 {
-    IFS0bits.CCT1IF = 0;
-    // Enable SCCP1 interrupt
-    IEC0bits.CCT1IE = 1;
-    
     CCP1CON1Lbits.CCPON = 1;
 }
 
 void SCCP1_Timer_Stop(void)
 {
     CCP1CON1Lbits.CCPON = 0;
-    
-    IFS0bits.CCT1IF = 0;
-    // Disable SCCP1 interrupt
-    IEC0bits.CCT1IE = 0;
 }
 
 void SCCP1_Timer_PeriodSet(uint32_t count)
@@ -169,10 +155,10 @@ void SCCP1_Timer_PeriodSet(uint32_t count)
 }
 
 uint32_t SCCP1_Timer_CounterGet(void)
-{
-    uint16_t tmrLow = 0;
-    uint16_t tmrHigh = 0;
-    uint16_t tmrLowRepeat = 0;
+{ 
+    uint16_t tmrLow;
+    uint16_t tmrHigh;
+    uint16_t tmrLowRepeat;
     
     if(CCP1CON1Lbits.T32 == 1)
     {
@@ -221,20 +207,25 @@ void __attribute__ ((weak)) SCCP1_TimeoutCallback (void)
 
 } 
 
-void __attribute__ ( ( interrupt, no_auto_psv ) ) _CCT1Interrupt (void)
+void SCCP1_Timer_Tasks(void)
 {
-    if(NULL != SCCP1_TimeoutHandler)
+    if(IFS0bits.CCT1IF == 1)
     {
-        (*SCCP1_TimeoutHandler)();
+        if(NULL != SCCP1_TimeoutHandler)
+        {
+            (*SCCP1_TimeoutHandler)();
+        }
+        IFS0bits.CCT1IF = 0;
     }
-    IFS0bits.CCT1IF = 0;
 }
 
-void SCCP1_Timer_PeriodCountSet(size_t count)
+#if TIMER_PERIODCOUNTSET_API_SUPPORT
+void SCCP1_PeriodCountSet(size_t count)
 {
-    CCP1PRL = (uint16_t)(count & MASK_32_BIT_LOW);
-    CCP1CON1Lbits.T32 = 0;
+    CCP1PRL = count & MASK_32_BIT_LOW;
+    CCP1PRH = (count & MASK_32_BIT_HIGH) >> 16;
 }
+#endif
 
 /**
  End of File

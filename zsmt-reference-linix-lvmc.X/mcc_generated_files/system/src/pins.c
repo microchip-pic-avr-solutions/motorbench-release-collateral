@@ -1,4 +1,4 @@
-/**
+ /**
  * PINS Generated Driver Source File 
  * 
  * @file      pins.c
@@ -9,13 +9,13 @@
  *
  * @skipline @version   Firmware Driver Version 1.0.2
  *
- * @skipline @version   PLIB Version 1.3.1
+ * @skipline @version   PLIB Version 1.4.1
  *
  * @skipline  Device : dsPIC33CK256MP508
 */
 
 /*
-© [2025] Microchip Technology Inc. and its subsidiaries.
+© [2026] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -48,66 +48,66 @@ void PINS_Initialize(void)
     /****************************************************************************
      * Setting the Output Latch SFR(s)
      ***************************************************************************/
-    LATA = 0x0000;
-    LATB = 0x0000;
-    LATC = 0x0000;
-    LATD = 0x0000;
-    LATE = 0x0000;
+    LATA = 0x0000U;
+    LATB = 0x0000U;
+    LATC = 0x0000U;
+    LATD = 0x2000U;
+    LATE = 0x0000U;
 
     /****************************************************************************
      * Setting the GPIO Direction SFR(s)
      ***************************************************************************/
-    TRISA = 0x001F;
-    TRISB = 0x0FFF;
-    TRISC = 0xFFFF;
-    TRISD = 0xDFFC;
-    TRISE = 0xFF2F;
+    TRISA = 0x001FU;
+    TRISB = 0x0FFFU;
+    TRISC = 0xFFFFU;
+    TRISD = 0xDFFCU;
+    TRISE = 0xFF2FU;
 
 
     /****************************************************************************
      * Setting the Weak Pull Up and Weak Pull Down SFR(s)
      ***************************************************************************/
-    CNPUA = 0x0000;
-    CNPUB = 0x0000;
-    CNPUC = 0x0000;
-    CNPUD = 0x0000;
-    CNPUE = 0x0000;
-    CNPDA = 0x0000;
-    CNPDB = 0x0000;
-    CNPDC = 0x0000;
-    CNPDD = 0x0000;
-    CNPDE = 0x0000;
+    CNPUA = 0x0000U;
+    CNPUB = 0x0000U;
+    CNPUC = 0x0000U;
+    CNPUD = 0x0000U;
+    CNPUE = 0x0000U;
+    CNPDA = 0x0000U;
+    CNPDB = 0x0000U;
+    CNPDC = 0x0000U;
+    CNPDD = 0x0000U;
+    CNPDE = 0x0000U;
 
 
     /****************************************************************************
      * Setting the Open Drain SFR(s)
      ***************************************************************************/
-    ODCA = 0x0000;
-    ODCB = 0x0000;
-    ODCC = 0x0000;
-    ODCD = 0x0000;
-    ODCE = 0x0000;
+    ODCA = 0x0000U;
+    ODCB = 0x0000U;
+    ODCC = 0x0000U;
+    ODCD = 0x0000U;
+    ODCE = 0x0000U;
 
 
     /****************************************************************************
      * Setting the Analog/Digital Configuration SFR(s)
      ***************************************************************************/
-    ANSELA = 0x001F;
-    ANSELB = 0x039F;
-    ANSELC = 0x00CF;
-    ANSELD = 0x0C00;
-    ANSELE = 0x000F;
+    ANSELA = 0x001FU;
+    ANSELB = 0x039FU;
+    ANSELC = 0x00CFU;
+    ANSELD = 0x0C00U;
+    ANSELE = 0x000FU;
 
     /****************************************************************************
      * Set the PPS
      ***************************************************************************/
      __builtin_write_RPCON(0x0000); // unlock PPS
 
-        RPINR18bits.U1RXR = 0x004E; //RD14->UART1:U1RX;
-        RPINR15bits.QEINDX1R = 0x003E; //RC14->QEI1:INDX1;
-        RPINR14bits.QEIA1R = 0x003C; //RC12->QEI1:QEA1;
-        RPINR14bits.QEIB1R = 0x003D; //RC13->QEI1:QEB1;
-        RPOR22bits.RP77R = 0x0001;  //RD13->UART1:U1TX;
+        RPINR15bits.QEINDX1R = 0x003EU; //RC14->QEI1:INDX1;
+        RPINR14bits.QEIA1R = 0x003CU; //RC12->QEI1:QEA1;
+        RPINR14bits.QEIB1R = 0x003DU; //RC13->QEI1:QEB1;
+        RPINR18bits.U1RXR = 0x004EU; //RD14->UART1:U1RX;
+        RPOR22bits.RP77R = 0x0001U;  //RD13->UART1:U1TX;
 
      __builtin_write_RPCON(0x0800); // lock PPS
 

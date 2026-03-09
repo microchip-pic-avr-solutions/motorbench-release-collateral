@@ -9,7 +9,7 @@
 /* *********************************************************************
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -474,7 +474,7 @@ inline bool MCAF_TorqueAngleDetect(MCAF_TORQUE_ANGLE_DETECT_T *ptorqueangle,
     
     if (detectedNow)
     {
-        ptorqueangle->quotient = __builtin_divf(ptorqueangle->gEsSqr, ptorqueangle->kxVsSqr);
+        ptorqueangle->quotient = UTIL_DivQ15(ptorqueangle->gEsSqr, ptorqueangle->kxVsSqr);
         ptorqueangle->timerInActive = 1;
         
         ptorqueangle->timerActive++;

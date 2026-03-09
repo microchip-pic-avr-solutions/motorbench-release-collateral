@@ -9,7 +9,7 @@
 /* *********************************************************************
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -44,13 +44,13 @@
  *
  * *****************************************************************************/
 
-#ifndef __MCAPI_H
-#define __MCAPI_H
+#ifndef MCAF_MCAPI_H 
+#define MCAF_MCAPI_H 
 
 #include <stdint.h>
 #include <stdbool.h>
 #include "mcapi_types.h"
-#include "math_asm.h"
+#include "math/sqrt.h"
 #include "util.h"
 #include "parameters/mcapi_params.h"
 
@@ -181,7 +181,7 @@ static inline int16_t MCAPI_CurrentMagnitudeGet(volatile MCAPI_MOTOR_DATA *pMoto
     pMotor->apiBusy = true;
     int16_t isMagSquaredFiltered = pMotor->isMagSquaredFiltered;
     pMotor->apiBusy = false;
-    return Q15SQRT(isMagSquaredFiltered);
+    return MCAF_SqrtQ15(isMagSquaredFiltered);
 }
 
 /**
@@ -398,4 +398,4 @@ static inline void MCAPI_ApplicationFaultCodeSet(volatile MCAPI_MOTOR_DATA *pMot
 }
 #endif
 
-#endif /* __MCAPI_H */
+#endif /* MCAF_MCAPI_H */

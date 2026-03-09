@@ -9,7 +9,7 @@
 /* *********************************************************************
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -70,7 +70,7 @@ void MCAF_StartupTransitioningInit(MCAF_MOTOR_STARTUP_DATA *pstartup)
     pstartup->idsat = ZSMT_ANGLE_PROBE_CURRENT;
     pstartup->angleProbeTime = ZSMT_ANGLE_PROBE_TIME;
     pstartup->idsatSlewRate = ZSMT_ANGLE_PROBE_SLEW_RATE;
-    pstartup->blankingTime = ZSMT_ANGLE_PROBE_BLANKING_TIME;
+    pstartup->compoundBlankingTime = ZSMT_ANGLE_PROBE_BLANKING_TIME + ZSMT_ANGLE_PROBE_SLEW_TIME;
     pstartup->demodAmplitudeAccum.gain = ZSMT_ANGLE_PROBE_ACCUM_GAIN;
             
     pstartup->referenceFrameInvert = false;

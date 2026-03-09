@@ -9,13 +9,13 @@
  *
  * @skipline @version   Firmware Driver Version 1.6.1
  *
- * @skipline @version   PLIB Version 1.5.4
+ * @skipline @version   PLIB Version 1.5.7
  *
  * @skipline  Device : dsPIC33CK256MP508
 */
 
 /*
-© [2025] Microchip Technology Inc. and its subsidiaries.
+© [2026] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -55,72 +55,67 @@
  *           This allows defining a structure with application specific name using 
  *           the 'Custom Name' field. Application specific name allows the API Portability.
 */
-extern const struct TIMER_INTERFACE MCC_TMR_PROFILE;
+extern const struct TIMER_INTERFACE MCC_TMR_TICK;
 
 /**
  * @ingroup  timerdriver
  * @brief    This macro defines the Custom Name for \ref TMR1_Initialize API
  */
-#define MCC_TMR_PROFILE_Initialize TMR1_Initialize
+#define MCC_TMR_TICK_Initialize TMR1_Initialize
 /**
  * @ingroup  timerdriver
  * @brief    This macro defines the Custom Name for \ref TMR1_Deinitialize API
  */
-#define MCC_TMR_PROFILE_Deinitialize TMR1_Deinitialize
-/**
- * @ingroup  timerdriver
- * @brief    This macro defines the Custom Name for \ref TMR1_Tasks API
- */
-#define MCC_TMR_PROFILE_Tasks TMR1_Tasks
+#define MCC_TMR_TICK_Deinitialize TMR1_Deinitialize
 /**
  * @ingroup  timerdriver
  * @brief    This macro defines the Custom Name for \ref TMR1_Start API
  */
-#define MCC_TMR_PROFILE_Start TMR1_Start
+#define MCC_TMR_TICK_Start TMR1_Start
 /**
  * @ingroup  timerdriver
  * @brief    This macro defines the Custom Name for \ref TMR1_Stop API
  */
-#define MCC_TMR_PROFILE_Stop TMR1_Stop
+#define MCC_TMR_TICK_Stop TMR1_Stop
 
 #if TIMER_PERIODCOUNTSET_API_SUPPORT
 /**
  * @ingroup  timerdriver
  * @brief    This macro defines the Custom Name for \ref TMR1_PeriodCountSet API
  */
-#define MCC_TMR_PROFILE_PeriodCountSet TMR1_PeriodCountSet
+#define MCC_TMR_TICK_PeriodCountSet TMR1_PeriodCountSet
 #endif
 
 /**
  * @ingroup  timerdriver
  * @brief    This macro defines the Custom Name for \ref TMR1_PeriodSet API
  */
-#define MCC_TMR_PROFILE_PeriodSet TMR1_PeriodSet
+#define MCC_TMR_TICK_PeriodSet TMR1_PeriodSet
 /**
  * @ingroup  timerdriver
  * @brief    This macro defines the Custom Name for \ref TMR1_PeriodGet API
  */
-#define MCC_TMR_PROFILE_PeriodGet TMR1_PeriodGet
+#define MCC_TMR_TICK_PeriodGet TMR1_PeriodGet
 /**
  * @ingroup  timerdriver
  * @brief    This macro defines the Custom Name for \ref TMR1_CounterGet API
  */
-#define MCC_TMR_PROFILE_CounterGet TMR1_CounterGet
+#define MCC_TMR_TICK_CounterGet TMR1_CounterGet
 /**
  * @ingroup  timerdriver
  * @brief    This macro defines the Custom Name for \ref TMR1_Counter16BitGet API
  */
-#define MCC_TMR_PROFILE_Counter16BitGet TMR1_Counter16BitGet
+#define MCC_TMR_TICK_Counter16BitGet TMR1_Counter16BitGet
 /**
  * @ingroup  timerdriver
  * @brief    This macro defines the Custom Name for \ref TMR1_InterruptPrioritySet API
  */
-#define MCC_TMR_PROFILE_InterruptPrioritySet TMR1_InterruptPrioritySet
+#define MCC_TMR_TICK_InterruptPrioritySet TMR1_InterruptPrioritySet
 /**
  * @ingroup  timerdriver
  * @brief    This macro defines the Custom Name for \ref TMR1_TimeoutCallbackRegister API
  */
-#define MCC_TMR_PROFILE_TimeoutCallbackRegister TMR1_TimeoutCallbackRegister
+#define MCC_TMR_TICK_TimeoutCallbackRegister TMR1_TimeoutCallbackRegister
 
 // Section: TMR1 Module APIs
 /**
@@ -139,14 +134,6 @@ void TMR1_Initialize ( void );
  */
 void TMR1_Deinitialize(void);
 
-/**
- * @ingroup  timerdriver
- * @brief    This function is used to implement the tasks for polled implementations
- * @pre      \ref TMR1_Initialize must be called and Timer must be ON
- * @param    none
- * @return   none
- */
-void TMR1_Tasks( void );
 
 /**
  * @ingroup  timerdriver

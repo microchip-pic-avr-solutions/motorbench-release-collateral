@@ -9,14 +9,14 @@
  *            
  * @skipline @version   Firmware Driver Version 1.2.1
  *
- * @skipline @version   PLIB Version 1.4.2
+ * @skipline @version   PLIB Version 1.4.5
  *            
  * @skipline  Device : dsPIC33CK256MP508
 */
 
 
 /*
-© [2025] Microchip Technology Inc. and its subsidiaries.
+© [2026] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -46,11 +46,11 @@
 static void (*CMP1_EventHandler)(void) = NULL;
 
 // Section: Driver Interface
-const struct DAC_DC_INTERFACE dac1_dc_interface = {
-    .Enable = &CMP1_DACEnable,
-    .Disable = &CMP1_DACDisable,
-    .DataWrite = &CMP1_DACDataWrite,
-};
+   static const struct DAC_DC_INTERFACE dac1_dc_interface = {
+        .Enable = &CMP1_DACEnable,
+        .Disable = &CMP1_DACDisable,
+        .DataWrite = &CMP1_DACDataWrite,
+    };
 
 const struct CMP_INTERFACE MCC_CMP = {
     .Initialize = &CMP1_Initialize,
@@ -69,18 +69,18 @@ const struct CMP_INTERFACE MCC_CMP = {
 void CMP1_Initialize(void)
 {           
     // Comparator Register settings
-    DACCTRL1L = 0x40; //FCLKDIV 1:1; CLKDIV 1:1; CLKSEL FVCO/2; DACSIDL disabled; DACON disabled; 
-    DACCTRL2H = 0x0; //SSTIME 0; 
-    DACCTRL2L = 0x0; //TMODTIME 0; 
-    DAC1CONH = 0x0; //TMCB 0; 
-    DAC1CONL = 0x8010; //HYSSEL None; HYSPOL Rising Edge; INSEL CMP1C; CMPPOL Non Inverted; FLTREN disabled; DACOEN disabled; CBE disabled; IRQM Interrupts are disabled; DACEN enabled; 
+    DACCTRL1L = 0x40U; //FCLKDIV 1:1; CLKDIV 1:1; CLKSEL FVCO/2; DACSIDL disabled; DACON disabled; 
+    DACCTRL2H = 0x0U; //SSTIME 0; 
+    DACCTRL2L = 0x0U; //TMODTIME 0; 
+    DAC1CONH = 0x0U; //TMCB 0; 
+    DAC1CONL = 0x8010U; //HYSSEL None; HYSPOL Rising Edge; INSEL CMP1C; CMPPOL Non Inverted; FLTREN disabled; DACOEN disabled; CBE disabled; IRQM Interrupts are disabled; DACEN enabled; 
 
     //Slope Settings
-    DAC1DATH = 0xF33; //DACDATH 3891; 
-    DAC1DATL = 0xCD; //DACDATL 205; 
-    SLP1CONH = 0x0; //PSE Negative; TWME disabled; HME disabled; SLOPEN disabled; 
-    SLP1CONL = 0x0; //SLPSTRT None; SLPSTOPB None; SLPSTOPA None; HCFSEL None; 
-    SLP1DAT = 0x0; //SLPDAT 0; 
+    DAC1DATH = 0xF33U; //DACDATH 3891; 
+    DAC1DATL = 0xCDU; //DACDATL 205; 
+    SLP1CONH = 0x0U; //PSE Negative; TWME disabled; HME disabled; SLOPEN disabled; 
+    SLP1CONL = 0x0U; //SLPSTRT None; SLPSTOPB None; SLPSTOPA None; HCFSEL None; 
+    SLP1DAT = 0x0U; //SLPDAT 0; 
     
     CMP1_EventCallbackRegister(&CMP1_EventCallback);
     
@@ -94,18 +94,18 @@ void CMP1_Deinitialize(void)
     
     
     // Comparator Register settings
-    DACCTRL1L = 0x0;
-    DACCTRL2H = 0x8A;
-    DACCTRL2L = 0x55;
-    DAC1CONH = 0x0;
-    DAC1CONL = 0x0;
+    DACCTRL1L = 0x0U;
+    DACCTRL2H = 0x8AU;
+    DACCTRL2L = 0x55U;
+    DAC1CONH = 0x0U;
+    DAC1CONL = 0x0U;
 
     //Slope Settings
-    DAC1DATH = 0x0;
-    DAC1DATL = 0x0;
-    SLP1CONH = 0x0;
-    SLP1CONL = 0x0;
-    SLP1DAT = 0x0;
+    DAC1DATH = 0x0U;
+    DAC1DATL = 0x0U;
+    SLP1CONH = 0x0U;
+    SLP1CONL = 0x0U;
+    SLP1DAT = 0x0U;
 }
 
 bool CMP1_StatusGet(void)

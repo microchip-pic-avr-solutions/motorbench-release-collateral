@@ -9,7 +9,7 @@
 /* *********************************************************************
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -44,8 +44,8 @@
  *
  * *****************************************************************************/
 
-#ifndef __STATE_MACHINE_H
-#define __STATE_MACHINE_H
+#ifndef MCAF_STATE_MACHINE_H 
+#define MCAF_STATE_MACHINE_H 
 
 #include "system_state.h"
 #ifdef __cplusplus
@@ -79,4 +79,4 @@ void MCAF_SystemStateMachine_StepMain(volatile MCAF_MOTOR_DATA *pmotor);
 }
 #endif
 
-#endif /* __STATE_MACHINE_H */
+#endif /* MCAF_STATE_MACHINE_H */

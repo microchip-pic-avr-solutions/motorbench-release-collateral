@@ -9,7 +9,7 @@
 /* *********************************************************************
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -44,8 +44,8 @@
  *
  * *****************************************************************************/
 
-#ifndef __ADC_COMPENSATION_H
-#define __ADC_COMPENSATION_H
+#ifndef MCAF_ADC_COMPENSATION_H 
+#define MCAF_ADC_COMPENSATION_H 
 
 #include "units.h"
 #include "adc_compensation_types.h"
@@ -55,7 +55,84 @@
 extern "C" {
 #endif
 
+#if MCAF_ADC_GAIN_COMPENSATION_ENABLED
+/**
+ * Initializes ADC Gain Compensator
+ *
+ * @param pcompensator ADC Gain Compensator state
+*/
+void MCAF_ADCGainCompInit(MCAF_ADC_GAIN_COMPENSATOR *pcompensator);
 
+/**
+ * Resets ADC gain compensator 
+ *
+ * @param pcompensator ADC Gain Compensator state
+ */
+inline static void MCAF_ADCGainCompRestart(MCAF_ADC_GAIN_COMPENSATOR *pcompensator)
+{
+    pcompensator->sampleCount = 0;
+    pcompensator->ready = false;
+    pcompensator->success = true;
+}
+
+/**
+ * Returns whether 33A ADC gain compensation is ready
+ *
+ * @param pcompensator ADC gain compensation data structure
+ * @return true if ADC gain compensation is ready
+ */
+inline static bool MCAF_ADCGainCompReady(const MCAF_ADC_GAIN_COMPENSATOR *pcompensator)
+{
+   return pcompensator->ready;
+}
+
+/**
+ * Returns whether the 33A ADC gain compensation routine is successful
+ *
+ * @param pcompensator ADC gain compensation data structure
+ * @return true if ADC gain compensation results are within limits
+ */
+inline static bool MCAF_ADCGainCompSuccessful(const MCAF_ADC_GAIN_COMPENSATOR *pcompensator)
+{
+   return pcompensator->success;
+}
+
+/** 
+ * ADC gain compensation for 33A devices
+ *
+ * @param pmotor motor data
+ */
+void MCAF_ADCGainCompensationStep(MCAF_MOTOR_DATA *pmotor);
+#endif
+
+/**
+ * Returns whether the ADC initialization is ready
+ *
+ * @param pmotor motor data structure
+ * @return true if ADC initialization is ready
+ */
+inline static bool MCAF_ADCInitializationReady(const MCAF_MOTOR_DATA *pmotor)
+{
+    return pmotor->adcCompensation.currentCalibration.ready;
+}
+
+/**
+ * Returns whether ADC current offset calibration is ready
+ *
+ * @param pcompensator ADC current offset calibration data structure
+ * @return true if ADC current offset calibration results are within limits
+ */
+inline static bool MCAF_ADCCurrentOffsetCalibrationSuccessful(const MCAF_CURRENT_CALIBRATION *pcal)
+{
+    return pcal->success;
+}
+
+/**
+ * Initializes ADC current offset calibration
+ *
+ * @param pinit ADC current offset initialization state
+ */
+void MCAF_ADCCurrentOffsetCalibrationInit(MCAF_CURRENT_CALIBRATION *pcal);
 
 /**
  * Manage ADC readings
@@ -77,4 +154,4 @@ void MCAF_ADCReadNonCritical(MCAF_MOTOR_DATA *pmotor);
 }
 #endif
 
-#endif /* __ADC_COMPENSATION_H */
+#endif /* MCAF_ADC_COMPENSATION_H */

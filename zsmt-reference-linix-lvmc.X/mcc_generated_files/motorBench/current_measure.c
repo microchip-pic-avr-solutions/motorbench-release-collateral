@@ -11,7 +11,7 @@
 /* *********************************************************************
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -57,7 +57,7 @@
 #include "parameters/adc_params.h"
 #include "parameters/options.h"
 
-void MCAF_ADCCompensationInit(MCAF_MOTOR_INITIALIZATION *pinit, 
+void MCAF_ADCCompensationInit(MCAF_ADC_COMPENSATION *padccomp, 
                               MCAF_CURRENT_COMPENSATION_PARAMETERS *pcal)
 {
     /* Scaling constants: Determined by calibration or hardware design. */
@@ -68,13 +68,10 @@ void MCAF_ADCCompensationInit(MCAF_MOTOR_INITIALIZATION *pinit,
     pcal->qKbb = CURRENT_KBB;
     pcal->qKcc = CURRENT_KCC;
 
-    pinit->sampleCount = 0;
-    pinit->sampleCountLimit = MCAF_CAL_COUNT;
-    pinit->offsetLPF[0].x32 = 0;
-    pinit->offsetLPF[1].x32 = 0;
-    pinit->offsetLPF[2].x32 = 0;
-    
-    pinit->kfilter = MCAF_CAL_FILTER_GAIN;
+    MCAF_ADCCurrentOffsetCalibrationInit(&padccomp->currentCalibration);
+#if MCAF_ADC_GAIN_COMPENSATION_ENABLED
+    MCAF_ADCGainCompInit(&padccomp->adcGainCompensator);
+#endif
 }
 
 inline static void MCAF_ScaleQ15(const MC_ABC_T *pabc_in, MC_ABC_T *pabc_out, int16_t k)

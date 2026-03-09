@@ -9,7 +9,7 @@
 /* *********************************************************************
  *
  * Motor Control Application Framework
- * R8/RC38 (commit 128946, build on 2025 Apr 09)
+ * R9/RC31 (commit 132024, build on 2026 Feb 13)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -44,11 +44,12 @@
  *
  * *****************************************************************************/
 
-#ifndef __FILTER_H
-#define __FILTER_H
+#ifndef MCAF_FILTER_H 
+#define MCAF_FILTER_H 
 
 #include <stdint.h>
 #include "filter_types.h"
+#include "util.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -70,11 +71,12 @@ inline static void MCAF_LpfFilterInitx16(MCAF_LPF_FILTER_X16_T *pfilterx16)
  * Initialize state variables of 16-bit low-pass filter
  *
  * @param pfilter LPF state
- * @param pfilter filter coefficient
+ * @param coeff filter coefficient
+ * @param initial_output filter initial condition
  */ 
-inline static void MCAF_FilterLowPassS16Init(MCAF_FILTER_LOW_PASS_S16_T *pfilter, uint16_t coeff)
+inline static void MCAF_FilterLowPassS16Init(MCAF_FILTER_LOW_PASS_S16_T *pfilter, uint16_t coeff, int16_t initial_output)
 {
-    pfilter->state.x32 = 0;
+    pfilter->state.x32 = (int32_t)initial_output << 16;
     pfilter->coeff     = coeff;
 }
 
@@ -99,8 +101,8 @@ inline static void MCAF_HpfFilterInitx16(MCAF_HPF_FILTER_X16_T *pfilterx16)
  */
 inline static int16_t MCAF_LpfFilterx16(MCAF_LPF_FILTER_X16_T *pfilterx16, int16_t input)
 {
-    pfilterx16->stateVar += __builtin_mulss(input, pfilterx16->coeff);
-    pfilterx16->stateVar -= __builtin_mulss(pfilterx16->output, pfilterx16->coeff);
+    pfilterx16->stateVar += UTIL_mulss(input, pfilterx16->coeff);
+    pfilterx16->stateVar -= UTIL_mulss(pfilterx16->output, pfilterx16->coeff);
     const int16_t output = (int16_t) (pfilterx16->stateVar >> 15);
     pfilterx16->output = output;
     return output;
@@ -126,8 +128,8 @@ inline static int16_t MCAF_FilterLowPassS16Update(MCAF_FILTER_LOW_PASS_S16_T *pf
      * than 32767 counts (example: x[k] = +20000 and y[k-1] = -20000).
      */
     const int16_t previousOutput = pfilter->state.x16.hi;
-    pfilter->state.x32 -= __builtin_mulus(pfilter->coeff, previousOutput);
-    pfilter->state.x32 += __builtin_mulus(pfilter->coeff, input);
+    pfilter->state.x32 -= UTIL_mulus(pfilter->coeff, previousOutput);
+    pfilter->state.x32 += UTIL_mulus(pfilter->coeff, input);
     const int16_t newOutput = pfilter->state.x16.hi;
     return newOutput;
 }
@@ -155,8 +157,8 @@ inline static int16_t MCAF_HpfFilterx16(MCAF_HPF_FILTER_X16_T *pfilterx16, int16
 {
     // Perform a low pass filter and subtract it from the input.
     const int16_t lpf_shift_prev = (int16_t) (pfilterx16->stateVar >> 16);
-    pfilterx16->stateVar -= __builtin_mulss(lpf_shift_prev, pfilterx16->coeff);
-    pfilterx16->stateVar += __builtin_mulss(input, pfilterx16->coeff);
+    pfilterx16->stateVar -= UTIL_mulss(lpf_shift_prev, pfilterx16->coeff);
+    pfilterx16->stateVar += UTIL_mulss(input, pfilterx16->coeff);
     const int16_t lpf_shift = (int16_t) (pfilterx16->stateVar >> 16);
     const int16_t output = UTIL_SatSubS16(input, lpf_shift);
     pfilterx16->output = output;
@@ -167,4 +169,4 @@ inline static int16_t MCAF_HpfFilterx16(MCAF_HPF_FILTER_X16_T *pfilterx16, int16
 }
 #endif
 
-#endif /* __FILTER_H */
+#endif /* MCAF_FILTER_H */

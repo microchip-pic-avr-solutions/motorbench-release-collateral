@@ -7,15 +7,13 @@
  *            
  * @brief     This is the generated source file for CLOCK driver
  *
- * @version   Firmware Driver Version 1.0.2
- *
- * @version   PLIB Version 1.4.1
+ * @skipline @version   PLIB Version 1.4.6
  *
  * @skipline  Device : dsPIC33CK256MP508
 */
 
 /*
-© [2025] Microchip Technology Inc. and its subsidiaries.
+© [2026] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -40,8 +38,62 @@
 #include <stdint.h>
 #include "../clock.h"
 
+#define OSC_SOURCE_FRC 0U
+#define OSC_SOURCE_FRC_PLL 0x1U
+#define OSC_SOURCE_POSC_PLL 0x3U
+#define OSCCONH_NOSC_MASK 0x07U
+
 void CLOCK_Initialize(void)
 {
+    //If PLL derived clock sources are used, then switch to FRC clock before changing PLL related settings
+    if(OSCCONbits.COSC == OSC_SOURCE_FRC_PLL || OSCCONbits.COSC == OSC_SOURCE_POSC_PLL)
+    {
+        //Set to FRC clock if current clock is not FRC
+        __builtin_write_OSCCONH((OSCCONH & ~ OSCCONH_NOSC_MASK) | OSC_SOURCE_FRC);
+        __builtin_write_OSCCONL((uint8_t) (0x01));
+        // Wait for Clock switch to occur
+        while (OSCCONbits.OSWEN != 0){}
+    }
+    // RCDIV FRC/1; PLLPRE 1:1; DOZE 1:8; DOZEN disabled; ROI disabled; 
+   CLKDIV = 0x3001U;
+    // PLLDIV 50; 
+   PLLFBD = 0x32U;
+    // TUN Center frequency; 
+   OSCTUN = 0x0U;
+    // PLLPOST 1:1; VCODIV FVCO/4; POST2DIV 1:1; 
+   PLLDIV = 0x11U;
+    // ENAPLL disabled; FRCSEL FRC Oscillator; APLLPRE 1:1; 
+   ACLKCON1 = 0x101U;
+    // APLLFBDIV 150; 
+   APLLFBD1 = 0x96U;
+    // APSTSCLR 1:4; APOST2DIV 1:1; AVCODIV FVCO/4; 
+   APLLDIV1 = 0x41U;
+    // CANCLKEN disabled; CANCLKSEL FVCO/4; CANCLKDIV Divide by 1; 
+   CANCLKCON = 0x500U;
+    // ROEN disabled; DIVSWEN disabled; ROSLP disabled; ROSEL ; OE disabled; ROSIDL disabled; 
+   REFOCONL = 0x0U;
+    // RODIV 0; 
+   REFOCONH = 0x0U;
+    // ROTRIM 0; 
+   REFOTRIMH = 0x0U;
+    // IOLOCK disabled; 
+   RPCON = 0x0U;
+    // PMDLOCK disabled; 
+   PMDCON = 0x0U;
+    // ADC1MD enabled; T1MD enabled; U2MD enabled; U1MD enabled; SPI2MD enabled; SPI1MD enabled; QEIMD enabled; PWMMD enabled; I2C1MD enabled; C1MD enabled; 
+   PMD1 = 0x0U;
+    // CCP2MD enabled; CCP1MD enabled; CCP4MD enabled; CCP3MD enabled; CCP7MD enabled; CCP8MD enabled; CCP5MD enabled; CCP6MD enabled; CCP9MD enabled; 
+   PMD2 = 0x0U;
+    // U3MD enabled; CRCMD enabled; I2C2MD enabled; I2C3MD enabled; QEI2MD enabled; PMPMD enabled; 
+   PMD3 = 0x0U;
+    // REFOMD enabled; 
+   PMD4 = 0x0U;
+    // DMA1MD enabled; DMA2MD enabled; DMA3MD enabled; DMA0MD enabled; SPI3MD enabled; 
+   PMD6 = 0x0U;
+    // PTGMD enabled; CMP1MD enabled; CMP3MD enabled; CMP2MD enabled; 
+   PMD7 = 0x0U;
+    // DMTMD enabled; CLC3MD enabled; OPAMPMD enabled; BIASMD enabled; CLC4MD enabled; SENT1MD enabled; CLC1MD enabled; CLC2MD enabled; SENT2MD enabled; 
+   PMD8 = 0x0U;
     /*  
        Input frequency                               :  8.00 MHz
        Clock source                                  :  FRC Oscillator with PLL
@@ -55,52 +107,12 @@ void CLOCK_Initialize(void)
        Auxiliary clock input frequency               :  8.00 MHz
        Auxiliary clock PLL output frequency (AFpllo) :  8.00 MHz
     */
-    // RCDIV FRC/1; PLLPRE 1:1; DOZE 1:8; DOZEN disabled; ROI disabled; 
-    CLKDIV = 0x3001;
-    // PLLDIV 50; 
-    PLLFBD = 0x32;
-    // TUN Center frequency; 
-    OSCTUN = 0x0;
-    // PLLPOST 1:1; VCODIV FVCO/4; POST2DIV 1:1; 
-    PLLDIV = 0x11;
-    // ENAPLL disabled; FRCSEL FRC Oscillator; APLLPRE 1:1; 
-    ACLKCON1 = 0x101;
-    // APLLFBDIV 150; 
-    APLLFBD1 = 0x96;
-    // APSTSCLR 1:4; APOST2DIV 1:1; AVCODIV FVCO/4; 
-    APLLDIV1 = 0x41;
-    // CANCLKEN disabled; CANCLKSEL FVCO/4; CANCLKDIV Divide by 1; 
-    CANCLKCON = 0x500;
-    // ROEN disabled; DIVSWEN disabled; ROSLP disabled; ROSEL ; OE disabled; ROSIDL disabled; 
-    REFOCONL = 0x0;
-    // RODIV 0; 
-    REFOCONH = 0x0;
-    // ROTRIM 0; 
-    REFOTRIMH = 0x0;
-    // IOLOCK disabled; 
-    RPCON = 0x0;
-    // PMDLOCK disabled; 
-    PMDCON = 0x0;
-    // ADC1MD enabled; T1MD enabled; U2MD enabled; U1MD enabled; SPI2MD enabled; SPI1MD enabled; QEIMD enabled; PWMMD enabled; I2C1MD enabled; C1MD enabled; 
-    PMD1 = 0x0;
-    // CCP2MD enabled; CCP1MD enabled; CCP4MD enabled; CCP3MD enabled; CCP7MD enabled; CCP8MD enabled; CCP5MD enabled; CCP6MD enabled; CCP9MD enabled; 
-    PMD2 = 0x0;
-    // U3MD enabled; CRCMD enabled; I2C2MD enabled; I2C3MD enabled; QEI2MD enabled; PMPMD enabled; 
-    PMD3 = 0x0;
-    // REFOMD enabled; 
-    PMD4 = 0x0;
-    // DMA1MD enabled; DMA2MD enabled; DMA3MD enabled; DMA0MD enabled; SPI3MD enabled; 
-    PMD6 = 0x0;
-    // PTGMD enabled; CMP1MD enabled; CMP3MD enabled; CMP2MD enabled; 
-    PMD7 = 0x0;
-    // DMTMD enabled; CLC3MD enabled; OPAMPMD enabled; BIASMD enabled; CLC4MD enabled; SENT1MD enabled; CLC1MD enabled; CLC2MD enabled; SENT2MD enabled; 
-    PMD8 = 0x0;
     // CF no clock failure; NOSC FRCPLL; CLKLOCK unlocked; OSWEN Switch is Complete; 
     __builtin_write_OSCCONH((uint8_t) (0x01));
     __builtin_write_OSCCONL((uint8_t) (0x01));
     // Wait for Clock switch to occur
-    while (OSCCONbits.OSWEN != 0);
-    while (OSCCONbits.LOCK != 1);
+    while (OSCCONbits.OSWEN != 0){}
+    while (OSCCONbits.LOCK != 1){}
 }
 
 bool CLOCK_AuxPllLockStatusGet(void)

@@ -9,13 +9,13 @@
  *            
  * @skipline @version   Firmware Driver Version 1.2.3
  *
- * @skipline @version   PLIB Version 1.4.1
+ * @skipline @version   PLIB Version 1.4.6
  *            
  * @skipline  Device : PIC24/dspIC/PIC32MM
 */
 
 /*
-© [2025] Microchip Technology Inc. and its subsidiaries.
+© [2026] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -65,72 +65,72 @@ const struct QEI_INTERFACE MCC_QEI = {
 void QEI1_Initialize(void)
 {
     /* CCM Quadrature Encoder mode; GATEN disabled; CNTPOL Positive; INTDIV 1:1; IMV Index match occurs when QEBx = 0 and QEAx = 0; PIMOD Modulo Count mode; QEISIDL disabled; QEIEN disabled; */
-    QEI1CON = 0x1800;
+    QEI1CON = 0x1800U;
     /* QEAPOL disabled; QEBPOL disabled; IDXPOL disabled; HOMPOL disabled; SWPAB disabled; OUTFNC disabled; QFDIV 1:; FLTREN enabled; QCAPEN ; */
-    QEI1IOC = 0x4000;
+    QEI1IOC = 0x4000U;
     /* HCAPEN ; */
-    QEI1IOCH = 0x0;
+    QEI1IOCH = 0x0U;
     /* IDXIEN disabled; IDXIRQ No index event has occured; HOMIEN disabled; HOMIRQ No home event has occured; VELOVIEN disabled; VELOVIRQ No overflow has occured; PCIIEN disabled; PCIIRQ POSxCNT was not reinitialized; POSOVIEN disabled; POSOVIRQ No overflow has occured; PCLEQIEN disabled; PCLEQIRQ POSxCNT greater than QEIxLEC; PCHEQIEN disabled; PCHEQIRQ POSxCNT less than QEIxGEC; */
-    QEI1STAT = 0x0;
+    QEI1STAT = 0x0U;
     /* POSCNTL 0x0; */
-    POS1CNTL = 0x0;
+    POS1CNTL = 0x0U;
     /* POSCNTH 0x0; */
-    POS1CNTH = 0x0;
+    POS1CNTH = 0x0U;
     /* POSHLDH 0x0; */
-    POS1HLD = 0x0;
+    POS1HLD = 0x0U;
     /* VELCNTL 0x0; */
-    VEL1CNT = 0x0;
+    VEL1CNT = 0x0U;
     /* VELCNTH 0x0; */
-    VEL1CNTH = 0x0;
+    VEL1CNTH = 0x0U;
     /* VELHLDH 0x0; */
-    VEL1HLD = 0x0;
+    VEL1HLD = 0x0U;
     /* INTTMRL 0x0; */
-    INT1TMRL = 0x0;
+    INT1TMRL = 0x0U;
     /* INTTMRH 0x0; */
-    INT1TMRH = 0x0;
+    INT1TMRH = 0x0U;
     /* INTHLDL 0x0; */
-    INT1HLDL = 0x0;
+    INT1HLDL = 0x0U;
     /* INTHLDH 0x0; */
-    INT1HLDH = 0x0;
+    INT1HLDH = 0x0U;
     /* INDXCNTL 0x0; */
-    INDX1CNTL = 0x0;
+    INDX1CNTL = 0x0U;
     /* INDXCNTH 0x0; */
-    INDX1CNTH = 0x0;
+    INDX1CNTH = 0x0U;
     /* INDXHLDH 0x0; */
-    INDX1HLD = 0x0;
+    INDX1HLD = 0x0U;
     /* QEIGECL 0x0; */
-    QEI1GECL = 0x0;
+    QEI1GECL = 0x0U;
     /* QEIGECH 0x0; */
-    QEI1GECH = 0x0;
+    QEI1GECH = 0x0U;
     /* QEILECL 0x0; */
-    QEI1LECL = 0x0;
+    QEI1LECL = 0x0U;
     /* QEILECH 0x0; */
-    QEI1LECH = 0x0;
+    QEI1LECH = 0x0U;
 }
 
 void QEI1_Deinitialize(void)
 {
-    QEI1CON = 0x0;
-    QEI1IOC = 0x0;
-    QEI1IOCH = 0x0;
-    QEI1STAT = 0x0;
-    POS1CNTL = 0x0;
-    POS1CNTH = 0x0;
-    POS1HLD = 0x0;
-    VEL1CNT = 0x0;
-    VEL1CNTH = 0x0;
-    VEL1HLD = 0x0;
-    INT1TMRL = 0x0;
-    INT1TMRH = 0x0;
-    INT1HLDL = 0x0;
-    INT1HLDH = 0x0;
-    INDX1CNTL = 0x0;
-    INDX1CNTH = 0x0;
-    INDX1HLD = 0x0;
-    QEI1GECL = 0x0;
-    QEI1GECH = 0x0;
-    QEI1LECL = 0x0;
-    QEI1LECH = 0x0;
+    QEI1CON = 0x0U;
+    QEI1IOC = 0x0U;
+    QEI1IOCH = 0x0U;
+    QEI1STAT = 0x0U;
+    POS1CNTL = 0x0U;
+    POS1CNTH = 0x0U;
+    POS1HLD = 0x0U;
+    VEL1CNT = 0x0U;
+    VEL1CNTH = 0x0U;
+    VEL1HLD = 0x0U;
+    INT1TMRL = 0x0U;
+    INT1TMRH = 0x0U;
+    INT1HLDL = 0x0U;
+    INT1HLDH = 0x0U;
+    INDX1CNTL = 0x0U;
+    INDX1CNTH = 0x0U;
+    INDX1HLD = 0x0U;
+    QEI1GECL = 0x0U;
+    QEI1GECH = 0x0U;
+    QEI1LECL = 0x0U;
+    QEI1LECH = 0x0U;
 }
 
 
