@@ -8,7 +8,7 @@
  * @brief     High-Resolution Pulse-Width Modulated (PWM) with Fine Edge 
  *            Placement using dsPIC MCUs. 
  *
- * @skipline @version   PLIB Version 1.3.0
+ * @skipline @version   PLIB Version 1.3.1
  *
  * @skipline  Device : 
 */

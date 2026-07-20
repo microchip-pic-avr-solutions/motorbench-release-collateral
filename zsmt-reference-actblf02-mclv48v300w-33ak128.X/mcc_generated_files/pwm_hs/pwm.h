@@ -7,7 +7,7 @@
  * 
  * @brief     This is the generated driver header file for the PWM driver
  *
- * @skipline @version   PLIB Version 1.3.0
+ * @skipline @version   PLIB Version 1.3.1
  *
  * @skipline  Device : 
 */

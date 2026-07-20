@@ -9,7 +9,7 @@
  *
  * @version   Firmware Driver Version 1.0.1
  *
- * @version   PLIB Version 1.2.5
+ * @version   PLIB Version 1.2.6
  *
  * @skipline  Device : dsPIC33CK256MP508
 */
@@ -112,6 +112,8 @@
 
 // FBOOT
 #pragma config BTMODE = SINGLE    //Device Boot Mode Configuration->Device is in Single Boot (legacy) mode
+
+#pragma message("This generated MCC Melody content with device json version 5.15.1 is most compatible with dsPIC33CK-MP_DFP v1.15.423.")
 
 /**
  End of File

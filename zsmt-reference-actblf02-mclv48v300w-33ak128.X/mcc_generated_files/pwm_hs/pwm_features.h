@@ -13,7 +13,7 @@
  * 
  *            The content in this file is strictly "read only" and should not be altered
  *
- * @skipline @version   PLIB Version 1.3.0
+ * @skipline @version   PLIB Version 1.3.1
  *
  * @skipline  Device : 
 */

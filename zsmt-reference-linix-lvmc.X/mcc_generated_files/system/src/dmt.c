@@ -9,7 +9,7 @@
  *
  * @skipline @version   Firmware Driver Version 1.2.1
  *
- * @skipline @version   PLIB Version 1.1.4
+ * @skipline @version   PLIB Version 1.1.5
  *
  * @skipline  Device : dsPIC33CK256MP508
 */
@@ -43,7 +43,7 @@
 
 // Section: Private Variable Definitions
 static bool bPreCleared = false;
-uint32_t calibOffset = 0;
+__attribute__((near)) uint32_t calibOffset = 0;
 static void (*DMT_EventHandler)(void) = NULL;
 
 // Section: File specific functions

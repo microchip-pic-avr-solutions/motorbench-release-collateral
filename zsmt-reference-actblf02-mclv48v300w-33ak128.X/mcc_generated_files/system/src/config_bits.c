@@ -185,7 +185,7 @@
 // FWPUCB
 #pragma config FWPUCB_WPUCB = 0xffffffff    //UCB write protection bits
 
-#pragma message("This generated MCC Melody content with device json version 5.13.8 is most compatible with dsPIC33AK-MC_DFP v1.4.172.")
+#pragma message("This generated MCC Melody content with device json version 5.15.1 is most compatible with dsPIC33AK-MC_DFP v1.5.214.")
 
 /**
  End of File

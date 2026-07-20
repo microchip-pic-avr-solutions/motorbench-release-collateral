@@ -20,7 +20,6 @@
 */
 #include "mcc_generated_files/motorBench/mcaf_main.h"
 #include "mcc_generated_files/system/system.h"
-
 /*
     Main application
 */

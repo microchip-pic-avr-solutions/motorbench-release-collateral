@@ -7,7 +7,7 @@
  * 
  * @brief     This is the generated driver source file for PWM driver
  *
- * @skipline @version   PLIB Version 1.3.0
+ * @skipline @version   PLIB Version 1.3.1
  *
  * @skipline  Device : 
 */
@@ -203,23 +203,23 @@ void PWM_Initialize (void)
     PG3TRIGC = 0x0UL;
     // CTA1EN disabled; CTA2EN disabled; CTA3EN disabled; CTA4EN disabled; CTA5EN disabled; CTA6EN disabled; CTA7EN disabled; CTA8EN disabled; CTB1EN disabled; CTB2EN disabled; CTB3EN disabled; CTB4EN disabled; CTB5EN disabled; CTB6EN disabled; CTB7EN disabled; CTB8EN disabled; 
     CMBTRIG = 0x0UL;
-    // FSCL disabled; 
+    // FSCL 0x0; 
     FSCL = 0x0UL;
-    // FSMINPER disabled; 
+    // FSMINPER 0x0; 
     FSMINPER = 0x0UL;
-    // LFSR disabled; 
+    // LFSR 0x0; 
     LFSR = 0x0UL;
-    // PWMLFAD PWM Generator 1; PWMLFA OR; S2APOL Positive Logic; S1APOL Positive Logic; PWMS2A PWM1H; PWMS1A PWM1H; 
+    // PWMLFAD disabled; PWMLFA OR; S2APOL Positive Logic; S1APOL Positive Logic; PWMS2A PWM1H; PWMS1A PWM1H; 
     LOGCONA = 0x0UL;
-    // PWMLFBD disabled; PWMLFB OR; S2BPOL disabled; S1BPOL disabled; PWMS2B PWM1H; PWMS1B PWM1H; 
+    // PWMLFBD disabled; PWMLFB OR; S2BPOL Positive Logic; S1BPOL Positive Logic; PWMS2B PWM1H; PWMS1B PWM1H; 
     LOGCONB = 0x0UL;
-    // PWMLFCD disabled; PWMLFC OR; S2CPOL disabled; S1CPOL disabled; PWMS2C PWM1H; PWMS1C PWM1H; 
+    // PWMLFCD disabled; PWMLFC OR; S2CPOL Positive Logic; S1CPOL Positive Logic; PWMS2C PWM1H; PWMS1C PWM1H; 
     LOGCONC = 0x0UL;
-    // PWMLFDD disabled; PWMLFD OR; S2DPOL disabled; S1DPOL disabled; PWMS2D PWM1H; PWMS1D PWM1H; 
+    // PWMLFDD disabled; PWMLFD OR; S2DPOL Positive Logic; S1DPOL Positive Logic; PWMS2D PWM1H; PWMS1D PWM1H; 
     LOGCOND = 0x0UL;
-    // PWMLFED disabled; PWMLFE OR; S2EPOL disabled; S1EPOL disabled; PWMS2E PWM1H; PWMS1E PWM1H; 
+    // PWMLFED disabled; PWMLFE OR; S2EPOL Positive Logic; S1EPOL Positive Logic; PWMS2E PWM1H; PWMS1E PWM1H; 
     LOGCONE = 0x0UL;
-    // PWMLFFD disabled; PWMLFF OR; S2FPOL disabled; S1FPOL disabled; PWMS2F PWM1H; PWMS1F PWM1H; 
+    // PWMLFFD disabled; PWMLFF OR; S2FPOL Positive Logic; S1FPOL Positive Logic; PWMS2F PWM1H; PWMS1F PWM1H; 
     LOGCONF = 0x0UL;
     // MDC 0x0; 
     MDC = 0x0UL;
