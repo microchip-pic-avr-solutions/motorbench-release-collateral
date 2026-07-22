@@ -7,7 +7,7 @@
  *            
  * @brief     This is the generated driver header file for the QEI1 driver
  *
- * @skipline @version   PLIB Version 1.0.5
+ * @skipline @version   PLIB Version 1.0.6
  *            
  * @skipline  Device : dsPIC33AK128MC106
 */
@@ -35,6 +35,11 @@
 
 #ifndef QEI1_H
 #define QEI1_H
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 // Section: Included Files
 
@@ -340,5 +345,9 @@ void QEI1_Initialize(void);
  * @return   none  
  */
 void QEI1_Deinitialize(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // QEI1.H

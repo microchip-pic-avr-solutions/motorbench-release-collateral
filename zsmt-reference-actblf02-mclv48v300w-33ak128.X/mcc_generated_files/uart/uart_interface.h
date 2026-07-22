@@ -7,7 +7,7 @@
  *            
  * @brief     Universal Asynchronous Receiver Transmitter driver using dsPIC MCUs
  *
- * @skipline @version   PLIB Version 1.1.3
+ * @skipline @version   PLIB Version 1.1.4
  *            
  * @skipline  Device : dsPIC33AK128MC106
 */
@@ -35,6 +35,11 @@
 
 #ifndef UART_INTERFACE_H
 #define UART_INTERFACE_H
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 // Section: Included Files
 
@@ -121,5 +126,9 @@ struct UART_INTERFACE{
     void (*ParityErrorCallbackRegister)(void (*CallbackHandler)(void));
     ///< Pointer to UARTx_ParityErrorCallbackRegister e.g. \ref UART1_ParityErrorCallbackRegister (defined only in interrupt mode)
 };
+#ifdef __cplusplus
+}
+#endif
+
 #endif
 

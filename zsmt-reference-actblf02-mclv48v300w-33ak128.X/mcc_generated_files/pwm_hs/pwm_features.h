@@ -13,7 +13,7 @@
  * 
  *            The content in this file is strictly "read only" and should not be altered
  *
- * @skipline @version   PLIB Version 1.3.1
+ * @skipline @version   PLIB Version 1.3.2
  *
  * @skipline  Device : 
 */
@@ -22,6 +22,11 @@
 
 #ifndef PWM_FEATURES
 #define PWM_FEATURES
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /*******************************************************************************
             Macros defined for features supported in the device
@@ -123,5 +128,9 @@
   NA
 */
 #define PWM_FAULT_MODE_ENABLE_FEATURE_AVAILABLE 0
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif //PWM_FEATURES

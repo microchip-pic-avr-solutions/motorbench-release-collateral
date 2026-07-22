@@ -7,7 +7,7 @@
  *            
  * @brief     High Speed Analog Comparator with Slope Compensation DAC driver using dsPIC MCUs. 
  *
- * @skipline @version   PLIB Version 1.1.5
+ * @skipline @version   PLIB Version 1.1.6
  *            
  * @skipline  Device : dsPIC33AK128MC106
 */
@@ -35,6 +35,11 @@
 
 #ifndef CMP_INTERFACE_H
 #define CMP_INTERFACE_H
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 // Section: Included Files
 
@@ -128,5 +133,9 @@ struct CMP_INTERFACE
     const struct DAC_SLOPE_INTERFACE *cmp_dac_slope_interface;
     ///< Pointer to \ref DAC_SLOPE_INTERFACE
 };
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

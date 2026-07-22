@@ -7,7 +7,7 @@
  * 
  * @brief     This is the generated driver header file for the OPA1 driver
  *
- * @version   PLIB Version 1.2.2
+ * @version   PLIB Version 1.2.3
  *
  * @skipline  Device : dsPIC33AK128MC106
 */
@@ -35,6 +35,11 @@
 
 #ifndef OPA1_H
 #define OPA1_H
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 // Section: Included Files
 
@@ -220,6 +225,10 @@ inline static void OPA1_OffsetCorrection(enum OPA_OFFSET_INPUT_TYPE inputType, e
             break;
     }
 }
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif //OPA1_H
 

@@ -7,7 +7,7 @@
  *            
  * @brief     This is the generated driver source file for CMP3 driver
  *
- * @skipline @version   PLIB Version 1.1.5
+ * @skipline @version   PLIB Version 1.1.6
  *            
  * @skipline  Device : dsPIC33AK128MC106
 */

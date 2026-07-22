@@ -7,7 +7,7 @@
  */ /*
  *
  * Motor Control Application Framework
- * R9/RC31 (commit 132024, build on 2026 Feb 13)
+ * R9/RC32 (commit 132904, build on 2026 Jul 14)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -70,11 +70,11 @@ extern "C" {
  *                               190.986 kRPM
  * alignTime:                      1.000 ms
  * angleLockDelay:                50.000 ms
- * angleProbeCurrent:              2.703  A
+ * angleProbeCurrent:              3.604  A
  * angleProbeTime:                10.000 ms
  * angleProbeAccumGain:                1  
  * angleProbeSlewTime:           599.558 us
- * angleProbeSlewRate:             4.508 kA/s
+ * angleProbeSlewRate:             6.011 kA/s
  * angleProbeBlankingTime:         1.599 ms
  * correctionGainDc:               0.000  rad/A
  * pllLockTime:                   10.000 ms
@@ -132,10 +132,10 @@ extern "C" {
 #define ZSMT_ANGLE_LOCK_DELAY_SCALE      5.000000e-05  // s
 #define ZSMT_ANGLE_LOCK_DELAY_ENG        0.0500000000  // s
 /* Angle probe current */
-#define ZSMT_ANGLE_PROBE_CURRENT             2031      // Q15(  0.06198) =   +2.70238 A           =   +2.70300 A           - 0.0229%
-#define ZSMT_ANGLE_PROBE_CURRENT_NORM    0.0619812012  // normalized
+#define ZSMT_ANGLE_PROBE_CURRENT             2709      // Q15(  0.08267) =   +3.60450 A           =   +3.60400 A           + 0.0140%
+#define ZSMT_ANGLE_PROBE_CURRENT_NORM    0.0826721191  // normalized
 #define ZSMT_ANGLE_PROBE_CURRENT_SCALE  43.6000000000  // A
-#define ZSMT_ANGLE_PROBE_CURRENT_ENG     2.7023803711  // A
+#define ZSMT_ANGLE_PROBE_CURRENT_ENG     3.6045043945  // A
 /* Angle probe duration */
 #define ZSMT_ANGLE_PROBE_TIME                 200      // Q0(200.00000)  =  +10.00000 ms          =  +10.00000 ms          + 0.0000%
 #define ZSMT_ANGLE_PROBE_TIME_NORM     200.0000000000  // normalized
@@ -157,10 +157,10 @@ extern "C" {
 #define ZSMT_ANGLE_PROBE_SLEW_TIME_SCALE   5.000000e-05  // s
 #define ZSMT_ANGLE_PROBE_SLEW_TIME_ENG     0.0006000000  // s
 /* Angle probe slew rate */
-#define ZSMT_ANGLE_PROBE_SLEW_RATE              169      // Q15(  0.00516) =   +4.49731 kA/s        =   +4.50832 kA/s        - 0.2441%
-#define ZSMT_ANGLE_PROBE_SLEW_RATE_NORM    0.0051574707  // normalized
+#define ZSMT_ANGLE_PROBE_SLEW_RATE              226      // Q15(  0.00690) =   +6.01416 kA/s        =   +6.01109 kA/s        + 0.0510%
+#define ZSMT_ANGLE_PROBE_SLEW_RATE_NORM    0.0068969727  // normalized
 #define ZSMT_ANGLE_PROBE_SLEW_RATE_SCALE   8.720000e+05  // A/s
-#define ZSMT_ANGLE_PROBE_SLEW_RATE_ENG     4.497314e+03  // A/s
+#define ZSMT_ANGLE_PROBE_SLEW_RATE_ENG     6.014160e+03  // A/s
 /* DC correction gain */
 #define ZSMT_CORRECTION_GAIN_DC                 0      // Q14(  0.00000) =   +0.00000 rad/A       =   +0.00000 rad/A       + 0.0000%
 #define ZSMT_CORRECTION_GAIN_DC_NORM     0.000000e+00  // normalized

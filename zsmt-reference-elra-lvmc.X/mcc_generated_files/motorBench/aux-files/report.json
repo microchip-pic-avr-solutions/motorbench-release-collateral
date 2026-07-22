@@ -1,8 +1,8 @@
 {
     "metadata": {
-        "build_time": "2026 Feb 13 18:37",
-        "commit": "132024",
-        "version": "R9/RC31"
+        "build_time": "2026 Jul 14 05:12",
+        "commit": "132904",
+        "version": "R9/RC32"
     },
     "motor": [
         {

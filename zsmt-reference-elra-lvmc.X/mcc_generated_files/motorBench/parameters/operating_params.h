@@ -9,7 +9,7 @@
  */ /*
  *
  * Motor Control Application Framework
- * R9/RC31 (commit 132024, build on 2026 Feb 13)
+ * R9/RC32 (commit 132904, build on 2026 Jul 14)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -62,10 +62,10 @@ extern "C" {
 #define MCAF_VELOCITY_COMMAND_MAX_SCALE   4.500000e+03  // RPM
 #define MCAF_VELOCITY_COMMAND_MAX_ENG   392.7038753887  // RPM
 /* Minimum velocity command */
-#define MCAF_VELOCITY_COMMAND_MIN             5461      // Q15(  0.16666) = +749.95422 RPM         = +750.00000 RPM         - 0.0061%
-#define MCAF_VELOCITY_COMMAND_MIN_NORM    0.1666564941  // normalized
+#define MCAF_VELOCITY_COMMAND_MIN             2185      // Q15(  0.06668) = +300.06409 RPM         = +300.00000 RPM         + 0.0214%
+#define MCAF_VELOCITY_COMMAND_MIN_NORM    0.0666809082  // normalized
 #define MCAF_VELOCITY_COMMAND_MIN_SCALE   4.500000e+03  // RPM
-#define MCAF_VELOCITY_COMMAND_MIN_ENG    78.5350226498  // RPM
+#define MCAF_VELOCITY_COMMAND_MIN_ENG    31.4226377018  // RPM
 /* Nominal velocity (base speed): nominal no-load speed at nominal supply voltage with no flux weakening */
 #define MCAF_VELOCITY_NOMINAL               21845      // Q15(  0.66666) =   +2.99995 kRPM        =   +3.00000 kRPM        - 0.0015%
 #define MCAF_VELOCITY_NOMINAL_NORM       0.6666564941  // normalized
@@ -79,8 +79,8 @@ extern "C" {
  *                                 4.500 kRPM
  * velocity_maximum:             392.699  rad/s
  *                                 3.750 kRPM
- * velocity_minimum:              78.540  rad/s
- *                               750.000  RPM
+ * velocity_minimum:              31.416  rad/s
+ *                               300.000  RPM
  * velocity_nominal:             314.159  rad/s
  *                                 3.000 kRPM
  * rho_xi_thresh:                0.111111  
@@ -89,8 +89,8 @@ extern "C" {
  * run                                    
  *   slewrate_accel:               2.934 krad/s^2
  *                                28.016 kRPM/s
- *   slewrate_decel:             532.907  rad/s^2
- *                                 5.089 kRPM/s
+ *   slewrate_decel:             516.772  rad/s^2
+ *                                 4.935 kRPM/s
  *   t_coastdown:                  1.168  s
  *   closedLoopStopping                   
  *     time:                     500.000 ms
@@ -116,10 +116,10 @@ extern "C" {
 #define VELOCITY_SLEWRATE_LIMIT_ACCEL_SCALE 471.2388980385  // rad/s
 #define VELOCITY_SLEWRATE_LIMIT_ACCEL_ENG     2.9337382568  // rad/s
 /* slew rate limit for velocity commands during deceleration */
-#define VELOCITY_SLEWRATE_LIMIT_DECEL               37      // Q15(  0.00113) = +532.09959 mrad/s      = +532.90746 mrad/s      - 0.1516%
-#define VELOCITY_SLEWRATE_LIMIT_DECEL_NORM    0.0011291504  // normalized
+#define VELOCITY_SLEWRATE_LIMIT_DECEL               36      // Q15(  0.00110) = +517.71852 mrad/s      = +516.77226 mrad/s      + 0.1831%
+#define VELOCITY_SLEWRATE_LIMIT_DECEL_NORM    0.0010986328  // normalized
 #define VELOCITY_SLEWRATE_LIMIT_DECEL_SCALE 471.2388980385  // rad/s
-#define VELOCITY_SLEWRATE_LIMIT_DECEL_ENG     0.5320995858  // rad/s
+#define VELOCITY_SLEWRATE_LIMIT_DECEL_ENG     0.5177185159  // rad/s
 /* estimate of worst-case time needed to decelerate to a stop */
 #define VELOCITY_COASTDOWN_TIME             23358      // Q0(23358.00000) =   +1.16790 s           =   +1.16792 s           - 0.0020%
 #define VELOCITY_COASTDOWN_TIME_NORM     2.335800e+04  // normalized

@@ -7,7 +7,7 @@
  * 
  * @brief     This is the generated driver source file for SCCP1-TIMER driver
  *
- * @version   PLIB Version 1.2.2
+ * @version   PLIB Version 1.2.3
  *
  * @skipline  Device : dsPIC33AK128MC106
 */

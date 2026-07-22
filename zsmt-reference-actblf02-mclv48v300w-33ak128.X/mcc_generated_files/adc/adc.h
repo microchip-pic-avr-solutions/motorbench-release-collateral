@@ -33,6 +33,11 @@
 
 #ifndef ADC_H
 #define ADC_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 // Section: Included Files
 
 #include "adc1.h"
@@ -111,6 +116,7 @@
  * @return   none  
  */
 void ADC_Initialize(void);
+
 
 /**
  * @ingroup  adcdriver
@@ -367,6 +373,10 @@ inline static enum ADC_CORE ADC_CoreGet(const enum ADC_CHANNEL channelName)
     }
     return core;
 }
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // ADC_H
     

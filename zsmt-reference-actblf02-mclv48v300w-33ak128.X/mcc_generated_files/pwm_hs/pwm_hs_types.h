@@ -7,7 +7,7 @@
  * 
  * @brief    This is the generated driver types header file for the PWM driver
  *
- * @skipline @version   PLIB Version 1.3.1
+ * @skipline @version   PLIB Version 1.3.2
  *
  * @skipline Device : 
 */
@@ -16,6 +16,11 @@
 
 #ifndef PWM_HS_TYPES_H
 #define PWM_HS_TYPES_H
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 // Section: Included Files
 
@@ -129,6 +134,10 @@ enum PWM_SOURCE_SELECT
     PWM_SOURCE_SELECT_INDEPENDENT = 0,         /**< PWM select Independent PWM as source */
     PWM_SOURCE_SELECT_MASTER = 1,             /**< PWM select Master as source */
 };
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif  //PWM_HS_TYPES_H
 /**

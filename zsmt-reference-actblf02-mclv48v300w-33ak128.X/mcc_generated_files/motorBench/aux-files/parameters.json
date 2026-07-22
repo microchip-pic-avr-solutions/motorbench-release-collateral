@@ -1,8 +1,8 @@
 {
     "metadata": {
-        "build_time": "2026 Feb 13 18:37",
-        "commit": "132024",
-        "version": "R9/RC31"
+        "build_time": "2026 Jul 14 05:12",
+        "commit": "132904",
+        "version": "R9/RC32"
     },
     "parameters": [
         {
@@ -180,7 +180,7 @@
         {
             "define_name": "MCAF_ZSMT_HYBRID_VELOCITY_THRESHOLD_FAST",
             "description": "Velocity threshold fast",
-            "intended_value": 104.71975512,
+            "intended_value": 125.663706144,
             "key": "estimator_minotaur.mcafZsmtHybridVelocityThresholdFast",
             "q": 15,
             "scale": 628.318530718,
@@ -189,7 +189,7 @@
         {
             "define_name": "MCAF_ZSMT_HYBRID_VELOCITY_THRESHOLD_SLOW",
             "description": "Velocity threshold slow",
-            "intended_value": 62.8318530718,
+            "intended_value": 83.7758040957,
             "key": "estimator_minotaur.mcafZsmtHybridVelocityThresholdSlow",
             "q": 15,
             "scale": 628.318530718,
@@ -198,7 +198,7 @@
         {
             "define_name": "MCAF_ZSMT_HYBRID_VELOCITY_THRESHOLD_TRANSITION",
             "description": "Velocity threshold transition",
-            "intended_value": 83.7758040957,
+            "intended_value": 104.71975512,
             "key": "estimator_minotaur.mcafZsmtHybridVelocityThresholdTransition",
             "q": 15,
             "scale": 628.318530718,
@@ -456,7 +456,7 @@
         {
             "define_name": "MCAPI_MINIMUM_VELOCITY",
             "description": "Minimum velocity command",
-            "intended_value": 104.71975512,
+            "intended_value": 41.8879020479,
             "key": "mcapi.mcapiMinimumVelocity",
             "q": 15,
             "scale": 628.318530718,
@@ -661,7 +661,7 @@
         {
             "define_name": "MCAF_VELOCITY_COMMAND_MIN",
             "description": "Minimum velocity command",
-            "intended_value": 104.71975512,
+            "intended_value": 41.8879020479,
             "key": "operation.mcafVelocityCommandMin",
             "q": 15,
             "scale": 628.318530718,
@@ -715,7 +715,7 @@
         {
             "define_name": "VELOCITY_SLEWRATE_LIMIT_DECEL",
             "description": "slew rate limit for velocity commands during deceleration",
-            "intended_value": 0.586957521038,
+            "intended_value": 0.491111383194,
             "key": "operation.run.velocitySlewrateLimitDecel",
             "q": 15,
             "scale": 628.318530718,
@@ -1132,7 +1132,7 @@
         {
             "define_name": "MINSPEEDINRPM",
             "description": "minimum operating speed in RPM",
-            "intended_value": 1000,
+            "intended_value": 400,
             "key": "startup.minspeedinrpm",
             "units": null
         },
@@ -1393,7 +1393,7 @@
         {
             "define_name": "ZSMT_ANGLE_PROBE_CURRENT",
             "description": "Angle probe current",
-            "intended_value": 2.703,
+            "intended_value": 3.604,
             "key": "zsmt.angleProbeCurrent",
             "q": 15,
             "scale": 44.08,
@@ -1402,7 +1402,7 @@
         {
             "define_name": "ZSMT_ANGLE_PROBE_SLEW_RATE",
             "description": "Angle probe slew rate",
-            "intended_value": 4501.9178786,
+            "intended_value": 6002.55717147,
             "key": "zsmt.angleProbeSlewRate",
             "q": 15,
             "scale": 881600.0,

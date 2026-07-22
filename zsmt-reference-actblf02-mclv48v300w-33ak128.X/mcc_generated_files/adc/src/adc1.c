@@ -7,7 +7,7 @@
  *            
  * @brief     This is the generated driver source file for ADC1 driver        
  *
- * @skipline @version   PLIB Version 1.2.1
+ * @skipline @version   PLIB Version 1.2.2
  *           
  * @skipline  Device : dsPIC33AK128MC106
 */
@@ -127,8 +127,8 @@ void ADC1_Initialize(void)
     AD1CH5CMPHI = 0x0UL;
     //CMPHI 0x0; 
     AD1CH6CMPHI = 0x0UL;
-    
-    
+
+
     // ADC Mode change to run mode
     AD1CONbits.ON = 1U;   
     while(AD1CONbits.ADRDY == 0U)

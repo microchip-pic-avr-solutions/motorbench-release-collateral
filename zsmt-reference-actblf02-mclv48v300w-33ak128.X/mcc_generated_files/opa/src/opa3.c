@@ -7,7 +7,7 @@
  * 
  * @brief     This is the generated driver source file for OPA3 driver
  *
- * @skipline @version   PLIB Version 1.2.2
+ * @skipline @version   PLIB Version 1.2.3
  *
  * @skipline  Device : dsPIC33AK128MC106
 */

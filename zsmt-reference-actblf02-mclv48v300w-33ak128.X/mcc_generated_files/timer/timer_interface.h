@@ -35,6 +35,11 @@
 #ifndef TIMER_INTERFACE_H
 #define TIMER_INTERFACE_H
 
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 // Section: Included Files
 #include <stddef.h>
 #include <stdint.h>
@@ -80,6 +85,10 @@ struct TIMER_INTERFACE
     void (*Tasks)(void);
     ///< Pointer to SCCPx_Timer_Tasks or TMRx_Tasks e.g. \ref SCCP1_Timer_Tasks or \ref TMR1_Tasks (Supported only in polling mode)
 };
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // TIMER_INTERFACE_H
 

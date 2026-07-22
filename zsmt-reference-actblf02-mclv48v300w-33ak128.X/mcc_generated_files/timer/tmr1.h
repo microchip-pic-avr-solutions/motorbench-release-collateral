@@ -7,7 +7,7 @@
  * 
  * @brief     This is the generated driver header file for the TMR1 driver
  *
- * @version   PLIB Version 1.1.1
+ * @version   PLIB Version 1.1.2
  *
  * @skipline  Device : dsPIC33AK128MC106
 */
@@ -35,6 +35,11 @@
 
 #ifndef TMR1_H
 #define TMR1_H
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 // Section: Included Files
 
@@ -203,6 +208,10 @@ void TMR1_TimeoutCallbackRegister(void (*handler)(void));
  */
 void TMR1_TimeoutCallback(void);
 
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif //TMR1_H
 

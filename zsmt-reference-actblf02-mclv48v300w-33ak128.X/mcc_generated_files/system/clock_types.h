@@ -7,7 +7,7 @@
  * 
  * @brief     This is the generated driver types header file for the CLOCK driver
  *
- * @skipline @version   PLIB Version 1.4.0-dev.3
+ * @skipline @version   PLIB Version 1.4.0
  *
  * @skipline  Device : dsPIC33AK128MC106
 */
@@ -35,6 +35,11 @@
 
 #ifndef CLOCK_TYPES_H
 #define CLOCK_TYPES_H
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /**
  @ingroup  clockdriver
@@ -102,6 +107,10 @@ enum CLOCK_MONITOR
 {
     CLOCK_MONITOR_MAX = 0
 };
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // CLOCK_TYPES_H
 

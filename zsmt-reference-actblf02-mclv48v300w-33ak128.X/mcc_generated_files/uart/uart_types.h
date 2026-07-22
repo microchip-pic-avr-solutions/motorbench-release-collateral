@@ -7,7 +7,7 @@
  * 
  * @brief     This is the generated driver types header file for the UART driver
  *
- * @skipline @version   PLIB Version 1.1.3
+ * @skipline @version   PLIB Version 1.1.4
  *
  * @skipline  Device : dsPIC33AK128MC106
 */
@@ -36,6 +36,11 @@
 #ifndef UART_TYPES_H
 #define UART_TYPES_H
 
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  @ingroup  uartdriver
  @enum     UART_ERROR_MASKS
@@ -49,6 +54,10 @@ enum UART_ERROR_MASKS{
     UART_ERROR_TX_COLLISION_MASK = 0x8,
     UART_ERROR_AUTOBAUD_OVERFLOW_MASK = 0x10,
 };
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
 

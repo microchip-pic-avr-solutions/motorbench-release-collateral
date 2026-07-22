@@ -7,7 +7,7 @@
  *            
  * @brief     Clock configurator driver for System and Peripheral Clock using dsPIC MCUs.
  *
- * @skipline @version   PLIB Version 1.4.0-dev.3
+ * @skipline @version   PLIB Version 1.4.0
  *
  * @skipline  Device : dsPIC33AK128MC106
 */
@@ -35,6 +35,11 @@
 
 #ifndef CLOCK_H
 #define CLOCK_H
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 // Section: Included Files
 
@@ -168,6 +173,10 @@ void CLOCK_CombinedClockFailCallbackRegister(void (*handler)(void));
  * @return   none  
  */
 void CLOCK_CombinedClockFailCallback(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif    /* CLOCK_H */
 

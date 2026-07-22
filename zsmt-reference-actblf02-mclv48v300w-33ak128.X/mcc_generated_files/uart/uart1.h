@@ -7,7 +7,7 @@
  *            
  * @brief     This is the generated driver header file for the UART1 driver
  *
- * @skipline @version   PLIB Version 1.1.3
+ * @skipline @version   PLIB Version 1.1.4
  *            
  * @skipline  Device : dsPIC33AK128MC106
 */
@@ -35,6 +35,11 @@
 
 #ifndef UART1_H
 #define UART1_H
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 // Section: Included Files
 
@@ -310,6 +315,10 @@ uint32_t UART1_BaudRateGet(void);
  * @return   Errors with masking as per \ref UART1_ERROR_MASKS
  */
 size_t UART1_ErrorGet(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif  // UART1_H
 

@@ -7,7 +7,7 @@
  * 
  * @brief     This is the generated driver source file for PWM driver
  *
- * @skipline @version   PLIB Version 1.3.1
+ * @skipline @version   PLIB Version 1.3.2
  *
  * @skipline  Device : 
 */

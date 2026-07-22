@@ -7,7 +7,7 @@
  *            
  * @brief     This is the generated driver source file for QEI1 driver
  *
- * @skipline @version   PLIB Version 1.0.5
+ * @skipline @version   PLIB Version 1.0.6
  *            
  * @skipline  Device : dsPIC33AK128MC106
 */

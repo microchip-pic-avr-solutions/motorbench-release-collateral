@@ -7,7 +7,7 @@
  *            
  * @brief     Device Configuration Bits using dsPIC MCUs
  *
- * @version   PLIB Version 1.1.2
+ * @version   PLIB Version 1.1.3
  *
  * @skipline  Device : dsPIC33AK128MC106
 */
@@ -52,7 +52,7 @@
 // FWDT
 #pragma config FWDT_WINDIS = ON    //Watchdog Timer Window Disable bit->Watchdog Timer operates in Non-Window mode
 #pragma config FWDT_SWDTMPS = PS1    //Sleep Mode Watchdog Timer Post Scaler select bits->1:1
-#pragma config FWDT_RCLKSEL = BFRC256    //Watchdog Timer Clock select bits->WDT Run Mode uses BFRC:256
+#pragma config FWDT_RCLKSEL = BFRC244    //Watchdog Timer Clock select bits->WDT Run Mode uses 32.78kHz clock from BFRC/244
 #pragma config FWDT_RWDTPS = PS1    //Run Mode Watchdog Timer Post Scaler select bits->1:1
 #pragma config FWDT_WDTWIN = WIN25    //Watchdog Timer Window Size Select bits->WDT Window is 25% of WDT period
 #pragma config FWDT_WDTEN = SW    //Watchdog Timer Enable bit->WDT is controlled by software, use WDTCON.ON bit
@@ -185,7 +185,7 @@
 // FWPUCB
 #pragma config FWPUCB_WPUCB = 0xffffffff    //UCB write protection bits
 
-#pragma message("This generated MCC Melody content with device json version 5.15.1 is most compatible with dsPIC33AK-MC_DFP v1.5.214.")
+#pragma message("This generated MCC Melody content with device json version 5.16.1 is most compatible with dsPIC33AK-MC_DFP v1.5.263.")
 
 /**
  End of File

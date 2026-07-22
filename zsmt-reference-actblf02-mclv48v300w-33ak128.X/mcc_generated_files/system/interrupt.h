@@ -7,7 +7,7 @@
  *            
  * @brief     Interrupt Priority configuration driver using dsPIC MCUs.            
  *
- * @skipline @version   PLIB Version 1.1.4
+ * @skipline @version   PLIB Version 1.1.5
  *            
  * @skipline  Device : dsPIC33AK128MC106
 */
@@ -35,6 +35,11 @@
 
 #ifndef INTERRUPT_H
 #define INTERRUPT_H
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 // Section: Includes
 #include <stdint.h>
@@ -90,6 +95,10 @@ inline static uint16_t INTERRUPT_VectorNumberGet(void)
 {
     return _VECNUM; 
 }
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
 

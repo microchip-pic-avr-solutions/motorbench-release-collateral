@@ -3,9 +3,9 @@
   <metadata>
     <source>
        <title>Motor Control Application Framework</title>
-       <version>R9/RC31</version>
-       <commit>132024</commit>
-       <build_time>2026 Feb 13 18:37</build_time>
+       <version>R9/RC32</version>
+       <commit>132904</commit>
+       <build_time>2026 Jul 14 05:12</build_time>
      </source>
    </metadata>
 <motor>

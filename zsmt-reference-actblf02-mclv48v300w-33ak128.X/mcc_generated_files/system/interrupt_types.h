@@ -7,7 +7,7 @@
  *            
  * @brief     This is the generated driver types header file for the INTERRUPT driver           
  *
- * @skipline @version   PLIB Version 1.1.4
+ * @skipline @version   PLIB Version 1.1.5
  *            
  * @skipline  Device : dsPIC33AK128MC106
 */
@@ -36,6 +36,11 @@
 #ifndef INTERRUPT_TYPES_H
 #define INTERRUPT_TYPES_H
 
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * @ingroup  interruptdriver
  * @enum     INTERRUPT_PRIORITY
@@ -53,6 +58,10 @@ enum INTERRUPT_PRIORITY
 	INTERRUPT_PRIORITY_7 = 7,
 	INTERRUPT_MAX_PRIORITY = 7
 };
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
 

@@ -8,7 +8,7 @@
  *            
  * @brief     This is the generated source file for CLOCK driver
  *
- * @version   PLIB Version 1.4.0-dev.3
+ * @version   PLIB Version 1.4.0
  *
  * @skipline  Device : dsPIC33AK128MC106
 */
@@ -85,8 +85,8 @@ void CLOCK_Initialize(void)
 #endif
     }
     
-    // NOSC Primary Oscillator; OE enabled; SIDL disabled; ON enabled; BOSC Serial Test Mode clock (PGC); FSCMEN disabled; DIVSWEN disabled; OSWEN disabled; EXTCFSEL disabled; EXTCFEN disabled; FOUTSWEN disabled; RIS disabled; PLLSWEN disabled; 
-    PLL1CON = 0x9300UL;
+    // NOSC Primary Oscillator; SIDL disabled; ON enabled; BOSC Serial Test Mode clock (PGC); FSCMEN disabled; DIVSWEN disabled; OSWEN disabled; EXTCFSEL disabled; EXTCFEN disabled; FOUTSWEN disabled; RIS disabled; PLLSWEN disabled; 
+    PLL1CON = 0x8300UL;
     // POSTDIV2 1x divide; POSTDIV1 5x divide; PLLFBDIV 200; PLLPRE 1; 
     PLL1DIV = 0x100C829UL;
     //Enable PLL Input and Feedback Divider update
@@ -118,8 +118,8 @@ void CLOCK_Initialize(void)
 #endif
     //Clearing ON shuts down oscillator when no downstream clkgen or peripheral is requesting the clock
     PLL1CONbits.ON = 0U;
-    // NOSC Primary Oscillator; OE enabled; SIDL disabled; ON enabled; BOSC Serial Test Mode clock (PGC); FSCMEN disabled; DIVSWEN disabled; OSWEN disabled; EXTCFSEL disabled; EXTCFEN disabled; FOUTSWEN disabled; RIS disabled; PLLSWEN disabled; 
-    PLL2CON = 0x9300UL;
+    // NOSC Primary Oscillator; SIDL disabled; ON enabled; BOSC Serial Test Mode clock (PGC); FSCMEN disabled; DIVSWEN disabled; OSWEN disabled; EXTCFSEL disabled; EXTCFEN disabled; FOUTSWEN disabled; RIS disabled; PLLSWEN disabled; 
+    PLL2CON = 0x8300UL;
     // POSTDIV2 1x divide; POSTDIV1 5x divide; PLLFBDIV 125; PLLPRE 1; 
     PLL2DIV = 0x1007D29UL;
     //Enable PLL Input and Feedback Divider update

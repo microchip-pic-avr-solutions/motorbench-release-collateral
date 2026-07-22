@@ -8,7 +8,7 @@
  * @brief     High-Resolution Pulse-Width Modulated (PWM) with Fine Edge 
  *            Placement using dsPIC MCUs. 
  *
- * @skipline @version   PLIB Version 1.3.1
+ * @skipline @version   PLIB Version 1.3.2
  *
  * @skipline  Device : 
 */
@@ -17,6 +17,11 @@
 
 #ifndef PWM_HS_INTERFACE_H
 #define PWM_HS_INTERFACE_H
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 // Section: Included Files
 
@@ -201,6 +206,10 @@ struct PWM_HS_INTERFACE{
     void (*CommonEventTasks)(enum PWM_COMMON_EVENT event);
     ///< Pointer to \ref PWM_CommonEventTasks (Supported only in polling mode)
 };
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif  //PWM_HS_INTERFACE_H
 /**

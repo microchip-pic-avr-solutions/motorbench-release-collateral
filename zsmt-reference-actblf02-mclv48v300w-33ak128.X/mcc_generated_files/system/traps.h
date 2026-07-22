@@ -7,7 +7,7 @@
  *            
  * @brief     Traps driver with handler for all types of traps using dsPIC MCUs.           
  *
- * @skipline @version   PLIB Version 1.1.4
+ * @skipline @version   PLIB Version 1.1.5
  *            
  * @skipline  Device : dsPIC33AK128MC106
 */
@@ -35,6 +35,11 @@
 
 #ifndef TRAPS_H
 #define TRAPS_H
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 // Section: Included Files
 #include <stdint.h>
@@ -84,6 +89,10 @@ enum TRAPS_ERROR_CODE
  * @return     none  
  */
 void TRAPS_halt_on_error(uint16_t code);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
 

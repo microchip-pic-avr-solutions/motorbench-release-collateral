@@ -7,7 +7,7 @@
  *            
  * @brief     This is the generated driver source file for the UART1 driver.
  *
- * @skipline @version   PLIB Version 1.1.3
+ * @skipline @version   PLIB Version 1.1.4
  *            
  * @skipline  Device : dsPIC33AK128MC106
 */

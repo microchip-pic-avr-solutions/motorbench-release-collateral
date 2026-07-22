@@ -34,6 +34,11 @@
 #ifndef ADC_COMMON_H
 #define ADC_COMMON_H
 
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 // Section: Included Files
 
 // Section: Data Type Definitions
@@ -124,6 +129,7 @@ enum ADC_PWM_TRIGGERS
     ADC_PWM_TRIGGER_2 = 2,     /**< PWM TRIGGER 2 */
 };
 
+
 #endif //ADC_COMMON_TYPES
         
 /*******************************************************************************
@@ -159,5 +165,10 @@ enum ADC_PWM_TRIGGERS
   
 */
 #define ADC_COMMON_INDIVIDUAL_SOFTWARE_TRIGGER_FEATURE_AVAILABLE   1
+
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif  //ADC_COMMON_H

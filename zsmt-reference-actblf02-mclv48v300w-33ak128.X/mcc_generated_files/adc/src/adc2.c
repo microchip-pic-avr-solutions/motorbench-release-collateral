@@ -7,7 +7,7 @@
  *            
  * @brief     This is the generated driver source file for ADC2 driver        
  *
- * @skipline @version   PLIB Version 1.2.1
+ * @skipline @version   PLIB Version 1.2.2
  *           
  * @skipline  Device : dsPIC33AK128MC106
 */
@@ -111,8 +111,8 @@ void ADC2_Initialize(void)
     AD2CH3CMPHI = 0x0UL;
     //CMPHI 0x0; 
     AD2CH4CMPHI = 0x0UL;
-    
-    
+
+
     // ADC Mode change to run mode
     AD2CONbits.ON = 1U;   
     while(AD2CONbits.ADRDY == 0U)

@@ -39,3 +39,4 @@ void ADC_Initialize(void)
     ADC1_Initialize();
     ADC2_Initialize();
 }
+

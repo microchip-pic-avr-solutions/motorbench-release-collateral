@@ -9,7 +9,7 @@
  */ /*
  *
  * Motor Control Application Framework
- * R9/RC31 (commit 132024, build on 2026 Feb 13)
+ * R9/RC32 (commit 132904, build on 2026 Jul 14)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -63,10 +63,10 @@ extern "C" {
 #define KFILTER_IQ_SCALE                 2.000000e+04  // rad/s
 #define KFILTER_IQ_ENG                 999.7558593750  // rad/s
 /* Minimum velocity command */
-#define MCAPI_MINIMUM_VELOCITY               5461      // Q15(  0.16666) =  +78.53502 rad/s       =  +78.53982 rad/s       - 0.0061%
-#define MCAPI_MINIMUM_VELOCITY_NORM      0.1666564941  // normalized
+#define MCAPI_MINIMUM_VELOCITY               2185      // Q15(  0.06668) =  +31.42264 rad/s       =  +31.41593 rad/s       + 0.0214%
+#define MCAPI_MINIMUM_VELOCITY_NORM      0.0666809082  // normalized
 #define MCAPI_MINIMUM_VELOCITY_SCALE   471.2388980385  // rad/s
-#define MCAPI_MINIMUM_VELOCITY_ENG      78.5350226498  // rad/s
+#define MCAPI_MINIMUM_VELOCITY_ENG      31.4226377018  // rad/s
 /* Maximum velocity command */
 #define MCAPI_MAXIMUM_VELOCITY              27307      // Q15(  0.83334) = +392.70388 rad/s       = +392.69908 rad/s       + 0.0012%
 #define MCAPI_MAXIMUM_VELOCITY_NORM      0.8333435059  // normalized

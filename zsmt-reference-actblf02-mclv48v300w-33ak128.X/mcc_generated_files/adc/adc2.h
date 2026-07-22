@@ -7,7 +7,7 @@
  *            
  * @brief     This is the generated driver header file for the ADC2 driver          
  *
- * @skipline @version   PLIB Version 1.2.1
+ * @skipline @version   PLIB Version 1.2.2
  *            
  * @skipline  Device : dsPIC33AK128MC106
 */
@@ -35,6 +35,11 @@
 
 #ifndef ADC2_H
 #define ADC2_H
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 // Section: Included Files
 
@@ -348,6 +353,10 @@ inline static void ADC2_IndividualChannelInterruptPrioritySet(const enum ADC_CHA
  */
 void ADC2_PWMTriggerSourceSet(const enum ADC_CHANNEL channel, enum ADC_PWM_INSTANCE pwmInstance, enum ADC_PWM_TRIGGERS triggerNumber);
 
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif //_ADC2_H
     

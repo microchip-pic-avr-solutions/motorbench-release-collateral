@@ -7,7 +7,7 @@
  *            
  * @brief     This is the generated driver types header file for the QEI driver 
  *
- * @skipline @version   PLIB Version 1.0.5
+ * @skipline @version   PLIB Version 1.0.6
  *            
  * @skipline  Device : dsPIC33AK128MC106
 */
@@ -35,6 +35,11 @@
 
 #ifndef QEI_TYPES_H
 #define QEI_TYPES_H
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 // Section: Included Files
 
@@ -67,5 +72,9 @@ enum QEI_IMV_STATE
     QEI_IMV_STATE_A1B1 = 3, /**< Index Match Value State : QEA = 1 and QEB = 1 */
     QEI_MAX_IMV_STATE       /**< Maximum configurable Index Match Value State  */
 };
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif    /* QEI_TYPES_H */             

@@ -7,7 +7,7 @@
  * 
  * @brief     This is the generated driver interface header file for the OPA driver
  *
- * @skipline @version   PLIB Version 1.2.2
+ * @skipline @version   PLIB Version 1.2.3
  *
  * @skipline  Device : dsPIC33AK128MC106
 */
@@ -16,6 +16,11 @@
 
 #ifndef OPA_TYPES_H
 #define    OPA_TYPES_H
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 // Section: Type defines
 
@@ -117,6 +122,10 @@ enum OPA_OUTPUT_VOLTAGE_OFFSET_CORRECTION
    INCREASE_15_UNIT_VOLTAGE = 0x10,           /**< Correct offset by +15 unit voltage */
 
 };
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif  //OPA_TYPES_H
 /**

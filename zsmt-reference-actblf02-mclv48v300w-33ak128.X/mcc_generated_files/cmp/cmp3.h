@@ -7,7 +7,7 @@
  *            
  * @brief     This is the generated driver header file for the CMP3 driver
  *
- * @skipline @version   PLIB Version 1.1.5
+ * @skipline @version   PLIB Version 1.1.6
  *            
  * @skipline  Device : dsPIC33AK128MC106
 */
@@ -35,6 +35,11 @@
 
 #ifndef CMP3_H
 #define CMP3_H
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 // Section: Included Files
 
@@ -237,6 +242,10 @@ void CMP3_EventCallback(void);
  * @return   none  
  */
 void CMP3_Tasks(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif //CMP3_H
 

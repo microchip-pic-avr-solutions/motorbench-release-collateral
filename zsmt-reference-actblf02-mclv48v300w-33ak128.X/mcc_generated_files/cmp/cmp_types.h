@@ -7,7 +7,7 @@
  * 
  * @brief     This is the generated driver types header file for the CMP driver
  *
- * @version   PLIB Version 1.1.5
+ * @version   PLIB Version 1.1.6
  *
  * @skipline  Device : dsPIC33AK128MC106
 */
@@ -37,6 +37,11 @@
 #define CMP_TYPES_H
 
 
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  @ingroup  clockdriver
  @enum     CMP_DAC_TRANSISION_MODE
@@ -62,6 +67,10 @@ enum CMP_DAC_SLOPE_UPDATE_MODE
     CMP_DAC_SLOPE_UPDATE_TRIGGERED = 1U, /**< Updates slope related data registers during the external trigger */
     
 };
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // CMP_TYPES_H
 

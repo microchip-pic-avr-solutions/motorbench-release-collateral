@@ -9,7 +9,7 @@
  */ /*
  *
  * Motor Control Application Framework
- * R9/RC31 (commit 132024, build on 2026 Feb 13)
+ * R9/RC32 (commit 132904, build on 2026 Jul 14)
  *
  * (c) 2017 - 2023 Microchip Technology Inc. and its subsidiaries. You may use
  * this software and any derivatives exclusively with Microchip products.
@@ -62,8 +62,8 @@ extern "C" {
  *                                 4.272 kRPM
  * omega0:                        89.483  rad/s
  *                               854.500  RPM
- * omega_min:                    104.720  rad/s
- *                                 1.000 kRPM
+ * omega_min:                     41.888  rad/s
+ *                               400.000  RPM
  * omega1:                       114.940  rad/s
  *                                 1.098 kRPM
  * accel_limit_0:                359.317  rad/s^2

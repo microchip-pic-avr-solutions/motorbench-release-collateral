@@ -7,7 +7,7 @@
  * 
  * @brief     This is the generated driver header file for the SCCP1-TIMER driver
  *
- * @version   PLIB Version 1.2.2
+ * @version   PLIB Version 1.2.3
  *
  * @skipline  Device : dsPIC33AK128MC106
 */
@@ -35,6 +35,11 @@
 
 #ifndef SCCP1_H
 #define SCCP1_H
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 // Section: Included Files
 
@@ -218,6 +223,10 @@ void SCCP1_Timer_TimeoutCallbackRegister(void (*handler)(void));
  * @return   none  
  */
 void SCCP1_TimeoutCallback(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif //SCCP1_H
 

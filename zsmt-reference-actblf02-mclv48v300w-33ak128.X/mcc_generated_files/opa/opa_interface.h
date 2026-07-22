@@ -9,7 +9,7 @@
  *            such as Voltage Amplifiers, Voltage Followers, Interfacing Sensors and 
  *            Signal Conditioning of Analog Input Signals using dsPIC MCUs.
  *
- * @skipline @version   PLIB Version 1.2.2
+ * @skipline @version   PLIB Version 1.2.3
  *
  * @skipline  Device : dsPIC33AK128MC106
 */
@@ -18,6 +18,11 @@
 
 #ifndef OPA_INTERFACE_H
 #define OPA_INTERFACE_H
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 // Section: Included Files
 
@@ -60,6 +65,10 @@ struct OPA_INTERFACE
     void (*OffsetCorrection) (enum OPA_OFFSET_INPUT_TYPE inputType, enum OPA_OUTPUT_VOLTAGE_OFFSET_CORRECTION unitVoltage);
     ///< Pointer to OPAx_OffsetCorrection e.g. \ref OPA1_OffsetCorrection
 };
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif //OPA_INTERFACE_H
 

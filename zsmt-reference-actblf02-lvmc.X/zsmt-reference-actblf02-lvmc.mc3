@@ -1,81 +1,78 @@
 <config configName="default" projectName="zsmt-reference-actblf02-lvmc" configVersion="1.3" device="dsPIC33CK256MP508" deviceLibraryClass="com.microchip.mcc.melody.Library" coreVersion="5.9.0" spaHostVersion="1.3.0">
    <usedPackages class="java.util.ArrayList">
-      <package packageName="@mchp-mcc/pic24-dspic33-qei-32b-upb" version="1.4.6" contentType="MELODY">
-         <modules class="java.util.ArrayList"/>
-      </package>
-      <package packageName="@mchp-mcc/pic-16bit" version="5.16.2" contentType="MELODY">
-         <modules class="java.util.ArrayList"/>
-      </package>
-      <package packageName="@mchp-mcc/pic24-dspic33-wdt-upb-v1" version="1.2.3" contentType="MELODY">
-         <modules class="java.util.ArrayList"/>
-      </package>
       <package packageName="@mchp-mcc/adc-multicore-driver" version="2.1.5" contentType="MELODY">
-         <modules class="java.util.ArrayList"/>
-      </package>
-      <package packageName="@mchp-mcc/dmt-16bit-driver" version="1.0.8" contentType="MELODY">
-         <modules class="java.util.ArrayList"/>
-      </package>
-      <package packageName="@mchp-mcc/pic24-dspic33-pwm-pc-upb" version="2.6.0" contentType="MELODY">
-         <modules class="java.util.ArrayList"/>
-      </package>
-      <package packageName="@mchp-mcc/wdt-16bit-driver" version="1.0.10" contentType="MELODY">
-         <modules class="java.util.ArrayList"/>
-      </package>
-      <package packageName="@mchp-mcc/dspic33-configuration-bits" version="1.2.6" contentType="MELODY">
-         <modules class="java.util.ArrayList"/>
-      </package>
-      <package packageName="@mchp-mcc/uart-driver" version="1.10.3" contentType="MELODY">
-         <modules class="java.util.ArrayList"/>
-      </package>
-      <package packageName="@mchp-mcc/main-16bit-manager" version="1.1.6" contentType="MELODY">
-         <modules class="java.util.ArrayList"/>
-      </package>
-      <package packageName="@mchp-mcc/pic24-dspic33-reset" version="1.1.3" contentType="MELODY">
          <modules class="java.util.ArrayList"/>
       </package>
       <package packageName="@mchp-mcc/clock-16bit-driver" version="1.2.1" contentType="MELODY">
          <modules class="java.util.ArrayList"/>
       </package>
-      <package packageName="@mchp-mcc/pic24-dspic33-clock-sib" version="1.4.6" contentType="MELODY">
+      <package packageName="@mchp-mcc/dmt-16bit-driver" version="1.0.8" contentType="MELODY">
          <modules class="java.util.ArrayList"/>
       </package>
-      <package packageName="@mchp-mcc/pic24-dspic33-adc-multicore" version="2.4.6" contentType="MELODY">
-         <modules class="java.util.ArrayList"/>
-      </package>
-      <package packageName="@mchp-mcc/pic24-dspic33-dmt-upb" version="1.1.5" contentType="MELODY">
-         <modules class="java.util.ArrayList"/>
-      </package>
-      <package packageName="@mchp-mcc/pic24-dspic33-pin-manager" version="1.4.1" contentType="MELODY">
-         <modules class="java.util.ArrayList"/>
-      </package>
-      <package packageName="@mchp-mcc/pic24-dspic33-mccp-upb" version="1.6.7" contentType="MELODY">
-         <modules class="java.util.ArrayList"/>
-      </package>
-      <package packageName="@mchp-mcc/pin-content-processor" version="3.11.0" contentType="MELODY">
-         <modules class="java.util.ArrayList"/>
-      </package>
-      <package packageName="@mchp-mcc/pic24-dspic33-uart-protocol-upb" version="1.5.4" contentType="MELODY">
+      <package packageName="@mchp-mcc/dspic33-configuration-bits" version="1.2.6" contentType="MELODY">
          <modules class="java.util.ArrayList"/>
       </package>
       <package packageName="@mchp-mcc/icd-16bit-driver" version="1.0.3" contentType="MELODY">
          <modules class="java.util.ArrayList"/>
       </package>
-      <package packageName="@mchp-mcc/pic24-dspic33-interrupt" version="1.4.3" contentType="MELODY">
+      <package packageName="@mchp-mcc/main-16bit-manager" version="1.1.6" contentType="MELODY">
+         <modules class="java.util.ArrayList"/>
+      </package>
+      <package packageName="@mchp-mcc/pic-16bit" version="5.16.2" contentType="MELODY">
+         <modules class="java.util.ArrayList"/>
+      </package>
+      <package packageName="@mchp-mcc/pic24-dspic33-adc-multicore" version="2.4.6" contentType="MELODY">
+         <modules class="java.util.ArrayList"/>
+      </package>
+      <package packageName="@mchp-mcc/pic24-dspic33-clock-sib" version="1.4.6" contentType="MELODY">
          <modules class="java.util.ArrayList"/>
       </package>
       <package packageName="@mchp-mcc/pic24-dspic33-cmp-dac" version="1.5.0" contentType="MELODY">
          <modules class="java.util.ArrayList"/>
       </package>
-      <package packageName="@mchp-mcc/pic24-dspic33-tmr-class-upb" version="1.5.7" contentType="MELODY">
+      <package packageName="@mchp-mcc/pic24-dspic33-dmt-upb" version="1.1.5" contentType="MELODY">
+         <modules class="java.util.ArrayList"/>
+      </package>
+      <package packageName="@mchp-mcc/pic24-dspic33-interrupt" version="1.4.3" contentType="MELODY">
+         <modules class="java.util.ArrayList"/>
+      </package>
+      <package packageName="@mchp-mcc/pic24-dspic33-mccp-upb" version="1.6.7" contentType="MELODY">
          <modules class="java.util.ArrayList"/>
       </package>
       <package packageName="@mchp-mcc/pic24-dspic33-opamp-ctrl-upb" version="1.4.6" contentType="MELODY">
          <modules class="java.util.ArrayList"/>
       </package>
-      <package packageName="com.microchip.mcc.motorbench.MotorBenchLibrary" version="2.56.0" contentType="CLASSIC">
+      <package packageName="@mchp-mcc/pic24-dspic33-pin-manager" version="1.4.1" contentType="MELODY">
          <modules class="java.util.ArrayList"/>
       </package>
-      <package packageName="@mchp-mcc/pic-16bit" version="5.16.2" contentType="MELODY">
+      <package packageName="@mchp-mcc/pic24-dspic33-pwm-pc-upb" version="2.6.0" contentType="MELODY">
+         <modules class="java.util.ArrayList"/>
+      </package>
+      <package packageName="@mchp-mcc/pic24-dspic33-qei-32b-upb" version="1.4.6" contentType="MELODY">
+         <modules class="java.util.ArrayList"/>
+      </package>
+      <package packageName="@mchp-mcc/pic24-dspic33-reset" version="1.1.3" contentType="MELODY">
+         <modules class="java.util.ArrayList"/>
+      </package>
+      <package packageName="@mchp-mcc/pic24-dspic33-tmr-class-upb" version="1.5.7" contentType="MELODY">
+         <modules class="java.util.ArrayList"/>
+      </package>
+      <package packageName="@mchp-mcc/pic24-dspic33-uart-protocol-upb" version="1.5.4" contentType="MELODY">
+         <modules class="java.util.ArrayList"/>
+      </package>
+      <package packageName="@mchp-mcc/pic24-dspic33-wdt-upb-v1" version="1.2.3" contentType="MELODY">
+         <modules class="java.util.ArrayList"/>
+      </package>
+      <package packageName="@mchp-mcc/pin-content-processor" version="3.11.0" contentType="MELODY">
+         <modules class="java.util.ArrayList"/>
+      </package>
+      <package packageName="@mchp-mcc/uart-driver" version="1.10.3" contentType="MELODY">
+         <modules class="java.util.ArrayList"/>
+      </package>
+      <package packageName="@mchp-mcc/wdt-16bit-driver" version="1.0.10" contentType="MELODY">
+         <modules class="java.util.ArrayList"/>
+      </package>
+      <package packageName="com.microchip.mcc.motorbench.MotorBenchLibrary" version="2.56.0" contentType="CLASSIC">
          <modules class="java.util.ArrayList"/>
       </package>
    </usedPackages>
@@ -322,7 +319,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Customize" name="component"/>
-         <value>{&quot;config&quot;:{&quot;ui&quot;:{&quot;content&quot;:{&quot;current_measure-method&quot;:&quot;triple_channel&quot;,&quot;current_measure-single_channel-minimumTime&quot;:2.0,&quot;current_measure-single_channel-sampleDelay&quot;:0.0,&quot;current_measure-opamp-full_input_range&quot;:true,&quot;current_measure-offset_cal-range&quot;:0.04,&quot;estimator-type&quot;:&quot;zsmt&quot;,&quot;estimator-active-pll&quot;:true,&quot;estimator-active-smo&quot;:false,&quot;estimator-active-qei&quot;:false,&quot;estimator-active-atpll&quot;:false,&quot;estimator-active-zsmt&quot;:false,&quot;estimator-active-ideal&quot;:false,&quot;operation-min_velocity_ratio&quot;:0.25,&quot;operation-startup_velocity_ratio&quot;:0.2744,&quot;operation-max_velocity_ratio&quot;:1.25,&quot;operation-fullscale_base_ratio&quot;:1.5,&quot;operation-outer_loop_type&quot;:&quot;velocity&quot;,&quot;operation-saliency-threshold&quot;:1.25,&quot;operation-slewrate-accel&quot;:0.5,&quot;operation-slewrate-decel&quot;:1.0,&quot;operation-dyn_current_type&quot;:&quot;none&quot;,&quot;operation-stopping-type&quot;:&quot;minimal_impact&quot;,&quot;operation-stopping-closed_loop_parameters-speed&quot;:0.05,&quot;operation-stopping-closed_loop_parameters-time&quot;:0.5,&quot;operation-stopping-coastdown-end_velocity&quot;:0.05,&quot;operation-stopping-coastdown-time&quot;:1.2,&quot;fault_inject-get_tf-div0&quot;:false,&quot;fault_inject-get_tf-missing_data&quot;:false,&quot;fault_inject-get_tf-raise_value_error&quot;:false,&quot;fault_inject-get_tf-raise_custom_error&quot;:false,&quot;fault_inject-tf-tf_null&quot;:false,&quot;fault_inject-tf-tf_jy&quot;:false,&quot;fault_inject-tf-tf_jyex&quot;:false,&quot;fault_inject-tf-div0&quot;:false,&quot;fault_inject-tf-tau&quot;:0.0,&quot;flux_control-method&quot;:&quot;none&quot;,&quot;flux_control-eqn_based-ilimit-region_type&quot;:&quot;quadratic&quot;,&quot;flux_control-eqn_based-ilimit-id_limit&quot;:0.7,&quot;flux_control-eqn_based-ilimit-iq_limit&quot;:0.95,&quot;flux_control-eqn_based-fluxweak_enable&quot;:false,&quot;flux_control-eqn_based-fw-vdq_limit&quot;:0.95,&quot;flux_control-eqn_based-mtpa_enable&quot;:false,&quot;deadtimecomp-method&quot;:&quot;none&quot;,&quot;deadtimecomp-perphase-current_sign_band&quot;:0.02,&quot;deadtimecomp-perphase-forward_gain&quot;:0.0,&quot;deadtimecomp-perphase-feedback_gain&quot;:0.0,&quot;fault_detect-margin_uv&quot;:2.0,&quot;fault_detect-margin_ov&quot;:2.0,&quot;fault_detect-stall_detect_enable&quot;:false,&quot;startup-Istartup&quot;:0.75,&quot;startup-t_rampup&quot;:25.0,&quot;startup-t_align&quot;:0.0,&quot;startup-min_total_accel_time&quot;:250.0,&quot;startup-torque_scale_accel&quot;:0.15,&quot;startup-torque_scale_slow_accel&quot;:0.2,&quot;startup-t_hold&quot;:0.0,&quot;startup-omega0&quot;:0.2,&quot;startup-theta_converge_rate&quot;:1.0,&quot;startup-method&quot;:&quot;zsmt_dsat&quot;,&quot;startup-damping-Imax&quot;:0.133,&quot;startup-damping-gainmax&quot;:40.0,&quot;startup-damping-omega_min&quot;:0.4,&quot;overmodulation-vd_limit&quot;:1.0,&quot;overmodulation-vq_limit&quot;:1.15,&quot;overmodulation-include_duty_clipping&quot;:true,&quot;atpll-tau1&quot;:0.1,&quot;atpll-tau2&quot;:2.19,&quot;atpll-kp&quot;:1.9,&quot;atpll-ki&quot;:30.0,&quot;pll-tau&quot;:2.19,&quot;pll-omega1&quot;:116.5,&quot;pll-velocity_filter_threshold&quot;:1.0,&quot;smo-velocity_loop_cutoff&quot;:0.3,&quot;encoder-lines&quot;:250.0,&quot;encoder-index_present&quot;:false,&quot;encoder-tracking_loop-tau&quot;:1.5,&quot;encoder-qei_sync-method&quot;:&quot;align&quot;,&quot;encoder-qei_sync-align-t_align&quot;:0.5,&quot;encoder-qei_sync-align-angle_shift&quot;:30.0,&quot;encoder-qei_sync-align-angle_init&quot;:-30.0,&quot;encoder-qei_sync-align_sweep-sweep_rate_pow&quot;:1.0,&quot;encoder-qei_sync-align_sweep-setup_angle&quot;:45.0,&quot;encoder-qei_sync-pullout-pullout_slip&quot;:0.117,&quot;zsmt-excitation-kV&quot;:0.12,&quot;zsmt-excitation-kI&quot;:0.1,&quot;zsmt-pll-zeta&quot;:1.5,&quot;zsmt-pll-tau&quot;:10.0,&quot;zsmt-pll-tau_lpf&quot;:0.0,&quot;zsmt-pll-execution_divider&quot;:2.0,&quot;zsmt-startup-align_delay&quot;:1.0,&quot;zsmt-startup-pll_lock_time&quot;:1.0,&quot;zsmt-startup-speed_limit&quot;:0.015,&quot;zsmt-startup-current_limit&quot;:0.3,&quot;zsmt-startup-probe_current&quot;:0.3,&quot;zsmt-startup-probe_duration&quot;:10.0,&quot;zsmt-startup-probe_slew_time&quot;:1.5,&quot;zsmt-startup-probe_blanking_time&quot;:4.0,&quot;zsmt-hybrid-type&quot;:&quot;minotaur&quot;,&quot;zsmt-minotaur-voltage_limit-vd&quot;:0.45,&quot;zsmt-minotaur-voltage_limit-vq&quot;:0.78,&quot;zsmt-minotaur-converge-angle&quot;:10.0,&quot;zsmt-minotaur-converge-duration&quot;:2.0,&quot;zsmt-minotaur-velocity_threshold-slow&quot;:0.15,&quot;zsmt-minotaur-velocity_threshold-transition&quot;:0.2,&quot;zsmt-minotaur-velocity_threshold-fast&quot;:0.25,&quot;zsmt-angle_correction-current_gain&quot;:0.0,&quot;dyn_current1-peak_factor&quot;:1.0,&quot;dyn_current1-horizon_factor&quot;:1.05,&quot;dyn_current1-tau&quot;:5.0,&quot;dyn_current1-nsamples&quot;:128.0,&quot;voltage_outerloop-tau_lpf&quot;:2.0,&quot;voltage_outerloop-Kp&quot;:0.1,&quot;voltage_outerloop-tau&quot;:100.0,&quot;mcapi-isSquaredTau&quot;:1.0,&quot;mcapi-iqTau&quot;:1.0,&quot;mcapi-adcIsrUserFunctions_enable&quot;:false,&quot;board_service-uiServiceTiming&quot;:1.0,&quot;board_service-uiButtonDebounceTime&quot;:7.0,&quot;board_service-uiButtonLongPressTime&quot;:2.5,&quot;test_harness-perturbation_asymmetric&quot;:false,&quot;test_harness-codegen-test_harness&quot;:false,&quot;test_harness-codegen-test_profiling&quot;:false,&quot;adc-vtempbridge&quot;:false,&quot;adc-temp_bridge_params-threshold&quot;:50.0,&quot;adc-temp_bridge_params-tau_lpf&quot;:10.0,&quot;adc-temp_bridge_params-slewrate&quot;:4.0,&quot;adc-vabsref&quot;:false,&quot;adc-vphasea&quot;:false,&quot;adc-vphaseb&quot;:false,&quot;adc-vphasec&quot;:false,&quot;diagnostics-method&quot;:&quot;x2cscope&quot;},&quot;version&quot;:{&quot;schema&quot;:6.0,&quot;motorBench&quot;:&quot;2.55.0&quot;,&quot;MCAF&quot;:&quot;R9&quot;},&quot;status&quot;:{&quot;valid&quot;:true}}}}</value>
+         <value>{&quot;config&quot;:{&quot;ui&quot;:{&quot;content&quot;:{&quot;current_measure-method&quot;:&quot;triple_channel&quot;,&quot;current_measure-single_channel-minimumTime&quot;:2.0,&quot;current_measure-single_channel-sampleDelay&quot;:0.0,&quot;current_measure-opamp-full_input_range&quot;:true,&quot;current_measure-offset_cal-range&quot;:0.04,&quot;estimator-type&quot;:&quot;zsmt&quot;,&quot;estimator-active-pll&quot;:true,&quot;estimator-active-smo&quot;:false,&quot;estimator-active-qei&quot;:false,&quot;estimator-active-atpll&quot;:false,&quot;estimator-active-zsmt&quot;:false,&quot;estimator-active-ideal&quot;:false,&quot;operation-min_velocity_ratio&quot;:0.1,&quot;operation-startup_velocity_ratio&quot;:0.2744,&quot;operation-max_velocity_ratio&quot;:1.25,&quot;operation-fullscale_base_ratio&quot;:1.5,&quot;operation-outer_loop_type&quot;:&quot;velocity&quot;,&quot;operation-saliency-threshold&quot;:1.25,&quot;operation-slewrate-accel&quot;:0.5,&quot;operation-slewrate-decel&quot;:1.0,&quot;operation-dyn_current_type&quot;:&quot;none&quot;,&quot;operation-stopping-type&quot;:&quot;minimal_impact&quot;,&quot;operation-stopping-closed_loop_parameters-speed&quot;:0.05,&quot;operation-stopping-closed_loop_parameters-time&quot;:0.5,&quot;operation-stopping-coastdown-end_velocity&quot;:0.05,&quot;operation-stopping-coastdown-time&quot;:1.2,&quot;fault_inject-get_tf-div0&quot;:false,&quot;fault_inject-get_tf-missing_data&quot;:false,&quot;fault_inject-get_tf-raise_value_error&quot;:false,&quot;fault_inject-get_tf-raise_custom_error&quot;:false,&quot;fault_inject-tf-tf_null&quot;:false,&quot;fault_inject-tf-tf_jy&quot;:false,&quot;fault_inject-tf-tf_jyex&quot;:false,&quot;fault_inject-tf-div0&quot;:false,&quot;fault_inject-tf-tau&quot;:0.0,&quot;flux_control-method&quot;:&quot;none&quot;,&quot;flux_control-eqn_based-ilimit-region_type&quot;:&quot;quadratic&quot;,&quot;flux_control-eqn_based-ilimit-id_limit&quot;:0.7,&quot;flux_control-eqn_based-ilimit-iq_limit&quot;:0.95,&quot;flux_control-eqn_based-fluxweak_enable&quot;:false,&quot;flux_control-eqn_based-fw-vdq_limit&quot;:0.95,&quot;flux_control-eqn_based-mtpa_enable&quot;:false,&quot;deadtimecomp-method&quot;:&quot;none&quot;,&quot;deadtimecomp-perphase-current_sign_band&quot;:0.02,&quot;deadtimecomp-perphase-forward_gain&quot;:0.0,&quot;deadtimecomp-perphase-feedback_gain&quot;:0.0,&quot;fault_detect-margin_uv&quot;:2.0,&quot;fault_detect-margin_ov&quot;:2.0,&quot;fault_detect-stall_detect_enable&quot;:false,&quot;startup-Istartup&quot;:0.75,&quot;startup-t_rampup&quot;:25.0,&quot;startup-t_align&quot;:0.0,&quot;startup-min_total_accel_time&quot;:250.0,&quot;startup-torque_scale_accel&quot;:0.15,&quot;startup-torque_scale_slow_accel&quot;:0.2,&quot;startup-t_hold&quot;:0.0,&quot;startup-omega0&quot;:0.2,&quot;startup-theta_converge_rate&quot;:1.0,&quot;startup-method&quot;:&quot;zsmt_dsat&quot;,&quot;startup-damping-Imax&quot;:0.133,&quot;startup-damping-gainmax&quot;:40.0,&quot;startup-damping-omega_min&quot;:0.4,&quot;overmodulation-vd_limit&quot;:1.0,&quot;overmodulation-vq_limit&quot;:1.15,&quot;overmodulation-include_duty_clipping&quot;:true,&quot;atpll-tau1&quot;:0.1,&quot;atpll-tau2&quot;:2.19,&quot;atpll-kp&quot;:1.9,&quot;atpll-ki&quot;:30.0,&quot;pll-tau&quot;:2.19,&quot;pll-omega1&quot;:116.5,&quot;pll-velocity_filter_threshold&quot;:1.0,&quot;smo-velocity_loop_cutoff&quot;:0.3,&quot;encoder-lines&quot;:250.0,&quot;encoder-index_present&quot;:false,&quot;encoder-tracking_loop-tau&quot;:1.5,&quot;encoder-qei_sync-method&quot;:&quot;align&quot;,&quot;encoder-qei_sync-align-t_align&quot;:0.5,&quot;encoder-qei_sync-align-angle_shift&quot;:30.0,&quot;encoder-qei_sync-align-angle_init&quot;:-30.0,&quot;encoder-qei_sync-align_sweep-sweep_rate_pow&quot;:1.0,&quot;encoder-qei_sync-align_sweep-setup_angle&quot;:45.0,&quot;encoder-qei_sync-pullout-pullout_slip&quot;:0.117,&quot;zsmt-excitation-kV&quot;:0.12,&quot;zsmt-excitation-kI&quot;:0.1,&quot;zsmt-pll-zeta&quot;:1.5,&quot;zsmt-pll-tau&quot;:10.0,&quot;zsmt-pll-tau_lpf&quot;:0.0,&quot;zsmt-pll-execution_divider&quot;:2.0,&quot;zsmt-startup-align_delay&quot;:1.0,&quot;zsmt-startup-pll_lock_time&quot;:1.0,&quot;zsmt-startup-speed_limit&quot;:0.015,&quot;zsmt-startup-current_limit&quot;:0.3,&quot;zsmt-startup-probe_current&quot;:0.4,&quot;zsmt-startup-probe_duration&quot;:10.0,&quot;zsmt-startup-probe_slew_time&quot;:1.5,&quot;zsmt-startup-probe_blanking_time&quot;:4.0,&quot;zsmt-hybrid-type&quot;:&quot;minotaur&quot;,&quot;zsmt-minotaur-voltage_limit-vd&quot;:0.45,&quot;zsmt-minotaur-voltage_limit-vq&quot;:0.78,&quot;zsmt-minotaur-converge-angle&quot;:10.0,&quot;zsmt-minotaur-converge-duration&quot;:2.0,&quot;zsmt-minotaur-velocity_threshold-slow&quot;:0.2,&quot;zsmt-minotaur-velocity_threshold-transition&quot;:0.25,&quot;zsmt-minotaur-velocity_threshold-fast&quot;:0.3,&quot;zsmt-angle_correction-current_gain&quot;:0.0,&quot;dyn_current1-peak_factor&quot;:1.0,&quot;dyn_current1-horizon_factor&quot;:1.05,&quot;dyn_current1-tau&quot;:5.0,&quot;dyn_current1-nsamples&quot;:128.0,&quot;voltage_outerloop-tau_lpf&quot;:2.0,&quot;voltage_outerloop-Kp&quot;:0.1,&quot;voltage_outerloop-tau&quot;:100.0,&quot;mcapi-isSquaredTau&quot;:1.0,&quot;mcapi-iqTau&quot;:1.0,&quot;mcapi-adcIsrUserFunctions_enable&quot;:false,&quot;board_service-uiServiceTiming&quot;:1.0,&quot;board_service-uiButtonDebounceTime&quot;:7.0,&quot;board_service-uiButtonLongPressTime&quot;:2.5,&quot;test_harness-perturbation_asymmetric&quot;:false,&quot;test_harness-codegen-test_harness&quot;:false,&quot;test_harness-codegen-test_profiling&quot;:false,&quot;adc-vtempbridge&quot;:false,&quot;adc-temp_bridge_params-threshold&quot;:50.0,&quot;adc-temp_bridge_params-tau_lpf&quot;:10.0,&quot;adc-temp_bridge_params-slewrate&quot;:4.0,&quot;adc-vabsref&quot;:false,&quot;adc-vphasea&quot;:false,&quot;adc-vphaseb&quot;:false,&quot;adc-vphasec&quot;:false,&quot;diagnostics-method&quot;:&quot;x2cscope&quot;},&quot;version&quot;:{&quot;schema&quot;:6.0,&quot;motorBench&quot;:&quot;2.55.0&quot;,&quot;MCAF&quot;:&quot;R9&quot;},&quot;status&quot;:{&quot;valid&quot;:true}}}}</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="DynamicBoard" name="component"/>
@@ -522,15 +519,15 @@
       </entry>
       <entry>
          <file>mcc_generated_files\cmp\cmp1.h</file>
-         <hash>0a5a3165667fb05c1797e70da5b011cacfd8d5ab610fac549643fca7ba367411</hash>
+         <hash>7d6eac4ba3b4f88eadfc33ae21ee5a1a32aba06325d8fcf7970d4c820981f902</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\cmp\cmp_interface.h</file>
-         <hash>41a9af81b72b0177dc3a19c0eb284f25f1d7eebd0cebab67035002b3825fb03d</hash>
+         <hash>54b8f390fefe20cf183aa505f066ede8c29610d00b24ee49aa8671ef82da0a06</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\cmp\src\cmp1.c</file>
-         <hash>ad24f9c017e66a434b4376c9038afc35acb1f7e391310b234bdfd76d3559789f</hash>
+         <hash>44a33e69212a246800aeffa6db30d79f2e66566360f5be04a42d5546dff8e575</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\LICENSE.txt</file>
@@ -538,239 +535,239 @@
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\adc_compensation.c</file>
-         <hash>2783b52231b773a07c24cd1a163bc8f022ff98c2246273313dc58a5fd48dd515</hash>
+         <hash>444b91818ed580e8710d51e3c5f9680c2afc2cf9e4ba68de6059ae9aacf9bf0a</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\adc_compensation.h</file>
-         <hash>f4aacfb7bae3699f6621e44c54c3a6fce016eab4234445c596d0115f0edf11e0</hash>
+         <hash>ad609f242a4dde1849a9878de4d3f0aee5b2b09d299502443ba06c6b4e027dd0</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\adc_compensation_types.h</file>
-         <hash>638bdb2e151e8746121407e199f9cd9faa177905b66c390a7001a9b6c97d46ac</hash>
+         <hash>492b16429191fde01e555b1a50d2b25484ee797aec4facf6647d12d83bd8bb31</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\aux-files\parameters.html</file>
-         <hash>25d348774783e0c60e84e54627ecd982450cb9fdf6f3256bf2876174532ff382</hash>
+         <hash>734f55123d7e33d423c68066fdcd35eb11a655e3db2810151c32c9936143f452</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\aux-files\parameters.json</file>
-         <hash>a0364470c5c1ae9224afb29c83d088e3096a47187a493f6a471600b6a44616f4</hash>
+         <hash>45628c3501a919ac8b27e9a1c627e3d4172fc2d71de388a7403ee7a98cb45c9c</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\aux-files\report.html</file>
-         <hash>c0595837a799a79dddcb9e82d0a1fc0fae8e6b5ea9880dfb0a9693be0030a1ba</hash>
+         <hash>43ed494f163ab3f492b35a640b98bbaa7f86e510e9983cfd84cb92f3bf248366</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\aux-files\report.json</file>
-         <hash>25b057870b0c3426220ff392dff95eefc6809b40295fc4b092b06b957ee2fb28</hash>
+         <hash>f85bf5c2f034de1c0f2426c8190956b60fefb913e288db43a87bad6bd9532f89</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\aux-files\report.xml.txt</file>
-         <hash>af70bbdc902e73d18f1bbbd45e40d2954e80ef5fe47b210e4df38fc6626f57a5</hash>
+         <hash>8d906c0d680c212e00ae90db4cfd205b7733dd4ef6e889412e040b8a0b0b1bee</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\board_service.c</file>
-         <hash>2977bd7b0b302aeff6e02b4ebb76d65b30cd66e66bb00c1f0031b81d76ba0a0f</hash>
+         <hash>14a65374cf3b450986aae10934142efde8a483a49c86591a5379fed91b414c2e</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\board_service.h</file>
-         <hash>14f257ac2387caa22bf3a18e9623292b598fa3e67c76993fa72333b036d895c8</hash>
+         <hash>a7c861a453c42f9d1608a8ee17b7cb7d1615725ae2d89775aae94f11329bd6d1</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\board_service_types.h</file>
-         <hash>e41ad8bb3a598899d663d14f5bc474c35356e0c02af617cae4c618a9176357c5</hash>
+         <hash>e2ab6cceaf98390fb05a2fc62f3dd6d3b423997d1b9dcca2763b6141df79fd80</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\commutation.c</file>
-         <hash>d6436393a96489de543aa3d7b1a2dc84cc36547ed71fb3f3ad6f8214b3a716e2</hash>
+         <hash>9c0779328a564d355851f6545e8a5e7d3feeffd49ac5d1b7676c460be31c9399</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\commutation.h</file>
-         <hash>91af5b70b9ce5a3cdb389a97b914a651bf6ec706c984fc8d2960654a5f62d546</hash>
+         <hash>c0ce24b220efc1e3768084651e79f2e770c4c7d7adcb8b2b2bd87fdecab5f3ee</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\commutation\common.h</file>
-         <hash>2e08cb7f23a31470732a7aa0dbf5a055cd3616ad4bbb0020f38639be5870f1b4</hash>
+         <hash>e746c58af43fca3f41a86fbe814109e7620fb7ad646189da4b6ea22554877837</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\commutation\pll.c</file>
-         <hash>0899de6382aa4c7c20ede67d55fa6d628b55a3259c99fac41fa99c08e6939c99</hash>
+         <hash>fa49ca6e61d96fb6d71ef3b84d5976a27c4a3c4a61da2ba1c3c48c8c8d03d38f</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\commutation\pll.h</file>
-         <hash>b3c13de142f85d8b353cd1e8f726689c436f980d3bd522e8bb3aa1fae172c9e7</hash>
+         <hash>95d3c6c5c88ac04a4a25655c1b6c049e6af5f8d5d6ec1adc7b478fdfa7e00bf3</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\commutation\zsmt.c</file>
-         <hash>b2f0cf1f4a93364c0bf1b579a9614c63a682205889ed54580d5a522517422b75</hash>
+         <hash>c8721bbf609c890ae46a48238d970bc71c2680f8301544921a48e42f495c4975</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\commutation\zsmt.h</file>
-         <hash>ff842bcefd78ffd63263b4370cbc649fffc917d492342ca60fd60487186dbabe</hash>
+         <hash>b0b1c5fa2fa31a7604ca87bb7781ef973ebae295f72e63fe0d54d94049744518</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\commutation\zsmt_hybrid.c</file>
-         <hash>4ed4ce7c6923c042b386e93f4a512002c6569a525c6307379ca54165ac9d18e9</hash>
+         <hash>7ab77ea83ea8edf8bc5a861dcbb50f1cc2f181c2826332dbc1718dc2ebc0970a</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\commutation\zsmt_hybrid.h</file>
-         <hash>aec2841f68b87df9b419043fa9ed636266dcf375ccb00b0c8c8e46cda65854e6</hash>
+         <hash>ce783fdc2b17a3dc0ff9b7a79a7e8d4567ac9072a6ef3e0e110f5eb6ee32bd87</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\commutation\zsmt_hybrid_interaction.h</file>
-         <hash>2f31c5fe834a2cba8fdb18f424ce8eccb88fd588d5d3cf1feb03a5483d40fb44</hash>
+         <hash>28b3746c16acec00fe4a1840a2812820cbed1ecbcad0f1ab9a192e45d879c6f1</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\commutation\zsmt_types.h</file>
-         <hash>242a183795706c8ee5b869d981af04c306f1b3b056f91bdd619df3076cc4ab63</hash>
+         <hash>69a009fb642031c2680853cef88f0ca5551548e5e1f63c4827654756c87c00c3</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\commutation\zsmtlib.h</file>
-         <hash>a061d46030f21051338327f18e0a6f6b2ed6949dcaaa7668baf6a538d9522317</hash>
+         <hash>d9bd284a0e84cc9087f37a8fcb834fb222a59f6cbca1e76eb76208eafbf483b7</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\commutation_excitation.h</file>
-         <hash>e29c1440ed9c1ab502b48cd8a5c198c7533040729e0294c100398a5ba9154293</hash>
+         <hash>65decc1efb5ba43ab1e204ce4fe050ecc0c4f697ab4465efed8e6d4d0075fe96</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\commutation_types.h</file>
-         <hash>68ee030f89361f47ba345d101fd4be3a7165fe581775bf84451cf72e8f226389</hash>
+         <hash>096a01845727de8d981eda59f0ee131af11deabff3ea47f0f116c2a225415f54</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\current_measure.c</file>
-         <hash>8c2ec7fa8c9e6c3823c7b211511f3052ce8ada76ffde50c8da91e8f71e4c0974</hash>
+         <hash>55066517a903bac951d42981725bde48d42cb359430f1605093c1043e3d2f7a4</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\current_measure.h</file>
-         <hash>48e83b8a2c4b4eb04ec3065415ab02bfcd194f20fe339e57e7dcce4f590573b9</hash>
+         <hash>98987f672699b5bad96c3041695feb8965bc25b2b08f5ad0735d448a2c69dc93</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\current_measure_types.h</file>
-         <hash>9c2cfd2544e3441e7c512310167344efcd7cc0d15a98458490b9f4c919311a3d</hash>
+         <hash>d7233fb49cc1d14bdf7bd7e9404e5ceab975b713067fe0f91f46cc318d36bc92</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\deadtimecomp.h</file>
-         <hash>4af59c3a3cd3057d46ee17e38702170c0e6df9b6aaa0fa5037e7f565536c609d</hash>
+         <hash>175a267e0bf61ab6a532c6b9318906f848c4886674d2f3a9973a56681d0e1d96</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\deadtimecomp_types.h</file>
-         <hash>152816029e3cdcce79fd75101f2f5f3ccf72de0fac26eb79664b8db37b68d14c</hash>
+         <hash>56a3f0ffc15c7804c94edf1f7726bc03769b5c850a5f7b5ead932437079f049c</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\diagnostics.c</file>
-         <hash>4c346de88aa137fdc6d4a8295e878857657106aea4e1c5a869dfa881054ba85a</hash>
+         <hash>27f331086d3a986055929382c4dab413bec2be9f99521d43cb70fb67cbcd251a</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\diagnostics.h</file>
-         <hash>caade0de57578d43098b83c0ab14154bfc82603dabe59a8416ce5143c78cb4e3</hash>
+         <hash>3752cd854d5bf9ac3540f793f65596f39256fc8f8e33cc3f24bbe14c10c286fa</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\dyn_current.h</file>
-         <hash>dad2e830aa7b17b8f4082f9a8003ff8547fd610cb3fca9144017ed34ee5f266c</hash>
+         <hash>d6116addf4edecf0bce61f9ee58864a7181f8544b2547c5eeb1dcbbaa4dc6ce7</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\dyn_current_types.h</file>
-         <hash>f94fb7a175781e8a8aa326812372487e45b0871fd2f68594e2af3384920a7211</hash>
+         <hash>a33bf229b91e366ecd7d7ab6376f92e70d2bfa524d8d74b0cabc82d4ee5b59d9</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\error_codes.h</file>
-         <hash>89e65e81933781b482154834268ab64f9a77379cf4544b06d29a90e6cd6685fd</hash>
+         <hash>8126f4d9dd89e2e105da41cd4731b17a747d43fe1a7cb232d1ec94603f52f77d</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\fault_detect.c</file>
-         <hash>82273a3f685a8b1890e8b9e113c437b865e7048c23d3d2be5a6c8f1bd9839c14</hash>
+         <hash>1575775dde22d43b7740690379a609d71924c8a5c9a51d5ccecd82b08421e33d</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\fault_detect.h</file>
-         <hash>e46cdb865a0a568bf870b0858bfb3d6d70bbd0ebc1988ac834d0d2276108521f</hash>
+         <hash>293d035e2b185d684509b4dd730d11b73ce6995e7e954d890b2f602d2d7c3c1f</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\fault_detect_types.h</file>
-         <hash>94edddd6b229f5cf017e91d0bec9c43141a435a36157860c079ca6bd6e0af450</hash>
+         <hash>d3f9ad1791deeb1e0515694e5807c0c84880476b302653090ede93b281893f47</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\fault_handle.c</file>
-         <hash>e2aac83307e14e03669ed8f6a18e10d8f9ddd7a4440640294595d6990586dcb2</hash>
+         <hash>2c87cc1b16e50648f3db93cd3ae6709933d4ac864240322939b9ecced8c64f18</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\fault_handle.h</file>
-         <hash>03d34dbbe7b008fe06a74c310c9f3398e4e922cbaa6f1a22c48542554ec35719</hash>
+         <hash>406f7deeaa9406752e88f4c8b5e967e91c50f0602338dddb75bb8d940161edf4</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\fault_handle_types.h</file>
-         <hash>c949e6ce771ef3c231425a45a256557779b9258d05d5b4904d72fa277c3ff1d7</hash>
+         <hash>3355875c97e3b884a3ae4488fee0206734145f061e696da45da9763f725f88f1</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\filter.h</file>
-         <hash>40a767c30df625c3522fb7f057f25058afc1168b23b0fb3c5e13847f8b8ae7ab</hash>
+         <hash>3b7d53ca183d92d468d6b7960a276e95521b678068ea07e939dc92aea4024406</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\filter_types.h</file>
-         <hash>295e009783213a965352eb67ff03a30cd2936a1cb755d3d868a2a63cb480f609</hash>
+         <hash>20c8d97b62cad4ab3ec6e8a34dad75153cd826e9160198fd16337af3f007b768</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\flux_control.h</file>
-         <hash>ad03577403873eb5561d9a1f41bda9b2d67b4d505723fb110452b6cdaf33305d</hash>
+         <hash>ebbe065852da13ea8ec66e57f442fe86d0d29fe3661db4c59e2a8dd3512c13fb</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\flux_control_types.h</file>
-         <hash>69696b2091a0a0f191f3443fe399fd135f9a7b7e2a2992545dbbabf784afc158</hash>
+         <hash>e4095edb1bccfd263f38def33adceb6ff10e5ae1c5b76071526961e536a52cf4</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\foc.c</file>
-         <hash>196ce07fe07e05c97d6e58b171a13866c9f2da1cfc7fa5c503483c0320861896</hash>
+         <hash>6381008f62607e6cdf71688f80b23aa56cbf36e3756dc8de1244d143f1215b0b</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\foc.h</file>
-         <hash>69ccd16509b560b06ad607bfc384cabe79a8a0e6eb23d4122f4d635f8a2e1bef</hash>
+         <hash>00a78a8e7e67a0b8572de3980b5ec43a9b0eb3ef0905bd5b3d425b82260fd24d</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\foc_types.h</file>
-         <hash>4872a07838740177f6dba4f86f77be1c7f117fdfbc8270faa5bd2666680b66ae</hash>
+         <hash>ccd98165b79de841261bb27c2442d3cea39d3f8e313da90bd1232511b2a5de5f</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\gate_drive.c</file>
-         <hash>9aeb09712032ca6ef80741d90b7d7aa09b4294b2404d9716de3f6d2663ca6423</hash>
+         <hash>42031f12f8d2bd3181af9edc650643145dc21d458d17ce08323f2e523ea9bf75</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\gate_drive.h</file>
-         <hash>88236ac1ded5ba338a7fde64ce8b1ae2c221dd58f17852f97211839d1c91938a</hash>
+         <hash>168ae0f133a1abeb728d39e93ae595077fc8a8edfb810e5251fda08ccbded721</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\gate_drive_types.h</file>
-         <hash>7960306bb2ed145e687314d53f9b5f2fc1a04d5201778418af02be551088e4c3</hash>
+         <hash>a49c987c96f4496e6520b9e8ec2e88bd26371b1cac47d1fdd71a7098849eb251</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\hal.h</file>
-         <hash>0b914a2e704bbb23de4a7d74056743ae86822f850488927b5f5d213daeaf6695</hash>
+         <hash>5e30dcf024329df70de3aedd9ab28d61c8bbfa11ad9975003283713ecfbed396</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\hal\hardware_access_functions.c</file>
-         <hash>5ebe048f3f433a5bae878cde14cdc5007c30d25cfb3a8627169a1a61293e183b</hash>
+         <hash>8a2c4a790ddf4234fc76e515555c81c1c9ee38fa1bf97ce4600e278c373a272b</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\hal\hardware_access_functions.h</file>
-         <hash>d59e273b1abc5a4e7ab71b7f7e60adc0993fd9cb323fdaa95395490caaabc03b</hash>
+         <hash>4e3b3ba6ef369b80aba49ef4786b44e0bc2f9f34dacc82cc93d4b54d283dff56</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\hal\hardware_access_functions_params.h</file>
-         <hash>1ade2e9bc2a31a662e4d7ad714d8e2ad2a9404525976aaca38b6e3b13b4cb001</hash>
+         <hash>58d7aa2c04e729571958df57e6c4c0cb9a84a37ee7796cd6560ac39390c47417</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\hal\hardware_access_functions_types.h</file>
-         <hash>5af5528d93d710d8df0ebe2b84cf306797fc28e8e9d044cf770b48c855667663</hash>
+         <hash>c8c6c9dc90765379090e08a90693567e582b7be74903f969e0d76008618e3408</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\hal\mcaf_pin_manager.c</file>
-         <hash>8279f6aaed75ed7c0a96119690367c83d59bcc2e21d4ac60839fc983bc78301b</hash>
+         <hash>812a5cea582e4560a7c4d17c307fb58c6b11b4a0807f9a910fbca261a9865f48</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\hal\mcaf_pin_manager.h</file>
-         <hash>457de714bc38569284bbeec051525256c0a892365b57bff255b9f9921fc04084</hash>
+         <hash>195d39c4ea3b0c33479ac86d338d68f6ecd78de90dfb84ba9262e2eabad300ac</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\isr.c</file>
-         <hash>cda3eb0bd3336321fb0376ec9b4b9bcd7751523048a4e873b2260e7812ce235c</hash>
+         <hash>1b2f9b906e4174ae2e2a29e96b80b9b8f97a38da62ca28e1def4a28921f7b3b1</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\library\libzsmt-elf.a</file>
@@ -842,15 +839,15 @@
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\math\sqrt.c</file>
-         <hash>7d387f6c8a9df84d92d663b682db840cb67ebed45392f000cc749655405925c1</hash>
+         <hash>2258c0279da3bb904477282ae40ffcbe3cdec618e3028eeedc2a523a4751e415</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\math\sqrt.h</file>
-         <hash>118bdb4da2413f278e3a6d651ae5ab6c229178c87738380b4fe58126588a2641</hash>
+         <hash>a2531e7a0c9992f0a6a5630dd04457bdadd1b4ffcbf51663bb5a4feebfad1161</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\math_asm.h</file>
-         <hash>c5736d078cca253070297aba62692a47539b76495bd875deefd7f5e6d02da112</hash>
+         <hash>7d959c9e2752c50245faa0ee588696ee810e5ecac4da195dc5bd6bb23d8272d7</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\math_asm.s</file>
@@ -858,67 +855,67 @@
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\mcaf_main.c</file>
-         <hash>c257fb056f885cd393903e9d72563252db7b74038455f35aaba2b8b7fbe942b1</hash>
+         <hash>1c79f37fac2763640e98b28046a0e195471ec008febe6ea2daba3291d5b8cfe5</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\mcaf_main.h</file>
-         <hash>88a6bc696760aa68323a11553073b786976e4609355b6a056e8ebfe888332d2d</hash>
+         <hash>6b0f8d2846c326542e57e6ff4490baf0ad91c2033b11948b3516be6274b37045</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\mcaf_sample_application.c</file>
-         <hash>e6f8c615f9b12c3d15e74756356724fa0f9d0f66eeb1db6701a49c6181f803ba</hash>
+         <hash>8fb1b16838cc5031537c6207a99540ce6bba2865ed0aa3e4512caabcf3288b93</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\mcaf_sample_application.h</file>
-         <hash>409ab5402b581764b5e221dd527e76dd33d13c5900940a78e634244e3c8f3f94</hash>
+         <hash>c63933eefa304f0e207d5c22cc9388318cf8012d6ad30cc7bf8adaeb14de6d5e</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\mcaf_traps.c</file>
-         <hash>63e26aa6091bbc72b8574d72a86d559df35dd44a28b7e2fcdfd879d7426b9d07</hash>
+         <hash>c8eda9880386675359e2e58664d61c69ca5d8b68fc41b0f76bb0e1a248e88456</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\mcaf_traps.h</file>
-         <hash>b7f3968ceef087c425c16c22594f8d7ba724d8df96d0921c459c547e5853a8da</hash>
+         <hash>758034ea47b8ac3294edc300bb80b26e4ff3ab6fd84fc38546c4dfcd316ab5e0</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\mcaf_watchdog.h</file>
-         <hash>2e7a51de2c2adbfb58d9aef9e171df2fb87bbbf04ff3e6035b6ef409e263874f</hash>
+         <hash>f8ce0a56ac654c53af2ce3be55f297635c46c708d7dc0d01c5129ac6cd9d43fe</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\mcapi.c</file>
-         <hash>2a241583f8a00d51955164243473c6a4b44d1f3c39cfa0cb360b7517755a7d15</hash>
+         <hash>bb8c2f8201379ccd4bcf002039cfb8dc44eb8112b4b8a2c853a9a6ed3db134fb</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\mcapi.h</file>
-         <hash>61d936a25ac2e4fed5369d2ee622b59def957cc0169bf3d91fd62fe0306da14a</hash>
+         <hash>d58ba5f7699625ab994ec62bcdc8e1a707846380e469a78ceb9bc4f7d78234b8</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\mcapi_internal.h</file>
-         <hash>47f1d7931b4d4d2067b4c6db4feaf7577192c0d77d9461557a676a492f4f796a</hash>
+         <hash>4c68a84f59ea85575a9fcc3fb230fdae4adb207d6a4ed8d4fb15d38fd9db14a5</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\mcapi_types.h</file>
-         <hash>749679e548c30690a4a1346449debbd62d14d88ebbd65277c16f68bf97f084a2</hash>
+         <hash>2bc3a94e34ad79ba0723f11aae70b9ed89be0a2cfa8a416b715ff42b5221bebd</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\metadata\data_model_snapshot.c</file>
-         <hash>736935c8a5888f267aa0d4c089d0e07217b84ac2159c74f7565836815927a1ad</hash>
+         <hash>211ae0d9526f31ba5888a2c3d1aa369b7593841c28c4c2f0f6eaebcc20874a68</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\monitor.c</file>
-         <hash>e5c2af1ffa8e6c4223f693976f46362ec98cdc9f7885dd5c5d5f890d3fea5fb5</hash>
+         <hash>0b67afa62592f2106c785ac5a54905577e9c073a892813e2482c852f201f468a</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\monitor.h</file>
-         <hash>b4bde4fa23804ea6627016d82692c2fea8c13a6d22d8f5fcdb1a4ac5517b90da</hash>
+         <hash>f340eec784860c512d5bc0f423ecec25c420b6894b8ebc68b53d3c5f0a1fb410</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\monitor_types.h</file>
-         <hash>61600ba9a3c322961eb7401caba41ecae4dcedd5fcb7923e60ff51fa59b04137</hash>
+         <hash>8f6a22aa11d00eb845f1d91c81aa536da9eb03dd427c0e988484fddab5cea340</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\motor_control_function_mapping.h</file>
-         <hash>d8c83a164509669f90884d1a99a0ace2cd66228386a0ae736b5071ef028581cb</hash>
+         <hash>0e492ef7ae83f26594d0c040ffb6fe09f1234d328ee5671dd28f204041365b21</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\motor_control_noinline.h</file>
@@ -926,199 +923,199 @@
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\parameters\adc_params.h</file>
-         <hash>c33741808279c24c09482f1610acc254bb0b0b9916b944af40534e0df2f94321</hash>
+         <hash>5e0270fbdeb11f561c3bc6f8db5d468d7f8795a180c0e1f7fdd1e2d9d99ab2f4</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\parameters\fault_detect_params.h</file>
-         <hash>b6a41e0be06059144a652c0aa6100a0c7bc4d34132e45cfc4d9142ac1d7f6570</hash>
+         <hash>9f5291d7c5eda96e77345abf7ad2eeb8d58889baee13cae1e0c9feec7c6213b5</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\parameters\foc_params.h</file>
-         <hash>67fb97b7ff9c6f47f84593b3c937d691ee3466aaa4f7cdc2fb25650edbc16e5f</hash>
+         <hash>0a4472f10735bc118cdbb75804ab97098e28324ad84782575aff1b0153de42be</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\parameters\hal_params.h</file>
-         <hash>59c7482c2d1c49389e32016f8d29d89f8e8145f040c5b588a85481c64e2cba8e</hash>
+         <hash>038c673fcaa2633e3d3ded023771f68cf2ade1e0cb6b1b65514c42d49065e929</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\parameters\init_params.c</file>
-         <hash>dbf54e3747e2e56dd6b7030c9263827ebe4a7b22935e7af364affa7a6b56a9d6</hash>
+         <hash>9d6c5b7b79c7899526ab9fe51ee209206c40fb6c329cd06e6c2e2775fe06cb8c</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\parameters\init_params.h</file>
-         <hash>f7f5c748c20a9f6b329eab77fffe31b1539af007de42dc0227259075cd0eed22</hash>
+         <hash>9cd257afc7e82498d2c566920deeedc83c3b82826087b3aa8df71967527323c5</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\parameters\mcapi_params.h</file>
-         <hash>9e8d33e30958df34b2db187c2d8f70d2b3805f47b67b448b58b00474ce58005e</hash>
+         <hash>cf424c4dc7c2ba518927af6052ae6a14e7b13e6399ea5741c52f95656af58854</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\parameters\motor_params.h</file>
-         <hash>82ccc56d0b25e4be21b58936a71de98c4f47a8216cbbae0796fc19725fb42559</hash>
+         <hash>3c0bdc3c6faff5b4eea5f61e8d021d17636a917085474578e89cf7b4e441ad5e</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\parameters\operating_params.h</file>
-         <hash>5757963249b8dbde1308ec33e118c592060b9488d2b1e4d4e651df671c0246d4</hash>
+         <hash>1e235abc68c93929967b1e5370c17eff887df663fb0ffad5b56e1644fcf67504</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\parameters\options.h</file>
-         <hash>e38b82ee381c4b3cba8f6921bae4c04aa85dc5b1c4f2c29d8be8eb3cc6585586</hash>
+         <hash>84f1cc70dad83f659c05d505f4ff930bda372d882283c6f9660f377e7ea2ff1e</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\parameters\outerloop_params.h</file>
-         <hash>f51476394dc467d7ba30341d3311c223ca36e2e052d8996a0124d46ddcbac215</hash>
+         <hash>4fc8a3a7e9bc84dd99decc27da63beecccd3def2cd33fb447b6f43e65041ad6e</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\parameters\pll_params.h</file>
-         <hash>a888035acef60382454e9f78918b0c14e6f67b16cb4573f3b6ac055ff2868bfd</hash>
+         <hash>80bd324716235c968186a2e15fad4d43fa6957e78a70bdd0d201f4c862aa5120</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\parameters\recover_params.h</file>
-         <hash>948c2ddbae84be5a27201599baf12d46da674a056da30c752ede69d1e741b195</hash>
+         <hash>44a7af60ef311a081c15b2ce13f7475883a941352c1bf5ae919b6aec84e1758e</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\parameters\sat_PI_params.h</file>
-         <hash>454ba846fbcd9ea341e14cefb30313e10b1764f0f38c59b4ecc873de2ccc9e72</hash>
+         <hash>2ecf85c072048d4e87ac56d95c5f5ff90de0b1c3025f63adb5d743945473aa52</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\parameters\startup_params.h</file>
-         <hash>17f13140dcc2e732b6f176569d78f86aab582ccadde7847cd764213bd6433cf3</hash>
+         <hash>d060c8098d4ac13e02a8dcf24e9275a28681964a9bfb3fce0b050690d8a4a64d</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\parameters\timing_params.h</file>
-         <hash>733101f1e0ee9243611f7c9bce05e225a05f77abfec818fcf60ce261e21d0bce</hash>
+         <hash>ea8325886d17a0760f40ec2e16f1fd501ba26ddf7b818aef864eb881d84b19a5</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\parameters\zsmt_hybrid_params.h</file>
-         <hash>854dfee29eada826c62c12d7918d3056cf4f3ebe546440d9b75f67eefe0e17f0</hash>
+         <hash>74407521b1997f9f03a84d99ad187d4d56c9312e0016c25cc2c56fa84754e148</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\parameters\zsmt_params.h</file>
-         <hash>725381f12556ecd12e229593508a816262fb2efe35beb87a33b4a82f0a466d86</hash>
+         <hash>9b7e70cabe558c97d4484326c76ea878d77dbbd6329b3ba4facacb1a0f7b4376</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\recover.c</file>
-         <hash>50dba28a2260cc491abab45def6baf78d2fb101b5fe8005455b3ff66a5ce57f6</hash>
+         <hash>2b7e7473b771393e01cc4540002f69161175dd6bbe6ca10ee42006b2012a5093</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\recover.h</file>
-         <hash>303fffd68899a646cf8acefdc8f3b8b586d91441ab1392a0d1480541b6d59a86</hash>
+         <hash>d03abe89a4c8df54bcc90b467cb6068d6eea86056379a10793526efde73f8191</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\sat_PI.c</file>
-         <hash>28f224cf32244719195cf746c06c4f733273da44fc4e2d9fcd894f42374264cb</hash>
+         <hash>af314e97088d2ad65947649a653ee6be71f1616b8afd306ee7632af1e21e5a78</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\sat_PI.h</file>
-         <hash>a485dd6464a222ab2d599cbcebaea26fd0d9f396d07d2d98de04176f11bcdb72</hash>
+         <hash>a77898e21233db860436c732998a4639198143a99d235110bb9d7e6b68195d53</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\sat_PI_types.h</file>
-         <hash>0b087c6971c4c6c98d9a1247ee0e263e4d7aeebc1c00b936977362bec6fed9ea</hash>
+         <hash>e6828e0edcebe99b2120898259a499eb14d1c6004093729162388ff4fb2ff05b</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\stall_detect.c</file>
-         <hash>e45453c9b0669fd2a22506df9701f79d44aa6b5a0d4fc5d2d7f41ee80186c134</hash>
+         <hash>3872317707e57f78238c3bda631932ad5cd599d5a77df02f8f003ceca89c4169</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\stall_detect.h</file>
-         <hash>82ff2015f6f9179570dd509e731f4365d661639c0246ea9e8bb33529ccb967b8</hash>
+         <hash>12bdb09d6ddfbc74dbd28bd46ca97b9afa96381d3f05983fe3d2610ef3f7a832</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\stall_detect_types.h</file>
-         <hash>b372ff385b9bc6cbb9422532afb30a94d732f67230b556200774914e25dd6f78</hash>
+         <hash>6e67fc9e3945f0ddf1476e0926a95f502e586bbf02c8bcf15c7933c5f8bc9ed9</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\startup.c</file>
-         <hash>4f087b92e4c7ee9bb8efb7e60ced8fd263d75bac3fbf1d60f955afbec5e47f6c</hash>
+         <hash>b019b7b99def8467676ff334753d429f5f18a105cb1abe92f18bef9a698b14e7</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\startup.h</file>
-         <hash>5c012c04dc610636360bc4e37143a4e0b844702b9d15b569996bc9a5e7ec6f8f</hash>
+         <hash>5b23c229252b84cb0a21cc298b8faf4e53e87dfaa8ff1bc02da0186f73d16b30</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\startup_lib.h</file>
-         <hash>1e5c5e5bbd2a2ec6c8f44f697107a1de33be231eee2583ab059ea4f794a3bb0e</hash>
+         <hash>aeedd5ec1410f517fb5163c2240d35c8d7dbc326455d10c8748ff1720dee9687</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\startup_types.h</file>
-         <hash>73460f8e4a27d67af3586a3effcc519ebbf7ae8a018860647f0dafe0c9a55e2e</hash>
+         <hash>66f665ce2d65b88a8bddd525cae68b4a981a5233d2e42ed0209beb83edc76b5e</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\state_machine.c</file>
-         <hash>c25784f0a3c9157955f8a407bb4da7c632976fe0530f8052af0d71b674ee659f</hash>
+         <hash>cc75ea95572016b760e2a42ff1db4a30a16df090fc4ff7a1b6ad082498782944</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\state_machine.h</file>
-         <hash>178f299d6ace2e7dec75fb910e02d5570aff1759aefe83eb00749e3b678d3d5f</hash>
+         <hash>07912e4712a8458a74ffc7592b77ca60aae2f72a7238d0406c1b9af5b279321b</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\state_machine_types.h</file>
-         <hash>9096c343e8e179a4f118eeff0a38aad6a2d0e0d382793f8ab6b0adc8ad5be52f</hash>
+         <hash>ead626b63f99c84041d67144493b10334d137867769cdc8e121848e502488f47</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\system_init.c</file>
-         <hash>30fa2aa12fea522f1454e6177d251949380a51dfea3735ab7963a06f043efeda</hash>
+         <hash>cc1921a69b7a4af979d32826cbcb977ed29189a493179d1ab608a3e594f52f93</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\system_init.h</file>
-         <hash>4e7bc9db519dbf0c2bdb4327d76e5ae43445992e8ebbfcc35e0e894ba1ea8464</hash>
+         <hash>7fe8c9b43c783b1d55947a53ada070de89302070c5508a5663cd6646f0fd9727</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\system_state.c</file>
-         <hash>3626299e13172c852fee258c46d16c8b08a5d89825e3c86a2919c4dc0caa34d0</hash>
+         <hash>170c7a8e036e8d01ddd29e824ddafb312225768145bdea3b3832ddc311491ef7</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\system_state.h</file>
-         <hash>e4a266d6730839672ff06c09152786aa666dd62b767e4e89dea5ccd032a3c331</hash>
+         <hash>328ba1bdff1c1c9a1057038acb44662d7ea1e141f0f2c10f58f5dc657889cbab</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\test_harness.c</file>
-         <hash>fbc5d20dab8d97b43bef3a2ece6deae5055ddf5622463ff3e1768a0883d91999</hash>
+         <hash>68fcd6cde2400f0734fc0f5e300d8c26b37fc399c23189a97e94d2b9646a0ce3</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\test_harness.h</file>
-         <hash>f4d649a2d9a6693d95e938b7115e37bc5fea456f45b52eb13dd70b8d0fff2784</hash>
+         <hash>78929bbb02d622b4eac1af5a0d0e949ada9ad5e2b6fb9fa69d3d9ef5a5b5e268</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\test_harness_timestamps.c</file>
-         <hash>227dda76fe3a3748501471a152f243ca4e44b04c90e97da127bab4324d0060a6</hash>
+         <hash>a570a0738e1b152a72b88ce3fe387fc090e4fe98a8157174495f0df8635299d9</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\test_harness_timestamps.h</file>
-         <hash>d2844b2e7c2c17643f56a539d4c92083a0fa9adb97aaa293deb61ad2e344f7ba</hash>
+         <hash>e44b2901a8fb0d6b2b6a6ea374f4df50d26fe19ae4009d5c59b1913b435210b1</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\timing.h</file>
-         <hash>50a9b45a580b696476e04f6fb9cbda5a461ffd5c463b682f9e218085e979b8f3</hash>
+         <hash>02442b8b5e04d804d55036924b2553f874932cb6ec110db0c25547bc29cdd353</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\ui.c</file>
-         <hash>6686cf1c64bff2b11da06b1526ea41b0724b3a5cecb788d3b5e09e02a6c71ba0</hash>
+         <hash>979938eab91a5369768e119bcf42153db3b7971761b618b26914ef0e6a8d32ef</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\ui.h</file>
-         <hash>b57c3de03550f5457eea446ce327e9b6d2589ea772a025a99a05bbe5be02fd6e</hash>
+         <hash>04ed4ceb247fe96800f732e49df9c29bd77d291daf7e598d43bf676760e0cbf5</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\ui_types.h</file>
-         <hash>718af3fabd059924e08df31122cd6315805a2b78d60fe61ce1634a49b019cef8</hash>
+         <hash>1066e693243ed14a30bba3f3c5c6b76b1890afbd8dcdc2251b45920ad9b593a0</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\units.h</file>
-         <hash>ec3969b7bae4700181b89969be753e3d8a0eb112b67bb547828ab5d54ba03291</hash>
+         <hash>8ac37758c0ad1ade0f3c03c3c4b2d80b2d579605770b412827ee44b1c7990577</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\util.h</file>
-         <hash>4f06fda1bd98164ab5633c392cb2d90f2dad83d0fb1b43e9e8050582ad7536a0</hash>
+         <hash>262c31996f3e8662f37c22ed7e627bec62137492bc0c6dc44ada08a1e1768d4f</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\util_dspic_16bit.h</file>
-         <hash>ab918af743c45f722556d219ea7c4b61a7b42bff4794c9acfdcb7f408dbb5bc5</hash>
+         <hash>865bdee4121a6db830ef441db8c686903d236648963a71cf47a203b834d7c4e3</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\motorBench\util_types.h</file>
-         <hash>c2bd40d715db60f19744e8753316f64a8c62997d2ff06e8f68fcea5f813db386</hash>
+         <hash>f0bc61e1ac2a7a35f8fea765ce691091469427d04599212d2914968ddc71936c</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\opa\opa1.h</file>
@@ -1154,23 +1151,23 @@
       </entry>
       <entry>
          <file>mcc_generated_files\pwm_hs\pwm.h</file>
-         <hash>445b4b77b676711b628ded6aaca58892002ecf89b3d124b4b0b932bd4bc53ea4</hash>
+         <hash>2c7c3af8a46929dd360dd050670fb67cf0402a0e663fdeb6617e0d1e81bc0fbe</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\pwm_hs\pwm_features.h</file>
-         <hash>d62ad7b8767178f929cfcac6501e2952cd1e541567c4e28e45d8308d883aed3e</hash>
+         <hash>e3154645c81fc4793553b79709366696fffa9cb2b1722f4d2e78778a9d1282e7</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\pwm_hs\pwm_hs_interface.h</file>
-         <hash>213b4ed6358a167da7e694b00019e15628c0cd549960dc23624b986ffab8acc6</hash>
+         <hash>01221862de242ef15a1a400a3b4798f622f63951809ec11cca03f00745771c24</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\pwm_hs\pwm_hs_types.h</file>
-         <hash>0ead2497d29d896de8769d7ac3ddefa70a14b69b456a854185a6d92b6f3f289a</hash>
+         <hash>8613a3898773980c8a65e1ecbe5fec1286d066582c7ec3fd10359d87a9ccfbfb</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\pwm_hs\src\pwm.c</file>
-         <hash>f4af1c87290afe72c389aeab2d911bcec2216fe97256f13bbbf15a7f0a2b1f59</hash>
+         <hash>afdc190c411751b5d2b12a733d8476008317e2a14e86a835c5680012cebf98eb</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\qei\qei1.h</file>
@@ -1274,11 +1271,11 @@
       </entry>
       <entry>
          <file>mcc_generated_files\timer\sccp1.h</file>
-         <hash>056321dfe1834f5c5ff5a2c2c6580faf20acb08fcf53e4ea75f9d6028a89e946</hash>
+         <hash>1b9cb75a390cbcf249690e9996a46107f0ae8d8d647003144211948e03a876d2</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\timer\src\sccp1.c</file>
-         <hash>c83d41e6fb42d2caa729d6a72f2bdafeb33a65e29ed55a66caf1b77700de40b7</hash>
+         <hash>75b43ff74ce8a6693d205df1986cd000c06b5ba059446e9cc9217fefc3fcb49e</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\timer\src\tmr1.c</file>

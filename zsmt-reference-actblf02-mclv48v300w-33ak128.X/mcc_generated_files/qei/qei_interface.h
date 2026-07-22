@@ -11,7 +11,7 @@
  *            
  * @skipline @version   Firmware Driver Version 1.2.3
  *
- * @skipline @version   PLIB Version 1.0.5
+ * @skipline @version   PLIB Version 1.0.6
  *            
  * @skipline  Device : dsPIC33AK128MC106
 */
@@ -39,6 +39,11 @@
 
 #ifndef QEI_INTERFACE_H
 #define QEI_INTERFACE_H
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 // Section: Included Files
 
@@ -107,5 +112,9 @@ struct QEI_INTERFACE
     void (*IMVGatedValueSet)(enum QEI_IMV_STATE state);
     ///< Pointer to QEIx_IMVGatedValueSet e.g. \ref QEI1_IMVGatedValueSet
 };
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
